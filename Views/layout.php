@@ -47,7 +47,7 @@
 	<?php require_once('routes.php');
 	}else{
 		//Inclur una pagina para redireccionar a index
-	header('Location: Views/sesion/no_sesion.php');
+	header('Location: Views/sesion/formulario.php');
 	}
 	?>
 	<!-- <script src='Public/jquery/jquery-3.3.1.min.js'></script> -->

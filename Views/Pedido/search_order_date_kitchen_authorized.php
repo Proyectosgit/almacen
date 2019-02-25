@@ -1,10 +1,15 @@
+<?php
+
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina"){
+?>
 <section>
     <div class="container">
         <div class="row">
         <div class="mx-auto">
             <form action="Controllers/pedido_controller.php" method="get">
               <center>
-                <label>Selecciona la fecha para buscar pedido Cancelado</label><br>
+                <label>Selecciona la fecha para buscar pedido Autorizado</label><br>
                 <input id="date" type="date" name="date" value="<?php echo date("Y-m-d");?>">
                 <input id="date" type="hidden" name="action" value="search_order_date_kitchen_authorized"><br><br>
                 <label>Buscar por:</label><br>
@@ -17,3 +22,10 @@
         </div>
     </div>
 </section>
+<?php
+		}else{
+			//Inclur una pagina para redireccionar a index
+			header('Location: Views/sesion/no_sesion.php');
+		}
+	}
+	?>

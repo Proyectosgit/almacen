@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador"){
+?>
+
 <section>
 <h1>Bienvenido al update usuario..!</h1>
 
@@ -23,3 +29,11 @@
 	<input type='submit' value='Actualizar'>
 </form>
 </section>
+
+<?php
+	}else{
+		//Inclur una pagina para redireccionar a index
+		header('Location: Views/sesion/no_sesion.php');
+	}
+}
+?>

@@ -4,6 +4,9 @@
 	{
 		public function __construct(){}
 
+		public function formulario(){
+			require_once('Views/sesion/formulario.php');
+		}
 		public function index(){
 			$usuarios=Usuario::all();
 			require_once('Views/Usuario/index.php');
@@ -64,7 +67,7 @@
 						header("Location: ../?controller=producto&action=search_prod");
 						break;
 						case "gerente":
-						header("Location: ../?controller=pedido&action=index");
+						header("Location: ../?controller=pedido&action=ver_pedidos");
 						break;
 						case "administrador":
 						header("Location: ../?controller=usuario&action=register");
@@ -81,7 +84,7 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register' & $_GET['action']!='index') {
+		if ($_GET['action']!='register' & $_GET['action']!='index' & $_GET['action']!='error') {
 			require_once('../connection.php');
 			$usuarioController=new UsuarioController();
 			if ($_GET['action']=='delete') {

@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador"){
+?>
+
 <div class="container">
 	<div class="row">
 		<div class="mx-auto">
@@ -39,3 +45,10 @@
 	</div>
 	</div>
 </div class="container">
+<?php
+		}else{
+			//Inclur una pagina para redireccionar a index
+			header('Location: Views/sesion/no_sesion.php');
+		}
+	}
+	?>
