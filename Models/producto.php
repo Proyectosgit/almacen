@@ -147,5 +147,15 @@ class Producto
 									$productoDb['pedido'],$productoDb['status']);
 		return $productos;
 	}
+
+	public static function ingresa_pedido_autorizado($productos){
+		$db=Db::getconnect();
+		foreach($productos->fetchAll() as $producto){
+			$insert=$db->prepare('UPDATE productos SET pedido=:pedido WHERE codingre=:codingre');
+			$insert->bindValue("pedido",$producto['num_prod']);
+			$insert->bindValue("codingre",$producto['codingre']);
+			$insert->execute();
+	  }
+	}
 }
 ?>

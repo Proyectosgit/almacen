@@ -112,12 +112,16 @@
 
 			}elseif($_GET['action']=="change"){
 				require_once("../Models/pedido.php");
+				require_once("../Models/producto.php");
 				Pedido::change_order_status($_GET['estado'],$_GET['id_pedido']);
-				if($_SESSION['id_sesion']=="administrador"){
+				$productos=Pedido::pedidosProd($_GET["id_pedido"]);
+				Producto::ingresa_pedido_autorizado($productos);
+
+				/*if($_SESSION['id_sesion']=="administrador"){
 					header("Location: ../?controller=pedido&action=index");
 				}elseif($_SESSION['id_sesion']=="gerente"){
 					header("Location: ../?controller=pedido&action=ver_pedidos");
-				}
+				}*/
 		//Busqueda por fecha
 
 
