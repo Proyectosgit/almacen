@@ -149,12 +149,15 @@ class Producto
 	}
 
 	public static function ingresa_pedido_autorizado($productos){
+		$status="autorizado";
 		$db=Db::getconnect();
 		foreach($productos->fetchAll() as $producto){
-			$insert=$db->prepare('UPDATE productos SET pedido=:pedido WHERE codingre=:codingre');
+			$insert=$db->prepare('UPDATE productos SET pedido=:pedido, status=:status WHERE codingre=:codingre');
 			$insert->bindValue("pedido",$producto['num_prod']);
 			$insert->bindValue("codingre",$producto['codingre']);
+			$insert->bindValue("status",$status);
 			$insert->execute();
+
 	  }
 	}
 

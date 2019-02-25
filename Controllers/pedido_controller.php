@@ -116,7 +116,7 @@
 				Pedido::change_order_status($_GET['estado'],$_GET['id_pedido']);
 				$productos=Pedido::pedidosProd($_GET["id_pedido"]);
 				Producto::ingresa_pedido_autorizado($productos);
-
+				
 				/*if($_SESSION['id_sesion']=="administrador"){
 					header("Location: ../?controller=pedido&action=index");
 				}elseif($_SESSION['id_sesion']=="gerente"){
