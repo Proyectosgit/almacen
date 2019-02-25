@@ -40,7 +40,7 @@
 		                <td>Existencia</td>
                     <td>Stock <br> máximo</td>
                     <td>Costo unitario</td>
-		                <td>Costo total</td>
+		                <!-- <td>Costo total</td> -->
                     <td>Costo productos</td>
 		                <td>Numero <br> productos pedido</td>
 		                <!-- <td colspan=2 >Acciones</td> -->
@@ -62,7 +62,7 @@
 				        <td class="existencia"><?php echo $order['inventa1'];?></td>
 				        <td class="stock_max"><?php  echo $order['stockmax'];?></td>
                 <td class="precio_unitario"><?php echo $order["ultcosto"];?></td>
-                <td id="costototalmod"><?php echo $order["costo_total"];?></td>
+                <!-- <td id="costototalmod"><?php //echo $order["costo_total"];?></td> -->
                 <td class="costo_producto"><?php echo $costo_producto;?></td>
                 <?php $costo_total=$costo_total+$costo_producto;
                 $total_prod=$total_prod+1;
@@ -74,7 +74,7 @@
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php// echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php// echo $pedido->id_pedido ?>">Eliminar</a> </td> -->
 			        <?php //}else{?>
-				        <td bgcolor="#b8ff54"><?php echo $order["num_prod"]?></td>
+				        <td bgcolor=#3ADF00><?php echo $order["num_prod"];?></td>
 				    <?php //} ?>
 			             </tr>
 	          <?php }//End foreach ?>
@@ -95,7 +95,8 @@
       </section>
 
 			<div align="center">
-				<h2 id="costototalmod">Costo Total: <?php echo $costo_total?> </h2> <br>
+				<h2 id="costototalmod">Costo Total: <?php echo $costo_total;?> </h2>
+				<h4 id="costototalmod">Fecha del pedido: <?php echo $order['fecha'];?> </h4> <br>
 				 <a href="../?controller=pedido&action=ver_pedidos" class="btn btn-primary">Regresar</a>
 			<div>
 </body>
