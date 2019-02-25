@@ -158,12 +158,12 @@ class Producto
 	  }
 	}
 
-	public static function change_order_status_db($estado,$id_pedido){
+	public static function change_order_status_db($status,$codingre){
 		$db=Db::getConnect();
 		$update=$db->prepare('UPDATE productos
-							SET status=:estado
-							WHERE id_pedido=:id_pedido');
-		$update->bindValue('status',$estado);
+							SET status=:status
+							WHERE codingre=:codingre');
+		$update->bindValue('status',$status);
 		$update->bindvalue('codingre',$codingre);
 		// $update->bindValue('autoriza',$_SESSION['nombre']);
 		$update->execute();
