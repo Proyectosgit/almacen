@@ -312,6 +312,7 @@ class Pedido
 			$update->bindValue('autoriza',$_SESSION['nombre']);
 			$update->execute();
 		}
+		
 
 		public static function change_order_cost($id_pedido,$costo_total){
 			$db=Db::getConnect();

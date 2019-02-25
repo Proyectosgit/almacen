@@ -157,5 +157,17 @@ class Producto
 			$insert->execute();
 	  }
 	}
+
+	public static function change_order_status_db($estado,$id_pedido){
+		$db=Db::getConnect();
+		$update=$db->prepare('UPDATE productos
+							SET status=:estado
+							WHERE id_pedido=:id_pedido');
+		$update->bindValue('status',$estado);
+		$update->bindvalue('codingre',$codingre);
+		// $update->bindValue('autoriza',$_SESSION['nombre']);
+		$update->execute();
+	}
+
 }
 ?>
