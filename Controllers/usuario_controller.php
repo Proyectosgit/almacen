@@ -18,7 +18,7 @@
 
 		public function save($usuario){
 			Usuario::save($usuario);
-			header('Location: ../index.php');
+			header('Location: ../index.php?controller=usuario&action=index');
 		}
 
 		public function update($usuario){
