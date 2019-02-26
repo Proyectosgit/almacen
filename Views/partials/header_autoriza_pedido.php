@@ -6,8 +6,8 @@
         <ul class="nav">
           <li class="active"><a href="?controller=pedido&action=ver_pedidos">Ver Pedidos</a></li>
           <li class="active"><a href="?controller=producto&action=search_prod">Realizar pedido</a></li>
-          <li class="active"><a href="?controller=pedido&action=ver_pedido_autorizado">Pedidos autorizados</a></li>
-          <li class="active"><a href="?controller=pedido&action=ver_pedido_cancelado">Pedidos cancelados</a></li>
+          <li class="active"><a href="?controller=pedido&action=ver_pedido_autorizado_todos">Pedidos autorizados</a></li>
+          <li class="active"><a href="?controller=pedido&action=ver_pedido_cancelado_todos">Pedidos cancelados</a></li>
             <li><a href="Views/sesion/cerrar_sesion.php">Cerrar sesion</a></li>
         </ul>
     </div>
