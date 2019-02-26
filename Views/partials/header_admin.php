@@ -13,10 +13,10 @@
         <li><a href="?controller=pedido&action=register">Ingresar pedido</a></li>
         <li><a href="?controller=pedido&action=index">Ver pedido</a></li>
         <li><a href="?controller=relacion&action=register">Ingresar relacion_pedido_producto</a></li>
-        <li><a href="?controller=relacion&action=index">Ver relacion_pedido_producto</a></li>
+        <li><a href="?controller=relacion&action=index">Productos por pedidos</a></li>
         <li><a href="?controller=producto&action=search_prod">Buscar producto por familia</a></li>
-        <li><a href="?controller=pedido&action=recibir_pedidos">Almacenista</a></li>
-        <li><a href="?controller=pedido&action=orderDate">Recibir pedidos</a></li>
+        <!-- <li><a href="?controller=pedido&action=recibir_pedidos">Almacenista</a></li> -->
+        <li><a href="?controller=pedido&action=orderDate">Ver pedidos</a></li>
         <li><a href="Views/sesion/cerrar_sesion.php">Cerrar sesion</a></li>
       </ul>
     </div>

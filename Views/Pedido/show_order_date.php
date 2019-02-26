@@ -23,6 +23,9 @@
 						<div class="container small">
 							<div class="table-responsive">
 								<table class="table">
+									<?php
+									if(!empty($select)){
+									?>
 									<thead class="thead-dark">
 										<tr>
 											<td>Id Pedido</td>
@@ -38,28 +41,35 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php
-										foreach ($select as $order) {
-											// if($order->estado=="autorizado" || $order->estado=="cancelado"){?>
-												<tr>
-													<td><?php echo $order->id_pedido; ?></td>
-													<td><?php echo $order->fecha; ?></td>
-													<td><?php echo $order->hora; ?></td>
-													<td><?php echo $order->autoriza; ?></td>
-													<td><?php echo $order->solicita; ?></td>
-													<td><?php echo $order->estado; ?></td>
-													<td><?php echo $order->observaciones; ?></td>
-													<td><?php echo $order->unidad_medida; ?></td>
-													<td><?php echo $order->costo_total; ?></td>
-													<td><a href="pedido_controller.php?action=order_almacen&id_pedido=<?php echo $order->id_pedido ?>">Detalles</a> </td>
-													<!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php// echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
-													<!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php// echo $pedido->id_pedido ?>">Eliminar</a> </td> -->
-												</tr>
-											<?php //}//end if
-										}//end switch ?>
+												<?php
+												foreach ($select as $order) {
+													?>
+														<tr>
+															<td><?php echo $order->id_pedido; ?></td>
+															<td><?php echo $order->fecha; ?></td>
+															<td><?php echo $order->hora; ?></td>
+															<td><?php echo $order->autoriza; ?></td>
+															<td><?php echo $order->solicita; ?></td>
+															<td><?php echo $order->estado; ?></td>
+															<td><?php echo $order->observaciones; ?></td>
+															<td><?php echo $order->unidad_medida; ?></td>
+															<td><?php echo $order->costo_total; ?></td>
+															<td><a href="pedido_controller.php?action=order_almacen&id_pedido=<?php echo $order->id_pedido ?>">Detalles</a> </td>
+															<!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php// echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
+															<!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php// echo $pedido->id_pedido ?>">Eliminar</a> </td> -->
+														</tr>
+														<?php //}//end if
+													}//end switch
+										}else{
+												echo "<h2 align='center'>No hay pedidos a mostrar</h2>";
+										}
+										 			?>
 									</tbody>
 								</table>
 							</div>
+						</div>
+						<div align="center">
+							<a href="../?controller=pedido&action=ver_pedido_cancelado_todos" class="btn btn-primary">Regresar</a>
 						</div>
 		</section>
 	</body>

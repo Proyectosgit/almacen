@@ -11,7 +11,7 @@
               <center>
                 <label>Selecciona para buscar pedido cancelado</label><br>
                 <input id="date" type="date" name="date" value="<?php echo date("Y-m-d");?>">
-                <input id="date" type="hidden" name="action" value="search_order_cancel_all"><br><br>
+                <input type="hidden" name="action" value="search_order_date_kitchen_cancel_all"><br><br>
                 <label>Buscar por:</label><br>
                 <label>Dia:</label> <input type="radio" name="tipo" value="dia" checked><br>
                 <label>Mes:</label> <input type="radio" name="tipo" value="mes"><br><br>
@@ -28,4 +28,4 @@
 			header('Location: Views/sesion/no_sesion.php');
 		}
 	}
-	?>
+?>

@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 class Pedido
 {
@@ -80,7 +80,8 @@ class Pedido
 		return $listaPedidos;
 	}
 
-	public static function allPedido(){
+
+		public static function allPedido(){
 
 		$listaPedidos =[];
 		$db=Db::getConnect();
@@ -195,11 +196,11 @@ class Pedido
 	  }
 
 	  	//Busca pedidos por fecha y los muestra
-
 	public static function getOrderByDay($fecha){
-
+		session_start();
 		$listaPedidos=[];
 		$db=Db::getConnect();
+		//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 		$select=$db->prepare('SELECT *
 							FROM pedidos
 							WHERE fecha = :fecha');
@@ -212,14 +213,14 @@ class Pedido
 										$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
 										$pedido['costo_total']);
 		}
-
-		return $listaPedidos;
+			return $listaPedidos;
 		}
 
-	 public static function getOrderByMonth($month){
-
+		public static function getOrderByMonth($month){
+			session_start();
 			$listaPedidos=[];
 			$db=Db::getConnect();
+			//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 			$select=$db->prepare('SELECT *
 								FROM pedidos
 								WHERE MONTH(fecha) = :month');
@@ -236,111 +237,95 @@ class Pedido
 			return $listaPedidos;
 			}
 
+			public static function getOrderByDayStatus($fecha,$estado){
+				session_start();
+				$listaPedidos=[];
+				$db=Db::getConnect();
+				//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
+				$select=$db->prepare('SELECT *
+									FROM pedidos
+									WHERE fecha = :fecha and estado = :estado and solicita = :solicita');
+			  $select->bindValue('fecha',$fecha);
+				$select->bindValue('estado',$estado);
+				$select->bindValue('solicita',$_SESSION["nombre"]);
+				$select->execute();
 
-//Esta es una funcion busca pedidos por mes con determinado estado
-	 public static function getOrderByMonthStatus($month,$estado){
-		 session_start();
-		 $listaPedidos=[];
-		 $db=Db::getConnect();
-		 $select=$db->prepare('SELECT *
-							 FROM pedidos
-							 WHERE MONTH(fecha) = :month and estado=:estado and solicita=:solicita');
-							 $select->bindValue('month',$month);
-							 $select->bindValue('estado',$estado);
-							 $select->bindValue('solicita',$_SESSION["nombre"]);
-							 $select->execute();
+				foreach ($select->fetchAll() as $pedido) {
+					$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+												$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
+												$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
+												$pedido['costo_total']);
+				}
 
-							 foreach ($select->fetchAll() as $pedido) {
-								 $listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
-										 $pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
-										 $pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
-										 $pedido['costo_total']);
-									 }
+				return $listaPedidos;
+				}
 
-									 return $listaPedidos;
-	 }
+				public static function getOrderByMonthStatus($month,$estado){
+					session_start();
+					$listaPedidos=[];
+					$db=Db::getConnect();
+					//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
+					$select=$db->prepare('SELECT *
+										FROM pedidos
+										WHERE MONTH(fecha) = :month and estado=:estado and solicita=:solicita');
+					$select->bindValue('month',$month);
+					$select->bindValue('estado',$estado);
+					$select->bindValue('solicita',$_SESSION["nombre"]);
+					$select->execute();
 
-	 public static function getOrderByDayStatus($fecha,$estado){
-		 session_start();
-		 $listaPedidos=[];
-		 $db=Db::getConnect();
-		 //$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
-		 $select=$db->prepare('SELECT *
-							 FROM pedidos
-							 WHERE fecha = :fecha and estado = :estado and solicita = :solicita');
-							 $select->bindValue('fecha',$fecha);
-							 $select->bindValue('estado',$estado);
-							 $select->bindValue('solicita',$_SESSION["nombre"]);
-							 $select->execute();
+					foreach ($select->fetchAll() as $pedido) {
+						$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+													$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
+													$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
+													$pedido['costo_total']);
+					}
 
-							 foreach ($select->fetchAll() as $pedido) {
-								 $listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
-										 $pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
-										 $pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
-										 $pedido['costo_total']);
-									 }
+					return $listaPedidos;
+					}
 
-									 return $listaPedidos;
-		}
-
-
-//Realiza la busqueda de pedidos por dia de todos los pedidos con determinado estado de todos los usuarios
-	 public static function getOrderByDayStatus_all($fecha,$estado){
-		 $listaPedidos=[];
-		 $db=Db::getConnect();
-		 $select=$db->prepare('SELECT *
-							 FROM pedidos
-							 WHERE fecha = :fecha and estado = :estado');
-							 $select->bindValue('fecha',$fecha);
-							 $select->bindValue('estado',$estado);
-							 $select->execute();
-
-							 foreach ($select->fetchAll() as $pedido) {
-								 $listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
-										 $pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
-										 $pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
-										 $pedido['costo_total']);
-									 }
+		public static function getOrderByDayStatus_all($fecha,$estado){
+			session_start();
+			$listaPedidos=[];
+			$db=Db::getConnect();
+			//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
+			$select=$db->prepare('SELECT *
+								FROM pedidos
+								WHERE fecha = :fecha and estado = :estado and autoriza = :autoriza');
+		  $select->bindValue('fecha',$fecha);
+			$select->bindValue('estado',$estado);
+			$select->bindValue('autoriza',$_SESSION["nombre"]);
+			$select->execute();
+			foreach ($select->fetchAll() as $pedido) {
+				$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+											$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
+											$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
+											$pedido['costo_total']);
+			}
 			return $listaPedidos;
-		}
+			}
 
-//Relaiza la busqueda de todos los pedidos del mes con deterinado estado de todos los usuarios
-	 public static function getOrderByMonthStatus_all($month,$estado){
-		 $listaPedidos=[];
-		 $db=Db::getConnect();
-		 $select=$db->prepare('SELECT *
-							 FROM pedidos
-							 WHERE MONTH(fecha) = :month and estado=:estado');
-							 $select->bindValue('month',$month);
-							 $select->bindValue('estado',$estado);
-							 $select->execute();
+			public static function getOrderByMonthStatus_all($month,$estado){
+				session_start();
+				$listaPedidos=[];
+				$db=Db::getConnect();
+				//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
+				$select=$db->prepare('SELECT *
+									FROM pedidos
+									WHERE MONTH(fecha) = :month and estado=:estado and autoriza=:autoriza');
+				$select->bindValue('month',$month);
+				$select->bindValue('estado',$estado);
+				$select->bindValue('autoriza',$_SESSION["nombre"]);
+				$select->execute();
 
-							 foreach ($select->fetchAll() as $pedido) {
-								 $listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
-										 $pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
-										 $pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
-										 $pedido['costo_total']);
-									 }
+				foreach ($select->fetchAll() as $pedido) {
+					$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+												$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
+												$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
+												$pedido['costo_total']);
+				}
 
-									 return $listaPedidos;
-		 }
-
-			//Busca pedidos por fecha y los muestra------Nota me servira mas adelante busca por fecha o id
-					/*public static function registerOrderById($fecha){
-						//buscar
-						$db=Db::getConnect();
-						//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
-						$select=$db->prepare('SELECT pedidos.id_pedido, productos.codingre, pedidos.fecha, productos.descrip,
-																				 pedido_producto.num_prod
-																	FROM pedidos
-																	RIGHT OUTER JOIN pedido_producto ON pedidos.id_pedido = pedido_producto.id_pedido
-																	RIGHT OUTER JOIN productos ON pedido_producto.codingre = productos.codingre
-																	WHERE pedidos.fecha = :fecha');
-						$select->bindValue('fecha',$fecha);
-						$select->execute();
-						return $select;
-					}*/
-//Cambia el el estatus del pedido
+				return $listaPedidos;
+				}
 		public static function change_order_status($estado,$id_pedido){
 			session_start();
 			$db=Db::getConnect();
@@ -353,7 +338,7 @@ class Pedido
 			$update->execute();
 		}
 
-//Cambia el costo del pedido
+
 		public static function change_order_cost($id_pedido,$costo_total){
 			$db=Db::getConnect();
 			$update=$db->prepare('UPDATE pedidos

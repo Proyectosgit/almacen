@@ -41,7 +41,7 @@
 		require_once('../Config/connection.php');
 
 		if ($_POST['action']=='register') {
-			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod']);
+			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod'],$_POST['Observacion']);
 			$relacionController->save($relacion);
 
 		}elseif ($_POST['action']=='update') {

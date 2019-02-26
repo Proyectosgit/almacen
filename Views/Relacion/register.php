@@ -1,5 +1,5 @@
 <?php
-	session_start();
+
 	if(isset($_SESSION["id_sesion"])){
 		if($_SESSION["id_sesion"]=="administrador"){
 ?>
@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label >Codigo de Ingrediente:</label>
-                <input class="form-control" type='number' name='codingre' maxlength="7" placeholder="Id Producto">
+                <input class="form-control" type='text' name='codingre' maxlength="7" placeholder="Id Producto">
             </div>
             <div class="form-group">
                 <label >Fecha Pedido:</label>
@@ -33,6 +33,10 @@
                 <label >Estado del Pedido:</label>
                 <input class="form-control" type='text' name='estado_prod' maxlength="20" placeholder="Estado del producto">
             </div>
+						<div class="form-group">
+								<label >Observaciones:</label>
+								<input class="form-control" type='text' name='observacion' maxlength="150" placeholder="Estado del producto">
+						</div>
                 <button class="btn-primary">Enviar</button>
         </form>
   </div>
