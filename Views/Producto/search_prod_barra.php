@@ -1,7 +1,7 @@
 <?php
-	session_start();
-	if(isset($_SESSION["id_sesion"])){
-		if($_SESSION["id_sesion"]=="administrador"){
+
+		if(isset($_SESSION["id_sesion"])){
+			if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="barra"){
 ?>
 
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
@@ -91,7 +91,7 @@
 		<input type="hidden" name="costo_total" value="<?php echo $costo_total;?>" id="costo_total_mod">
 		<input type="hidden" name="total_prod" value="<?php echo $total_prod;?>">
 		<input type="hidden" name="modificados" value="" id="array_modifica">
-		<input type="hidden" name="observacion" value="ivan">
+		<input type="hidden" name="observacion" value="--">
 		<center>
 			<input type="submit" value="Pedido" class="btn btn-success" onclick="return foor();">
 		</center>

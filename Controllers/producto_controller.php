@@ -80,7 +80,11 @@
 					}
 				}
 			}
-		header('Location: ../index.php?controller=producto&action=search_prod');
+			if($_SESSION['id_sesion']=="barra"){
+				header('Location: ../index.php?controller=producto&action=search_prod_bar');
+			}else{
+				header('Location: ../index.php?controller=producto&action=search_prod');
+			}
 		}
 
 		public function registra_pedido($modificados){
@@ -126,7 +130,8 @@
 								}
 					}
 			}
-			header('Location: ../index.php?controller=pedido&action=index');
+
+				header('Location: ../index.php?controller=pedido&action=index');
 		}
 
 		//public function search_prod_fam($cod_fam){

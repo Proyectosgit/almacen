@@ -1,7 +1,7 @@
 <?php
 
 	if(isset($_SESSION["id_sesion"])){
-		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina"){
+		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina" || $_SESSION["id_sesion"]=="barra"){
 ?>
 <section>
     <div class="container">

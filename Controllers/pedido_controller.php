@@ -146,7 +146,8 @@
 					$mes=explode("-",$_GET["date"]);
 					$select=Pedido::getOrderByMonthStatus($mes[1],"autorizado");
 				}
-					require_once('../Views/pedido/show_order_date.php');
+				require_once('../Views/pedido/show_order_date.php');
+				
 			}elseif($_GET['action']=="search_order_date_kitchen_cancel"){
 					require_once("../Models/pedido.php");
 				if($_GET["tipo"]=="dia"){

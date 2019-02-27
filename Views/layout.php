@@ -32,7 +32,7 @@
 					require_once("Views/partials/header_admin.php");
 					break;
 			case "barra":
-					require_once("Views/partials/header_realiza_pedido.php");
+					require_once("Views/partials/header_realiza_pedido_barra.php");
 					break;
 			}
 			?>

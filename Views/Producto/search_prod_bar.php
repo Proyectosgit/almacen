@@ -1,7 +1,7 @@
 <?php
-	session_start();
+
 	if(isset($_SESSION["id_sesion"])){
-		if($_SESSION["id_sesion"]=="administrador"){
+		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="barra"){
 ?>
 
 <div class="container">
