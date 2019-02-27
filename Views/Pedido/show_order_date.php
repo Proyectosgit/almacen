@@ -69,7 +69,8 @@
 							</div>
 						</div>
 						<div align="center">
-							<a href="../?controller=pedido&action=ver_pedido_cancelado_todos" class="btn btn-primary">Regresar</a>
+							<a href="javascript:window.history.back();" class="btn btn-primary">&laquo; Volver atrás</a>
+							<!-- <a href="../?controller=pedido&action=ver_pedido_cancelado_todos" class="btn btn-primary">Regresar</a> -->
 						</div>
 		</section>
 	</body>

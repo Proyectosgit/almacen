@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(isset($_SESSION["id_sesion"])){
-		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina"){
+		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina" || $_SESSION["id_sesion"]=="barra"){
 ?>
 <html>
 	<head>
@@ -61,6 +61,11 @@
 		<!-- <input type="submit" value="Pedido"> -->
 	<!-- </form> -->
 		</div>
+	</div>
+	<div align="center">
+		<!-- <a href="?controller=pedido&action=ver_pedido_autorizado" class="btn btn-primary">Regresar</a> -->
+		<!-- <a href="<?php //echo $HTTP_REFERER; ?>">Volver atras</a>  -->
+		<a href="javascript:window.history.back();" class="btn btn-primary">&laquo; Volver atrás</a>
 	</div>
 </section>
 </body>
