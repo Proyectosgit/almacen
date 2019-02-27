@@ -9,13 +9,13 @@
         <div class="mx-auto">
             <form action="Controllers/pedido_controller.php" method="get">
               <center>
-                <label>Selecciona la fecha para buscar pedido Autorizado</label><br>
+                <label>Selecciona la fecha para buscar pedido Autorizado</label><br><br>
                 <input id="date" type="date" name="date" value="<?php echo date("Y-m-d");?>">
                 <input type="hidden" name="action" value="search_order_date_kitchen_cancel_all"><br><br>
                 <label>Buscar por:</label><br>
                 <label>Dia:</label> <input type="radio" name="tipo" value="dia" checked><br>
                 <label>Mes:</label> <input type="radio" name="tipo" value="mes"><br><br>
-                <button type="submit" class="btn btn-info"> Buscar Pedido</button>
+                <button type="submit" class="btn btn-success"> Buscar Autorizados</button>
                   </center>
             </form>
         </div>

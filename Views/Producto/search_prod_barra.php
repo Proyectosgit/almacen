@@ -93,7 +93,10 @@
 		<input type="hidden" name="modificados" value="" id="array_modifica">
 		<input type="hidden" name="observacion" value="--">
 		<center>
-			<input type="submit" value="Pedido" class="btn btn-success" onclick="return foor();">
+			<!-- <input type="submit" value="Pedido" class="btn btn-success" onclick="return foor();"> -->
+			<button type="submit" class="btn btn-success" onclick="return foor();">
+				Pedido &nbsp; <span class="oi" data-glyph="cart"></span>
+			</button>
 		</center>
 	</form>
 	<?php
