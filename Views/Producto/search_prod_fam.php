@@ -91,14 +91,20 @@
 		<input type="hidden" name="costo_total" value="<?php echo $costo_total;?>" id="costo_total_mod">
 		<input type="hidden" name="total_prod" value="<?php echo $total_prod;?>">
 		<input type="hidden" name="modificados" value="" id="array_modifica">
-		<input type="hidden" name="observacion" value="ivan">
+		<input type="hidden" name="observacion" value="">
 		<center>
-			<input type="submit" value="Pedido" class="btn btn-success" onclick="return foor();">
+			<button type="submit" class="btn btn-success" onclick="return foor();">
+				Pedido <span class="oi" data-glyph="cart"></span>
+			</button>
 		</center>
 	</form>
 	<?php
 	}else{
-		Echo "<h1 align='center'>No hay productos a pedir<h1>";
+		Echo "<h1 align='center'>No hay productos a pedir<h1>
+			<div align='center'>
+			<a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
+			<!-- <a href='../?controller=pedido&action=ver_pedido_cancelado_todos' class='btn btn-primary'>Regresar</a> -->
+			</div>";
 	}
 	?>
 	<!-- <script src="Public/librerias/verifica_cambio_pedido.js"></script> --> <!--Sirve para validar las entradas -->

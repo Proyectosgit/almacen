@@ -1,7 +1,7 @@
 <?php
 
 	if(isset($_SESSION["id_sesion"])){
-		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina")){
+		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina"){
 ?>
 <section>
     <div class="container">
@@ -11,11 +11,13 @@
               <center>
                 <label>Selecciona la fecha para buscar pedido Autorizado</label><br><br>
                 <input id="date" type="date" name="date" value="<?php echo date("Y-m-d");?>">
-                <input type="hidden" name="action" value="search_order_date_kitchen_cancel_all"><br><br>
+                <input type="hidden" name="action" value="search_order_date_kitchen_authorized_all"><br><br>
                 <label>Buscar por:</label><br>
                 <label>Dia:</label> <input type="radio" name="tipo" value="dia" checked><br>
                 <label>Mes:</label> <input type="radio" name="tipo" value="mes"><br><br>
-                <button type="submit" class="btn btn-success"> Buscar Autorizados</button>
+                <button type="submit" class="btn btn-success">
+									Buscar Autorizados <span class="oi" data-glyph="magnifying-glass"></span>
+								</button>
                   </center>
             </form>
         </div>

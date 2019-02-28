@@ -30,7 +30,9 @@
 				</tr>
 				<tr>
 					<td align="center"><br>
-						<input type='submit' value='Buscar' class="btn btn-info">
+						<button type='submit' class="btn btn-info">
+							Buscar <span class="oi" data-glyph="magnifying-glass"></span>
+						</button>
 					</td>
 				</tr>
 			</table>

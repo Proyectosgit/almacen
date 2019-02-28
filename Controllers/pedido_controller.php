@@ -147,7 +147,7 @@
 					$select=Pedido::getOrderByMonthStatus($mes[1],"autorizado");
 				}
 				require_once('../Views/pedido/show_order_date.php');
-				
+
 			}elseif($_GET['action']=="search_order_date_kitchen_cancel"){
 					require_once("../Models/pedido.php");
 				if($_GET["tipo"]=="dia"){
@@ -161,10 +161,10 @@
 			}elseif($_GET['action']=="search_order_date_kitchen_authorized_all"){
 					require_once("../Models/pedido.php");
 					if($_GET["tipo"]=="dia"){
-						$select=Pedido::getOrderByDayStatus_all($_GET['date'],"cancelado");
+						$select=Pedido::getOrderByDayStatus_all($_GET['date'],"autorizado");
 					}elseif($_GET["tipo"]=="mes"){
 						$mes=explode("-",$_GET["date"]);
-						$select=Pedido::getOrderByMonthStatus_all($mes[1],"cancelado");
+						$select=Pedido::getOrderByMonthStatus_all($mes[1],"autorizado");
 					}
 					require_once('../Views/Pedido/show_order_date.php');
 

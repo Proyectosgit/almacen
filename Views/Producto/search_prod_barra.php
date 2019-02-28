@@ -101,7 +101,11 @@
 	</form>
 	<?php
 	}else{
-		Echo "<h1 align='center'>No hay productos a pedir<h1>";
+		Echo "<h1 align='center'>No hay productos a pedir<h1>
+			<div align='center'>
+			<a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
+			<!-- <a href='../?controller=pedido&action=ver_pedido_cancelado_todos' class='btn btn-primary'>Regresar</a> -->
+			</div>";
 	}
 	?>
 	<!-- <script src="Public/librerias/verifica_cambio_pedido.js"></script> --> <!--Sirve para validar las entradas -->
