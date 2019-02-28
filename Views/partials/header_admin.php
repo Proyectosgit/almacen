@@ -17,6 +17,7 @@
         <li><a href="?controller=producto&action=search_prod">Buscar producto por familia</a></li>
         <!-- <li><a href="?controller=pedido&action=recibir_pedidos">Almacenista</a></li> -->
         <li><a href="?controller=pedido&action=orderDate">Ver pedidos</a></li>
+        <li><a href="?controller=pedido&action=orderDate">Descargar Base de Datos</a></li>
         <li><a href="Views/sesion/cerrar_sesion.php">Cerrar sesion</a></li>
       </ul>
     </div>
