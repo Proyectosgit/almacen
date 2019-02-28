@@ -172,5 +172,49 @@ class Producto
 		$update->execute();
 	}
 
-}
+	public static function create_csv($data,$name_file){
+		// $db=Db::getConnect();
+		// $query = $db->query("SELECT * FROM productos ORDER BY codingre ASC");
+
+		if(!empty($data)){
+    	$delimiter = ",";
+    	$filename = $name_file . date('Y-m-d') . ".csv";
+    	$f = fopen('php://memory', 'w');
+    	$fields = array('codingre', 'descrip', 'familia', 'unidad', 'empaque',
+			 								'equivale', 'inventa1', 'stockmax', 'stockmin', 'ultcosto',
+											'costoprome', 'impuesto', 'pedido', 'status');
+    	fputcsv($f, $fields, $delimiter);
+    	//Escribe cada uno de los registros de la tabla usuarios en líneas separadas de nuestro csv
+    	foreach($data as $row){
+        	//$status = ($row['status'] == '1')?'Active':'Inactive';
+        	$lineData = array(
+                    $row->codingre,
+                    $row->descrip,
+                    $row->familia,
+                    $row->unidad,
+                    $row->empaque,
+                    $row->equivale,
+                    $row->inventa1,
+                    $row->stockmax,
+                    $row->stockmin,
+                    $row->ultcosto,
+                    $row->costoprome,
+                    $row->impuesto,
+                    $row->pedido,
+                    $row->status);
+        	fputcsv($f, $lineData, $delimiter);
+    		}
+    	//move back to beginning of file
+    	fseek($f, 0);
+    	//set headers to download file rather than displayed
+    	header('Content-Type: text/csv');
+    	header('Content-Disposition: attachment; filename="' . $filename . '";');
+    	//output all remaining data on a file pointer
+    	fpassthru($f);
+    fclose($f);
+		}
+		exit;
+	}
+
+}//End class
 ?>

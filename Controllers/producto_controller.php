@@ -176,6 +176,16 @@
 		public function error(){
 			require_once('Views/Producto/error.php');
 		}
+
+		public function button_download_db(){
+			require_once('Views/Producto/button_download_db.php');
+		}
+
+		public function download_db($name_file){
+			$productos=Producto::all();
+			Producto::create_csv($productos,$name_file);
+			//require_once('Views/Producto/download.php');
+		}
 	}
 
 
@@ -215,7 +225,8 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register'&$_GET['action']!='index'&$_GET['action']!='search_prod'&$_GET['action']!='search_prod_fam'&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra') {
+		if ($_GET['action']!='register'&$_GET['action']!='index'&$_GET['action']!='search_prod'&$_GET['action']!='search_prod_fam'
+				&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra'&$_GET['action']!='button_download_db') {
 			require_once('../Config/connection.php');
 			$productoController=new ProductoController();
 
@@ -227,6 +238,10 @@
 				require_once('../Models/producto.php');
 				$producto=Producto::getById($_GET['codingre']);
 				require_once('../Views/Producto/update.php');
+			}elseif ($_GET['action']=='download') {//mostrar la vista update con los datos del registro actualizar
+				require_once('../Models/producto.php');
+				$productoController->download_db($_GET["name_file"]);
+				header('Location: index.php/?controller=producto&action=button_download_db');
 			}
 		}
 	}
