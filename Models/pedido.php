@@ -244,7 +244,8 @@ class Pedido
 				//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 				$select=$db->prepare('SELECT *
 									FROM pedidos
-									WHERE fecha = :fecha and estado = :estado and solicita = :solicita');
+									WHERE fecha = :fecha and estado = :estado and solicita = :solicita
+									ORDER BY id_pedido DESC');
 			  $select->bindValue('fecha',$fecha);
 				$select->bindValue('estado',$estado);
 				$select->bindValue('solicita',$_SESSION["nombre"]);
@@ -267,7 +268,8 @@ class Pedido
 					//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 					$select=$db->prepare('SELECT *
 										FROM pedidos
-										WHERE MONTH(fecha) = :month and estado=:estado and solicita=:solicita');
+										WHERE MONTH(fecha) = :month and estado=:estado and solicita=:solicita
+										ORDER BY id_pedido DESC');
 					$select->bindValue('month',$month);
 					$select->bindValue('estado',$estado);
 					$select->bindValue('solicita',$_SESSION["nombre"]);
@@ -290,7 +292,8 @@ class Pedido
 			//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 			$select=$db->prepare('SELECT *
 								FROM pedidos
-								WHERE fecha = :fecha and estado = :estado and autoriza = :autoriza');
+								WHERE fecha = :fecha and estado = :estado and autoriza = :autoriza
+								ORDER BY id_pedido DESC');
 		  $select->bindValue('fecha',$fecha);
 			$select->bindValue('estado',$estado);
 			$select->bindValue('autoriza',$_SESSION["nombre"]);
@@ -311,7 +314,8 @@ class Pedido
 				//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 				$select=$db->prepare('SELECT *
 									FROM pedidos
-									WHERE MONTH(fecha) = :month and estado=:estado and autoriza=:autoriza');
+									WHERE MONTH(fecha) = :month and estado=:estado and autoriza=:autoriza
+									ORDER BY id_pedido DESC');
 				$select->bindValue('month',$month);
 				$select->bindValue('estado',$estado);
 				$select->bindValue('autoriza',$_SESSION["nombre"]);
