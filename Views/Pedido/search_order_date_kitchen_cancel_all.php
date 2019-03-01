@@ -9,7 +9,7 @@
         <div class="mx-auto">
             <form action="Controllers/pedido_controller.php" method="get">
               <center>
-                <label>Selecciona para buscar pedido cancelado</label><br><br>
+                <label>Buscar pedido(s) Cancelado(s)</label><br><br>
                 <input id="date" type="date" name="date" value="<?php echo date("Y-m-d");?>">
                 <input type="hidden" name="action" value="search_order_date_kitchen_cancel_all"><br><br>
                 <label>Buscar por:</label><br>

@@ -12,7 +12,7 @@
 	<!-- <link rel="stylesheet" href="Public/bootstrap-3.3.6/dist/css/bootstrap.min.css"/> -->
   <link rel="stylesheet" href="Public/bootstrap/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="Public/bootstrap/bootstrap_3.3.6/bootstrap.min.css">
-  <link rel="stylesheet" href="..Public/css/style.css">
+  <link rel="stylesheet" href="../Public/css/style.css">
 	<link href="Public/open-iconic-master/font/css/open-iconic.css" rel="stylesheet">
 </head>
 <body>

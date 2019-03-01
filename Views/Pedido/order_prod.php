@@ -6,12 +6,14 @@
   	<head>
 		<title>Productos del pedido</title>
 		<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'/>
-	    <!-- <link rel="stylesheet" href="Views/bootstrap/css/bootstrap.min.css"/> -->
-	    <link rel="stylesheet" href="Public/assets/bootstrap-4.2.1/css/bootstrap.min.css"/>
-		<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->
+		<!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+		<link rel="stylesheet" href="../Public/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="../Public/bootstrap/bootstrap_3.3.6/bootstrap.min.css">
+		<link href="Public/open-iconic-master/font/css/open-iconic.css" rel="stylesheet">
+
+
 		<script src="../Public/librerias/verifica_cambio_relacion.js"></script>
 		<script>
 			function foor(){
@@ -24,7 +26,7 @@
 	<body>
 		<header>
 			<div align="center">
-			<h1>Detalles del pedido</h1>
+				<h1>Detalles del pedido</h1>
 			</div>
 		</header>
     <section>
@@ -33,17 +35,17 @@
 				<table class="table">
 							 <thead class="thead-dark">
 	                <tr>
-		                <td>Id Pedido</td>
-		                <td>Id Producto</td>
-		                <td>Fecha</td>
-		                <td>Descripción</td>
-		                <td>Existencia</td>
-                    <td>Stock <br> máximo</td>
-                    <td>Costo unitario</td>
-		                <!-- <td>Costo total</td> -->
-                    <td>Costo productos</td>
-		                <td>Numero <br> productos pedido</td>
-		                <!-- <td colspan=2 >Acciones</td> -->
+		                <th>Id Pedido</th>
+										<th>Productos <br> pedido</th>
+										<th>Descripción</th>
+										<th>Costo <br>unitario</th>
+										<th>Costo <br>productos</th>
+		                <th>Id Producto</th>
+		                <!-- <th>Fecha</th> -->
+		                <th>Existencia</th>
+                    <th>Stock <br> máximo</th>
+		                <!-- <th>Costo total</th> -->
+		                <!-- <th colspan=2 >Acciones</th> -->
 	                </tr>
               </thead>
                 <tbody>
@@ -56,17 +58,18 @@
 			            <tr>
                 <!-- <td id="id_pedido"><?php //echo $order['id_pedido']; ?></td> -->
 				        <td><?php echo $order['id_pedido']; ?></td>
+								<td bgcolor=#3ADF00><?php echo $order["num_prod"];?></td>
+								<td><?php echo $order['descrip'];?></td>
+								<td class="precio_unitario"><?php echo $order["ultcosto"];?></td>
+								<!-- <td id="costototalmod"><?php //echo $order["costo_total"];?></td> -->
+								<td class="costo_producto"><?php echo $costo_producto;?></td>
+								<?php $costo_total=$costo_total+$costo_producto;
+								$total_prod=$total_prod+1;
+								?>
 				        <td><?php echo $order['codingre']; ?></td>
-				        <td><?php echo $order['fecha']; ?></td>
-				        <td><?php echo $order['descrip'];?></td>
+				        <!-- <td><?php //echo $order['fecha']; ?></td> -->
 				        <td class="existencia"><?php echo $order['inventa1'];?></td>
 				        <td class="stock_max"><?php  echo $order['stockmax'];?></td>
-                <td class="precio_unitario"><?php echo $order["ultcosto"];?></td>
-                <!-- <td id="costototalmod"><?php //echo $order["costo_total"];?></td> -->
-                <td class="costo_producto"><?php echo $costo_producto;?></td>
-                <?php $costo_total=$costo_total+$costo_producto;
-                $total_prod=$total_prod+1;
-                ?>
 				        <?php //if($_GET["estatus"]=="pedido"){ ?>
 									<!-- <td bgcolor="#b8ff54"><?php //echo $order['num_prod'];?></td> -->
 				        <!-- <td><input class="cantidad" type="number" name="<?php //echo$order['codingre']?>" value="<?php //echo $order['num_prod'];?>" required></td> modifica cantidad-->
@@ -74,7 +77,6 @@
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php// echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php// echo $pedido->id_pedido ?>">Eliminar</a> </td> -->
 			        <?php //}else{?>
-				        <td bgcolor=#3ADF00><?php echo $order["num_prod"];?></td>
 				    <?php //} ?>
 			             </tr>
 	          <?php }//End foreach ?>
@@ -96,8 +98,8 @@
 
 			<div align="center">
 				<h2 id="costototalmod">Costo Total: <?php echo $costo_total;?> </h2>
-				<h4 id="costototalmod">Fecha del pedido: <?php echo $order['fecha'];?> </h4> <br>
-				 <a href="../?controller=pedido&action=ver_pedidos" class="btn btn-primary">Regresar</a>
+				<h4 id="costototalmod">Fecha del pedido: <?php echo $order['fecha'];?> </h4>
+				 <a href="../?controller=pedido&action=ver_pedidos" class="btn btn-primary">Regresar</a><br>
 			<div>
 </body>
 <?php
