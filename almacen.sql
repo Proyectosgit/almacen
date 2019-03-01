@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-02-2019 a las 18:01:49
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.0
+-- Tiempo de generación: 28-02-2019 a las 19:30:32
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,12 +30,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `almacen` (
   `id_almacen` int(3) NOT NULL,
-  `nom_almacen` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
-  `estado` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `gerente` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `direccion` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
-  `tel` varchar(10) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `nom_almacen` varchar(60) NOT NULL,
+  `estado` varchar(25) NOT NULL,
+  `gerente` varchar(30) NOT NULL,
+  `direccion` varchar(300) NOT NULL,
+  `tel` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `almacen`
@@ -52,9 +52,9 @@ INSERT INTO `almacen` (`id_almacen`, `nom_almacen`, `estado`, `gerente`, `direcc
 --
 
 CREATE TABLE `familia` (
-  `cod_familia` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `descripcion` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `cod_familia` varchar(20) NOT NULL,
+  `descripcion` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `familia`
@@ -101,14 +101,14 @@ CREATE TABLE `pedidos` (
   `id_pedido` int(10) NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `autoriza` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `solicita` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `observaciones` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `unidad_medida` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `autoriza` varchar(30) DEFAULT NULL,
+  `solicita` varchar(30) NOT NULL,
+  `estado` varchar(20) NOT NULL,
+  `observaciones` varchar(150) DEFAULT NULL,
+  `unidad_medida` varchar(10) NOT NULL,
   `total_prod` float NOT NULL,
   `costo_total` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pedidos`
@@ -272,9 +272,31 @@ INSERT INTO `pedidos` (`id_pedido`, `fecha`, `hora`, `autoriza`, `solicita`, `es
 (155, '2019-02-25', '11:30:22', 'paola paez', 'memo', 'autorizado', NULL, '', 9, 9524.92),
 (156, '2019-02-25', '11:33:50', 'paola paez', 'memo', 'autorizado', NULL, '', 9, 9524.92),
 (157, '2019-02-25', '11:38:17', 'paola paez', 'paola paez', 'autorizado', NULL, '', 9, 9524.92),
-(158, '2019-02-25', '12:31:27', NULL, 'paola paez', 'pedido', NULL, '', 9, 9524.92),
+(158, '2019-02-25', '12:31:27', 'paola paez', 'paola paez', 'cancelado', NULL, '', 9, 9524.92),
 (159, '2019-02-25', '12:34:51', 'paola paez', 'paola paez', 'autorizado', NULL, '', 9, 9524.92),
-(160, '2019-02-25', '12:38:04', 'paola paez', 'paola paez', 'autorizado', NULL, '', 9, 9524.92);
+(160, '2019-02-25', '12:38:04', 'paola paez', 'paola paez', 'autorizado', NULL, '', 9, 9524.92),
+(161, '2019-02-26', '02:37:59', NULL, 'paola paez', 'pedido', NULL, '', 9, 9524.92),
+(162, '2019-02-26', '05:16:00', 'Ivan Colula Medel', 'Jose', 'autorizado', 'sin observaciones', 'litros', 12, 500),
+(163, '2019-02-26', '06:19:59', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(164, '2019-02-26', '06:23:50', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(165, '2019-02-26', '06:26:59', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(166, '2019-02-26', '06:49:34', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(167, '2019-02-26', '06:55:39', NULL, 'memo', 'pedido', NULL, '', 9, 9524.92),
+(168, '2019-02-26', '06:58:10', NULL, 'memo', 'pedido', NULL, '', 9, 9524.92),
+(169, '2019-02-26', '06:58:26', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(170, '2019-02-26', '07:01:01', NULL, 'memo', 'pedido', NULL, '', 9, 9524.92),
+(171, '2019-02-26', '07:01:18', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(172, '2019-02-26', '07:13:18', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(173, '2019-02-26', '07:14:10', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(174, '2019-02-26', '07:15:32', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(175, '2019-02-26', '07:26:59', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(176, '2019-02-27', '10:17:05', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(177, '2019-02-27', '02:44:42', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(178, '2019-02-27', '02:45:05', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(179, '2019-02-27', '04:47:27', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(180, '2019-02-27', '05:50:04', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(181, '2019-02-27', '06:35:59', 'paola paez', 'memo', 'autorizado', NULL, '', 9, 9524.92),
+(182, '2019-02-28', '07:18:00', NULL, 'memo', 'pedido', NULL, '', 9, 9524.92);
 
 -- --------------------------------------------------------
 
@@ -284,13 +306,13 @@ INSERT INTO `pedidos` (`id_pedido`, `fecha`, `hora`, `autoriza`, `solicita`, `es
 
 CREATE TABLE `pedido_producto` (
   `id_pedido` int(10) NOT NULL,
-  `codingre` varchar(10) CHARACTER SET latin1 NOT NULL,
+  `codingre` varchar(10) NOT NULL,
   `fecha_pedido` date NOT NULL,
   `hora_pedido` time NOT NULL,
   `num_prod` float NOT NULL,
-  `estado_prod` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
-  `observacion` varchar(150) CHARACTER SET latin1 DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `estado_prod` varchar(20) DEFAULT NULL,
+  `observacion` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pedido_producto`
@@ -2053,7 +2075,77 @@ INSERT INTO `pedido_producto` (`id_pedido`, `codingre`, `fecha_pedido`, `hora_pe
 (160, 'A017', '2019-02-25', '12:38:04', 10, 'pedido', 'ivan'),
 (160, 'A018', '2019-02-25', '12:38:04', 9, 'pedido', 'ivan'),
 (160, 'A243', '2019-02-25', '12:38:04', 18, 'pedido', 'ivan'),
-(160, 'A244', '2019-02-25', '12:38:04', 19, 'pedido', 'ivan');
+(160, 'A244', '2019-02-25', '12:38:04', 19, 'pedido', 'ivan'),
+(161, 'A005', '2019-02-26', '02:37:59', 10, 'pedido', 'ivan'),
+(161, 'A006', '2019-02-26', '02:37:59', 9.51, 'pedido', 'ivan'),
+(161, 'A008', '2019-02-26', '02:37:59', 13, 'pedido', 'ivan'),
+(161, 'A009', '2019-02-26', '02:37:59', 10, 'pedido', 'ivan'),
+(161, 'A015', '2019-02-26', '02:37:59', 8, 'pedido', 'ivan'),
+(161, 'A017', '2019-02-26', '02:37:59', 10, 'pedido', 'ivan'),
+(161, 'A018', '2019-02-26', '02:37:59', 9, 'pedido', 'ivan'),
+(161, 'A243', '2019-02-26', '02:37:59', 18, 'pedido', 'ivan'),
+(161, 'A244', '2019-02-26', '02:37:59', 19, 'pedido', 'ivan'),
+(162, 'A001', '2019-02-26', '02:02:00', 10, 'pedido', NULL),
+(163, 'B002', '2019-02-26', '06:19:59', 100, 'pedido', 'ivan'),
+(164, 'B002', '2019-02-26', '06:23:50', 100, 'pedido', 'ivan'),
+(165, 'B002', '2019-02-26', '06:26:59', 100, 'pedido', 'ivan'),
+(166, 'B002', '2019-02-26', '06:49:34', 100, 'pedido', 'ivan'),
+(167, 'A005', '2019-02-26', '06:55:39', 10, 'pedido', 'ivan'),
+(167, 'A006', '2019-02-26', '06:55:39', 9.51, 'pedido', 'ivan'),
+(167, 'A008', '2019-02-26', '06:55:39', 13, 'pedido', 'ivan'),
+(167, 'A009', '2019-02-26', '06:55:39', 10, 'pedido', 'ivan'),
+(167, 'A015', '2019-02-26', '06:55:39', 8, 'pedido', 'ivan'),
+(167, 'A017', '2019-02-26', '06:55:39', 10, 'pedido', 'ivan'),
+(167, 'A018', '2019-02-26', '06:55:39', 9, 'pedido', 'ivan'),
+(167, 'A243', '2019-02-26', '06:55:39', 18, 'pedido', 'ivan'),
+(167, 'A244', '2019-02-26', '06:55:39', 19, 'pedido', 'ivan'),
+(168, 'A005', '2019-02-26', '06:58:10', 10, 'pedido', 'ivan'),
+(168, 'A006', '2019-02-26', '06:58:10', 9.51, 'pedido', 'ivan'),
+(168, 'A008', '2019-02-26', '06:58:10', 13, 'pedido', 'ivan'),
+(168, 'A009', '2019-02-26', '06:58:10', 10, 'pedido', 'ivan'),
+(168, 'A015', '2019-02-26', '06:58:10', 8, 'pedido', 'ivan'),
+(168, 'A017', '2019-02-26', '06:58:10', 10, 'pedido', 'ivan'),
+(168, 'A018', '2019-02-26', '06:58:10', 9, 'pedido', 'ivan'),
+(168, 'A243', '2019-02-26', '06:58:10', 18, 'pedido', 'ivan'),
+(168, 'A244', '2019-02-26', '06:58:10', 19, 'pedido', 'ivan'),
+(169, 'B002', '2019-02-26', '06:58:26', 100, 'pedido', 'ivan'),
+(170, 'A005', '2019-02-26', '07:01:01', 10, 'pedido', 'ivan'),
+(170, 'A006', '2019-02-26', '07:01:01', 9.51, 'pedido', 'ivan'),
+(170, 'A008', '2019-02-26', '07:01:01', 13, 'pedido', 'ivan'),
+(170, 'A009', '2019-02-26', '07:01:01', 10, 'pedido', 'ivan'),
+(170, 'A015', '2019-02-26', '07:01:01', 8, 'pedido', 'ivan'),
+(170, 'A017', '2019-02-26', '07:01:01', 10, 'pedido', 'ivan'),
+(170, 'A018', '2019-02-26', '07:01:01', 9, 'pedido', 'ivan'),
+(170, 'A243', '2019-02-26', '07:01:01', 18, 'pedido', 'ivan'),
+(170, 'A244', '2019-02-26', '07:01:01', 19, 'pedido', 'ivan'),
+(171, 'B002', '2019-02-26', '07:01:18', 100, 'pedido', 'ivan'),
+(172, 'B002', '2019-02-26', '07:13:18', 100, 'pedido', '--'),
+(173, 'B002', '2019-02-26', '07:14:10', 100, 'pedido', '--'),
+(174, 'B002', '2019-02-26', '07:15:32', 100, 'pedido', '--'),
+(175, 'B002', '2019-02-26', '07:26:59', 100, 'pedido', '--'),
+(176, 'B002', '2019-02-27', '10:17:05', 100, 'pedido', '--'),
+(177, 'B002', '2019-02-27', '02:44:42', 100, 'pedido', '--'),
+(178, 'B002', '2019-02-27', '02:45:05', 100, 'pedido', '--'),
+(179, 'B002', '2019-02-27', '04:47:27', 100, 'pedido', '--'),
+(180, 'B002', '2019-02-27', '05:50:04', 100, 'pedido', '--'),
+(181, 'A005', '2019-02-27', '06:35:59', 10, 'pedido', ''),
+(181, 'A006', '2019-02-27', '06:35:59', 9.51, 'pedido', ''),
+(181, 'A008', '2019-02-27', '06:35:59', 13, 'pedido', ''),
+(181, 'A009', '2019-02-27', '06:35:59', 10, 'pedido', ''),
+(181, 'A015', '2019-02-27', '06:35:59', 8, 'pedido', ''),
+(181, 'A017', '2019-02-27', '06:35:59', 10, 'pedido', ''),
+(181, 'A018', '2019-02-27', '06:35:59', 9, 'pedido', ''),
+(181, 'A243', '2019-02-27', '06:35:59', 18, 'pedido', ''),
+(181, 'A244', '2019-02-27', '06:35:59', 19, 'pedido', ''),
+(182, 'A005', '2019-02-28', '07:18:00', 10, 'pedido', ''),
+(182, 'A006', '2019-02-28', '07:18:00', 9.51, 'pedido', ''),
+(182, 'A008', '2019-02-28', '07:18:00', 13, 'pedido', ''),
+(182, 'A009', '2019-02-28', '07:18:00', 10, 'pedido', ''),
+(182, 'A015', '2019-02-28', '07:18:00', 8, 'pedido', ''),
+(182, 'A017', '2019-02-28', '07:18:00', 10, 'pedido', ''),
+(182, 'A018', '2019-02-28', '07:18:00', 9, 'pedido', ''),
+(182, 'A243', '2019-02-28', '07:18:00', 18, 'pedido', ''),
+(182, 'A244', '2019-02-28', '07:18:00', 19, 'pedido', '');
 
 -- --------------------------------------------------------
 
@@ -2076,7 +2168,7 @@ CREATE TABLE `productos` (
   `impuesto` float NOT NULL,
   `pedido` float NOT NULL,
   `status` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -2084,13 +2176,13 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, `equivale`, `inventa1`, `stockmax`, `stockmin`, `ultcosto`, `costoprome`, `impuesto`, `pedido`, `status`) VALUES
 ('A001', 'JARDIN', 'PRODU', 'gr', '', 1000, 0, 0, 0, 1.75, 5.38, 0, 0, NULL),
-('A005', 'ACEITE OLIVO', 'ABARR', 'ml', 'BIDON', 3000, 0, 10, 0, 281.32, 281.33, 0, 10, 'autorizado'),
-('A006', 'ACEITE VEGETAL', 'ABARR', 'ml', 'LITRO', 20000, 0.49, 10, 0, 422, 422, 0, 9.51, 'autorizado'),
-('A008', 'ACEITUNA VERDE', 'ABARR', 'gr', '', 450, 2, 15, 0, 59.5, 59.51, 0, 13, 'autorizado'),
-('A009', 'ACHIOTE', 'ABARR', 'GR', '', 1000, 0, 10, 0, 48.6, 50.06, 0, 10, 'autorizado'),
-('A015', 'ALCAPARRA', 'ABARR', 'gr', '', 605, 2, 10, 0, 85, 70.93, 0, 8, 'autorizado'),
-('A017', 'ALMEJAS LATA', 'ABARR', 'gr', '', 396, 0, 10, 0, 30, 29.77, 0, 10, 'autorizado'),
-('A018', 'ANCHOAS', 'ABARR', 'gr', '', 80, 1, 10, 0, 31, 31, 0, 9, 'autorizado'),
+('A005', 'ACEITE OLIVO', 'ABARR', 'ml', 'BIDON', 3000, 0, 10, 0, 281.32, 281.33, 0, 10, 'pedido'),
+('A006', 'ACEITE VEGETAL', 'ABARR', 'ml', 'LITRO', 20000, 0.49, 10, 0, 422, 422, 0, 9.51, 'pedido'),
+('A008', 'ACEITUNA VERDE', 'ABARR', 'gr', '', 450, 2, 15, 0, 59.5, 59.51, 0, 13, 'pedido'),
+('A009', 'ACHIOTE', 'ABARR', 'GR', '', 1000, 0, 10, 0, 48.6, 50.06, 0, 10, 'pedido'),
+('A015', 'ALCAPARRA', 'ABARR', 'gr', '', 605, 2, 10, 0, 85, 70.93, 0, 8, 'pedido'),
+('A017', 'ALMEJAS LATA', 'ABARR', 'gr', '', 396, 0, 10, 0, 30, 29.77, 0, 10, 'pedido'),
+('A018', 'ANCHOAS', 'ABARR', 'gr', '', 80, 1, 10, 0, 31, 31, 0, 9, 'pedido'),
 ('A019', 'ARROZ', 'ABARR', 'gr', '', 1000, 0, 0, 0, 21.35, 21.33, 0, 0, NULL),
 ('A021', 'ATE DE MEMBRILLO', 'ABARR', 'GR', '', 700, 1.5, 0, 0, 25.78, 25.68, 0, 0, NULL),
 ('A028', 'AZUCAR MORENA', 'ABARR', 'gr', '', 1000, 0, 0, 0, 22.14, 17.66, 0, 0, NULL),
@@ -2221,8 +2313,8 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('A240', 'SALSA VALENTINA', 'ABARR', 'ml', '', 370, 0, 0, 0, 19, 13.7, 0, 0, NULL),
 ('A241', 'SALSA YAKIZOBA', 'ABARR', 'ml', '', 4000, 0, 0, 0, 0, 0, 0, 0, NULL),
 ('A242', 'SALSA YUZU', 'ABARR', 'ml', '', 1000, 0, 0, 0, 99, 99, 0, 0, NULL),
-('A243', 'SALSA ZAMBAL', 'ABARR', 'gr', '', 3859, 1, 19, 0, 10, 0, 0, 18, 'autorizado'),
-('A244', 'SAZONADOR MONTREAL DE POL', 'ABARR', 'gr', '', 652, 0, 19, 0, 0, 0, 0, 19, 'autorizado'),
+('A243', 'SALSA ZAMBAL', 'ABARR', 'gr', '', 3859, 1, 19, 0, 10, 0, 0, 18, 'pedido'),
+('A244', 'SAZONADOR MONTREAL DE POL', 'ABARR', 'gr', '', 652, 0, 19, 0, 0, 0, 0, 19, 'pedido'),
 ('A245', 'SAZONADOR MONTREAL DE RES', 'ABARR', 'gr', '', 822, 0, 0, 0, 0, 0, 0, 0, NULL),
 ('A246', 'SAZONADOR SABROSEADOR', 'ABARR', 'gr', '', 117, 0, 0, 0, 14.55, 15.54, 0, 0, NULL),
 ('A247', 'SIDRA', 'ABARR', 'ml', '', 680, 0, 0, 0, 41.55, 41.15, 0, 0, NULL),
@@ -2273,7 +2365,7 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('ABGM', 'GREY GOOSE 1.750', 'VODKA', 'ML', '', 1750, 0, 0, 0, 846.84, 844.2, 0, 0, NULL),
 ('AGCO', 'AGUA CORRIENTE', 'REFRE', 'ML', '', 19000, 0, 0, 0, 30.59, 25.94, 0, 0, NULL),
 ('B001', 'AGUA GARRAFON', 'BEBID', 'ml', '', 20000, 0, 0, 0, 27, 27, 0, 0, NULL),
-('B002', 'AGUA MINERAL LATA', 'BEBID', 'PZ', '', 355, 251, 351, 0, 5.96, 5.96, 16, 0, NULL),
+('B002', 'AGUA MINERAL LATA', 'BEBID', 'PZ', '', 355, 251, 351, 0, 5.96, 5.96, 16, 0, 'pedido'),
 ('B003', 'AGUA MINERAL MINI', 'BEBID', 'ML', '', 250, 304, 0, 0, 5.53, 5.53, 16, 0, NULL),
 ('B004', 'AGUA MINERAL REFIL', 'BEBID', 'ML', '', 2000, 15, 0, 0, 12.07, 12.08, 16, 0, NULL),
 ('B006', 'AGUA NATURAL MINI', 'BEBID', 'ML', '', 355, 0, 0, 0, 7.76, 5.98, 16, 0, NULL),
@@ -3216,7 +3308,7 @@ CREATE TABLE `usuario` (
   `cargo` varchar(30) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -3226,9 +3318,12 @@ INSERT INTO `usuario` (`id_user`, `username`, `password`, `cargo`, `nombre`, `em
 (1, 'ivan', '12345', 'administrador', 'ivan colula', 'ivan_f789@hotmail.com'),
 (2, 'paola', '12345', 'gerente', 'paola paez', 'paola@gmail.com'),
 (3, 'memo', '12345', 'cocina', 'memo', 'memo@gmail.com'),
-(4, 'raul', '12345', 'almacenista', 'raul', 'raul@gmail.com'),
+(4, 'raul', '12345', 'barra', 'raul', 'raul@gmail.com'),
 (5, 'Luis', '12345', 'barra', 'Luis sanchez', 'luis@gmail.com'),
-(6, 'cocina', '12345', 'cocina', 'cocina', 'cocina@gmail.com');
+(6, 'cocina', '12345', 'cocina', 'cocina', 'cocina@gmail.com'),
+(8, 'raul', '12345', 'barra', 'raul rulo', 'raul@gmail.com'),
+(9, 'jorge', 'jorge', 'no', 'jorgito', 'sada@dfs'),
+(10, 'cha', '12', 'noas', 'asd', 'asd@as');
 
 --
 -- Índices para tablas volcadas
@@ -3288,13 +3383,13 @@ ALTER TABLE `almacen`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id_pedido` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
@@ -3304,8 +3399,8 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
-  ADD CONSTRAINT `pedido_producto_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`),
-  ADD CONSTRAINT `pedido_producto_ibfk_2` FOREIGN KEY (`codingre`) REFERENCES `productos` (`codingre`);
+  ADD CONSTRAINT `pedido_producto_ibfk_1` FOREIGN KEY (`codingre`) REFERENCES `productos` (`codingre`),
+  ADD CONSTRAINT `pedido_producto_ibfk_2` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
