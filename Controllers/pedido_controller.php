@@ -1,7 +1,6 @@
 <?php
 
-	class PedidoController
-	{
+	class PedidoController{
 		public function __construct(){}
 
 		public function index(){
@@ -9,10 +8,15 @@
 			require_once('Views/Pedido/index.php');
 		}
 
-		public function ver_autorizados(){
-			$pedidos=Pedido::autorizados();
-			require_once('Views/Pedido/index.php');
+		public function ver_pedidos(){
+			$pedidos=Pedido::ver_pedidos();
+			require_once('Views/Pedido/ver_pedido.php');
 		}
+
+		// public function ver_autorizados(){
+			// $pedidos=Pedido::autorizados();
+			// require_once('Views/Pedido/index.php');
+		// }
 
 		public function ver_pedido_autorizado(){
 			require_once('Views/Pedido/search_order_date_kitchen_authorized.php');
@@ -20,6 +24,14 @@
 
 		public function ver_pedido_cancelado(){
 			require_once('Views/Pedido/search_order_date_kitchen_cancel.php');
+		}
+
+		public function ver_pedido_autorizado_todos(){
+			require_once('Views/Pedido/search_order_date_kitchen_authorized_all.php');
+		}
+
+		public function ver_pedido_cancelado_todos(){
+			require_once('Views/Pedido/search_order_date_kitchen_cancel_all.php');
 		}
 
 		public function recibir_pedidos($id){
@@ -82,15 +94,16 @@
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
 		if ($_GET['action'] != 'register'&$_GET['action'] != 'index'&$_GET['action'] != 'recibir_pedidos'&$_GET['action'] != 'orderDate'
-				&$_GET['action'] != 'ver_pedido'&$_GET['action'] != 'ver_pedido_autorizado'&$_GET['action'] != 'ver_pedido_cancelado'){
+				&$_GET['action'] != 'ver_pedido'&$_GET['action'] != 'ver_pedido_autorizado'&$_GET['action'] != 'ver_pedido_cancelado' &$_GET['action'] != 'ver_pedidos'
+				&$_GET['action'] != 'ver_pedido_autorizado_todos'&$_GET['action'] != 'ver_pedido_cancelado_todos'){
 
-			require_once('../Config/connection.php');
-			$pedidoController=new PedidoController();
+				require_once('../Config/connection.php');
+				$pedidoController=new PedidoController();
 
 			if ($_GET['action']=='delete') {
 				$pedidoController->delete($_GET['id_pedido']);
-		//mostrar la vista update con los datos del registro actualizar
-			}elseif ($_GET['action']=='update') {
+				//mostrar la vista update con los datos del registro actualizar
+			}elseif($_GET['action']=='update') {
 				require_once('../Models/pedido.php');
 				$pedido=Pedido::getById($_GET['id_pedido']);
 				require_once('../Views/Pedido/update.php');
@@ -99,19 +112,22 @@
 				require_once('../Models/pedido.php');
 				$select=Pedido::getOrderById($_GET['id_pedido']);
 				require_once('../Views/Pedido/order_prod.php');
-
 			}elseif($_GET['action']=='register_order'){
 				require_once('../Models/pedido.php');
 				$select=Pedido::registerOrderById($_GET['fecha']);
 				require_once('../Views/Pedido/register_prod.php');
-
 			}elseif($_GET['action']=="change"){
 				require_once("../Models/pedido.php");
+				require_once("../Models/producto.php");
 				Pedido::change_order_status($_GET['estado'],$_GET['id_pedido']);
-				header("Location: ../?controller=pedido&action=index");
+				$productos=Pedido::pedidosProd($_GET["id_pedido"]);
+				Producto::ingresa_pedido_autorizado($productos);
+				if($_SESSION['id_sesion']=="administrador"){
+					header("Location: ../?controller=pedido&action=index");
+				}elseif($_SESSION['id_sesion']=="gerente"){
+					header("Location: ../?controller=pedido&action=ver_pedidos");
+				}
 		//Busqueda por fecha
-
-
 			}elseif($_GET['action']=="search_order_date"){
 				require_once("../Models/pedido.php");
 				if($_GET["tipo"]=="dia"){
@@ -121,7 +137,6 @@
 					$select=Pedido::getOrderByMonth($mes[1]);
 				}
 				require_once('../Views/pedido/show_order_date.php');
-
 		//Obtiene los detalles del pedido del almacen
 			}elseif($_GET['action']=="search_order_date_kitchen_authorized"){
 				require_once("../Models/pedido.php");
@@ -134,7 +149,7 @@
 				require_once('../Views/pedido/show_order_date.php');
 
 			}elseif($_GET['action']=="search_order_date_kitchen_cancel"){
-				require_once("../Models/pedido.php");
+					require_once("../Models/pedido.php");
 				if($_GET["tipo"]=="dia"){
 					$select=Pedido::getOrderByDayStatus($_GET['date'],"cancelado");
 				}elseif($_GET["tipo"]=="mes"){
@@ -143,13 +158,30 @@
 				}
 				require_once('../Views/pedido/show_order_date.php');
 
+			}elseif($_GET['action']=="search_order_date_kitchen_authorized_all"){
+					require_once("../Models/pedido.php");
+					if($_GET["tipo"]=="dia"){
+						$select=Pedido::getOrderByDayStatus_all($_GET['date'],"autorizado");
+					}elseif($_GET["tipo"]=="mes"){
+						$mes=explode("-",$_GET["date"]);
+						$select=Pedido::getOrderByMonthStatus_all($mes[1],"autorizado");
+					}
+					require_once('../Views/Pedido/show_order_date.php');
+
+			}elseif($_GET['action']=="search_order_date_kitchen_cancel_all"){
+					require_once("../Models/pedido.php");
+					if($_GET["tipo"]=="dia"){
+						$select=Pedido::getOrderByDayStatus_all($_GET['date'],"cancelado");
+					}elseif($_GET["tipo"]=="mes"){
+						$mes=explode("-",$_GET["date"]);
+						$select=Pedido::getOrderByMonthStatus_all($mes[1],"cancelado");
+				}
+				require_once('../Views/Pedido/show_order_date.php');
 		//Obtiene los detalles del pedido del almacen
 			}elseif($_GET['action']=='order_almacen'){
 				require_once('../Models/pedido.php');
 				$select=Pedido::pedidosProd($_GET['id_pedido']);
 				require_once('../Views/Pedido/order_prod_almacen.php');
-
-
 			}
 		}
 	}

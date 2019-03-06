@@ -1,3 +1,9 @@
+<?php
+
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador"){
+?>
+
  <section>
     <h3 align="center">Registro de Usuario:</h3>
    <div class="container">
@@ -29,3 +35,11 @@
   </div>
 </section>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+  <?php
+  		}else{
+  			//Inclur una pagina para redireccionar a index
+  			header('Location: Views/sesion/no_sesion.php');
+  		}
+  	}
+  	?>

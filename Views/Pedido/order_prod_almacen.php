@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina" || $_SESSION["id_sesion"]=="barra"){
+?>
 <html>
 	<head>
 		<title>Bienvenido MVC </title>
@@ -13,7 +18,7 @@
 
 	<body>
 		<head>
-			<div class="container"><h1>Detalles del pedido almacen</h1>	</div>
+			<div class="container"><h1>Detalles del pedido almacen pagina order_prod_almacen</h1>	</div>
 		</head>
 <section>
 	<div class="container small">
@@ -57,6 +62,18 @@
 	<!-- </form> -->
 		</div>
 	</div>
+	<div align="center">
+		<!-- <a href="?controller=pedido&action=ver_pedido_autorizado" class="btn btn-primary">Regresar</a> -->
+		<!-- <a href="<?php //echo $HTTP_REFERER; ?>">Volver atras</a>  -->
+		<a href="javascript:window.history.back();" class="btn btn-primary">&laquo; Volver atrás</a>
+	</div>
 </section>
 </body>
 </html>
+<?php
+		}else{
+			//
+			header('Location: ../Views/sesion/no_sesion.php');
+		}
+	}
+	?>

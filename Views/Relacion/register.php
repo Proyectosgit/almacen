@@ -1,3 +1,8 @@
+<?php
+
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador"){
+?>
 
  <section>
     <h3 align="center">Registro de Relación Pedido - Producto:</h3>
@@ -10,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label >Codigo de Ingrediente:</label>
-                <input class="form-control" type='number' name='codingre' maxlength="7" placeholder="Id Producto">
+                <input class="form-control" type='text' name='codingre' maxlength="7" placeholder="Id Producto">
             </div>
             <div class="form-group">
                 <label >Fecha Pedido:</label>
@@ -28,9 +33,21 @@
                 <label >Estado del Pedido:</label>
                 <input class="form-control" type='text' name='estado_prod' maxlength="20" placeholder="Estado del producto">
             </div>
+						<div class="form-group">
+								<label >Observaciones:</label>
+								<input class="form-control" type='text' name='observacion' maxlength="150" placeholder="Estado del producto">
+						</div>
                 <button class="btn-primary">Enviar</button>
         </form>
   </div>
 
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> -->
 </section>
+
+<?php
+		}else{
+			//Inclur una pagina para redireccionar a index
+			header('Location: Views/sesion/no_sesion.php');
+		}
+	}
+	?>

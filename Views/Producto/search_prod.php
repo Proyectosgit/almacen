@@ -1,3 +1,8 @@
+<?php
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina"){
+?>
+
 <section>
 <div class="container">
 	<div class="row">
@@ -25,7 +30,9 @@
 				</tr>
 				<tr>
 					<td align="center"><br>
-						<input type='submit' value='Buscar' class="btn btn-info">
+						<button type='submit' class="btn btn-info">
+							Buscar <span class="oi" data-glyph="magnifying-glass"></span>
+						</button>
 					</td>
 				</tr>
 			</table>
@@ -33,4 +40,22 @@
 	</div>
 	</div>
 </div class="container">
+<!-- <img src="Public/imagenes/logo.jpg"/> -->
 </section>
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="mx-auto">
+				<img class="logo_fondo" src="Public/imagenes/logo.jpg"/>
+			</div>
+		</div>
+	</div>
+</section>
+
+<?php
+		}else{
+			//Inclur una pagina para redireccionar a index
+			header('Location: Views/sesion/no_sesion.php');
+		}
+	}
+	?>

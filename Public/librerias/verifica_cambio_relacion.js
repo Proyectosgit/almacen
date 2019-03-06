@@ -32,13 +32,6 @@ $(document).ready(function(){
 
     if(cantidad.match(/^[0-9]+/) && !($(this).parents("tr").find(".cantidad").val().length == 0)){
 
-      if(cantidad > cantidad_aux){
-        // alert("Estas solicitando más de lo sugerido = " + cantidad_aux);
-       observacion=prompt("Estas solicitando más de lo sugerido = " + cantidad_aux,"Ingresa tu comentario");
-      }else if(cantidad < cantidad_aux){
-        alert("Estas solicitando menos de lo sugerido = " + cantidad_aux);
-      }
-
       //Calcula el precio por producto, dependiendo la cantidad
       var precio_unitario=$(this).parents("tr").find(".precio_unitario").html();
       var costo_producto=precio_unitario*cantidad;
@@ -62,7 +55,7 @@ $(document).ready(function(){
       //calcula la suma total de los productos
       var totalDeuda=0;
       $(".costo_producto").each(function(){
-         totalDeuda+=parseInt($(this).html()||0);
+         totalDeuda+=parseFloat($(this).html()||0);
        });
       // $("#costo_total").html("Total de Compra = " + totalDeuda);
 
@@ -71,6 +64,13 @@ $(document).ready(function(){
       $("#costo_total_mod").val(totalDeuda);
       $("#costototalmod").html(totalDeuda);
       console.log("Deuda todal"+totalDeuda);
+
+      if(cantidad > cantidad_aux){
+       alert("Estas solicitando más de lo sugerido = " + cantidad_aux);
+       // observacion=prompt("Estas solicitando más de lo sugerido = " + cantidad_aux,"Ingresa tu comentario");
+      }else if(cantidad < cantidad_aux){
+        alert("Estas solicitando menos de lo sugerido = " + cantidad_aux);
+      }
 
     }else{
       $(this).parents("tr").find(".cantidad").css("background-color", "#fdaf9c" );

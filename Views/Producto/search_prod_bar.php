@@ -1,3 +1,9 @@
+<?php
+
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="barra"){
+?>
+
 <div class="container">
 	<div class="row">
 		<div class="mx-auto">
@@ -31,7 +37,10 @@
 				</tr>
 				<tr>
 					<td align="center"><br>
-						<input type='submit' value='Buscar' class="btn btn-info">
+						<!-- <input type='submit' value='Buscar' class="btn btn-info" > -->
+						<button type="submit" class="btn btn-info">
+							Buscar &nbsp;<span class="oi" data-glyph="magnifying-glass"></span>
+						</button>
 					</td>
 				</tr>
 			</table>
@@ -39,3 +48,10 @@
 	</div>
 	</div>
 </div class="container">
+<?php
+		}else{
+			//Inclur una pagina para redireccionar a index
+			header('Location: Views/sesion/no_sesion.php');
+		}
+	}
+	?>

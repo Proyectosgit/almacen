@@ -1,3 +1,5 @@
 <header>
-  <a href="/almacen">Piacevole</a>
+  <a href="/almacen">
+    <img id="logo" src="Public/imagenes/logo.jpg">
+  </a>
 </header>

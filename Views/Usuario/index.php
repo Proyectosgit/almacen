@@ -1,3 +1,8 @@
+<?php
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador"){
+?>
+
 		<section>
 			<div class="container">
 				<div class="table-responsive">
@@ -6,7 +11,7 @@
 							<tr>
 								<th>Id</th>
 								<th>Nombre de usuario</th>
-								<th>Contraseña</th>
+								<!-- <th>Contraseña</th> -->
 								<th>Cargo</th>
 								<th>Nombre</th>
 								<th>E-mail</th>
@@ -20,7 +25,7 @@
 								<tr>
 									<td><?php echo $usuario->id_user; ?></td>
 									<td><?php echo $usuario->username; ?></td>
-									<td><?php echo $usuario->password;?></td>
+									<!-- <td><?php //echo $usuario->password;?></td> -->
 									<td><?php echo $usuario->cargo;?></td>
 									<td><?php echo $usuario->nombre;?></td>
 									<td><?php echo $usuario->email;?></td>
@@ -33,3 +38,11 @@
 				</div>
 			</div>
 		</section>
+
+<?php
+	}else{
+		//Inclur una pagina para redireccionar a index
+		header('Location: Views/sesion/no_sesion.php');
+	}
+}
+?>

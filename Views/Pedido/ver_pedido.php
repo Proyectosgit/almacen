@@ -1,3 +1,9 @@
+<?php
+
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="administrador"){
+?>
+
 <section>
 <div class="container">
 <div class="table-responsive">
@@ -49,3 +55,11 @@
 </div>
 </section>
 <?php require_once("Views/partials/footer.php");?>
+
+<?php
+	}else{
+		//Inclur una pagina para redireccionar a index
+		header('Location: ../Views/sesion/no_sesion.php');
+	}
+}
+?>

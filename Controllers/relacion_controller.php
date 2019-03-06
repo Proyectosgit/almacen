@@ -41,7 +41,7 @@
 		require_once('../Config/connection.php');
 
 		if ($_POST['action']=='register') {
-			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod']);
+			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod'],$_POST['Observacion']);
 			$relacionController->save($relacion);
 
 		}elseif ($_POST['action']=='update') {
@@ -53,7 +53,7 @@
 			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);
 			require_once('../Models/pedido.php');
 			Pedido::change_order_cost($_POST['id_pedido'],$_POST['costo_total']);
-			header('Location: ../index.php?controller=pedido&action=index');
+			header('Location: ../index.php?controller=pedido&action=ver_pedidos');
 		}
 	}
 

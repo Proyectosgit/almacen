@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-02-2019 a las 21:27:57
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.1
+-- Tiempo de generación: 28-02-2019 a las 19:30:32
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,13 +25,36 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `almacen`
+--
+
+CREATE TABLE `almacen` (
+  `id_almacen` int(3) NOT NULL,
+  `nom_almacen` varchar(60) NOT NULL,
+  `estado` varchar(25) NOT NULL,
+  `gerente` varchar(30) NOT NULL,
+  `direccion` varchar(300) NOT NULL,
+  `tel` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `almacen`
+--
+
+INSERT INTO `almacen` (`id_almacen`, `nom_almacen`, `estado`, `gerente`, `direccion`, `tel`) VALUES
+(1, 'piacevole', 'puebla', 'paola', 'angelopolis', '2222222222'),
+(2, 'tercera ronda', 'puebla', 'paola', 'angelopolis', '2222222222');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `familia`
 --
 
 CREATE TABLE `familia` (
-  `cod_familia` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `descripcion` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `cod_familia` varchar(20) NOT NULL,
+  `descripcion` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `familia`
@@ -78,14 +101,14 @@ CREATE TABLE `pedidos` (
   `id_pedido` int(10) NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `autoriza` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `solicita` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `observaciones` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `unidad_medida` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `autoriza` varchar(30) DEFAULT NULL,
+  `solicita` varchar(30) NOT NULL,
+  `estado` varchar(20) NOT NULL,
+  `observaciones` varchar(150) DEFAULT NULL,
+  `unidad_medida` varchar(10) NOT NULL,
   `total_prod` float NOT NULL,
   `costo_total` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pedidos`
@@ -176,39 +199,104 @@ INSERT INTO `pedidos` (`id_pedido`, `fecha`, `hora`, `autoriza`, `solicita`, `es
 (82, '2019-02-17', '09:29:31', NULL, 'ivan colula', 'autorizado', NULL, '', 1, 773.5),
 (83, '2019-02-18', '02:23:30', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 69),
 (84, '2019-02-18', '02:45:14', 'ivan colula', 'memo', 'autorizado', NULL, '', 3, 953.5),
-(85, '2019-02-18', '03:01:13', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(86, '2019-02-18', '03:01:54', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(87, '2019-02-18', '03:02:01', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(88, '2019-02-18', '03:10:15', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(89, '2019-02-18', '03:11:17', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(90, '2019-02-18', '03:12:11', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(91, '2019-02-18', '03:15:18', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(92, '2019-02-18', '03:19:08', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(93, '2019-02-18', '03:19:19', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 1013),
-(94, '2019-02-18', '03:20:53', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 1013),
-(95, '2019-02-18', '03:21:03', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(96, '2019-02-18', '03:22:08', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(97, '2019-02-18', '03:22:17', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(98, '2019-02-18', '03:29:03', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(99, '2019-02-18', '03:29:41', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(100, '2019-02-18', '03:29:49', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(101, '2019-02-18', '03:29:58', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(102, '2019-02-18', '03:31:54', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(103, '2019-02-18', '03:34:37', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(104, '2019-02-18', '03:35:35', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(105, '2019-02-18', '03:35:43', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(106, '2019-02-18', '03:37:14', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(107, '2019-02-18', '03:38:35', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(108, '2019-02-18', '03:40:48', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
-(109, '2019-02-18', '03:43:35', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(85, '2019-02-18', '03:01:13', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(86, '2019-02-18', '03:01:54', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(87, '2019-02-18', '03:02:01', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(88, '2019-02-18', '03:10:15', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(89, '2019-02-18', '03:11:17', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(90, '2019-02-18', '03:12:11', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(91, '2019-02-18', '03:15:18', 'paola paez', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(92, '2019-02-18', '03:19:08', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(93, '2019-02-18', '03:19:19', 'paola paez', 'ivan colula', 'autorizado', NULL, '', 3, 1013),
+(94, '2019-02-18', '03:20:53', 'paola paez', 'ivan colula', 'autorizado', NULL, '', 3, 1013),
+(95, '2019-02-18', '03:21:03', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(96, '2019-02-18', '03:22:08', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(97, '2019-02-18', '03:22:17', 'paola paez', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(98, '2019-02-18', '03:29:03', 'paola paez', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(99, '2019-02-18', '03:29:41', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(100, '2019-02-18', '03:29:49', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(101, '2019-02-18', '03:29:58', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(102, '2019-02-18', '03:31:54', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(103, '2019-02-18', '03:34:37', 'paola paez', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(104, '2019-02-18', '03:35:35', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(105, '2019-02-18', '03:35:43', 'paola paez', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(106, '2019-02-18', '03:37:14', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(107, '2019-02-18', '03:38:35', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(108, '2019-02-18', '03:40:48', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(109, '2019-02-18', '03:43:35', 'paola paez', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
 (110, '2019-02-18', '03:45:23', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
 (111, '2019-02-18', '03:48:41', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
 (112, '2019-02-18', '03:49:49', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
 (113, '2019-02-18', '03:52:09', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(114, '2019-02-18', '10:36:27', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 69),
-(115, '2019-02-19', '06:17:49', 'ivan colula', 'memo', 'autorizado', NULL, '', 3, 953.5),
-(116, '2019-02-19', '06:58:14', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
-(117, '2019-02-19', '07:04:20', NULL, 'ivan colula', 'pedido', NULL, '', 3, 953.5);
+(114, '2019-02-18', '10:07:29', 'ivan colula', 'memo', 'cancelado', NULL, '', 64, 16418),
+(115, '2019-02-18', '10:18:06', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(116, '2019-02-18', '10:34:34', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 64, -4905.61),
+(117, '2019-02-18', '10:38:14', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 1, 5.96),
+(118, '2019-02-18', '10:48:27', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(119, '2019-02-18', '10:54:13', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 64, -4905.61),
+(120, '2019-02-18', '10:54:48', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(121, '2019-02-18', '10:57:34', 'ivan colula', 'memo', 'cancelado', NULL, '', 3, 953.5),
+(122, '2019-02-18', '11:00:59', 'ivan colula', 'memo', 'cancelado', NULL, '', 3, 953.5),
+(123, '2019-02-18', '11:01:19', NULL, 'memo', 'autorizado', NULL, '', 3, 953.5),
+(124, '2019-02-18', '11:02:47', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 64, -4905.61),
+(125, '2019-02-18', '11:05:04', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(126, '2019-02-19', '09:18:19', 'ivan colula', 'memo', 'cancelado', NULL, '', 3, 1939),
+(127, '2019-02-19', '09:18:57', 'paola paez', 'memo', 'autorizado', NULL, '', 3, 953.5),
+(128, '2019-02-19', '10:01:44', 'ivan colula', 'memo', 'cancelado', NULL, '', 3, 1251),
+(129, '2019-02-19', '02:35:05', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 69),
+(130, '2019-02-19', '02:40:22', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(131, '2019-02-19', '02:59:59', 'ivan colula', 'ivan colula', 'cancelado', NULL, '', 3, 953.5),
+(132, '2019-02-19', '05:17:51', 'paola paez', 'memo', 'autorizado', NULL, '', 3, 239),
+(133, '2019-02-20', '10:59:30', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(134, '2019-02-20', '03:19:55', 'paola paez', 'memo', 'cancelado', NULL, '', 3, 953.5),
+(135, '2019-02-20', '06:15:29', 'ivan colula', 'ivan colula', 'autorizado', NULL, '', 3, 953.5),
+(136, '2019-02-20', '06:20:54', 'paola paez', 'memo', 'cancelado', NULL, '', 3, 953.5),
+(137, '2019-02-20', '06:35:16', 'paola paez', 'memo', 'cancelado', NULL, '', 3, 953.5),
+(138, '2019-02-20', '07:55:49', 'ivan colula', 'cocina', 'autorizado', NULL, '', 3, 953.5),
+(139, '2019-02-21', '10:04:50', 'paola paez', 'cocina', 'autorizado', NULL, '', 3, 953.5),
+(140, '2019-02-21', '10:05:58', 'paola paez', 'cocina', 'cancelado', NULL, '', 3, 953.5),
+(141, '2019-02-21', '10:42:53', 'paola paez', 'paola paez', 'autorizado', NULL, '', 3, 953.5),
+(142, '2019-02-21', '10:44:16', 'paola paez', 'paola paez', 'cancelado', NULL, '', 3, 953.5),
+(143, '2019-02-21', '11:03:29', 'paola paez', 'paola paez', 'cancelado', NULL, '', 3, 953.5),
+(144, '2019-02-21', '11:04:57', 'paola paez', 'paola paez', 'cancelado', NULL, '', 3, 953.5),
+(145, '2019-02-21', '01:45:31', 'paola paez', 'paola paez', 'cancelado', NULL, '', 3, 953.5),
+(146, '2019-02-21', '01:50:59', 'paola paez', 'paola paez', 'autorizado', NULL, '', 3, 953.5),
+(147, '2019-02-21', '06:10:29', 'paola paez', 'paola paez', 'autorizado', NULL, '', 3, 953.5),
+(148, '2019-02-21', '06:10:40', 'paola paez', 'paola paez', 'cancelado', NULL, '', 3, 953.5),
+(149, '2019-02-21', '07:05:26', 'paola paez', 'memo', 'autorizado', NULL, '', 3, 953.5),
+(150, '2019-02-21', '07:36:47', 'paola paez', 'paola paez', 'autorizado', NULL, '', 3, 953.5),
+(151, '2019-02-22', '09:35:30', 'paola paez', 'memo', 'autorizado', NULL, '', 3, 953.5),
+(152, '2019-02-22', '09:46:03', 'paola paez', 'memo', 'autorizado', NULL, '', 3, 169.5),
+(153, '2019-02-25', '10:37:52', 'paola paez', 'memo', 'autorizado', NULL, '', 9, 9524.92),
+(154, '2019-02-25', '11:25:10', 'paola paez', 'memo', 'autorizado', NULL, '', 9, 9524.92),
+(155, '2019-02-25', '11:30:22', 'paola paez', 'memo', 'autorizado', NULL, '', 9, 9524.92),
+(156, '2019-02-25', '11:33:50', 'paola paez', 'memo', 'autorizado', NULL, '', 9, 9524.92),
+(157, '2019-02-25', '11:38:17', 'paola paez', 'paola paez', 'autorizado', NULL, '', 9, 9524.92),
+(158, '2019-02-25', '12:31:27', 'paola paez', 'paola paez', 'cancelado', NULL, '', 9, 9524.92),
+(159, '2019-02-25', '12:34:51', 'paola paez', 'paola paez', 'autorizado', NULL, '', 9, 9524.92),
+(160, '2019-02-25', '12:38:04', 'paola paez', 'paola paez', 'autorizado', NULL, '', 9, 9524.92),
+(161, '2019-02-26', '02:37:59', NULL, 'paola paez', 'pedido', NULL, '', 9, 9524.92),
+(162, '2019-02-26', '05:16:00', 'Ivan Colula Medel', 'Jose', 'autorizado', 'sin observaciones', 'litros', 12, 500),
+(163, '2019-02-26', '06:19:59', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(164, '2019-02-26', '06:23:50', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(165, '2019-02-26', '06:26:59', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(166, '2019-02-26', '06:49:34', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(167, '2019-02-26', '06:55:39', NULL, 'memo', 'pedido', NULL, '', 9, 9524.92),
+(168, '2019-02-26', '06:58:10', NULL, 'memo', 'pedido', NULL, '', 9, 9524.92),
+(169, '2019-02-26', '06:58:26', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(170, '2019-02-26', '07:01:01', NULL, 'memo', 'pedido', NULL, '', 9, 9524.92),
+(171, '2019-02-26', '07:01:18', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(172, '2019-02-26', '07:13:18', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(173, '2019-02-26', '07:14:10', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(174, '2019-02-26', '07:15:32', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(175, '2019-02-26', '07:26:59', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(176, '2019-02-27', '10:17:05', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(177, '2019-02-27', '02:44:42', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(178, '2019-02-27', '02:45:05', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(179, '2019-02-27', '04:47:27', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(180, '2019-02-27', '05:50:04', NULL, 'raul', 'pedido', NULL, '', 1, 596),
+(181, '2019-02-27', '06:35:59', 'paola paez', 'memo', 'autorizado', NULL, '', 9, 9524.92),
+(182, '2019-02-28', '07:18:00', NULL, 'memo', 'pedido', NULL, '', 9, 9524.92);
 
 -- --------------------------------------------------------
 
@@ -218,13 +306,13 @@ INSERT INTO `pedidos` (`id_pedido`, `fecha`, `hora`, `autoriza`, `solicita`, `es
 
 CREATE TABLE `pedido_producto` (
   `id_pedido` int(10) NOT NULL,
-  `codingre` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `codingre` varchar(10) NOT NULL,
   `fecha_pedido` date NOT NULL,
   `hora_pedido` time NOT NULL,
   `num_prod` float NOT NULL,
-  `estado_prod` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `observacion` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `estado_prod` varchar(20) DEFAULT NULL,
+  `observacion` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pedido_producto`
@@ -1820,46 +1908,244 @@ INSERT INTO `pedido_producto` (`id_pedido`, `codingre`, `fecha_pedido`, `hora_pe
 (113, 'A008', '2019-02-18', '03:52:09', 13, 'pedido', 'ivan'),
 (113, 'A243', '2019-02-18', '03:52:09', 18, 'pedido', 'ivan'),
 (113, 'A244', '2019-02-18', '03:52:09', 19, 'pedido', 'ivan'),
-(114, 'A008', '2019-02-18', '10:36:27', 1, 'pedido', 'ivan'),
-(114, 'A243', '2019-02-18', '10:36:27', 1, 'pedido', 'ivan'),
-(114, 'A244', '2019-02-18', '10:36:27', 20, 'pedido', 'ivan'),
-(115, 'A008', '2019-02-19', '06:17:49', 13, 'pedido', 'ivan'),
-(115, 'A243', '2019-02-19', '06:17:49', 18, 'pedido', 'ivan'),
-(115, 'A244', '2019-02-19', '06:17:49', 19, 'pedido', 'ivan'),
-(116, 'A008', '2019-02-19', '06:58:14', 13, 'pedido', 'ivan'),
-(116, 'A243', '2019-02-19', '06:58:14', 18, 'pedido', 'ivan'),
-(116, 'A244', '2019-02-19', '06:58:14', 19, 'pedido', 'ivan'),
-(117, 'A008', '2019-02-19', '07:04:20', 13, 'pedido', 'ivan'),
-(117, 'A243', '2019-02-19', '07:04:20', 18, 'pedido', 'ivan'),
-(117, 'A244', '2019-02-19', '07:04:20', 19, 'pedido', 'ivan');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `producto`
---
-
-CREATE TABLE `producto` (
-  `id_prod` int(7) NOT NULL,
-  `descripcion` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `cod_fam` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `existencia` float(6,4) NOT NULL,
-  `precio_unitario` float(6,4) NOT NULL,
-  `stock_min` float(6,4) NOT NULL,
-  `stock_max` float(6,4) NOT NULL,
-  `unidad_medida` varchar(10) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `producto`
---
-
-INSERT INTO `producto` (`id_prod`, `descripcion`, `cod_fam`, `existencia`, `precio_unitario`, `stock_min`, `stock_max`, `unidad_medida`) VALUES
-(1, 'leche', 'LACT', 10.0000, 20.0000, 8.0000, 15.0000, 'litro'),
-(2, 'ron1', 'R0NE5', 10.0000, 10.0000, 5.0000, 15.0000, 'lt'),
-(765, 'Queso Manchego', 'LACT', 5.0000, 60.0000, 20.0000, 50.0000, 'kg'),
-(777, 'Jitomate', 'VEG', 1.0000, 10.0000, 10.0000, 10.0000, 'kilo'),
-(778, 'coca', 'lact', 1.0000, 1.0000, 1.0000, 1.0000, '2');
+(115, 'A008', '2019-02-18', '10:18:06', 13, 'pedido', 'ivan'),
+(115, 'A243', '2019-02-18', '10:18:06', 18, 'pedido', 'ivan'),
+(115, 'A244', '2019-02-18', '10:18:06', 19, 'pedido', 'ivan'),
+(117, 'B002', '2019-02-18', '10:38:14', 1, 'pedido', 'ivan'),
+(118, 'A008', '2019-02-18', '10:48:27', 13, 'pedido', 'ivan'),
+(118, 'A243', '2019-02-18', '10:48:27', 18, 'pedido', 'ivan'),
+(118, 'A244', '2019-02-18', '10:48:27', 19, 'pedido', 'ivan'),
+(120, 'A008', '2019-02-18', '10:54:48', 13, 'pedido', 'ivan'),
+(120, 'A243', '2019-02-18', '10:54:48', 18, 'pedido', 'ivan'),
+(120, 'A244', '2019-02-18', '10:54:48', 19, 'pedido', 'ivan'),
+(121, 'A008', '2019-02-18', '10:57:34', 13, 'pedido', 'ivan'),
+(121, 'A243', '2019-02-18', '10:57:34', 18, 'pedido', 'ivan'),
+(121, 'A244', '2019-02-18', '10:57:34', 19, 'pedido', 'ivan'),
+(122, 'A008', '2019-02-18', '11:00:59', 13, 'pedido', 'ivan'),
+(122, 'A243', '2019-02-18', '11:00:59', 18, 'pedido', 'ivan'),
+(122, 'A244', '2019-02-18', '11:00:59', 19, 'pedido', 'ivan'),
+(123, 'A008', '2019-02-18', '11:01:19', 13, 'pedido', 'ivan'),
+(123, 'A243', '2019-02-18', '11:01:19', 18, 'pedido', 'ivan'),
+(123, 'A244', '2019-02-18', '11:01:19', 19, 'pedido', 'ivan'),
+(125, 'A008', '2019-02-18', '11:05:04', 13, 'pedido', 'ivan'),
+(125, 'A243', '2019-02-18', '11:05:04', 18, 'pedido', 'ivan'),
+(125, 'A244', '2019-02-18', '11:05:04', 19, 'pedido', 'ivan'),
+(126, 'A008', '2019-02-19', '09:18:19', 1, 'pedido', 'ivan'),
+(126, 'A243', '2019-02-19', '09:18:19', 188, 'pedido', 'ivan'),
+(126, 'A244', '2019-02-19', '09:18:19', 19, 'pedido', 'ivan'),
+(127, 'A008', '2019-02-19', '09:18:57', 13, 'pedido', 'ivan'),
+(127, 'A243', '2019-02-19', '09:18:57', 18, 'pedido', 'ivan'),
+(127, 'A244', '2019-02-19', '09:18:57', 19, 'pedido', 'ivan'),
+(128, 'A008', '2019-02-19', '10:01:44', 18, 'pedido', 'ivan'),
+(128, 'A243', '2019-02-19', '10:01:44', 18, 'pedido', 'ivan'),
+(128, 'A244', '2019-02-19', '10:01:44', 19, 'pedido', 'ivan'),
+(129, 'A008', '2019-02-19', '02:35:05', 1, 'pedido', 'ivan'),
+(129, 'A243', '2019-02-19', '02:35:05', 1, 'pedido', 'ivan'),
+(129, 'A244', '2019-02-19', '02:35:05', 12, 'pedido', 'ivan'),
+(130, 'A008', '2019-02-19', '02:40:22', 13, 'pedido', 'ivan'),
+(130, 'A243', '2019-02-19', '02:40:22', 18, 'pedido', 'ivan'),
+(130, 'A244', '2019-02-19', '02:40:22', 19, 'pedido', 'ivan'),
+(131, 'A008', '2019-02-19', '02:59:59', 13, 'pedido', 'ivan'),
+(131, 'A243', '2019-02-19', '02:59:59', 18, 'pedido', 'ivan'),
+(131, 'A244', '2019-02-19', '02:59:59', 19, 'pedido', 'ivan'),
+(132, 'A008', '2019-02-19', '05:17:51', 1, 'pedido', 'ivan'),
+(132, 'A243', '2019-02-19', '05:17:51', 18, 'pedido', 'ivan'),
+(132, 'A244', '2019-02-19', '05:17:51', 19, 'pedido', 'ivan'),
+(133, 'A008', '2019-02-20', '10:59:30', 13, 'pedido', 'ivan'),
+(133, 'A243', '2019-02-20', '10:59:30', 18, 'pedido', 'ivan'),
+(133, 'A244', '2019-02-20', '10:59:30', 19, 'pedido', 'ivan'),
+(134, 'A008', '2019-02-20', '03:19:55', 13, 'pedido', 'ivan'),
+(134, 'A243', '2019-02-20', '03:19:55', 18, 'pedido', 'ivan'),
+(134, 'A244', '2019-02-20', '03:19:55', 19, 'pedido', 'ivan'),
+(135, 'A008', '2019-02-20', '06:15:29', 13, 'pedido', 'ivan'),
+(135, 'A243', '2019-02-20', '06:15:29', 18, 'pedido', 'ivan'),
+(135, 'A244', '2019-02-20', '06:15:29', 19, 'pedido', 'ivan'),
+(136, 'A008', '2019-02-20', '06:20:54', 13, 'pedido', 'ivan'),
+(136, 'A243', '2019-02-20', '06:20:54', 18, 'pedido', 'ivan'),
+(136, 'A244', '2019-02-20', '06:20:54', 19, 'pedido', 'ivan'),
+(137, 'A008', '2019-02-20', '06:35:16', 13, 'pedido', 'ivan'),
+(137, 'A243', '2019-02-20', '06:35:16', 18, 'pedido', 'ivan'),
+(137, 'A244', '2019-02-20', '06:35:16', 19, 'pedido', 'ivan'),
+(138, 'A008', '2019-02-20', '07:55:49', 13, 'pedido', 'ivan'),
+(138, 'A243', '2019-02-20', '07:55:49', 18, 'pedido', 'ivan'),
+(138, 'A244', '2019-02-20', '07:55:49', 19, 'pedido', 'ivan'),
+(139, 'A008', '2019-02-21', '10:04:50', 13, 'pedido', 'ivan'),
+(139, 'A243', '2019-02-21', '10:04:50', 18, 'pedido', 'ivan'),
+(139, 'A244', '2019-02-21', '10:04:50', 19, 'pedido', 'ivan'),
+(140, 'A008', '2019-02-21', '10:05:58', 13, 'pedido', 'ivan'),
+(140, 'A243', '2019-02-21', '10:05:58', 18, 'pedido', 'ivan'),
+(140, 'A244', '2019-02-21', '10:05:58', 19, 'pedido', 'ivan'),
+(141, 'A008', '2019-02-21', '10:42:53', 13, 'pedido', 'ivan'),
+(141, 'A243', '2019-02-21', '10:42:53', 18, 'pedido', 'ivan'),
+(141, 'A244', '2019-02-21', '10:42:53', 19, 'pedido', 'ivan'),
+(142, 'A008', '2019-02-21', '10:44:16', 13, 'pedido', 'ivan'),
+(142, 'A243', '2019-02-21', '10:44:16', 18, 'pedido', 'ivan'),
+(142, 'A244', '2019-02-21', '10:44:16', 19, 'pedido', 'ivan'),
+(143, 'A008', '2019-02-21', '11:03:29', 13, 'pedido', 'ivan'),
+(143, 'A243', '2019-02-21', '11:03:29', 18, 'pedido', 'ivan'),
+(143, 'A244', '2019-02-21', '11:03:29', 19, 'pedido', 'ivan'),
+(144, 'A008', '2019-02-21', '11:04:57', 13, 'pedido', 'ivan'),
+(144, 'A243', '2019-02-21', '11:04:57', 18, 'pedido', 'ivan'),
+(144, 'A244', '2019-02-21', '11:04:57', 19, 'pedido', 'ivan'),
+(145, 'A008', '2019-02-21', '01:45:31', 13, 'pedido', 'ivan'),
+(145, 'A243', '2019-02-21', '01:45:31', 18, 'pedido', 'ivan'),
+(145, 'A244', '2019-02-21', '01:45:31', 19, 'pedido', 'ivan'),
+(146, 'A008', '2019-02-21', '01:50:59', 13, 'pedido', 'ivan'),
+(146, 'A243', '2019-02-21', '01:50:59', 18, 'pedido', 'ivan'),
+(146, 'A244', '2019-02-21', '01:50:59', 19, 'pedido', 'ivan'),
+(147, 'A008', '2019-02-21', '06:10:29', 13, 'pedido', 'ivan'),
+(147, 'A243', '2019-02-21', '06:10:29', 18, 'pedido', 'ivan'),
+(147, 'A244', '2019-02-21', '06:10:29', 19, 'pedido', 'ivan'),
+(148, 'A008', '2019-02-21', '06:10:40', 13, 'pedido', 'ivan'),
+(148, 'A243', '2019-02-21', '06:10:40', 18, 'pedido', 'ivan'),
+(148, 'A244', '2019-02-21', '06:10:40', 19, 'pedido', 'ivan'),
+(149, 'A008', '2019-02-21', '07:05:26', 13, 'pedido', 'ivan'),
+(149, 'A243', '2019-02-21', '07:05:26', 18, 'pedido', 'ivan'),
+(149, 'A244', '2019-02-21', '07:05:26', 19, 'pedido', 'ivan'),
+(150, 'A008', '2019-02-21', '07:36:47', 13, 'pedido', 'ivan'),
+(150, 'A243', '2019-02-21', '07:36:47', 18, 'pedido', 'ivan'),
+(150, 'A244', '2019-02-21', '07:36:47', 19, 'pedido', 'ivan'),
+(151, 'A008', '2019-02-22', '09:35:30', 13, 'pedido', 'ivan'),
+(151, 'A243', '2019-02-22', '09:35:30', 18, 'pedido', 'ivan'),
+(151, 'A244', '2019-02-22', '09:35:30', 19, 'pedido', 'ivan'),
+(152, 'A008', '2019-02-22', '09:46:03', 1, 'pedido', 'ivan'),
+(152, 'A243', '2019-02-22', '09:46:03', 11, 'pedido', 'ivan'),
+(152, 'A244', '2019-02-22', '09:46:03', 56, 'pedido', 'ivan'),
+(153, 'A005', '2019-02-25', '10:37:52', 10, 'pedido', 'ivan'),
+(153, 'A006', '2019-02-25', '10:37:52', 9.51, 'pedido', 'ivan'),
+(153, 'A008', '2019-02-25', '10:37:52', 13, 'pedido', 'ivan'),
+(153, 'A009', '2019-02-25', '10:37:52', 10, 'pedido', 'ivan'),
+(153, 'A015', '2019-02-25', '10:37:52', 8, 'pedido', 'ivan'),
+(153, 'A017', '2019-02-25', '10:37:52', 10, 'pedido', 'ivan'),
+(153, 'A018', '2019-02-25', '10:37:52', 9, 'pedido', 'ivan'),
+(153, 'A243', '2019-02-25', '10:37:52', 18, 'pedido', 'ivan'),
+(153, 'A244', '2019-02-25', '10:37:52', 19, 'pedido', 'ivan'),
+(154, 'A005', '2019-02-25', '11:25:10', 10, 'pedido', 'ivan'),
+(154, 'A006', '2019-02-25', '11:25:10', 9.51, 'pedido', 'ivan'),
+(154, 'A008', '2019-02-25', '11:25:10', 13, 'pedido', 'ivan'),
+(154, 'A009', '2019-02-25', '11:25:10', 10, 'pedido', 'ivan'),
+(154, 'A015', '2019-02-25', '11:25:10', 8, 'pedido', 'ivan'),
+(154, 'A017', '2019-02-25', '11:25:10', 10, 'pedido', 'ivan'),
+(154, 'A018', '2019-02-25', '11:25:10', 9, 'pedido', 'ivan'),
+(154, 'A243', '2019-02-25', '11:25:10', 18, 'pedido', 'ivan'),
+(154, 'A244', '2019-02-25', '11:25:10', 19, 'pedido', 'ivan'),
+(155, 'A005', '2019-02-25', '11:30:22', 10, 'pedido', 'ivan'),
+(155, 'A006', '2019-02-25', '11:30:22', 9.51, 'pedido', 'ivan'),
+(155, 'A008', '2019-02-25', '11:30:22', 13, 'pedido', 'ivan'),
+(155, 'A009', '2019-02-25', '11:30:22', 10, 'pedido', 'ivan'),
+(155, 'A015', '2019-02-25', '11:30:22', 8, 'pedido', 'ivan'),
+(155, 'A017', '2019-02-25', '11:30:22', 10, 'pedido', 'ivan'),
+(155, 'A018', '2019-02-25', '11:30:22', 9, 'pedido', 'ivan');
+INSERT INTO `pedido_producto` (`id_pedido`, `codingre`, `fecha_pedido`, `hora_pedido`, `num_prod`, `estado_prod`, `observacion`) VALUES
+(155, 'A243', '2019-02-25', '11:30:22', 18, 'pedido', 'ivan'),
+(155, 'A244', '2019-02-25', '11:30:22', 19, 'pedido', 'ivan'),
+(156, 'A005', '2019-02-25', '11:33:50', 10, 'pedido', 'ivan'),
+(156, 'A006', '2019-02-25', '11:33:50', 9.51, 'pedido', 'ivan'),
+(156, 'A008', '2019-02-25', '11:33:50', 13, 'pedido', 'ivan'),
+(156, 'A009', '2019-02-25', '11:33:50', 10, 'pedido', 'ivan'),
+(156, 'A015', '2019-02-25', '11:33:50', 8, 'pedido', 'ivan'),
+(156, 'A017', '2019-02-25', '11:33:50', 10, 'pedido', 'ivan'),
+(156, 'A018', '2019-02-25', '11:33:50', 9, 'pedido', 'ivan'),
+(156, 'A243', '2019-02-25', '11:33:50', 18, 'pedido', 'ivan'),
+(156, 'A244', '2019-02-25', '11:33:50', 19, 'pedido', 'ivan'),
+(157, 'A005', '2019-02-25', '11:38:17', 10, 'pedido', 'ivan'),
+(157, 'A006', '2019-02-25', '11:38:17', 9.51, 'pedido', 'ivan'),
+(157, 'A008', '2019-02-25', '11:38:17', 13, 'pedido', 'ivan'),
+(157, 'A009', '2019-02-25', '11:38:17', 10, 'pedido', 'ivan'),
+(157, 'A015', '2019-02-25', '11:38:17', 8, 'pedido', 'ivan'),
+(157, 'A017', '2019-02-25', '11:38:17', 10, 'pedido', 'ivan'),
+(157, 'A018', '2019-02-25', '11:38:17', 9, 'pedido', 'ivan'),
+(157, 'A243', '2019-02-25', '11:38:17', 18, 'pedido', 'ivan'),
+(157, 'A244', '2019-02-25', '11:38:17', 19, 'pedido', 'ivan'),
+(158, 'A005', '2019-02-25', '12:31:27', 10, 'pedido', 'ivan'),
+(158, 'A006', '2019-02-25', '12:31:27', 9.51, 'pedido', 'ivan'),
+(158, 'A008', '2019-02-25', '12:31:27', 13, 'pedido', 'ivan'),
+(158, 'A009', '2019-02-25', '12:31:27', 10, 'pedido', 'ivan'),
+(158, 'A015', '2019-02-25', '12:31:27', 8, 'pedido', 'ivan'),
+(158, 'A017', '2019-02-25', '12:31:27', 10, 'pedido', 'ivan'),
+(158, 'A018', '2019-02-25', '12:31:27', 9, 'pedido', 'ivan'),
+(158, 'A243', '2019-02-25', '12:31:27', 18, 'pedido', 'ivan'),
+(158, 'A244', '2019-02-25', '12:31:27', 19, 'pedido', 'ivan'),
+(159, 'A005', '2019-02-25', '12:34:51', 10, 'pedido', 'ivan'),
+(160, 'A005', '2019-02-25', '12:38:04', 10, 'pedido', 'ivan'),
+(160, 'A006', '2019-02-25', '12:38:04', 9.51, 'pedido', 'ivan'),
+(160, 'A008', '2019-02-25', '12:38:04', 13, 'pedido', 'ivan'),
+(160, 'A009', '2019-02-25', '12:38:04', 10, 'pedido', 'ivan'),
+(160, 'A015', '2019-02-25', '12:38:04', 8, 'pedido', 'ivan'),
+(160, 'A017', '2019-02-25', '12:38:04', 10, 'pedido', 'ivan'),
+(160, 'A018', '2019-02-25', '12:38:04', 9, 'pedido', 'ivan'),
+(160, 'A243', '2019-02-25', '12:38:04', 18, 'pedido', 'ivan'),
+(160, 'A244', '2019-02-25', '12:38:04', 19, 'pedido', 'ivan'),
+(161, 'A005', '2019-02-26', '02:37:59', 10, 'pedido', 'ivan'),
+(161, 'A006', '2019-02-26', '02:37:59', 9.51, 'pedido', 'ivan'),
+(161, 'A008', '2019-02-26', '02:37:59', 13, 'pedido', 'ivan'),
+(161, 'A009', '2019-02-26', '02:37:59', 10, 'pedido', 'ivan'),
+(161, 'A015', '2019-02-26', '02:37:59', 8, 'pedido', 'ivan'),
+(161, 'A017', '2019-02-26', '02:37:59', 10, 'pedido', 'ivan'),
+(161, 'A018', '2019-02-26', '02:37:59', 9, 'pedido', 'ivan'),
+(161, 'A243', '2019-02-26', '02:37:59', 18, 'pedido', 'ivan'),
+(161, 'A244', '2019-02-26', '02:37:59', 19, 'pedido', 'ivan'),
+(162, 'A001', '2019-02-26', '02:02:00', 10, 'pedido', NULL),
+(163, 'B002', '2019-02-26', '06:19:59', 100, 'pedido', 'ivan'),
+(164, 'B002', '2019-02-26', '06:23:50', 100, 'pedido', 'ivan'),
+(165, 'B002', '2019-02-26', '06:26:59', 100, 'pedido', 'ivan'),
+(166, 'B002', '2019-02-26', '06:49:34', 100, 'pedido', 'ivan'),
+(167, 'A005', '2019-02-26', '06:55:39', 10, 'pedido', 'ivan'),
+(167, 'A006', '2019-02-26', '06:55:39', 9.51, 'pedido', 'ivan'),
+(167, 'A008', '2019-02-26', '06:55:39', 13, 'pedido', 'ivan'),
+(167, 'A009', '2019-02-26', '06:55:39', 10, 'pedido', 'ivan'),
+(167, 'A015', '2019-02-26', '06:55:39', 8, 'pedido', 'ivan'),
+(167, 'A017', '2019-02-26', '06:55:39', 10, 'pedido', 'ivan'),
+(167, 'A018', '2019-02-26', '06:55:39', 9, 'pedido', 'ivan'),
+(167, 'A243', '2019-02-26', '06:55:39', 18, 'pedido', 'ivan'),
+(167, 'A244', '2019-02-26', '06:55:39', 19, 'pedido', 'ivan'),
+(168, 'A005', '2019-02-26', '06:58:10', 10, 'pedido', 'ivan'),
+(168, 'A006', '2019-02-26', '06:58:10', 9.51, 'pedido', 'ivan'),
+(168, 'A008', '2019-02-26', '06:58:10', 13, 'pedido', 'ivan'),
+(168, 'A009', '2019-02-26', '06:58:10', 10, 'pedido', 'ivan'),
+(168, 'A015', '2019-02-26', '06:58:10', 8, 'pedido', 'ivan'),
+(168, 'A017', '2019-02-26', '06:58:10', 10, 'pedido', 'ivan'),
+(168, 'A018', '2019-02-26', '06:58:10', 9, 'pedido', 'ivan'),
+(168, 'A243', '2019-02-26', '06:58:10', 18, 'pedido', 'ivan'),
+(168, 'A244', '2019-02-26', '06:58:10', 19, 'pedido', 'ivan'),
+(169, 'B002', '2019-02-26', '06:58:26', 100, 'pedido', 'ivan'),
+(170, 'A005', '2019-02-26', '07:01:01', 10, 'pedido', 'ivan'),
+(170, 'A006', '2019-02-26', '07:01:01', 9.51, 'pedido', 'ivan'),
+(170, 'A008', '2019-02-26', '07:01:01', 13, 'pedido', 'ivan'),
+(170, 'A009', '2019-02-26', '07:01:01', 10, 'pedido', 'ivan'),
+(170, 'A015', '2019-02-26', '07:01:01', 8, 'pedido', 'ivan'),
+(170, 'A017', '2019-02-26', '07:01:01', 10, 'pedido', 'ivan'),
+(170, 'A018', '2019-02-26', '07:01:01', 9, 'pedido', 'ivan'),
+(170, 'A243', '2019-02-26', '07:01:01', 18, 'pedido', 'ivan'),
+(170, 'A244', '2019-02-26', '07:01:01', 19, 'pedido', 'ivan'),
+(171, 'B002', '2019-02-26', '07:01:18', 100, 'pedido', 'ivan'),
+(172, 'B002', '2019-02-26', '07:13:18', 100, 'pedido', '--'),
+(173, 'B002', '2019-02-26', '07:14:10', 100, 'pedido', '--'),
+(174, 'B002', '2019-02-26', '07:15:32', 100, 'pedido', '--'),
+(175, 'B002', '2019-02-26', '07:26:59', 100, 'pedido', '--'),
+(176, 'B002', '2019-02-27', '10:17:05', 100, 'pedido', '--'),
+(177, 'B002', '2019-02-27', '02:44:42', 100, 'pedido', '--'),
+(178, 'B002', '2019-02-27', '02:45:05', 100, 'pedido', '--'),
+(179, 'B002', '2019-02-27', '04:47:27', 100, 'pedido', '--'),
+(180, 'B002', '2019-02-27', '05:50:04', 100, 'pedido', '--'),
+(181, 'A005', '2019-02-27', '06:35:59', 10, 'pedido', ''),
+(181, 'A006', '2019-02-27', '06:35:59', 9.51, 'pedido', ''),
+(181, 'A008', '2019-02-27', '06:35:59', 13, 'pedido', ''),
+(181, 'A009', '2019-02-27', '06:35:59', 10, 'pedido', ''),
+(181, 'A015', '2019-02-27', '06:35:59', 8, 'pedido', ''),
+(181, 'A017', '2019-02-27', '06:35:59', 10, 'pedido', ''),
+(181, 'A018', '2019-02-27', '06:35:59', 9, 'pedido', ''),
+(181, 'A243', '2019-02-27', '06:35:59', 18, 'pedido', ''),
+(181, 'A244', '2019-02-27', '06:35:59', 19, 'pedido', ''),
+(182, 'A005', '2019-02-28', '07:18:00', 10, 'pedido', ''),
+(182, 'A006', '2019-02-28', '07:18:00', 9.51, 'pedido', ''),
+(182, 'A008', '2019-02-28', '07:18:00', 13, 'pedido', ''),
+(182, 'A009', '2019-02-28', '07:18:00', 10, 'pedido', ''),
+(182, 'A015', '2019-02-28', '07:18:00', 8, 'pedido', ''),
+(182, 'A017', '2019-02-28', '07:18:00', 10, 'pedido', ''),
+(182, 'A018', '2019-02-28', '07:18:00', 9, 'pedido', ''),
+(182, 'A243', '2019-02-28', '07:18:00', 18, 'pedido', ''),
+(182, 'A244', '2019-02-28', '07:18:00', 19, 'pedido', '');
 
 -- --------------------------------------------------------
 
@@ -1868,11 +2154,11 @@ INSERT INTO `producto` (`id_prod`, `descripcion`, `cod_fam`, `existencia`, `prec
 --
 
 CREATE TABLE `productos` (
-  `codingre` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `descrip` varchar(35) COLLATE utf8_spanish_ci NOT NULL,
-  `familia` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `unidad` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `empaque` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `codingre` varchar(10) NOT NULL,
+  `descrip` varchar(35) NOT NULL,
+  `familia` varchar(10) NOT NULL,
+  `unidad` varchar(10) NOT NULL,
+  `empaque` varchar(15) NOT NULL,
   `equivale` float NOT NULL,
   `inventa1` float NOT NULL,
   `stockmax` float NOT NULL,
@@ -1881,8 +2167,8 @@ CREATE TABLE `productos` (
   `costoprome` float NOT NULL,
   `impuesto` float NOT NULL,
   `pedido` float NOT NULL,
-  `status` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `status` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -1890,13 +2176,13 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, `equivale`, `inventa1`, `stockmax`, `stockmin`, `ultcosto`, `costoprome`, `impuesto`, `pedido`, `status`) VALUES
 ('A001', 'JARDIN', 'PRODU', 'gr', '', 1000, 0, 0, 0, 1.75, 5.38, 0, 0, NULL),
-('A005', 'ACEITE OLIVO', 'ABARR', 'ml', 'BIDON', 3000, 0, 0, 0, 281.32, 281.33, 0, 0, NULL),
-('A006', 'ACEITE VEGETAL', 'ABARR', 'ml', 'LITRO', 20000, 0.49, 0, 0, 422, 422, 0, 0, NULL),
-('A008', 'ACEITUNA VERDE', 'ABARR', 'gr', '', 450, 2, 15, 0, 59.5, 59.51, 0, 0, NULL),
-('A009', 'ACHIOTE', 'ABARR', 'GR', '', 1000, 0, 0, 0, 48.6, 50.06, 0, 0, NULL),
-('A015', 'ALCAPARRA', 'ABARR', 'gr', '', 605, 2, 0, 0, 85, 70.93, 0, 0, NULL),
-('A017', 'ALMEJAS LATA', 'ABARR', 'gr', '', 396, 0, 0, 0, 30, 29.77, 0, 0, NULL),
-('A018', 'ANCHOAS', 'ABARR', 'gr', '', 80, 1, 0, 0, 31, 31, 0, 0, NULL),
+('A005', 'ACEITE OLIVO', 'ABARR', 'ml', 'BIDON', 3000, 0, 10, 0, 281.32, 281.33, 0, 10, 'pedido'),
+('A006', 'ACEITE VEGETAL', 'ABARR', 'ml', 'LITRO', 20000, 0.49, 10, 0, 422, 422, 0, 9.51, 'pedido'),
+('A008', 'ACEITUNA VERDE', 'ABARR', 'gr', '', 450, 2, 15, 0, 59.5, 59.51, 0, 13, 'pedido'),
+('A009', 'ACHIOTE', 'ABARR', 'GR', '', 1000, 0, 10, 0, 48.6, 50.06, 0, 10, 'pedido'),
+('A015', 'ALCAPARRA', 'ABARR', 'gr', '', 605, 2, 10, 0, 85, 70.93, 0, 8, 'pedido'),
+('A017', 'ALMEJAS LATA', 'ABARR', 'gr', '', 396, 0, 10, 0, 30, 29.77, 0, 10, 'pedido'),
+('A018', 'ANCHOAS', 'ABARR', 'gr', '', 80, 1, 10, 0, 31, 31, 0, 9, 'pedido'),
 ('A019', 'ARROZ', 'ABARR', 'gr', '', 1000, 0, 0, 0, 21.35, 21.33, 0, 0, NULL),
 ('A021', 'ATE DE MEMBRILLO', 'ABARR', 'GR', '', 700, 1.5, 0, 0, 25.78, 25.68, 0, 0, NULL),
 ('A028', 'AZUCAR MORENA', 'ABARR', 'gr', '', 1000, 0, 0, 0, 22.14, 17.66, 0, 0, NULL),
@@ -2027,8 +2313,8 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('A240', 'SALSA VALENTINA', 'ABARR', 'ml', '', 370, 0, 0, 0, 19, 13.7, 0, 0, NULL),
 ('A241', 'SALSA YAKIZOBA', 'ABARR', 'ml', '', 4000, 0, 0, 0, 0, 0, 0, 0, NULL),
 ('A242', 'SALSA YUZU', 'ABARR', 'ml', '', 1000, 0, 0, 0, 99, 99, 0, 0, NULL),
-('A243', 'SALSA ZAMBAL', 'ABARR', 'gr', '', 3859, 1, 19, 0, 10, 0, 0, 0, NULL),
-('A244', 'SAZONADOR MONTREAL DE POL', 'ABARR', 'gr', '', 652, 0, 19, 0, 0, 0, 0, 0, NULL),
+('A243', 'SALSA ZAMBAL', 'ABARR', 'gr', '', 3859, 1, 19, 0, 10, 0, 0, 18, 'pedido'),
+('A244', 'SAZONADOR MONTREAL DE POL', 'ABARR', 'gr', '', 652, 0, 19, 0, 0, 0, 0, 19, 'pedido'),
 ('A245', 'SAZONADOR MONTREAL DE RES', 'ABARR', 'gr', '', 822, 0, 0, 0, 0, 0, 0, 0, NULL),
 ('A246', 'SAZONADOR SABROSEADOR', 'ABARR', 'gr', '', 117, 0, 0, 0, 14.55, 15.54, 0, 0, NULL),
 ('A247', 'SIDRA', 'ABARR', 'ml', '', 680, 0, 0, 0, 41.55, 41.15, 0, 0, NULL),
@@ -2079,7 +2365,7 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('ABGM', 'GREY GOOSE 1.750', 'VODKA', 'ML', '', 1750, 0, 0, 0, 846.84, 844.2, 0, 0, NULL),
 ('AGCO', 'AGUA CORRIENTE', 'REFRE', 'ML', '', 19000, 0, 0, 0, 30.59, 25.94, 0, 0, NULL),
 ('B001', 'AGUA GARRAFON', 'BEBID', 'ml', '', 20000, 0, 0, 0, 27, 27, 0, 0, NULL),
-('B002', 'AGUA MINERAL LATA', 'BEBID', 'PZ', '', 355, 251, 351, 0, 5.96, 5.96, 16, 0, NULL),
+('B002', 'AGUA MINERAL LATA', 'BEBID', 'PZ', '', 355, 251, 351, 0, 5.96, 5.96, 16, 0, 'pedido'),
 ('B003', 'AGUA MINERAL MINI', 'BEBID', 'ML', '', 250, 304, 0, 0, 5.53, 5.53, 16, 0, NULL),
 ('B004', 'AGUA MINERAL REFIL', 'BEBID', 'ML', '', 2000, 15, 0, 0, 12.07, 12.08, 16, 0, NULL),
 ('B006', 'AGUA NATURAL MINI', 'BEBID', 'ML', '', 355, 0, 0, 0, 7.76, 5.98, 16, 0, NULL),
@@ -2475,27 +2761,18 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('LISO', 'CITRIC SOUTH COMFOR', 'LICOR', 'ML', '', 750, 0, 0, 0, 1, 0, 0, 0, NULL),
 ('LIST', 'STREGA', 'LICOR', 'ML', '', 750, 2.17, 0, 0, 534.78, 466.36, 16, 0, NULL),
 ('LIVR', 'VERMOUNT', 'LICOR', 'ML', '', 750, 6.12, 0, 0, 113.79, 113.92, 16, 0, NULL),
-('LSR^', 'SR.NATILLA GUAYABA', 'PRODU', '', '', 700, 0, 0, 0, 39.57, 39.57, 0, 0, NULL),
-('LSR_', 'SR.CEBOLLA ENCURTIDA', 'PRODU', '', '', 1000, -27.19, 0, 0, 30.56, 30.56, 0, 0, NULL),
-('LSR!', 'SR.SALSA DE COCO', 'PRODU', '', '', 600, 0, 0, 0, 75.54, 75.54, 0, 0, NULL);
-INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, `equivale`, `inventa1`, `stockmax`, `stockmin`, `ultcosto`, `costoprome`, `impuesto`, `pedido`, `status`) VALUES
-('LSR?', 'SR.ARROZ ROJO', 'PRODU', '', '', 1000, -39.65, 0, 0, 44.94, 44.94, 0, 0, NULL),
-('LSR.', 'SR.MOJO DE AJO', 'PRODU', '', '', 1000, -1.66, 0, 0, 0, 0, 0, 0, NULL),
-('LSR\'', 'SR.SESOS AL EPAZOTE', 'PRODU', '', '', 1500, 0, 0, 0, 62.45, 62.45, 0, 0, NULL),
+('LSR!', 'SR.SALSA DE COCO', 'PRODU', '', '', 600, 0, 0, 0, 75.54, 75.54, 0, 0, NULL),
 ('LSR\",SR.AD', 'PRODU', '', '', '1000.00', 0, 0, 0, 26.08, 26.08, 0, 0, 0, NULL),
+('LSR#', 'SR.PIPIAN ROJO', 'PRODU', '', '', 1500, -3.56, 0, 0, 95.64, 95.64, 0, 0, NULL);
+INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, `equivale`, `inventa1`, `stockmax`, `stockmin`, `ultcosto`, `costoprome`, `impuesto`, `pedido`, `status`) VALUES
+('LSR%', 'SR.NATILLA VAINILLA', 'PRODU', '', '', 700, 0, 0, 0, 66.29, 66.29, 0, 0, NULL),
+('LSR&', 'SR.NATILLA MAMEY', 'PRODU', '', '', 700, 0, 0, 0, 43.91, 43.91, 0, 0, NULL),
+('LSR\'', 'SR.SESOS AL EPAZOTE', 'PRODU', '', '', 1500, 0, 0, 0, 62.45, 62.45, 0, 0, NULL),
 ('LSR(', 'SR.SALSA ROMPOPE', 'PRODU', '', '', 700, -28.29, 0, 0, 67.54, 67.54, 0, 0, NULL),
 ('LSR)', 'SR.CALDO DE POLLO', 'PRODU', '', '', 1000, -65.27, 0, 0, 55.47, 55.47, 0, 0, NULL),
-('LSR[', 'SR.ADEREZO CILANTRO', 'PRODU', '', '', 1000, 0.4, 0, 0, 0, 0, 0, 0, NULL),
-('LSR]', 'SR.TLACOYOS', 'PRODU', '', '', 1000, -25.86, 0, 0, 24.82, 24.82, 0, 0, NULL),
-('LSR@', 'SR.PIPIAN VERDE', 'PRODU', '', '', 1000, -2.34, 0, 0, 50.99, 50.99, 0, 0, NULL),
 ('LSR*', 'SR.SALSA FRUTOS ROJOS', 'PRODU', '', '', 800, -0.02, 0, 0, 43.45, 43.45, 0, 0, NULL),
-('LSR\\\",SR.C', 'PRODU', '', '', '350.00', 0, 0, 0, 61.62, 61.62, 0, 0, 0, NULL),
-('LSR&', 'SR.NATILLA MAMEY', 'PRODU', '', '', 700, 0, 0, 0, 43.91, 43.91, 0, 0, NULL),
-('LSR#', 'SR.PIPIAN ROJO', 'PRODU', '', '', 1500, -3.56, 0, 0, 95.64, 95.64, 0, 0, NULL),
-('LSR%', 'SR.NATILLA VAINILLA', 'PRODU', '', '', 700, 0, 0, 0, 66.29, 66.29, 0, 0, NULL),
 ('LSR+', 'SR.SOPES', 'PRODU', '', '', 3, 3, 0, 0, 3.22, 3.22, 0, 0, NULL),
-('LSR<', 'SR.CALDO POLLO AJILLO', 'PRODU', '', '', 1000, 0, 0, 0, 70.31, 70.31, 0, 0, NULL),
-('LSR>', 'SR.SOYA 3 CHILES', 'PRODU', '', '', 1000, -3.28, 0, 0, 212.86, 212.86, 0, 0, NULL),
+('LSR.', 'SR.MOJO DE AJO', 'PRODU', '', '', 1000, -1.66, 0, 0, 0, 0, 0, 0, NULL),
 ('LSR0', 'SR.REQUESON EPAZOTE', 'PRODU', '', '', 250, -79.74, 0, 0, 3.51, 3.51, 0, 0, NULL),
 ('LSR1', 'SR.CEBOLLA CARAMELIZADA', 'PRODU', 'GR', '', 1000, -55.4, 0, 0, 17.39, 17.39, 0, 0, NULL),
 ('LSR2', 'SR.MAYO CHIPOTLE', 'PRODU', '', '', 1350, -62.49, 0, 0, 72.65, 72.65, 0, 0, NULL),
@@ -2506,6 +2783,10 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('LSR7', 'SR.CHILES VINAGRE', 'PRODU', '', '', 1500, 0, 0, 0, 17.45, 17.45, 0, 0, NULL),
 ('LSR8', 'SR.PICADILLO', 'PRODU', '', '', 1000, 0, 0, 0, 158.75, 158.75, 0, 0, NULL),
 ('LSR9', 'SR.ARROZ CREMOSO', 'PRODU', '', '', 1000, 0.1, 0, 0, 35.05, 35.05, 0, 0, NULL),
+('LSR<', 'SR.CALDO POLLO AJILLO', 'PRODU', '', '', 1000, 0, 0, 0, 70.31, 70.31, 0, 0, NULL),
+('LSR>', 'SR.SOYA 3 CHILES', 'PRODU', '', '', 1000, -3.28, 0, 0, 212.86, 212.86, 0, 0, NULL),
+('LSR?', 'SR.ARROZ ROJO', 'PRODU', '', '', 1000, -39.65, 0, 0, 44.94, 44.94, 0, 0, NULL),
+('LSR@', 'SR.PIPIAN VERDE', 'PRODU', '', '', 1000, -2.34, 0, 0, 50.99, 50.99, 0, 0, NULL),
 ('LSRA', 'SR.HUEVO ESTRELLADO', 'PRODU', '', '', 1, 0, 0, 0, 3.86, 3.86, 0, 0, NULL),
 ('LSRB', 'SR.RAJAS POBLANAS', 'PRODU', '', '', 1000, -32.47, 0, 0, 0, 0, 0, 0, NULL),
 ('LSRC', 'SR.AGUACHILE ROJO', 'PRODU', '', '', 1000, -10.85, 0, 0, 59.01, 59.01, 0, 0, NULL),
@@ -2532,6 +2813,11 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('LSRX', 'SR.ENSALADA PAPAYA', 'PRODU', '', '', 1000, 0, 0, 0, 11.41, 11.41, 0, 0, NULL),
 ('LSRY', 'SR.CHILAQUILES NEGROS', 'PRODU', '', '', 1000, 0, 0, 0, 40.78, 40.78, 0, 0, NULL),
 ('LSRZ', 'SR.ENMOLADA', 'PRODU', '', '', 1000, -1.03, 0, 0, 6.48, 6.48, 0, 0, NULL),
+('LSR[', 'SR.ADEREZO CILANTRO', 'PRODU', '', '', 1000, 0.4, 0, 0, 0, 0, 0, 0, NULL),
+('LSR\\\",SR.C', 'PRODU', '', '', '350.00', 0, 0, 0, 61.62, 61.62, 0, 0, 0, NULL),
+('LSR]', 'SR.TLACOYOS', 'PRODU', '', '', 1000, -25.86, 0, 0, 24.82, 24.82, 0, 0, NULL),
+('LSR^', 'SR.NATILLA GUAYABA', 'PRODU', '', '', 700, 0, 0, 0, 39.57, 39.57, 0, 0, NULL),
+('LSR_', 'SR.CEBOLLA ENCURTIDA', 'PRODU', '', '', 1000, -27.19, 0, 0, 30.56, 30.56, 0, 0, NULL),
 ('MARV', 'MARTELL VSOP', 'COGNA', '', '', 1, 0, 0, 0, 564.66, 564.66, 16, 0, NULL),
 ('ME4C', '400 CONEJOS ESPADIN BCO', 'MEZCA', 'ML', '', 750, 6.15, 0, 0, 354.61, 354.61, 16, 0, NULL),
 ('MEAA', 'ALIPUS SN ANDRES', 'MEZCA', 'ML', '', 750, 0.03, 0, 0, 499.57, 250.29, 16, 0, NULL),
@@ -2559,10 +2845,10 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('MXC!', 'MEXCALITO MINI COCO', 'MEZCA', 'ML', '', 124, 15, 0, 0, 60.35, 0, 0, 0, NULL),
 ('MXME', 'MEXCALITO ESPADIN', 'MEZCA', 'ML', '', 750, 1.1, 0, 0, 297.42, 0, 0, 0, NULL),
 ('MXMG', 'MEXCALITO GUAYABA', 'MEZCA', 'ML', '', 750, 2, 0, 0, 297.42, 0, 0, 0, NULL),
-('MZM@', 'MEXCALITO MINI MARACUTYA', 'MEZCA', 'ML', '', 124, 21, 0, 0, 60.35, 0, 0, 0, NULL),
 ('MZM3', 'MEXCALITO MINI TAMARINDO', 'MEZCA', 'ML', '', 124, 18, 0, 0, 60.35, 0, 0, 0, NULL),
 ('MZM4', 'MEXCALITO MINI GUAYABA', 'MEZCA', 'ML', '', 124, 18, 0, 0, 60.35, 0, 0, 0, NULL),
 ('MZM5', 'MEXCALITO MINI ESPADIN', 'MEZCA', 'ML', '', 124, 15, 0, 0, 60.35, 0, 0, 0, NULL),
+('MZM@', 'MEXCALITO MINI MARACUTYA', 'MEZCA', 'ML', '', 124, 21, 0, 0, 60.35, 0, 0, 0, NULL),
 ('MZMC', 'MEXCALITO COCO', 'MEZCA', 'ML', '', 750, 2, 0, 0, 297.42, 0, 0, 0, NULL),
 ('MZMT', 'MEXCALITO TAMARINDO', 'MEZCA', 'ML', '', 750, 2.1, 0, 0, 297.42, 297.42, 16, 0, NULL),
 ('PM04', 'ATUN MEDALLON', 'MARIS', 'pz', '', 1000, 3.38, 0, 0, 306, 306.05, 0, 0, NULL),
@@ -2673,7 +2959,6 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('TEAN', 'HERRAD.ANT.REP', 'TEQUI', 'ML', '', 750, 6, 0, 0, 185.34, 185.34, 16, 0, NULL),
 ('TEAZ', 'LOS AZULEJOS', 'TEQUI', 'ML', '', 750, 0, 0, 0, 276.52, 276.53, 0, 0, NULL),
 ('TEBL', 'CAZADORES BCO. LT.', 'TEQUI', 'ML', '', 950, 0, 0, 0, 173.04, 173.46, 0, 0, NULL),
-('TEC¥', 'CENTENARIO A¥EJO', 'TEQUI', 'ML', '', 750, 1.11, 0, 0, 386.55, 373.26, 16, 0, NULL),
 ('TEC3', 'CUERVO TRAD 3LTS', 'TEQUI', 'ML', '', 3000, 0, 0, 0, 763.47, 739.65, 0, 0, NULL),
 ('TECA', 'CAZADORES REP. 750', 'TEQUI', 'ML', '', 750, 0, 0, 0, 427.01, 364.57, 0, 0, NULL),
 ('TECE', 'CENTENARIO REP. 750 ML.', 'TEQUI', 'ML', '', 750, 2.06, 0, 0, 147.64, 147.65, 16, 0, NULL),
@@ -2684,6 +2969,7 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('TECP', 'CENTENARIO PLATA 700 ML.', 'TEQUI', 'ML', '', 750, 0.89, 0, 0, 190, 190, 16, 0, NULL),
 ('TECR', 'CUERVO TRAD.', 'TEQUI', 'ML', '', 695, 11.95, 0, 0, 214.57, 214.57, 16, 0, NULL),
 ('TECS', 'CUERVO ESPECIAL 990', 'TEQUI', 'ML', '', 990, 0, 0, 0, 77.82, 77.82, 0, 0, NULL),
+('TEC¥', 'CENTENARIO A¥EJO', 'TEQUI', 'ML', '', 750, 1.11, 0, 0, 386.55, 373.26, 16, 0, NULL),
 ('TED1', 'DON JULIO 70', 'TEQUI', 'ML', '', 750, 4.93, 0, 0, 482.72, 482.72, 16, 0, NULL),
 ('TED4', 'DON JULIO 1942', 'TEQUI', 'ML', '', 750, 1, 0, 0, 1120.69, 1044.79, 16, 0, NULL),
 ('TEDB', 'DON JULIO BLANCO 750', 'TEQUI', 'ML', '', 750, 4.08, 0, 0, 250, 250, 16, 0, NULL),
@@ -2691,7 +2977,6 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('TEEB', 'ESPOLON BCO', 'TEQUI', 'ML', '', 750, 1, 0, 0, 208.02, 184.11, 16, 0, NULL),
 ('TEEC', 'ESPOLON COLORADO', 'TEQUI', 'ML', '', 750, 1.14, 0, 0, 268.62, 250.12, 16, 0, NULL),
 ('TEEM', 'ESPOLON MARANON', 'TEQUI', 'ML', '', 750, 1, 0, 0, 343.97, 294.58, 16, 0, NULL),
-('TEH¥', 'HORNITOS A¥EJO 750 ML.', 'TEQUI', 'ML', '', 750, 0, 0, 0, 173.04, 0, 0, 0, NULL),
 ('TEHA', 'HERRAD.A¥EJO TEQ', 'TEQUI', 'ML', '', 750, 3.12, 0, 0, 394.83, 394.41, 16, 0, NULL),
 ('TEHB', 'HERRAD.BCO', 'TEQUI', 'ML', '', 950, 4.02, 0, 0, 249.91, 249.91, 16, 0, NULL),
 ('TEHD', 'HERRAD.BCO.DIRECTO ALAMBI', 'TEQUI', 'ML', '', 750, 2.1, 0, 0, 589.55, 294.78, 16, 0, NULL),
@@ -2705,6 +2990,7 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 ('TEHU', 'HERRAD.SEL.SUPREMA', 'TEQUI', 'ML', '', 750, 1, 0, 0, 2122.44, 1061.22, 16, 0, NULL),
 ('TEHX', 'HERRAD.ULTRA', 'TEQUI', 'ML', '', 750, 2.14, 0, 0, 443.97, 443.98, 16, 0, NULL),
 ('TEHZ', 'HERRAD.ANT.BCO', 'TEQUI', 'ML', '', 750, 0, 0, 0, 145.73, 109.55, 0, 0, NULL),
+('TEH¥', 'HORNITOS A¥EJO 750 ML.', 'TEQUI', 'ML', '', 750, 0, 0, 0, 173.04, 0, 0, 0, NULL),
 ('TEJ7', 'JIMADOR REP 700', 'TEQUI', 'ML', '', 700, 15.13, 0, 0, 108.11, 108.12, 16, 0, NULL),
 ('TEJA', 'DON JULIO A¥EJO', 'TEQUI', 'ML', '', 750, 4.08, 0, 0, 422.41, 424.3, 16, 0, NULL),
 ('TEJB', 'JIMADOR BCO', 'TEQUI', 'ML', '', 750, 0, 0, 0, 90.61, 90.42, 0, 0, NULL),
@@ -3017,12 +3303,12 @@ INSERT INTO `productos` (`codingre`, `descrip`, `familia`, `unidad`, `empaque`, 
 
 CREATE TABLE `usuario` (
   `id_user` int(10) NOT NULL,
-  `username` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `password` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `cargo` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `username` varchar(30) NOT NULL,
+  `password` varchar(25) NOT NULL,
+  `cargo` varchar(30) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -3030,14 +3316,24 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_user`, `username`, `password`, `cargo`, `nombre`, `email`) VALUES
 (1, 'ivan', '12345', 'administrador', 'ivan colula', 'ivan_f789@hotmail.com'),
-(2, 'paola', '12345', 'contador', 'paola paez', 'paola@gmail.com'),
+(2, 'paola', '12345', 'gerente', 'paola paez', 'paola@gmail.com'),
 (3, 'memo', '12345', 'cocina', 'memo', 'memo@gmail.com'),
-(4, 'raul', '12345', 'almacenista', 'raul', 'raul@gmail.com'),
-(5, 'Luis', '12345', 'barra', 'Luis sanchez', 'luis@gmail.com');
+(4, 'raul', '12345', 'barra', 'raul', 'raul@gmail.com'),
+(5, 'Luis', '12345', 'barra', 'Luis sanchez', 'luis@gmail.com'),
+(6, 'cocina', '12345', 'cocina', 'cocina', 'cocina@gmail.com'),
+(8, 'raul', '12345', 'barra', 'raul rulo', 'raul@gmail.com'),
+(9, 'jorge', 'jorge', 'no', 'jorgito', 'sada@dfs'),
+(10, 'cha', '12', 'noas', 'asd', 'asd@as');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `almacen`
+--
+ALTER TABLE `almacen`
+  ADD PRIMARY KEY (`id_almacen`);
 
 --
 -- Indices de la tabla `familia`
@@ -3061,14 +3357,6 @@ ALTER TABLE `pedido_producto`
   ADD KEY `id_prod` (`codingre`);
 
 --
--- Indices de la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD PRIMARY KEY (`id_prod`),
-  ADD UNIQUE KEY `id_prod` (`id_prod`),
-  ADD KEY `cod_fam` (`cod_fam`);
-
---
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
@@ -3086,22 +3374,22 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `almacen`
+--
+ALTER TABLE `almacen`
+  MODIFY `id_almacen` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
-
---
--- AUTO_INCREMENT de la tabla `producto`
---
-ALTER TABLE `producto`
-  MODIFY `id_prod` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=779;
+  MODIFY `id_pedido` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
@@ -3111,8 +3399,8 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
-  ADD CONSTRAINT `pedido_producto_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`),
-  ADD CONSTRAINT `pedido_producto_ibfk_2` FOREIGN KEY (`codingre`) REFERENCES `productos` (`codingre`);
+  ADD CONSTRAINT `pedido_producto_ibfk_1` FOREIGN KEY (`codingre`) REFERENCES `productos` (`codingre`),
+  ADD CONSTRAINT `pedido_producto_ibfk_2` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

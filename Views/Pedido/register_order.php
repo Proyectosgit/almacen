@@ -1,8 +1,14 @@
+<?php
+	session_start();
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador"){
+?>
+
 	<body>
 		<head>
 			<div class="container">
 			<h1>Detalles del pedido</h1>
-		</div>
+			</div>
 		</head>
 		<section>
 				<div class="container small">
@@ -37,4 +43,13 @@
 					</div>
 				</div>
 			</section>
-</body>
+</body
+
+
+<?php
+	}else{
+		//Inclur una pagina para redireccionar a index
+		header('Location: Views/sesion/no_sesion.php');
+	}
+}
+?>

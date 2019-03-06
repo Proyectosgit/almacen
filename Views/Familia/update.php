@@ -24,7 +24,7 @@
 	</form>
 </section>
 
-<?php require_once('routes.php');
+<?php
 		}else{
 			//Inclur una pagina para redireccionar a index
 			header('Location: Views/sesion/no_sesion.php');

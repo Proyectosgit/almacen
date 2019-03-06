@@ -12,6 +12,7 @@
 		public function realizar_pedido($cod_fam,$modificados,$costo_total,$observacion){
 			session_start();
 			require_once('../Models/pedido.php');
+			require_once('../Models/producto.php');
 			require_once('../Models/relacion.php');
 			require_once('../Config/fecha.php');
 
@@ -55,12 +56,15 @@
 									$num_prod=$lista_cantidad[$indice];
  									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
  									Relacion::save($relacion);
+									Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a bd productos
 								}
 								// continue;
 								else{
-									$num_prod=$producto->stockmax-$producto->inventa1;
-									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
-									Relacion::save($relacion);
+											$num_prod=$producto->stockmax-$producto->inventa1;
+											$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
+											Relacion::save($relacion);
+											Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
+
 								  	}
 								}
 						}
@@ -71,11 +75,16 @@
 							$num_prod=$producto->stockmax-$producto->inventa1;
 							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
 							Relacion::save($relacion);
+							Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
 						}
 					}
 				}
 			}
-		header('Location: ../index.php?controller=producto&action=search_prod');
+			if($_SESSION['id_sesion']=="barra"){
+				header('Location: ../index.php?controller=producto&action=search_prod_bar');
+			}else{
+				header('Location: ../index.php?controller=producto&action=search_prod');
+			}
 		}
 
 		public function registra_pedido($modificados){
@@ -121,7 +130,8 @@
 								}
 					}
 			}
-			header('Location: ../index.php?controller=pedido&action=index');
+
+				header('Location: ../index.php?controller=pedido&action=index');
 		}
 
 		//public function search_prod_fam($cod_fam){
@@ -133,11 +143,11 @@
 		public function search_prod(){
 			require_once('Views/Producto/search_prod.php');
 			}
-		
+
 		public function search_prod_bar(){
 		require_once('Views/Producto/search_prod_bar.php');
 		}
-		
+
 		public function search_prod_barra($familia){
 			$productos=Producto::getByFam($familia);
       require_once('Views/Producto/search_prod_barra.php');
@@ -165,6 +175,16 @@
 
 		public function error(){
 			require_once('Views/Producto/error.php');
+		}
+
+		public function button_download_db(){
+			require_once('Views/Producto/button_download_db.php');
+		}
+
+		public function download_db($name_file){
+			$productos=Producto::all();
+			Producto::create_csv($productos,$name_file);
+			//require_once('Views/Producto/download.php');
 		}
 	}
 
@@ -205,7 +225,8 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register'&$_GET['action']!='index'&$_GET['action']!='search_prod'&$_GET['action']!='search_prod_fam'&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra') {
+		if ($_GET['action']!='register'&$_GET['action']!='index'&$_GET['action']!='search_prod'&$_GET['action']!='search_prod_fam'
+				&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra'&$_GET['action']!='button_download_db') {
 			require_once('../Config/connection.php');
 			$productoController=new ProductoController();
 
@@ -217,6 +238,10 @@
 				require_once('../Models/producto.php');
 				$producto=Producto::getById($_GET['codingre']);
 				require_once('../Views/Producto/update.php');
+			}elseif ($_GET['action']=='download') {//mostrar la vista update con los datos del registro actualizar
+				require_once('../Models/producto.php');
+				$productoController->download_db($_GET["name_file"]);
+				header('Location: index.php/?controller=producto&action=button_download_db');
 			}
 		}
 	}

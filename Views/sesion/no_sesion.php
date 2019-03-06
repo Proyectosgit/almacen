@@ -2,6 +2,7 @@
     session_start();
     unset($_SESSION["id_sesion"]);
     session_destroy();
+    if(!isset($_SESSION['id_sesion'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,3 +24,6 @@
     </body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 </html>
+<?php
+    }
+?>

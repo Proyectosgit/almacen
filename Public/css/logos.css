@@ -1,0 +1,16 @@
+#logo{
+      width: auto;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+.logo_fondo{
+  width: 50%;
+  display: block;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  /* position:absolute; */
+  /* position:relative; */
+
+}

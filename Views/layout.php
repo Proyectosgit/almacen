@@ -7,21 +7,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> A&B </title>
+	<title>A&B</title>
 	<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'/>
-  <!-- <link rel="stylesheet" href="Views/bootstrap/css/bootstrap.min.css"/> -->
+	<!-- <link rel="stylesheet" href="Public/bootstrap-3.3.6/dist/css/bootstrap.min.css"/> -->
   <link rel="stylesheet" href="Public/bootstrap/css/bootstrap.min.css"/>
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
-  <link rel="stylesheet" href="Public/bootstrap/bootstrap_3.3.6/bootstrap.min.css">
+	<link rel="stylesheet" href="Public/bootstrap/bootstrap_3.3.6/bootstrap.min.css">
+	<link rel="stylesheet" href="Public/css/logos.css"/>
   <link rel="stylesheet" href="../Public/css/style.css">
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->
- <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+	<link href="Public/open-iconic-master/font/css/open-iconic.css" rel="stylesheet">
 </head>
-<header>
-	<!-- <p>esto es el header</p> -->
-	<!-- <p><a href='Public/cerrar_sesion.php'>Cerrar Sesion</a></p> -->
-</header>
 <body>
 			<?php
 			switch($_SESSION["id_sesion"]){
@@ -38,19 +32,18 @@
 					require_once("Views/partials/header_admin.php");
 					break;
 			case "barra":
-					require_once("Views/partials/header_realiza_pedido.php");
+					require_once("Views/partials/header_realiza_pedido_barra.php");
 					break;
 			}
-
 			?>
 
 	<?php require_once('routes.php');
 	}else{
 		//Inclur una pagina para redireccionar a index
-	header('Location: Views/sesion/no_sesion.php');
+	header('Location: Views/sesion/formulario.php');
 	}
 	?>
-	<!-- <script src='Public/jquery/jquery-3.3.1.min.js'></script> -->
-	<!-- <script src='Public/assets/bootstrap-4.2.1/js/bootstrap.min.js'></script> -->
+		<script src='Public/jquery/jquery-3.3.1.min.js'></script>
+		<script src='Public/bootstrap-3.3.6/dist/js/bootstrap.min.js'></script>
 </body>
 </html>
