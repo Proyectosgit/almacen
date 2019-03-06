@@ -7,10 +7,11 @@ body{
 .container{
   margin: 20px auto;
   padding-top: 10px auto;
-  border-radius: 100px;
+  border-radius: 30px;
   border: 4px solid #eee;
   width: 300px;
-  background: #424242;
+  /* background: #424242; */
+  background: #fff;
 }
 
 input[type="text"], input[type="password"]{
@@ -18,10 +19,10 @@ input[type="text"], input[type="password"]{
   outline: none;
   padding: 20px;
   display: block;
-  width: 250px;
+  width: 220px;
   border-radius: 10px;
   border: 4px solid #eee;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
 input[type="submit"]{
@@ -42,7 +43,7 @@ input[type="submit"]:hover{
 }
 
 header{
-  background: #1C1C1C;
+  background:	rgba(0,0,0,1);
   border-bottom: 2px solid #eee;
   padding: 20px 0;
   margin-bottom: 10px;
@@ -57,13 +58,17 @@ header a{
 
 footer{
 
-    width: auto;
-   -webkit-box-sizing:border-box;
-   -moz-box-sizing:border-box;
-   box-sizing:border-box;
-   margin-top: 200px;
-   background: black;
+  width: auto;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+  margin-top: 200px;
+  background:	rgba(0,0,0,1);;
    /* border-top: 2px solid #000; */
+}
+
+.inicio_sesion{
+  color: #fff;
 }
 
 #texto_sesion{
@@ -73,4 +78,17 @@ footer{
 
 #ref_sesion{
   margin-top: 500px;
+}
+
+.imagen_fondo{
+  max-width: 80%;
+  position: relative;
+  margin-bottom: 10%;
+  /* z-index: -1; */
+  filter:alpha(opacity:60);
+  -moz-opacity:0.6;
+  -khtml-opacity: 0.6;
+  opacity: 0.6;
+  padding-top: 10%;
+
 }

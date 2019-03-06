@@ -1,9 +1,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-          <img id="logo" src="Public/imagenes/logo.jpg">
-        </a>
+          <img  class="navbar-brand" id="logo" src="Public/imagenes/logo.jpg">
       </div>
       <ul class="nav">
         <li class="active"><a href="?controller=usuario&action=register">Ingresar Usuarios</a></li>

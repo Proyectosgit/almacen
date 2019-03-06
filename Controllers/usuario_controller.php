@@ -54,9 +54,9 @@
 
 		}elseif($_POST['action']=='login'){
 			$usuario=Usuario::login($_POST["usuario"]);
-			if($usuario->email==$_POST["usuario"] && $usuario->password==$_POST["password"]){
+			if($usuario->email==$_POST["usuario"] && $usuario->password==$_POST["password"] && ($_POST["usuario"] != "") && ($_POST["password"]!="") ){
 
-		  		session_start();
+		  	session_start();
 				$_SESSION["id_sesion"] = $usuario->cargo;
 				$_SESSION["nombre"] = $usuario->nombre;
 				switch($_SESSION["id_sesion"]){

@@ -1,6 +1,7 @@
 <?php
     session_start();
     unset($_SESSION["id_sesion"]);
+    unset($_SESSION["nombre"]);
     session_destroy();
     if(!isset($_SESSION['id_sesion'])){
 ?>

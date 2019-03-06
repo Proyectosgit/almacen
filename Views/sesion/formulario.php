@@ -9,20 +9,21 @@
  </head>
  <body>
    <?php require_once("../partials/header.php");?>
-   <section>
-    <h1>Inicio de Sesión</h1>
+      <section>
+        <!-- <h1>Inicio de Sesión</h1> -->
 
-    <div class="container">
-     <form method="post" action="../../Controllers/usuario_controller.php">
-        <div class="form-group">
-          <input type="hidden" name="action" value="login">
-          <input type="text" name="usuario" placeholder="Ingresa tu E-mail"><br>
-          <input type="password" name="password" placeholder="Ingresa tu contraseña">
-          <input type="submit" name="login">
+        <div class="container">
+          <img class="imagen_fondo" src="../../Public/imagenes/logo.jpg"/>
+          <form method="post" action="../../Controllers/usuario_controller.php">
+            <div class="form-group">
+              <input type="hidden" name="action" value="login">
+              <input type="text" name="usuario" placeholder="Ingresa tu E-mail"><br>
+              <input type="password" name="password" placeholder="Ingresa tu contraseña">
+              <input type="submit" name="login" value="Iniciar Sesión">
+            </div>
+          </form>
         </div>
-     </form>
-   </div>
-  </section>
+      </section>
    <?php require_once("../partials/footer.php");?>
  </body>
  </html>
