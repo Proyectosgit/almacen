@@ -12,8 +12,7 @@
           Pedidos autorizados
           </a>
         </li>
-        <li>
-          <a href="?controller=pedido&action=ver_pedido_cancelado"><span class="oi" data-glyph="x"></span>
+        <li><a href="?controller=pedido&action=ver_pedido_cancelado"><span class="oi" data-glyph="x"></span>
             Pedidos cancelados
           </a>
         </li>

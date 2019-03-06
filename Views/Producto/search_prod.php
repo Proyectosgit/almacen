@@ -40,7 +40,6 @@
 	</div>
 	</div>
 </div class="container">
-<!-- <img src="Public/imagenes/logo.jpg"/> -->
 </section>
 <section>
 	<div class="container">
