@@ -48,6 +48,17 @@
 	</div>
 	</div>
 </div class="container">
+
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="mx-auto">
+				<img class="logo_fondo" src="Public/imagenes/logo.jpg"/>
+			</div>
+		</div>
+	</div>
+</section>
+
 <?php
 		}else{
 			//Inclur una pagina para redireccionar a index
