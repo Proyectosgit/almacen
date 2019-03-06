@@ -9,10 +9,15 @@
 			require_once('Views/Pedido/index.php');
 		}
 
-		public function ver_autorizados(){
-			$pedidos=Pedido::autorizados();
-			require_once('Views/Pedido/index.php');
+		public function ver_pedidos(){
+			$pedidos=Pedido::ver_pedidos();
+			require_once('Views/Pedido/ver_pedido.php');
 		}
+
+		// public function ver_autorizados(){
+			// $pedidos=Pedido::autorizados();
+			// require_once('Views/Pedido/index.php');
+		// }
 
 		public function ver_pedido_autorizado(){
 			require_once('Views/Pedido/search_order_date_kitchen_authorized.php');
@@ -82,7 +87,7 @@
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
 		if ($_GET['action'] != 'register'&$_GET['action'] != 'index'&$_GET['action'] != 'recibir_pedidos'&$_GET['action'] != 'orderDate'
-				&$_GET['action'] != 'ver_pedido'&$_GET['action'] != 'ver_pedido_autorizado'&$_GET['action'] != 'ver_pedido_cancelado'){
+				&$_GET['action'] != 'ver_pedido'&$_GET['action'] != 'ver_pedido_autorizado'&$_GET['action'] != 'ver_pedido_cancelado' & $_GET['action']!='ver_pedidos'){
 
 			require_once('../Config/connection.php');
 			$pedidoController=new PedidoController();
@@ -107,8 +112,15 @@
 
 			}elseif($_GET['action']=="change"){
 				require_once("../Models/pedido.php");
+				require_once("../Models/producto.php");
 				Pedido::change_order_status($_GET['estado'],$_GET['id_pedido']);
-				header("Location: ../?controller=pedido&action=index");
+				$productos=Pedido::pedidosProd($_GET["id_pedido"]);
+				Producto::ingresa_pedido_autorizado($productos);
+				if($_SESSION['id_sesion']=="administrador"){
+					header("Location: ../?controller=pedido&action=index");
+				}elseif($_SESSION['id_sesion']=="gerente"){
+					header("Location: ../?controller=pedido&action=ver_pedidos");
+				}
 		//Busqueda por fecha
 
 

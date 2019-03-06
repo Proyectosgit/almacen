@@ -44,6 +44,25 @@ class Pedido
 		return $listaPedidos;
 	}
 
+	public static function ver_pedidos(){
+/**Funcion que regresa los pedidos con estado de pedido, para autorizarlos,
+*agregar filtro para que vea solo los de su almacen
+**/
+		$listaPedidos =[];
+		$db=Db::getConnect();
+		$sql=$db->prepare('SELECT * FROM pedidos WHERE estado=:estado ORDER BY id_pedido DESC');
+		$sql->bindValue('estado','pedido');
+		$sql->execute();
+
+		foreach ($sql->fetchAll() as $pedido) {
+			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+																	$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
+																	$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
+																	$pedido['costo_total']);
+		}
+		return $listaPedidos;
+	}
+
 	public static function autorizados(){
 
 		$listaPedidos =[];
@@ -293,6 +312,7 @@ class Pedido
 			$update->bindValue('autoriza',$_SESSION['nombre']);
 			$update->execute();
 		}
+		
 
 		public static function change_order_cost($id_pedido,$costo_total){
 			$db=Db::getConnect();

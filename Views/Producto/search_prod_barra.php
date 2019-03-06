@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador"){
+?>
+
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
 <section>
 <div class="container">
@@ -95,4 +101,11 @@
 		Echo "<h1 align='center'>No hay productos a pedir<h1>";
 	}
 	?>
-	<!-- <script src="Public/librerias/verifica_cambio_pedido.js"></script> --> <!--Sirve para validar las entradas ->
+	<!-- <script src="Public/librerias/verifica_cambio_pedido.js"></script> --> <!--Sirve para validar las entradas -->
+	<?php
+		}else{
+			//Inclur una pagina para redireccionar a index
+			header('Location: Views/sesion/no_sesion.php');
+		}
+	}
+	?>

@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador"){
+?>
+
 <section>
 <!-- <form action='Controllers/producto_controller.php' method='post' id="register_form"> -->
 	<form action='Controllers/producto_controller.php' method='post' id="register_form">
@@ -46,3 +52,10 @@
 		<input type='submit' value='Guardar'>
 	</form>
 </section>
+<?php
+		}else{
+			//Inclur una pagina para redireccionar a index
+			header('Location: Views/sesion/no_sesion.php');
+		}
+	}
+	?>

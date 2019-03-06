@@ -53,7 +53,7 @@
 			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);
 			require_once('../Models/pedido.php');
 			Pedido::change_order_cost($_POST['id_pedido'],$_POST['costo_total']);
-			header('Location: ../index.php?controller=pedido&action=index');
+			header('Location: ../index.php?controller=pedido&action=ver_pedidos');
 		}
 	}
 

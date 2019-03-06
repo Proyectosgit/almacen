@@ -31,11 +31,6 @@ $(document).ready(function(){
       //Ajusta tamaño de input
       //$(this).parents("tr").find(".cantidad").css("width",($(this).parents("tr").find(".cantidad").val().length+1)+"em");
 
-      if(cantidad > cantidad_aux){
-        alert("Estas solicitando más de lo sugerido = " + cantidad_aux);
-      }else if(cantidad < cantidad_aux){
-        alert("Estas solicitando menos de lo sugerido = " + cantidad_aux);
-      }
 
       //Calcula el precio por producto, dependiendo la cantidad
       var precio_unitario=$(this).parents("tr").find(".precio_unitario").html();
@@ -60,13 +55,19 @@ $(document).ready(function(){
       //calcula la suma total de los productos
       var totalDeuda=0;
       $(".costo_producto").each(function(){
-        totalDeuda+=parseInt($(this).html()||0);
+        totalDeuda+=parseFloat($(this).html()||0);
       });
       $("#costo_total").html("Total de Compra = " + totalDeuda);
 
       //Pone los datos modificados en un value de un relacion_pedido_producto
       $("#array_modifica").val(datos);
       $("#costo_total_mod").val(totalDeuda);
+
+      if(cantidad > cantidad_aux){
+        alert("Estas solicitando más de lo sugerido = " + cantidad_aux);
+      }else if(cantidad < cantidad_aux){
+        alert("Estas solicitando menos de lo sugerido = " + cantidad_aux);
+      }
 
 
     }else{

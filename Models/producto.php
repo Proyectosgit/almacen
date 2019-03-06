@@ -147,5 +147,30 @@ class Producto
 									$productoDb['pedido'],$productoDb['status']);
 		return $productos;
 	}
+
+	public static function ingresa_pedido_autorizado($productos){
+		$status="autorizado";
+		$db=Db::getconnect();
+		foreach($productos->fetchAll() as $producto){
+			$insert=$db->prepare('UPDATE productos SET pedido=:pedido, status=:status WHERE codingre=:codingre');
+			$insert->bindValue("pedido",$producto['num_prod']);
+			$insert->bindValue("codingre",$producto['codingre']);
+			$insert->bindValue("status",$status);
+			$insert->execute();
+
+	  }
+	}
+
+	public static function change_order_status_db($status,$codingre){
+		$db=Db::getConnect();
+		$update=$db->prepare('UPDATE productos
+							SET status=:status
+							WHERE codingre=:codingre');
+		$update->bindValue('status',$status);
+		$update->bindvalue('codingre',$codingre);
+		// $update->bindValue('autoriza',$_SESSION['nombre']);
+		$update->execute();
+	}
+
 }
 ?>

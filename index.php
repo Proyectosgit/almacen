@@ -11,7 +11,7 @@
 		}
 	} else {
 		$controller='usuario';
-		$action='index';
+		$action='error';
 	}
 	//carga la vista layout.php
 	require_once('Views/layout.php');

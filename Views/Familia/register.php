@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	if(isset($_SESSION["id_sesion"])){
 		if($_SESSION["id_sesion"]=="administrador"){
 ?>
@@ -23,7 +22,7 @@
 </section>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
-<?php require_once('routes.php');
+<?php
 		}else{
 			//Inclur una pagina para redireccionar a index
 			header('Location: Views/sesion/no_sesion.php');

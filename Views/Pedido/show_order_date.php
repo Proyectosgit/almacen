@@ -1,3 +1,8 @@
+<?php
+	if(isset($_SESSION["id_sesion"])){
+		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina"){
+?>
+
 <html>
 	<head>
 		<title>Show_order_prod </title>
@@ -59,3 +64,10 @@
 		</section>
 	</body>
 <html>
+<?php
+		}else{
+			//Inclur una pagina para redireccionar a index
+			header('Location: Views/sesion/no_sesion.php');
+		}
+	}
+	?>
