@@ -1,7 +1,9 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">A&B</a>
+        <a class="navbar-brand" href="#">
+          <img id="logo" src="Public/imagenes/logo.jpg">
+        </a>
     </div>
         <ul class="nav">
           <li class="active"><a href="?controller=pedido&action=ver_pedidos"><span class="oi" data-glyph="book"></span>
