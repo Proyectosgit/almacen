@@ -10,7 +10,6 @@
         <title>Sesión Cerrada</title>
         <meta name="description" content="DESCRIPTION">
         <meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'/>
-        <link rel="stylesheet" href="../Public/bootstrap/bootstrap_3.3.6/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="../../Public/css/style.css">
     </head>
     <body>
@@ -18,5 +17,4 @@
         <h1 id="texto_sesion">Sesión Cerrada <br> Correctamente</h1>
         <a href="formulario.php">Iniciar Sesión</a>
     </body>
-    <script src="../Public/bootstrap/bootstrap_3.3.6/js/bootstrap.min.js"></script>
 </html>
