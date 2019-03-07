@@ -2,6 +2,7 @@
 
 	if(isset($_SESSION["id_sesion"])){
 		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina"){
+			if($_SESSION["visible"]=="true"){
 ?>
 
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
@@ -104,6 +105,14 @@
 			<div align='center'>
 			<a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
 			<!-- <a href='../?controller=pedido&action=ver_pedido_cancelado_todos' class='btn btn-primary'>Regresar</a> -->
+			</div>";
+
+	}
+
+	}else{//end if visible
+			echo "<h1 align='center'>Pagina expirada, has cancelado tu pedido o ya se realizo<h1>
+			<div align='center'>
+			<a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
 			</div>";
 	}
 	?>

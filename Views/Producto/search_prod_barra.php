@@ -1,9 +1,27 @@
 <?php
 
 		if(isset($_SESSION["id_sesion"])){
-			if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="barra"){
+			if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="barra")){
+				if($_SESSION["visible"]=="true"){
 ?>
+<script>
+	function cancela_pedido(){
 
+		javascript:window.history.back();
+
+	}
+</script>
+<script>
+	function foor(){
+		alert("Pedido Realizado");
+		return true;
+	}
+</script>
+<script language="JavaScript">
+<!--
+  javascript:window.history.forward(1);
+//-->
+</script>
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
 <section>
 <div class="container">
@@ -78,14 +96,7 @@
 
 <?php if($total_prod>0){
 ?>
-	<script>
-		function foor(){
-			alert("Pedido Realizado");
-			return true;
-		}
-	</script>
-
-	<form action="Controllers/producto_controller.php" method="post" id="pedido_form">
+		<form action="Controllers/producto_controller.php" method="post" id="pedido_form">
 		<input type="hidden" name="action" value="pedido">
 		<input type="hidden" name="familia" value="<?php echo $producto->familia;?>" >
 		<input type="hidden" name="costo_total" value="<?php echo $costo_total;?>" id="costo_total_mod">
@@ -97,16 +108,26 @@
 			<button type="submit" class="btn btn-success" onclick="return foor();">
 				Pedido &nbsp; <span class="oi" data-glyph="cart"></span>
 			</button>
+			<button type="reset" class="btn btn-danger" onclick="cancela_pedido();" >
+				Cancelar &nbsp; <span class="oi" data-glyph="x"></span>
+			</button>
 		</center>
 	</form>
 	<?php
 	}else{
-		Echo "<h1 align='center'>No hay productos a pedir<h1>
+			echo "<h1 align='center'>No hay productos a pedir<h1>
 			<div align='center'>
 			<a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
 			<!-- <a href='../?controller=pedido&action=ver_pedido_cancelado_todos' class='btn btn-primary'>Regresar</a> -->
 			</div>";
 	}
+
+}else{//end if visible
+		echo "<h1 align='center'>Pagina expirada, has cancelado tu pedido o ya se realizo<h1>
+			<div align='center'>
+			<a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
+			</div>";
+}
 	?>
 	<!-- <script src="Public/librerias/verifica_cambio_pedido.js"></script> --> <!--Sirve para validar las entradas -->
 	<?php

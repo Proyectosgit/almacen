@@ -9,11 +9,11 @@
 <head>
 	<title>A&B</title>
 	<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'/>
-  	<link rel="stylesheet" href="Public/bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="Public/bootstrap/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="Public/bootstrap/bootstrap_3.3.6/bootstrap.min.css">
 	<link rel="stylesheet" href="Public/css/logos.css"/>
 	<link href="Public/open-iconic-master/font/css/open-iconic.css" rel="stylesheet">
-</head>
+	</head>
 <body>
 			<?php
 			switch($_SESSION["id_sesion"]){

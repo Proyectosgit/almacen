@@ -151,6 +151,7 @@
 		public function search_prod_barra($familia){
 			$productos=Producto::getByFam($familia);
       require_once('Views/Producto/search_prod_barra.php');
+			$_SESSION["visible"]="true";
 		}
 
 		public function register(){
@@ -217,7 +218,7 @@
 
 		}elseif($_POST['action']=='pedido'){
 			$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
-
+			$_SESSION["visible"]="false";
 		}elseif($_POST['action']=='registra_pedido'){
 				// $productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total']);
 		}

@@ -1,1 +1,1 @@
-<p>Error al cargar la vista!</p>
+<p>Error al cargar la vista del Pedido!</p>
