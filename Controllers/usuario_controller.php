@@ -59,9 +59,9 @@
 		  	session_start();
 				$_SESSION["id_sesion"] = $usuario->cargo;
 				$_SESSION["nombre"] = $usuario->nombre;
-				$_SESSION["visible"] = "false";
+				$_SESSION["visible"] = "true";
 				switch($_SESSION["id_sesion"]){
-					case "almacenista":
+						case "almacenista":
 						header("Location: ../?controller=pedido&action=recibir_pedido");
 						break;
 						case "cocina":

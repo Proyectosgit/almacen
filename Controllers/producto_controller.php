@@ -82,7 +82,7 @@
 			}
 			if($_SESSION['id_sesion']=="barra"){
 				header('Location: ../index.php?controller=producto&action=search_prod_bar');
-			}else{
+			}else if($_SESSION['id_sesion']=="cocina"){
 				header('Location: ../index.php?controller=producto&action=search_prod');
 			}
 		}
@@ -137,7 +137,8 @@
 		//public function search_prod_fam($cod_fam){
 		public function search_prod_fam($familia){
 			$productos=Producto::getByFam($familia);
-      require_once('Views/Producto/search_prod_fam.php');
+			require_once('Views/Producto/search_prod_fam.php');
+			$_SESSION["visible"]=$_GET["visible"];
 		}
 
 		public function search_prod(){
@@ -150,8 +151,9 @@
 
 		public function search_prod_barra($familia){
 			$productos=Producto::getByFam($familia);
-      require_once('Views/Producto/search_prod_barra.php');
-			$_SESSION["visible"]="true";
+			$_SESSION["visible"]=$_GET["visible"];
+			require_once('Views/Producto/search_prod_barra.php');
+			$_SESSION["visible"]="false";
 		}
 
 		public function register(){

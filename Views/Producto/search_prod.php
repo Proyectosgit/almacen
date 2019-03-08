@@ -10,6 +10,7 @@
 		<form action='index.php' method='get' id="search_form">
 			<input type='hidden' name='controller' value='producto'>
 			<input type='hidden' name='action' value='search_prod_fam'>
+			<input type="hidden" name="visible" value="true">
 			<table id="update_table">
 				<tr>
 					<td><label>Productos por categoria: &nbsp; </label></td>
