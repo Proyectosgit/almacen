@@ -87,16 +87,23 @@ if(isset($_SESSION["id_sesion"])){
 									<input type="hidden" name="observacion" value="">
 									<center>
 											<!-- <input type="submit" value="Pedido" class="btn btn-success" onclick="return foor();"> -->
-											<button type="submit" class="btn btn-success" onclick="return foor();">
+											<button type="submit" class="btn btn-success" onclick="return autoriza_pedido();">
 												Pedido &nbsp; <span class="oi" data-glyph="cart"></span>
 											</button>
-											&nbsp;&nbsp;&nbsp;&nbsp;
-											<button type="reset" class="btn btn-danger" onclick="cancela_pedido();" >
-												Cancelar &nbsp; <span class="oi" data-glyph="x"></span>
-											</button>
-											<br><br><br><br>
 									</center>
 								</form>
+								<br><br>
+
+								<form action="Controllers/producto_controller.php" method="post">
+									<input type="hidden" name="action" value="cancelado">
+									<input type="hidden" name="perfil" value="barra">
+									<center>
+										<button type="submit" class="btn btn-danger"  onclick="return cancela_pedido();">
+											Cancelar &nbsp; <span class="oi" data-glyph="x"></span>
+										</button>
+									</center>
+								</form>
+								<br><br><br>
 
 					<?php
 					}else{
@@ -131,9 +138,11 @@ if(isset($_SESSION["id_sesion"])){
 
 <script>
 	function cancela_pedido(){
-	 	javascript:window.history.back();
+	 	// javascript:window.history.back();
+		alert("Pedido Cancelado");
+		return true;
 	 }
-	function foor(){
+	function autoriza_pedido(){
 		alert("Pedido Realizado");
 		return true;
 	}

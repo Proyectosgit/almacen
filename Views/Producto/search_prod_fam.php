@@ -1,12 +1,4 @@
-	<?php
-	if(isset($POST["action1"]))
-	{
-		echo "Me ejcuto";
-		if($POST["action1"]=="cancelado"){
-			$_SESSION["visible"]="false";
-			header("Location: index.php?controller=producto&action=search_prod");
-		}
-	}
+<?php
 
 	if(isset($_SESSION["id_sesion"])){
 		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina"){
@@ -96,10 +88,9 @@
 								<input type="hidden" name="modificados" value="" id="array_modifica">
 								<input type="hidden" name="observacion" value="">
 								<center>
-									<button type="submit" class="btn btn-success" onclick="return foor();">
+									<button type="submit" class="btn btn-success" onclick="return autoriza_pedido();">
 										Pedido <span class="oi" data-glyph="cart"></span>
 									</button>
-										<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
 								</center>
 							</form>
 							<br><br>
@@ -108,12 +99,12 @@
 								<input type="hidden" name="action" value="cancelado">
 								<input type="hidden" name="perfil" value="cocina">
 								<center>
-									<button type="submit" class="btn btn-danger"  onclick="return foor();">
+									<button type="submit" class="btn btn-danger"  onclick="return cancela_pedido();">
 										Cancelar &nbsp; <span class="oi" data-glyph="x"></span>
 									</button>
 								</center>
 							</form>
-							<br><br><br><br>
+							<br><br><br>
 					<?php
 						}else{
 								echo "<h1 align='center'>No hay productos a pedir<h1>
@@ -144,10 +135,10 @@
 	function cancela_pedido(){
  		//javascript:window.history.back();
 		<?php //$_SESSION["visible"]="false";?>
-		window.location="index.php?controller=producto&action=search_prod";
-		// header("Location: index.php?controller=producto&action=search_prod");
-	 }
-	function foor(){
+		alert("Pedido Cancelado");
+		return true;
+	}
+	function autoriza_pedido(){
 		alert("Pedido Realizado");
 		return true;
 	}

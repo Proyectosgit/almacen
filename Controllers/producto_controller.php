@@ -141,7 +141,7 @@
 
 		public function redireccionar_barra(){
 			session_start();
-			header('Location: ../index.php?controller=producto&action=search_prod');
+			header('Location: ../index.php?controller=producto&action=search_prod_bar');
 		}
 
 		//public function search_prod_fam($cod_fam){
@@ -232,10 +232,10 @@
 			$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
 			$_SESSION["visible"]="false";
 		}elseif($_POST['action']=='cancelado'){
-			if($POST["perfil"]=="cocina"){
+			if($_POST["perfil"]=="cocina"){
 				$productoController->redireccionar_cocina();
 				$_SESSION["visible"]="false";
-			}else if($POST["perfil"]=="barra"){
+			}else if($_POST["perfil"]=="barra"){
 				$productoController->redireccionar_barra();
 				$_SESSION["visible"]="false";
 			}
