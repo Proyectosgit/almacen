@@ -134,6 +134,16 @@
 				header('Location: ../index.php?controller=pedido&action=index');
 		}
 
+		public function redireccionar_cocina(){
+			session_start();
+			header('Location: ../index.php?controller=producto&action=search_prod');
+		}
+
+		public function redireccionar_barra(){
+			session_start();
+			header('Location: ../index.php?controller=producto&action=search_prod');
+		}
+
 		//public function search_prod_fam($cod_fam){
 		public function search_prod_fam($familia){
 			$productos=Producto::getByFam($familia);
@@ -221,6 +231,14 @@
 		}elseif($_POST['action']=='pedido'){
 			$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
 			$_SESSION["visible"]="false";
+		}elseif($_POST['action']=='cancelado'){
+			if($POST["perfil"]=="cocina"){
+				$productoController->redireccionar_cocina();
+				$_SESSION["visible"]="false";
+			}else if($POST["perfil"]=="barra"){
+				$productoController->redireccionar_barra();
+				$_SESSION["visible"]="false";
+			}
 		}elseif($_POST['action']=='registra_pedido'){
 				// $productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total']);
 		}

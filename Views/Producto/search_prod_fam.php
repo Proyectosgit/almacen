@@ -1,9 +1,17 @@
 	<?php
+	if(isset($POST["action1"]))
+	{
+		echo "Me ejcuto";
+		if($POST["action1"]=="cancelado"){
+			$_SESSION["visible"]="false";
+			header("Location: index.php?controller=producto&action=search_prod");
+		}
+	}
+
 	if(isset($_SESSION["id_sesion"])){
 		if($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina"){
 			if($_SESSION["visible"]=="true"){
 	?>
-
 
 				<section>
 					<div class="container">
@@ -91,16 +99,24 @@
 									<button type="submit" class="btn btn-success" onclick="return foor();">
 										Pedido <span class="oi" data-glyph="cart"></span>
 									</button>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-									<button type="reset" class="btn btn-danger" onclick="cancela_pedido();" >
-										Cancelar &nbsp; <span class="oi" data-glyph="x"></span>
-									</button>
-									<br><br><br><br>
+										<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
 								</center>
 							</form>
+							<br><br>
+
+							<form action="Controllers/producto_controller.php" method="post">
+								<input type="hidden" name="action" value="cancelado">
+								<input type="hidden" name="perfil" value="cocina">
+								<center>
+									<button type="submit" class="btn btn-danger"  onclick="return foor();">
+										Cancelar &nbsp; <span class="oi" data-glyph="x"></span>
+									</button>
+								</center>
+							</form>
+							<br><br><br><br>
 					<?php
 						}else{
-							echo "<h1 align='center'>No hay productos a pedir<h1>
+								echo "<h1 align='center'>No hay productos a pedir<h1>
 								<div align='center'>
 								<a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
 								</div>";
@@ -125,9 +141,9 @@
 
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
 <script>
-	 function cancela_pedido(){
+	function cancela_pedido(){
  		//javascript:window.history.back();
-		<?php $_SESSION["visible"]="false";?>
+		<?php //$_SESSION["visible"]="false";?>
 		window.location="index.php?controller=producto&action=search_prod";
 		// header("Location: index.php?controller=producto&action=search_prod");
 	 }
