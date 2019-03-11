@@ -86,7 +86,7 @@
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
 		if ($_GET['action']!='register' & $_GET['action']!='index' & $_GET['action']!='error') {
-			require_once('../connection.php');
+			require_once('../Config/connection.php');
 			$usuarioController=new UsuarioController();
 			if ($_GET['action']=='delete') {
 				$usuarioController->delete($_GET['id']);

@@ -11,7 +11,7 @@
 			<tr>
 				<th>Codigo de Familia</th>
 				<th>Descripcion</th>
-				<th colspan=2 >Acciones</th>
+				<!-- <th colspan=2 >Acciones</th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -20,8 +20,8 @@
 			<tr>
 				<td><?php echo $familia->cod_familia; ?></td>
 				<td><?php echo $familia->descripcion; ?></td>
-				<td><a href="Controllers/familia_controller.php?action=update&cod_familia=<?php echo $familia->cod_familia ?>">Actualizar</a> </td>
-				<td><a href="Controllers/familia_controller.php?action=delete&cod_familia=<?php echo $familia->cod_familia ?>">Eliminar</a> </td>
+				<!-- <td><a href="Controllers/familia_controller.php?action=update&cod_familia=<?php //echo $familia->cod_familia ?>">Actualizar</a> </td> -->
+				<!-- <td><a href="Controllers/familia_controller.php?action=delete&cod_familia=<?php //echo $familia->cod_familia ?>">Eliminar</a> </td> -->
 			</tr>
 			<?php } ?>
 		</tbody>

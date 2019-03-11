@@ -20,7 +20,7 @@
 			<!-- <th>Observaciones</th> -->
 			<!-- <th>Unidad de medida</th> -->
 			<!-- <th>Total de productos por familia</th> -->
-			<th scope="col">Fecha</th>
+			<th scope="col">Fecha Pedido</th>
 			<th scope="col">Hora</th>
 			</tr>
 		</thead>
@@ -48,7 +48,7 @@
 					<!-- <td><?php //echo $pedido->total_prod;?></td> -->
 					<!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php //echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
 					<!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php //echo $pedido->id_pedido ?>">Eliminar</a> </td> -->
-					<td><?php echo $pedido->fecha; ?></td>
+					<td><?php echo $pedido->fecha_pedido; ?></td>
 					<td><?php echo $pedido->hora;?></td>
 				</tr>
   <?php }//end foreach

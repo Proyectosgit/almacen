@@ -89,7 +89,7 @@
 			// }else if($_SESSION['id_sesion']=='gerente'){
 			// 	header('Location: ../index.php?controller=pedido&action=ver_pedidos');
 			// }
-			return 1;
+			return 0;
 		}
 
 		public function registra_pedido($modificados){

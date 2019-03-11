@@ -5,20 +5,20 @@
 ?>
 <html>
 	<head>
-		<title>Bienvenido MVC </title>
+		<title>Detalles del pedido </title>
+
 		<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'/>
-		<!-- <link rel="stylesheet" href="Views/bootstrap/css/bootstrap.min.css"/> -->
-		<link rel="stylesheet" href="Public/assets/bootstrap-4.2.1/css/bootstrap.min.css"/>
-		<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../Public/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="../Public/bootstrap/bootstrap_3.3.6/bootstrap.min.css">
+		<!-- <link rel="stylesheet" href="Public/css/logos.css"/> -->
+		<link href="Public/open-iconic-master/font/css/open-iconic.css" rel="stylesheet">
+
 		<script src="../librerias/js/verifica_cambio_almacen.js"></script>
 	</head>
 
 	<body>
 		<head>
-			<div class="container"><h1>Detalles del pedido almacen pagina order_prod_almacen</h1>	</div>
+			<div class="container"><h1>Detalles del pedido </h1></div>
 		</head>
 <section>
 	<div class="container small">
@@ -26,11 +26,11 @@
 		<table class="table">
 		<thead class="thead-dark">
 			<tr>
-				<td>Id Pedido</td>
-				<td>Id Producto</td>
-				<td>Fecha</td>
-				<td>Descripcion</td>
-				<td>Numero <br> productos</td>
+				<th>Id Pedido</th>
+				<th>Id Producto</th>
+				<th>Fecha del pedido</th>
+				<th>Descripcion</th>
+				<th>Numero <br> productos</th>
 				<!-- <td>Recibidos</td> -->
 				<!-- <td colspan=2 >Acciones</td> -->
 			</tr>
@@ -41,9 +41,9 @@
 				<tr>
 					<td><?php echo $order['id_pedido']; ?></td>
 					<td><?php echo $order['codingre']; ?></td>
-					<td><?php echo $order['fecha']; ?></td>
+					<td><?php echo $order['fecha_pedido']; ?></td>
 					<td><?php echo $order['descrip'];?></td>
-					<td class="pedidos"><?php echo $order['num_prod'];?></td>
+					<td class="pedidos"><?php echo $order['num_prod'];?></td><!--Numero de productos de la relacion pedido_productos-->
 					<!-- <td><input type="text" value="<?php //echo $order['num_prod'];?>" class="cantidad" name="<?php //echo $order['codingre'];?>"></td> -->
 					<!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php// echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
 					<!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php// echo $pedido->id_pedido ?>">Eliminar</a> </td> -->

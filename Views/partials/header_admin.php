@@ -4,21 +4,31 @@
           <img  class="navbar-brand" id="logo" src="Public/imagenes/logo.jpg">
       </div>
       <ul class="nav">
-        <li class="active"><a href="?controller=usuario&action=register">Ingresar Usuarios</a></li>
-        <li><a href="?controller=usuario&action=index">Ver Usuarios</a></li>
-        <li><a href="?controller=producto&action=register">Ingresar Producto</a></li>
-        <li><a href="?controller=producto&action=index">Ver Producto</a></li>
-        <li><a href="?controller=familia&action=register">Ingresar Familia</a></li>
-        <li><a href="?controller=familia&action=index">Ver Familia</a></li>
-        <li><a href="?controller=pedido&action=register">Ingresar pedido</a></li>
-        <li><a href="?controller=pedido&action=index">Ver pedido</a></li>
-        <li><a href="?controller=relacion&action=register">Ingresar relacion_pedido_producto</a></li>
-        <li><a href="?controller=relacion&action=index">Productos por pedidos</a></li>
-        <li><a href="?controller=producto&action=search_prod">Buscar producto por familia</a></li>
+        <li><a href="?controller=pedido&action=index"><span class="oi" data-glyph="key"></span>
+        Pedidos</a></li>
+        <!-- <li><a href="?controller=relacion&action=register">Ingresar relacion_pedido_producto</a></li> -->
+        <!-- <li><a href="?controller=relacion&action=index">Productos por pedidos</a></li> -->
+        <li><a href="?controller=producto&action=search_prod"><span class="oi" data-glyph="cart"></span>
+        Realizar pedido Cocina</a></li>
         <!-- <li><a href="?controller=pedido&action=recibir_pedidos">Almacenista</a></li> -->
-        <li><a href="?controller=pedido&action=orderDate">Ver pedidos</a></li>
-        <li><a href="?controller=producto&action=button_download_db">Descargar Base de Datos</a></li>
-        <li><a href="Views/sesion/cerrar_sesion.php">Cerrar sesion</a></li>
+        <li><a href="?controller=pedido&action=orderDate"><span class="oi" data-glyph="book"></span>
+        Consultar pedidos</a></li>
+        <li><a href="?controller=producto&action=button_download_db"><span class="oi" data-glyph="cloud-download"></span>
+        Descargar Base de Datos</a></li>
+        <li class="active"><a href="?controller=usuario&action=register"><span class="oi" data-glyph="person"></span>
+        Alta Usuario</a></li>
+        <li><a href="?controller=usuario&action=index"><span class="oi" data-glyph="people"></span>
+        Ver Usuarios</a></li>
+        <!-- <li><a href="?controller=producto&action=register">Ingresar Producto</a></li> -->
+        <li><a href="?controller=producto&action=index"><span class="oi" data-glyph="eye"></span>
+        Ver Producto</a></li>
+        <li><a href="?controller=familia&action=register"><span class="oi" data-glyph="task"></span>
+        Alta Familia</a></li>
+        <li><a href="?controller=familia&action=index"><span class="oi" data-glyph="eye"></span>
+        Ver Familia</a></li>
+        <!-- <li><a href="?controller=pedido&action=register">Ingresar pedido</a></li> -->
+        <li><a href="Views/sesion/cerrar_sesion.php"><span class="oi" data-glyph="account-logout"></span>
+        Cerrar sesion</a></li>
       </ul>
     </div>
   </nav>

@@ -29,7 +29,7 @@
 											<th>Fecha autoriza</th>
 											<th>Hora</th>
 											<th>Detalles</th>
-											<th>Cancelo</th>
+											<th>Gerete</th>
 											<th>Solicita</th>
 											<th>Estado</th>
 											<th>Costo Total</th>
@@ -44,8 +44,8 @@
 													?>
 														<tr>
 															<td><?php echo $order->id_pedido; ?></td>
-															<td><?php echo $order->fecha_autoriza; ?></td>
-															<td><?php echo $order->hora; ?></td>
+															<td><?php echo $order->fecha_autoriza_cancela; ?></td>
+															<td><?php echo $order->hora_autoriza_cancela; ?></td>
 															<td><a href="pedido_controller.php?action=order_almacen&id_pedido=<?php echo $order->id_pedido ?>">Detalles</a> </td>
 															<td><?php echo $order->autoriza; ?></td>
 															<td><?php echo $order->solicita; ?></td>
