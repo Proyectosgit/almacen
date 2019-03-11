@@ -66,6 +66,10 @@
 		public function error(){
 			require_once('Views/Pedido/error.php');
 		}
+
+		public function error_order_db(){
+			require_once('Views/Pedido/error_order.php');
+		}
 	}
 
 	//obtiene los datos del pedido desde la vista y redirecciona a PedidoController.php
@@ -95,7 +99,7 @@
 	if (isset($_GET['action'])) {
 		if ($_GET['action'] != 'register'&$_GET['action'] != 'index'&$_GET['action'] != 'recibir_pedidos'&$_GET['action'] != 'orderDate'
 				&$_GET['action'] != 'ver_pedido'&$_GET['action'] != 'ver_pedido_autorizado'&$_GET['action'] != 'ver_pedido_cancelado' &$_GET['action'] != 'ver_pedidos'
-				&$_GET['action'] != 'ver_pedido_autorizado_todos'&$_GET['action'] != 'ver_pedido_cancelado_todos'){
+				&$_GET['action'] != 'ver_pedido_autorizado_todos'&$_GET['action'] != 'ver_pedido_cancelado_todos'&$_GET['action'] != 'error_order_db'){
 
 				require_once('../Config/connection.php');
 				$pedidoController=new PedidoController();

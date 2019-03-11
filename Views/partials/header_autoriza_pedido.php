@@ -8,8 +8,12 @@
               Ver Pedidos
             </a></li>
           <li class="active"><a href="?controller=producto&action=search_prod"><span class="oi" data-glyph="cart"></span>
-              Realizar pedido
+            Realizar pedido de productos
             </a></li>
+          <li class="active">
+              <a href="?controller=producto&action=search_prod_bar"><span class="oi" data-glyph="cart"></span>
+            Realizar pedido de bebidas
+              </a></li>
           <li class="active"><a href="?controller=pedido&action=ver_pedido_autorizado_todos"><span class="oi" data-glyph="check"></span>
               Pedidos autorizados
           </a></li>

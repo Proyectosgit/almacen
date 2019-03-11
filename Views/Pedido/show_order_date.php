@@ -26,7 +26,7 @@
 									<thead class="thead-dark">
 										<tr>
 											<th>Pedido</th>
-											<th>Fecha</th>
+											<th>Fecha autoriza</th>
 											<th>Hora</th>
 											<th>Detalles</th>
 											<th>Cancelo</th>
@@ -44,7 +44,7 @@
 													?>
 														<tr>
 															<td><?php echo $order->id_pedido; ?></td>
-															<td><?php echo $order->fecha; ?></td>
+															<td><?php echo $order->fecha_autoriza; ?></td>
 															<td><?php echo $order->hora; ?></td>
 															<td><a href="pedido_controller.php?action=order_almacen&id_pedido=<?php echo $order->id_pedido ?>">Detalles</a> </td>
 															<td><?php echo $order->autoriza; ?></td>

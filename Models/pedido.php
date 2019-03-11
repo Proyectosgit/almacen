@@ -1,11 +1,13 @@
-	<?php
+<?php
 
 class Pedido
 {
 
 	public $id_pedido;
-	public $fecha;
+	public $fecha_pedido;
+	public $fecha_autoriza_cancela;
 	public $hora;
+	public $hora_autoriza_cancela;
 	public $autoriza;
 	public $solicita;
 	public $estado;
@@ -15,11 +17,13 @@ class Pedido
 	public $costo_total;
 
 
-	function __construct($id_pedido, $fecha, $hora, $autoriza, $solicita, $estado, $observaciones, $unidad_medida, $total_prod, $costo_total){
+	function __construct($id_pedido, $fecha_pedido, $fecha_autoriza_cancela, $hora, $hora_autoriza_cancela, $autoriza, $solicita, $estado, $observaciones, $unidad_medida, $total_prod, $costo_total){
 
 		$this->id_pedido=$id_pedido;
-		$this->fecha=$fecha;
+		$this->fecha_pedido=$fecha_pedido;
+		$this->fecha_autoriza_cancela=$fecha_autoriza_cancela;
 		$this->hora=$hora;
+		$this->hora_autoriza_cancela=$hora_autoriza_cancela;
 		$this->autoriza=$autoriza;
 		$this->solicita=$solicita;
 		$this->estado=$estado;
@@ -36,10 +40,10 @@ class Pedido
 		$db=Db::getConnect();
 		$sql=$db->query('SELECT * FROM pedidos ORDER BY id_pedido DESC');
 		foreach ($sql->fetchAll() as $pedido) {
-			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
-																	$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
-																	$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
-																	$pedido['costo_total']);
+			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
+										$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],
+										$pedido['estado'],$pedido['observaciones'],$pedido['unidad_medida'],
+										$pedido['total_prod'],$pedido['costo_total']);
 		}
 		return $listaPedidos;
 	}
@@ -55,10 +59,10 @@ class Pedido
 		$sql->execute();
 
 		foreach ($sql->fetchAll() as $pedido) {
-			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
-																	$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
-																	$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
-																	$pedido['costo_total']);
+			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
+										$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],
+										$pedido['estado'],$pedido['observaciones'],$pedido['unidad_medida'],
+										$pedido['total_prod'],$pedido['costo_total']);
 		}
 		return $listaPedidos;
 	}
@@ -72,10 +76,10 @@ class Pedido
 										WHERE estado="cancelado" and fecha="2019-02-20"
 										ORDER BY id_pedido DESC');
 		foreach ($sql->fetchAll() as $pedido) {
-			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
-																	$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
-																	$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
-																	$pedido['costo_total']);
+			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
+			 							$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],
+										$pedido['estado'],$pedido['observaciones'],$pedido['unidad_medida'],
+										$pedido['total_prod'],$pedido['costo_total']);
 		}
 		return $listaPedidos;
 	}
@@ -87,10 +91,10 @@ class Pedido
 		$db=Db::getConnect();
 		$sql=$db->query('SELECT * FROM pedidos ORDER BY id_pedido DESC');
 		foreach ($sql->fetchAll() as $pedido) {
-			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
-																	$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
-																	$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
-																	$pedido['costo_total']);
+			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
+			 							$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],
+										$pedido['estado'],$pedido['observaciones'],$pedido['unidad_medida'],
+										$pedido['total_prod'],$pedido['costo_total']);
 		}
 		return $listaPedidos;
 	}
@@ -101,11 +105,13 @@ class Pedido
 
 			$db=Db::getConnect();
 			$insert=$db->prepare('INSERT INTO pedidos
-								  VALUES(NULL,:fecha,:hora,:autoriza,
-											  :solicita,:estado,:observaciones,
-											  :unidad_medida,:total_prod,:costo_total)');
-			$insert->bindValue('fecha',$pedido->fecha);
+								  VALUES(NULL,:fecha_pedido,:fecha_autoriza_cancela,:hora,:hora_autoriza_cancela,:autoriza,
+											  :solicita,:estado,:observaciones,:unidad_medida,
+											  :total_prod,:costo_total)');
+			$insert->bindValue('fecha_pedido',$pedido->fecha_pedido);
+			$insert->bindValue('fecha_autoriza_cancela',$pedido->fecha_autoriza_cancela);
 			$insert->bindValue('hora',$pedido->hora);
+			$insert->bindValue('hora_autoriza_cancela',$pedido->hora_autoriza_cancela);
 			$insert->bindValue('autoriza',$pedido->autoriza);
 			$insert->bindValue('solicita',$pedido->solicita);
 			$insert->bindValue('estado',$pedido->estado);
@@ -123,13 +129,15 @@ class Pedido
 
 		$db=Db::getConnect();
 		$update=$db->prepare('UPDATE pedidos
-							  SET fecha=:fecha, hora=:hora, autoriza=:autoriza,
+							  SET fecha_pedido=:fecha_pedido, fecha_autoriza_cancela=:fecha_autoriza_cancela, hora=:hora,hora_autoriza_cancela=:hora_autoriza_cancela, autoriza=:autoriza,
 								solicita=:solicita, estado=:estado, observaciones=:observaciones,
 								unidad_medida=:unidad_medida, total_prod=:total_prod, costo_total=:costo_total
 					 	      WHERE id_pedido=:id_pedido');
 		$update->bindValue('id_pedido',$pedido->id_pedido);
-		$update->bindValue('fecha',$pedido->fecha);
+		$update->bindValue('fecha_pedido',$pedido->fecha_pedido);
+		$update->bindValue('fecha_autoriza_cancela',$pedido->fecha_autoriza_cancela);
 		$update->bindValue('hora',$pedido->hora);
+		$update->bindValue('hora_autoriza_cancela',$pedido->hora_autoriza_cancela);
 		$update->bindValue('autoriza',$pedido->autoriza);
 		$update->bindValue('solicita',$pedido->solicita);
 		$update->bindValue('estado',$pedido->estado);
@@ -157,7 +165,7 @@ class Pedido
 		$select->bindValue('id',$id);
 		$select->execute();
 		$pedidoDb=$select->fetch();
-		$pedido= new Pedido($pedidoDb['id_pedido'],$pedidoDb['fecha'],$pedidoDb['hora'],
+		$pedido= new Pedido($pedidoDb['id_pedido'],$pedidoDb['fecha_pedido'],$pedidoDb['fecha_autoriza_cancela'],$pedidoDb['hora'],$pedidoDb['hora_autoriza_cancela'],
 		$pedidoDb['autoriza'],$pedidoDb['solicita'],$pedidoDb['estado'],$pedidoDb['observaciones']
 		,$pedidoDb['unidad_medida'],$pedidoDb['total_prod'],$pedidoDb['costo_total']);
 
@@ -168,7 +176,7 @@ class Pedido
 	public static function getOrderById($id){
 
 		$db=Db::getConnect();
-		$select=$db->prepare('SELECT pedidos.id_pedido, productos.codingre, pedidos.fecha, productos.descrip,
+		$select=$db->prepare('SELECT pedidos.id_pedido, productos.codingre, pedidos.fecha_pedido, productos.descrip,
 									 productos.inventa1,productos.stockmax,pedido_producto.num_prod, pedidos.costo_total,
 									 productos.ultcosto
 							FROM pedidos
@@ -183,7 +191,7 @@ class Pedido
 	  public static function pedidosProd($id){
 
 		$db=Db::getConnect();
-		$select=$db->prepare('SELECT pedidos.id_pedido,productos.codingre,pedidos.fecha, productos.descrip,
+		$select=$db->prepare('SELECT pedidos.id_pedido,productos.codingre,pedidos.fecha_pedido, productos.descrip,
 									 pedido_producto.num_prod
 							FROM pedidos
 							RIGHT OUTER JOIN pedido_producto ON pedidos.id_pedido = pedido_producto.id_pedido
@@ -203,12 +211,12 @@ class Pedido
 		//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 		$select=$db->prepare('SELECT *
 							FROM pedidos
-							WHERE fecha = :fecha');
+							WHERE fecha_pedido = :fecha_pedido');
 		$select->bindValue('fecha',$fecha);
 		$select->execute();
 
 		foreach ($select->fetchAll() as $pedido) {
-			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'], $pedido['fecha_autoriza_cancela'],$pedido['hora'],$pedido['hora_autoriza_cancela'],
 										$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 										$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
 										$pedido['costo_total']);
@@ -223,12 +231,12 @@ class Pedido
 			//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 			$select=$db->prepare('SELECT *
 								FROM pedidos
-								WHERE MONTH(fecha) = :month');
+								WHERE MONTH(fecha_pedido) = :month');
 			$select->bindValue('month',$month);
 			$select->execute();
 
 			foreach ($select->fetchAll() as $pedido) {
-				$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+				$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'], $pedido['hora'],$pedido['hora_autoriza_cancela'],
 											$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 											$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
 											$pedido['costo_total']);
@@ -244,15 +252,15 @@ class Pedido
 				//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 				$select=$db->prepare('SELECT *
 									FROM pedidos
-									WHERE fecha = :fecha and estado = :estado and solicita = :solicita
+									WHERE fecha_pedido = :fecha_pedido and estado = :estado and solicita = :solicita
 									ORDER BY id_pedido DESC');
-			  $select->bindValue('fecha',$fecha);
+			  $select->bindValue('fecha_pedido',$fecha_pedido);
 				$select->bindValue('estado',$estado);
 				$select->bindValue('solicita',$_SESSION["nombre"]);
 				$select->execute();
 
 				foreach ($select->fetchAll() as $pedido) {
-					$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+					$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'], $pedido['hora'],$pedido['hora_autoriza_cancela'],
 												$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 												$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
 												$pedido['costo_total']);
@@ -268,7 +276,7 @@ class Pedido
 					//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 					$select=$db->prepare('SELECT *
 										FROM pedidos
-										WHERE MONTH(fecha) = :month and estado=:estado and solicita=:solicita
+										WHERE MONTH(fecha_pedido) = :month and estado=:estado and solicita=:solicita
 										ORDER BY id_pedido DESC');
 					$select->bindValue('month',$month);
 					$select->bindValue('estado',$estado);
@@ -276,7 +284,7 @@ class Pedido
 					$select->execute();
 
 					foreach ($select->fetchAll() as $pedido) {
-						$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+						$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'], $pedido['hora'],$pedido['hora_autoriza_cancela'],
 													$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 													$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
 													$pedido['costo_total']);
@@ -285,21 +293,22 @@ class Pedido
 					return $listaPedidos;
 					}
 
-		public static function getOrderByDayStatus_all($fecha,$estado){
+		public static function getOrderByDayStatus_all($fecha_autoriza_cancela,$estado){
 			session_start();
 			$listaPedidos=[];
+			$autoriza=$_SESSION["nombre"];
 			$db=Db::getConnect();
 			//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 			$select=$db->prepare('SELECT *
 								FROM pedidos
-								WHERE fecha = :fecha and estado = :estado and autoriza = :autoriza
+								WHERE fecha_autoriza_cancela = :fecha_autoriza_cancela and estado = :estado and autoriza = :autoriza
 								ORDER BY id_pedido DESC');
-		  $select->bindValue('fecha',$fecha);
+		  $select->bindValue('fecha_autoriza_cancela',$fecha_autoriza_cancela);
 			$select->bindValue('estado',$estado);
-			$select->bindValue('autoriza',$_SESSION["nombre"]);
+			$select->bindValue('autoriza',$autoriza);
 			$select->execute();
 			foreach ($select->fetchAll() as $pedido) {
-				$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+				$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'], $pedido['hora'], $pedido['hora_autoriza_cancela'],
 											$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 											$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
 											$pedido['costo_total']);
@@ -314,7 +323,7 @@ class Pedido
 				//$select=$db->prepare('SELECT * FROM usuario WHERE ID=:id');
 				$select=$db->prepare('SELECT *
 									FROM pedidos
-									WHERE MONTH(fecha) = :month and estado=:estado and autoriza=:autoriza
+									WHERE MONTH(fecha_autoriza_cancela) = :month and estado=:estado and autoriza=:autoriza
 									ORDER BY id_pedido DESC');
 				$select->bindValue('month',$month);
 				$select->bindValue('estado',$estado);
@@ -322,7 +331,7 @@ class Pedido
 				$select->execute();
 
 				foreach ($select->fetchAll() as $pedido) {
-					$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha'], $pedido['hora'],
+					$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],$pedido['hora'],$pedido['hora_autoriza_cancela'],
 												$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 												$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
 												$pedido['costo_total']);
@@ -332,13 +341,20 @@ class Pedido
 				}
 		public static function change_order_status($estado,$id_pedido){
 			session_start();
+			require_once("../Config/fecha.php");
+			$autoriza=$_SESSION['nombre'];
+			$fecha_autoriza_cancela = date("Y-m-d");
+			$hora_autoriza_cancela = date("h:i:s");
 			$db=Db::getConnect();
 			$update=$db->prepare('UPDATE pedidos
-								SET estado=:estado, autoriza=:autoriza
+								SET estado=:estado, autoriza=:autoriza, fecha_autoriza_cancela=:fecha_autoriza_cancela,
+									hora_autoriza_cancela=:hora_autoriza_cancela
 								WHERE id_pedido=:id_pedido');
 			$update->bindValue('estado',$estado);
 			$update->bindvalue('id_pedido',$id_pedido);
-			$update->bindValue('autoriza',$_SESSION['nombre']);
+			$update->bindValue('autoriza',$autoriza);
+			$update->bindValue('fecha_autoriza_cancela',$fecha_autoriza_cancela);
+			$update->bindValue('hora_autoriza_cancela',$hora_autoriza_cancela);
 			$update->execute();
 		}
 

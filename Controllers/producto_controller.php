@@ -16,8 +16,10 @@
 			require_once('../Models/relacion.php');
 			require_once('../Config/fecha.php');
 
-			$fecha = date("Y-m-d");
+			$fecha_pedido = date("Y-m-d");
+			$fecha_autoriza = NULL;
 			$hora = date("h:i:s");
+			$hora_autoriza_cancela=NULL;
 			$autoriza=NULL;
 			$solicita=$_SESSION["nombre"];
 			$estado='pedido';
@@ -26,11 +28,11 @@
 			$total_prod=$_POST['total_prod'];
 			$costo_total=$_POST['costo_total'];
 			//Crea Objeto pedido y lo pasa a el metodo save
-			$pedido= new Pedido(NULL,$fecha,$hora,$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,$costo_total);
+			$pedido= new Pedido(NULL,$fecha_pedido,$fecha_autoriza,$hora,$hora_autoriza_cancela,$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,$costo_total);
 
 			//Variables para la relacion entre producto y pedido
 			$id_pedido=Pedido::save($pedido);
-			$fecha_pedido=$pedido->fecha;
+			$fecha_pedido_relacion=$pedido->fecha_pedido;
 			$hora_pedido=$pedido->hora;
 			$estado_prod='pedido';
 			//Objeto con los productos por familia
@@ -54,14 +56,14 @@
 							    if(in_array($codingre,$lista_productos)){
 									$indice=array_search($codingre,$lista_productos);
 									$num_prod=$lista_cantidad[$indice];
- 									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
+ 									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
  									Relacion::save($relacion);
 									Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a bd productos
 								}
 								// continue;
 								else{
 											$num_prod=$producto->stockmax-$producto->inventa1;
-											$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
+											$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 											Relacion::save($relacion);
 											Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
 
@@ -73,18 +75,21 @@
 						if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 							$codingre=$producto->codingre;
 							$num_prod=$producto->stockmax-$producto->inventa1;
-							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
+							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 							Relacion::save($relacion);
 							Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
 						}
 					}
 				}
 			}
-			if($_SESSION['id_sesion']=="barra"){
-				header('Location: ../index.php?controller=producto&action=search_prod_bar');
-			}else if($_SESSION['id_sesion']=="cocina"){
-				header('Location: ../index.php?controller=producto&action=search_prod');
-			}
+			// if($_SESSION['id_sesion']=="barra"){
+			// 	header('Location: ../index.php?controller=producto&action=search_prod_bar');
+			// }else if($_SESSION['id_sesion']=="cocina"){
+			// 	header('Location: ../index.php?controller=producto&action=search_prod');
+			// }else if($_SESSION['id_sesion']=='gerente'){
+			// 	header('Location: ../index.php?controller=pedido&action=ver_pedidos');
+			// }
+			return 1;
 		}
 
 		public function registra_pedido($modificados){
@@ -111,11 +116,11 @@
 									 $indice=array_search($codingre,$lista_productos);
 									 //$num_prod=$producto->stock_max-$producto->existencia;
 									 $num_prod=$lista_cantidad[$indice];
-									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
+									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 									 Relacion::save($relacion);
 								 }else{
 									 $num_prod=$producto->stockmax-$producto->inventa1;
-									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
+									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 									 Relacion::save($relacion);
 								}
 							}
@@ -125,7 +130,7 @@
 								foreach ($productos as $producto) {
 									$codingre=$producto->codingre;
 									$num_prod=$producto->stockmax-$producto->inventa1;
-									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido,$hora_pedido,$num_prod,$estado_prod,$observacion);
+									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 									Relacion::save($relacion);
 								}
 					}
@@ -147,13 +152,14 @@
 		//public function search_prod_fam($cod_fam){
 		public function search_prod_fam($familia){
 			$productos=Producto::getByFam($familia);
-			require_once('Views/Producto/search_prod_fam.php');
 			$_SESSION["visible"]=$_GET["visible"];
+			require_once('Views/Producto/search_prod_fam.php');
+			$_SESSION["visible"]="false";
 		}
 
 		public function search_prod(){
 			require_once('Views/Producto/search_prod.php');
-			}
+		}
 
 		public function search_prod_bar(){
 		require_once('Views/Producto/search_prod_bar.php');
@@ -229,8 +235,22 @@
 			header('Location: ../index.php?controller=producto&action=search_prod_fam');
 
 		}elseif($_POST['action']=='pedido'){
-			$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
-			$_SESSION["visible"]="false";
+			echo "<center><h1>Se esta realizando tu pedido</h1></center>";
+			$resultado=$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
+			if($resultado==0){
+				// echo "<script>alert('Se realizo el pedido de forma exitosa!!!');</script>";
+				if($_SESSION['id_sesion']=="barra"){
+					header('Location: ../index.php?controller=producto&action=search_prod_bar');
+				}else if($_SESSION['id_sesion']=="cocina"){
+					header('Location: ../index.php?controller=producto&action=search_prod');
+				}else if($_SESSION['id_sesion']=='gerente'){
+					header('Location: ../index.php?controller=pedido&action=ver_pedidos');
+				}
+				$_SESSION["visible"]="false";
+			}else{
+				// echo "<script>alert('Error: No se realizo el pedido, intenta nuevamente o ponte en contacto con el administrador');</script>";
+				header('Location: ../index.php?controller=pedido&action=error_order_db');
+			}
 		}elseif($_POST['action']=='cancelado'){
 			if($_POST["perfil"]=="cocina"){
 				$productoController->redireccionar_cocina();
