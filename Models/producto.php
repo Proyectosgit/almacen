@@ -148,8 +148,8 @@ class Producto
 		return $productos;
 	}
 
-	public static function ingresa_pedido_autorizado($productos){
-		$status="autorizado";
+	public static function ingresa_pedido_autorizado_cancelado($productos,$status){
+		//$status="autorizado";
 		$db=Db::getconnect();
 		foreach($productos->fetchAll() as $producto){
 			$insert=$db->prepare('UPDATE productos SET pedido=:pedido, status=:status WHERE codingre=:codingre');

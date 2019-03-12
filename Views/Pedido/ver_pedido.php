@@ -1,4 +1,4 @@
-<?php
+ <?php
 	if(isset($_SESSION["id_sesion"])){
 		if($_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="administrador"){
 

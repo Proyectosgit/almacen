@@ -28,7 +28,8 @@
 			$total_prod=$_POST['total_prod'];
 			$costo_total=$_POST['costo_total'];
 			//Crea Objeto pedido y lo pasa a el metodo save
-			$pedido= new Pedido(NULL,$fecha_pedido,$fecha_autoriza,$hora,$hora_autoriza_cancela,$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,$costo_total);
+			$pedido= new Pedido(NULL,$fecha_pedido,$fecha_autoriza,$hora,$hora_autoriza_cancela,
+								$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,$costo_total);
 
 			//Variables para la relacion entre producto y pedido
 			$id_pedido=Pedido::save($pedido);
@@ -239,23 +240,22 @@
 				// echo "<script>alert('Se realizo el pedido de forma exitosa!!!');</script>";
 				if($_SESSION['id_sesion']=="barra"){
 					header('Location: ../index.php?controller=producto&action=search_prod_bar');
-// $_SESSION["visible"]="false";
+
 				}else if($_SESSION['id_sesion']=="cocina"){
 					header('Location: ../index.php?controller=producto&action=search_prod');
-// $_SESSION["visible"]="false";
+
 				}else if($_SESSION['id_sesion']=='gerente'){
 					header('Location: ../index.php?controller=pedido&action=ver_pedidos');
-// $_SESSION["visible"]="false";
+
 				}else if($_SESSION['id_sesion']=='administrador'){
 					header('Location: ../index.php?controller=pedido&action=ver_pedidos');
-// $_SESSION["visible"]="false";
+
 				}
 				$_SESSION["visible"]="false";
 			}else{
 				// echo "<script>alert('Error: No se realizo el pedido, intenta nuevamente o ponte en contacto con el administrador');</script>";
 				header('Location: ../index.php?controller=pedido&action=error_order_db');
 			}
-// $_SESSION["visible"]="false";
 
 		}elseif($_POST['action']=='cancelado'){
 			if($_POST["perfil"]=="cocina"){

@@ -36,4 +36,15 @@ class PedidoProducto
 		}
 		return $listaPedidosProd;
 	}
+
+	public static function change_order_status_relation($id_pedido,$estado_prod){
+		$db=Db::getConnect();
+		$sql=$db->prepare('UPDATE pedido_producto
+						   SET estado_prod=:estado_prod
+							WHERE id_pedido=:id_pedido');
+		$sql->bindValue("estado_prod",$estado_prod);
+		$sql->bindValue("id_pedido",$id_pedido);
+		$sql->execute();
+	}
+}
 ?>

@@ -17,7 +17,8 @@ class Pedido
 	public $costo_total;
 
 
-	function __construct($id_pedido, $fecha_pedido, $fecha_autoriza_cancela, $hora, $hora_autoriza_cancela, $autoriza, $solicita, $estado, $observaciones, $unidad_medida, $total_prod, $costo_total){
+	function __construct($id_pedido, $fecha_pedido, $fecha_autoriza_cancela, $hora, $hora_autoriza_cancela,
+ 						$autoriza, $solicita, $estado, $observaciones, $unidad_medida, $total_prod, $costo_total){
 
 		$this->id_pedido=$id_pedido;
 		$this->fecha_pedido=$fecha_pedido;

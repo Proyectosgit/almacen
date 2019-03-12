@@ -121,17 +121,24 @@
 				$select=Pedido::registerOrderById($_GET['fecha']);
 				require_once('../Views/Pedido/register_prod.php');
 			}elseif($_GET['action']=="change"){
+
 				require_once("../Models/pedido.php");
 				require_once("../Models/producto.php");
+				require_once("../Models/pedido_prod.php");
+
 				Pedido::change_order_status($_GET['estado'],$_GET['id_pedido']);
+
 				$productos=Pedido::pedidosProd($_GET["id_pedido"]);
-				Producto::ingresa_pedido_autorizado($productos);
+				Producto::ingresa_pedido_autorizado_cancelado($productos,$_GET['estado']);
+
+				PedidoProducto::change_order_status_relation($_GET['id_pedido'],$_GET['estado']);
+
 				if($_SESSION['id_sesion']=="administrador"){
 					header("Location: ../?controller=pedido&action=index");
 				}elseif($_SESSION['id_sesion']=="gerente"){
 					header("Location: ../?controller=pedido&action=ver_pedidos");
 				}
-		//Busqueda por fecha
+
 			}elseif($_GET['action']=="search_order_date"){
 				require_once("../Models/pedido.php");
 				if($_GET["tipo"]=="dia"){
