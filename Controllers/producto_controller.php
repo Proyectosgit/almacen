@@ -166,9 +166,8 @@
 
 		public function search_prod_barra($familia){
 			$productos=Producto::getByFam($familia);
-			$_SESSION["visible"]=$_GET["visible"];
 			require_once('Views/Producto/search_prod_barra.php');
-			$_SESSION["visible"]="false";
+			$_SESSION["visible"]=$_GET["visible"];
 		}
 
 		public function register(){
