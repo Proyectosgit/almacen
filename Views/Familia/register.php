@@ -15,12 +15,20 @@
            <div class="form-group">
                <label for="nombre">Descripción:</label>
                <input class="form-control" type="text" name='descripcion' maxlength="50" placeholder="Descripción">
-               <button class="btn-primary">Enviar</button>
             </div>
+			<button class="btn btn-primary">Enviar</button>
         </form>
     </div>
 </section>
-
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="mx-auto">
+				<img class="logo_fondo" src="Public/imagenes/logo.jpg"/>
+			</div>
+		</div>
+	</div>
+</section>
 <?php
 		}else{
 			//Inclur una pagina para redireccionar a index

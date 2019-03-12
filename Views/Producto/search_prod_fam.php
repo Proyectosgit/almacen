@@ -135,6 +135,7 @@
 	function cancela_pedido(){
  		//javascript:window.history.back();
 		<?php //$_SESSION["visible"]="false";?>
+		// window.location="index.php?controller=producto&action=search_prod";
 		alert("Pedido Cancelado");
 		return true;
 	}

@@ -29,7 +29,7 @@
 											<th>Fecha autoriza</th>
 											<th>Hora</th>
 											<th>Detalles</th>
-											<th>Gerete</th>
+											<th>Gerente</th>
 											<th>Solicita</th>
 											<th>Estado</th>
 											<th>Costo Total</th>

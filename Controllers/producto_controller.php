@@ -152,9 +152,8 @@
 		//public function search_prod_fam($cod_fam){
 		public function search_prod_fam($familia){
 			$productos=Producto::getByFam($familia);
-			$_SESSION["visible"]=$_GET["visible"];
 			require_once('Views/Producto/search_prod_fam.php');
-			$_SESSION["visible"]="false";
+			$_SESSION["visible"]=$_GET["visible"];
 		}
 
 		public function search_prod(){
@@ -216,10 +215,10 @@
 
 		if ($_POST['action']=='register') {
 			$producto= new Producto($_POST['codingre'],$_POST['descrip'],$_POST['familia'],
-															$_POST['unidad'],$_POST['empaque'],$_POST['equivale'],
-															$_POST['inventa1'],$_POST['stockmax'],$_POST['stockmin'],
-														  $_POST['ultcosto'],$_POST['costoprome'],$_POST['impuesto'],
-														  $_POST['pedido'],$_POST['status']);
+														$_POST['unidad'],$_POST['empaque'],$_POST['equivale'],
+														$_POST['inventa1'],$_POST['stockmax'],$_POST['stockmin'],
+														$_POST['ultcosto'],$_POST['costoprome'],$_POST['impuesto'],
+														$_POST['pedido'],$_POST['status']);
 			$productoController->save($producto);
 			header('Location: ../index.php?controller=producto&action=index');
 
@@ -235,22 +234,30 @@
 			header('Location: ../index.php?controller=producto&action=search_prod_fam');
 
 		}elseif($_POST['action']=='pedido'){
-			echo "<center><h1>Se esta realizando tu pedido</h1></center>";
+			// echo "<center><h1>Se esta realizando tu pedido</h1></center>";
 			$resultado=$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
 			if($resultado==0){
 				// echo "<script>alert('Se realizo el pedido de forma exitosa!!!');</script>";
 				if($_SESSION['id_sesion']=="barra"){
 					header('Location: ../index.php?controller=producto&action=search_prod_bar');
+// $_SESSION["visible"]="false";
 				}else if($_SESSION['id_sesion']=="cocina"){
 					header('Location: ../index.php?controller=producto&action=search_prod');
+// $_SESSION["visible"]="false";
 				}else if($_SESSION['id_sesion']=='gerente'){
 					header('Location: ../index.php?controller=pedido&action=ver_pedidos');
+// $_SESSION["visible"]="false";
+				}else if($_SESSION['id_sesion']=='administrador'){
+					header('Location: ../index.php?controller=pedido&action=ver_pedidos');
+// $_SESSION["visible"]="false";
 				}
 				$_SESSION["visible"]="false";
 			}else{
 				// echo "<script>alert('Error: No se realizo el pedido, intenta nuevamente o ponte en contacto con el administrador');</script>";
 				header('Location: ../index.php?controller=pedido&action=error_order_db');
 			}
+// $_SESSION["visible"]="false";
+
 		}elseif($_POST['action']=='cancelado'){
 			if($_POST["perfil"]=="cocina"){
 				$productoController->redireccionar_cocina();

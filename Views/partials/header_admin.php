@@ -10,6 +10,8 @@
         <!-- <li><a href="?controller=relacion&action=index">Productos por pedidos</a></li> -->
         <li><a href="?controller=producto&action=search_prod"><span class="oi" data-glyph="cart"></span>
         Realizar pedido Cocina</a></li>
+        <li><a href="?controller=producto&action=search_prod_bar"><span class="oi" data-glyph="cart"></span>
+        Realizar pedido Barra</a></li>
         <!-- <li><a href="?controller=pedido&action=recibir_pedidos">Almacenista</a></li> -->
         <li><a href="?controller=pedido&action=orderDate"><span class="oi" data-glyph="book"></span>
         Consultar pedidos</a></li>
