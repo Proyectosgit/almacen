@@ -9,4 +9,6 @@ define("DB_USER","root");
 define("DB_PASS","");
 
 define("NAME_CSV","OCOMPRA");
+define("NAME_CS1","OCOMPRA");
+
 ?>
