@@ -238,6 +238,7 @@
 			$resultado=$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
 			if($resultado==0){
 				// echo "<script>alert('Se realizo el pedido de forma exitosa!!!');</script>";
+				$_SESSION["visible"]="true";
 				if($_SESSION['id_sesion']=="barra"){
 					header('Location: ../index.php?controller=producto&action=search_prod_bar');
 
