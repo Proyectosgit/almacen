@@ -2,7 +2,7 @@
 
 if(isset($_SESSION["id_sesion"])){
 		if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="barra")){
-				if($_SESSION["visible"]=="true"){
+				// if($visible=="true"){
 ?>
 						<section>
 							<div class="container">
@@ -85,6 +85,7 @@ if(isset($_SESSION["id_sesion"])){
 									<input type="hidden" name="total_prod" value="<?php echo $total_prod;?>">
 									<input type="hidden" name="modificados" value="" id="array_modifica">
 									<input type="hidden" name="observacion" value="">
+									<input type="hidden" name="visible" value="false">
 									<center>
 											<!-- <input type="submit" value="Pedido" class="btn btn-success" onclick="return foor();"> -->
 											<button type="submit" class="btn btn-success" onclick="return autoriza_pedido();">
@@ -105,6 +106,14 @@ if(isset($_SESSION["id_sesion"])){
 								</form>
 								<br><br><br>
 
+								<!-- <meta http-equiv="Expires" content="0" /> -->
+								<!-- <meta http-equiv="Pragma" content="no-cache" /> -->
+								<script type="text/javascript">
+					  			if(history.forward(1)){
+					    			location.replace( history.forward(1) );
+					  			}
+								</script>
+
 					<?php
 					}else{
 
@@ -117,15 +126,15 @@ if(isset($_SESSION["id_sesion"])){
 					}
 
 
-				}else{//end if visible
-
-							// echo "<h1 align='center'>Pagina expirada, has cancelado tu pedido o ya se realizo<h1>
-							// <div align='center'>
-							// <a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
-							// </div>";
-							header("Location: index.php?controller=producto&action=search_prod_bar");
-
-				}
+				// }else{//end if visible
+				//
+				// 			// echo "<h1 align='center'>Pagina expirada, has cancelado tu pedido o ya se realizo<h1>
+				// 			// <div align='center'>
+				// 			// <a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
+				// 			// </div>";
+				// 			header("Location: index.php?controller=producto&action=search_prod_bar");
+				//
+				// }
 					?>
 					<!-- <script src="Public/librerias/verifica_cambio_pedido.js"></script> --> <!--Sirve para validar las entradas -->
 		<?php

@@ -154,7 +154,6 @@
 		public function search_prod_fam($familia){
 			$productos=Producto::getByFam($familia);
 			require_once('Views/Producto/search_prod_fam.php');
-			$_SESSION["visible"]=$_GET["visible"];
 		}
 
 		public function search_prod(){
@@ -168,7 +167,6 @@
 		public function search_prod_barra($familia){
 			$productos=Producto::getByFam($familia);
 			require_once('Views/Producto/search_prod_barra.php');
-			$_SESSION["visible"]=$_GET["visible"];
 		}
 
 		public function register(){
@@ -238,7 +236,6 @@
 			$resultado=$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
 			if($resultado==0){
 				// echo "<script>alert('Se realizo el pedido de forma exitosa!!!');</script>";
-				$_SESSION["visible"]="true";
 				if($_SESSION['id_sesion']=="barra"){
 					header('Location: ../index.php?controller=producto&action=search_prod_bar');
 
@@ -252,7 +249,6 @@
 					header('Location: ../index.php?controller=pedido&action=ver_pedidos');
 
 				}
-				$_SESSION["visible"]="false";
 			}else{
 				// echo "<script>alert('Error: No se realizo el pedido, intenta nuevamente o ponte en contacto con el administrador');</script>";
 				header('Location: ../index.php?controller=pedido&action=error_order_db');
@@ -261,10 +257,8 @@
 		}elseif($_POST['action']=='cancelado'){
 			if($_POST["perfil"]=="cocina"){
 				$productoController->redireccionar_cocina();
-				$_SESSION["visible"]="false";
 			}else if($_POST["perfil"]=="barra"){
 				$productoController->redireccionar_barra();
-				$_SESSION["visible"]="false";
 			}
 		}elseif($_POST['action']=='registra_pedido'){
 				// $productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total']);
