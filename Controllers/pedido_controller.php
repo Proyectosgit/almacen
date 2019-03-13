@@ -132,6 +132,9 @@
 				Producto::ingresa_pedido_autorizado_cancelado($productos,$_GET['estado']);
 
 				PedidoProducto::change_order_status_relation($_GET['id_pedido'],$_GET['estado']);
+				//Genera el archivo csv y lo descarga
+				$productos=Producto::all();
+				Producto::create_csv_automatic($productos,NAME_CSV);
 
 				if($_SESSION['id_sesion']=="administrador"){
 					header("Location: ../?controller=pedido&action=index");
