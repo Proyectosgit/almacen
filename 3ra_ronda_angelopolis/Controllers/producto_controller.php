@@ -162,6 +162,7 @@
 		}
 
 		public function search_prod_bar(){
+			require_once('Config/config.php');
 		require_once('Views/Producto/search_prod_bar.php');
 		}
 

@@ -9,6 +9,7 @@
 		}
 
 		public function ver_pedidos(){
+			//require_once('Config/config.php');
 			$pedidos=Pedido::ver_pedidos();
 			require_once('Views/Pedido/ver_pedido.php');
 		}
@@ -19,18 +20,22 @@
 		// }
 
 		public function ver_pedido_autorizado(){
+			require_once('Config/config.php');
 			require_once('Views/Pedido/search_order_date_kitchen_authorized.php');
 		}
 
 		public function ver_pedido_cancelado(){
+			require_once('Config/config.php');
 			require_once('Views/Pedido/search_order_date_kitchen_cancel.php');
 		}
 
 		public function ver_pedido_autorizado_todos(){
+			require_once('Config/config.php');
 			require_once('Views/Pedido/search_order_date_kitchen_authorized_all.php');
 		}
 
 		public function ver_pedido_cancelado_todos(){
+			require_once('Config/config.php');
 			require_once('Views/Pedido/search_order_date_kitchen_cancel_all.php');
 		}
 

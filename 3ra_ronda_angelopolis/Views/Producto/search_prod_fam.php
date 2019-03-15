@@ -105,6 +105,13 @@
 								</center>
 							</form>
 							<br><br><br>
+
+							<script type="text/javascript">
+							if(history.forward(1)){
+								location.replace( history.forward(1) );
+							}
+							</script>
+
 					<?php
 						}else{
 								echo "<h1 align='center'>No hay productos a pedir<h1>
