@@ -1,9 +1,11 @@
 <?php
-
+// require_once("Config/config.php");
+//echo  $_SESSION["ruta"];
 	if(isset($_SESSION["id_sesion"])){
-		if($_SESSION["id_sesion"]=="administrador"){
-			echo $_SESSION['id_sesion'];
-			echo $_SESSION['ruta'];
+		if($_SESSION["id_sesion"]=="administrador" && $_SESSION["ruta"]==SUCURSAL){
+			//echo $_SESSION['id_sesion'];
+			//echo $_SESSION['ruta'];
+			//echo SUCURSAL;
 ?>
 
  <section>
@@ -45,7 +47,7 @@
 <?php
 		}else{
 			//Inclur una pagina para redireccionar a index
-			header('Location: Views/sesion/no_sesion.php');
+			header('Location: ../Views/sesion/no_sesion.php');
 		}
 	}
 ?>

@@ -13,6 +13,7 @@
 		}
 
 		public function register(){
+			require_once('Config/config.php');
 			require_once('Views/Usuario/register.php');
 		}
 
@@ -36,11 +37,11 @@
 			require_once('Views/Usuario/error.php');
 		}
 
-		public function cerrar(){
-			require_once('Views/sesion/cerrar_sesion.php');
+		public static function sucursal(){
+			require_once('Config/config.php');
+			return SUCURSAL;
 		}
 	}
-
 
 
 	if (isset($_POST['action'])) {
@@ -49,54 +50,48 @@
 		require_once('../Config/connection.php');
 
 		if ($_POST['action']=='register') {
-			$usuario= new Usuario(null,$_POST['username'],$_POST['password'],$_POST['cargo'],
-								$_POST['nombre'],$_POST['email'],$_POST['id_almacen'],$_POST['ruta']);
+			$usuario= new Usuario(null,$_POST['username'],$_POST['password'],$_POST['cargo'],$_POST['nombre'],$_POST['email']);
 			$usuarioController->save($usuario);
-			echo $_SESSION['id_sesion'];
-			echo $_SESSION['ruta'];
 
 		}elseif ($_POST['action']=='update') {
-			$usuario= new Usuario($_POST['id_user'],$_POST['username'],$_POST['password'],$_POST['cargo'],
-								$_POST['nombre'],$_POST['email'],$_POST['id_almacen'],$_POST['ruta']);
+			$usuario= new Usuario($_POST['id_user'],$_POST['username'],$_POST['password'],$_POST['cargo'],$_POST['nombre'],$_POST['email']);
 			$usuarioController->update($usuario);
 
-		}elseif($_POST['action']=='login'){
+		}/*elseif($_POST['action']=='login'){
 			$usuario=Usuario::login($_POST["usuario"]);
 			if($usuario->email==$_POST["usuario"] && $usuario->password==$_POST["password"] && ($_POST["usuario"] != "") && ($_POST["password"]!="") ){
 
 		  	session_start();
 				$_SESSION["id_sesion"] = $usuario->cargo;
 				$_SESSION["nombre"] = $usuario->nombre;
-				$_SESSION["ruta"] = $usuario->ruta;
 				$_SESSION["visible"] = "true";
-
 				switch($_SESSION["id_sesion"]){
 						case "almacenista":
-						header("Location: ../".$usuario->ruta."?controller=pedido&action=recibir_pedido");
+						header("Location: ../?controller=pedido&action=recibir_pedido");
 						break;
 						case "cocina":
-						header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod");
+						header("Location: ../?controller=producto&action=search_prod");
 						break;
 						case "gerente":
-						header("Location: ../".$usuario->ruta."?controller=pedido&action=ver_pedidos");
+						header("Location: ../?controller=pedido&action=ver_pedidos");
 						break;
 						case "administrador":
-						header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
+						header("Location: ../?controller=usuario&action=register");
 						break;
 						case "barra":
-						header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
+						header("Location: ../?controller=producto&action=search_prod_bar");
 						break;
 				}
 			}else{
 				header('Location: ../Views/sesion/no_sesion.php');
 			}
-		}//End elseif
+		}*/
 	}
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
 		if ($_GET['action']!='register' & $_GET['action']!='index' & $_GET['action']!='error') {
-			require_once('Config/connection.php');
+			require_once('../Config/connection.php');
 			$usuarioController=new UsuarioController();
 			if ($_GET['action']=='delete') {
 				$usuarioController->delete($_GET['id']);

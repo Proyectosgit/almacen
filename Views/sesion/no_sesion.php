@@ -2,6 +2,8 @@
     session_start();
     unset($_SESSION["id_sesion"]);
     unset($_SESSION["nombre"]);
+    unset($_SESSION["ruta"]);
+    unset($_SESSION["visible"]);
     session_destroy();
     if(!isset($_SESSION['id_sesion'])){
 ?>
@@ -18,7 +20,7 @@
         <?php require_once("../partials/header.php");?>
         <section>
           <h1 id="texto_sesion">No has iniciado sesión.<br>Inicia sesión <br>e inténtalo de nuevo</h1>
-          <a href="formulario.php">Iniciar Sesión</a>
+          <a href="../../index.php?controller=usuario&action=formulario">Iniciar Sesión</a>
         </section>
     </body>
 </html>

@@ -9,15 +9,18 @@ class Usuario
 	public $cargo;
 	public $nombre;
 	public $email;
+	public $id_almacen;
+	public $ruta;
 
-
-	function __construct($id_user, $username, $password, $cargo, $nombre, $email){
+	function __construct($id_user, $username, $password, $cargo, $nombre, $email,$id_almacen,$ruta){
 		$this->id_user=$id_user;
 		$this->username=$username;
 		$this->password=$password;
 		$this->cargo=$cargo;
 		$this->nombre=$nombre;
 		$this->email=$email;
+		$this->id_almacen=$id_almacen;
+		$this->ruta=$ruta;
 	}
 
 	public static function all(){
@@ -26,7 +29,7 @@ class Usuario
 		$sql=$db->query('SELECT * FROM usuario');
 		foreach ($sql->fetchAll() as $usuario) {
 			$listaUsuarios[]= new Usuario($usuario['id_user'],$usuario['username'], $usuario['password'],
-										$usuario['cargo'],$usuario['nombre'],$usuario['email']);
+										$usuario['cargo'],$usuario['nombre'],$usuario['email'],$usuario['id_almacen'],$usuario['ruta']);
 		}
 		return $listaUsuarios;
 	}
@@ -34,12 +37,14 @@ class Usuario
 
 	public static function save($usuario){
 			$db=Db::getConnect();
-			$insert=$db->prepare('INSERT INTO usuario VALUES(NULL,:username,:password,:cargo,:nombre,:email)');
+			$insert=$db->prepare('INSERT INTO usuario VALUES(NULL,:username,:password,:cargo,:nombre,:email,:id_almacen,:ruta)');
 			$insert->bindValue('username',$usuario->username);
 			$insert->bindValue('password',$usuario->password);
 			$insert->bindValue('cargo',$usuario->cargo);
 			$insert->bindValue('nombre',$usuario->nombre);
 			$insert->bindValue('email',$usuario->email);
+			$insert->bindValue('id_almacen',$usuario->id_almacen);
+			$insert->bindValue('ruta',$usuario->ruta);
 			$insert->execute();
 		}
 
@@ -48,7 +53,7 @@ class Usuario
 		$db=Db::getConnect();
 		$update=$db->prepare('UPDATE usuario
 							SET username=:username, password=:password, cargo=:cargo,
-							 	nombre=:nombre, email=:email
+							 	nombre=:nombre, email=:email, id_almacen=:id_almacen, ruta=:ruta
 							WHERE id_user=:id_user');
 		$update->bindValue('id_user',$usuario->id_user);
 		$update->bindValue('username',$usuario->username);
@@ -56,6 +61,8 @@ class Usuario
 		$update->bindValue('cargo',$usuario->cargo);
 		$update->bindValue('nombre',$usuario->nombre);
 		$update->bindValue('email',$usuario->email);
+		$update->bindValue('id_almacen',$usuario->id_almacen);
+		$update->bindValue('ruta',$usuario->ruta);
 		$update->execute();
 	}
 
@@ -76,7 +83,7 @@ class Usuario
 		$select->execute();
 		$usuarioDb=$select->fetch();
 		$usuario= new Usuario($usuarioDb['id_user'],$usuarioDb['username'],$usuarioDb['password'],
-							$usuarioDb['cargo'],$usuarioDb['nombre'],$usuarioDb['email']);
+							$usuarioDb['cargo'],$usuarioDb['nombre'],$usuarioDb['email'],$usuarioDb['id_almacen'],$usuarioDb['ruta']);
 		return $usuario;
 	}
 
@@ -89,7 +96,7 @@ class Usuario
 		//asignarlo al objeto usuario
 		$usuarioDb=$validate->fetch();
 		$usuario= new Usuario($usuarioDb['id_user'],$usuarioDb['username'],$usuarioDb['password'],
-							$usuarioDb['cargo'],$usuarioDb['nombre'],$usuarioDb['email']);
+							$usuarioDb['cargo'],$usuarioDb['nombre'],$usuarioDb['email'],$usuarioDb['id_almacen'],$usuarioDb['ruta']);
 		return $usuario;
 	}
 }
