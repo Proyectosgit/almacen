@@ -1,6 +1,6 @@
 <?php
 	if(isset($_SESSION["id_sesion"])){
-		if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina" || $_SESSION["id_sesion"]=="barra")&& $_SESSION["ruta"]==SUCURSAL){
+		if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina" || $_SESSION["id_sesion"]=="barra") && $_SESSION["ruta"]==SUCURSAL){
 ?>
 
 <html>

@@ -159,6 +159,7 @@
 		//Obtiene los detalles del pedido del almacen
 			}elseif($_GET['action']=="search_order_date_kitchen_authorized"){
 				require_once("../Models/pedido.php");
+				// require_once("../Config/config.php");
 				if($_GET["tipo"]=="dia"){
 					$select=Pedido::getOrderByDayStatus($_GET["date"],"autorizado");
 				}elseif($_GET["tipo"]=="mes"){
