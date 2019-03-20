@@ -33,8 +33,8 @@ class Relacion
 		// carga en la $listaUsuarios cada registro desde la base de datos
 		foreach ($sql->fetchAll() as $relacion) {
 			$listaRelaciones[]= new Relacion($relacion['id_pedido'],$relacion['codingre'], $relacion['fecha_pedido'],
-																			 $relacion['hora_pedido'],$relacion['num_prod'],$relacion['estado_prod'],
-																		 	 $relacion['observacion']);
+											 $relacion['hora_pedido'],$relacion['num_prod'],$relacion['estado_prod'],
+										 	 $relacion['observacion']);
 		}
 		return $listaRelaciones;
 	}
@@ -123,8 +123,8 @@ class Relacion
 		//asignarlo al objeto usuario
 		$relacionDb=$select->fetch();
 		$relacion= new Relacion($relacionDb['id_pedido'],$relacionDb['codingre'],$relacionDb['fecha_pedido'],
-														$relacionDb['hora_pedido'],$relacionDb['num_prod'],$relacionDb['estado_prod'],
-														$relacionDb['observacion']);
+								$relacionDb['hora_pedido'],$relacionDb['num_prod'],$relacionDb['estado_prod'],
+								$relacionDb['observacion']);
 		return $relacion;
 	}
 }

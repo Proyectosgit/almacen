@@ -217,11 +217,12 @@ class Producto
 	}
 
 	public static function create_csv_automatic($data,$name_file){
-
+		require_once("../Config/config.php");
 		if(!empty($data)){
 		$delimiter = ",";
 		$filename = $name_file . date('Y-m-d') . ".csv";
-		$f = fopen('C:\OCOMPRA\\'.$filename, 'w');
+		// $f = fopen('C:\OCOMPRA'.'\\'.$filename, 'w');
+		$f = fopen(PATH_CSV.'\\'.$filename, 'w');
 		$fields = array('codingre', 'descrip', 'familia', 'unidad', 'empaque',
 											'equivale', 'inventa1', 'stockmax', 'stockmin', 'ultcosto',
 											'costoprome', 'impuesto', 'pedido', 'status');

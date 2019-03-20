@@ -89,14 +89,14 @@
 
 		if ($_POST['action']=='register') {
 			$pedido= new Pedido(NULL,$_POST['fecha'],$_POST['hora'],$_POST['autoriza'],
-															 $_POST['solicita'],$_POST['estado'],$_POST['observaciones'],
-															 $_POST['unidad_medida'],$_POST['total_prod'],$_POST['costo_total']);
+								 $_POST['solicita'],$_POST['estado'],$_POST['observaciones'],
+								 $_POST['unidad_medida'],$_POST['total_prod'],$_POST['costo_total']);
 			$pedidoController->save($pedido);
 		}elseif ($_POST['action']=='update') {
 			$pedido= new Pedido($_POST['id_pedido'],$_POST['fecha'],$_POST['hora'],
-													$_POST['autoriza'],$_POST['solicita'],$_POST['estado'],
-													$_POST['observaciones'],$_POST['unidad_medida'],$_POST['total_prod'],
-													$_POST['costo_total']);
+								$_POST['autoriza'],$_POST['solicita'],$_POST['estado'],
+								$_POST['observaciones'],$_POST['unidad_medida'],$_POST['total_prod'],
+								$_POST['costo_total']);
 			$pedidoController->update($pedido);
 		}
 	}
