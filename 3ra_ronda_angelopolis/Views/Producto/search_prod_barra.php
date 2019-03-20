@@ -147,7 +147,6 @@ if(isset($_SESSION["id_sesion"])){
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
 <script>
 	function cancela_pedido(){
-	 	// javascript:window.history.back();
 		alert("Pedido Cancelado");
 		return true;
 	 }
