@@ -10,6 +10,7 @@
 		}
 
 		public function register(){
+			require_once('Config/config.php');
 			require_once('Views/Familia/register.php');
 		}
 

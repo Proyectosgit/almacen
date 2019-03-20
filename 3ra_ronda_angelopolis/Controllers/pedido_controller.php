@@ -45,6 +45,7 @@
 		}
 
 		public function orderDate(){
+			require_once('Config/config.php');
 			require_once('Views/Pedido/search_order_date.php');
 		}
 

@@ -16,12 +16,12 @@
 
 		<div class="form-group">
       		<label>Usuario:</label>
-      		<input class="form-control" type="text" name="username" maxlength="30" placeholder="Nombre">
+      		<input class="form-control" type="text" name="username" maxlength="30" placeholder="Nombre" required>
       	</div>
 
       	<div class="form-group">
       		<label >Password:</label>
-      		<input class="form-control" type="password" name="password" maxlength="30" placeholder="Password" autocomplete="off">
+      		<input class="form-control" type="password" name="password" maxlength="30" placeholder="Password" autocomplete="off" required>
       	</div>
 
 	  	<div class="form-group">
@@ -34,11 +34,11 @@
 	  	</div>
       	<div class="form-group">
       		<label >Nombre:</label>
-      		<input class="form-control" type='text' name='nombre' maxlength="30" placeholder="Cargo">
+      		<input class="form-control" type='text' name='nombre' maxlength="30" placeholder="Cargo" required>
       	</div>
       	<div class="form-group">
       		<label >E-mail:</label>
-      		<input class="form-control" type="email" name="email" maxlength="30" placeholder="E-mail">
+      		<input class="form-control" type="email" name="email" maxlength="30" placeholder="E-mail" required>
       	</div>
       	<button class="btn btn-primary">Enviar</button>
     </form>

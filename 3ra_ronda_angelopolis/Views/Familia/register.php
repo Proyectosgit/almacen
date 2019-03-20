@@ -10,11 +10,11 @@
            <input type='hidden' name='action' value='register'>
            <div class="form-group">
                <label for="nombre">Código de Familia:</label>
-               <input class="form-control" type="text" name='cod_familia' maxlength="20" placeholder="Código de Familia">
+               <input class="form-control" type="text" name='cod_familia' maxlength="20" placeholder="Código de Familia" required>
            </div>
            <div class="form-group">
                <label for="nombre">Descripción:</label>
-               <input class="form-control" type="text" name='descripcion' maxlength="50" placeholder="Descripción">
+               <input class="form-control" type="text" name='descripcion' maxlength="50" placeholder="Descripción" required>
             </div>
 			<button class="btn btn-primary">Enviar</button>
         </form>
