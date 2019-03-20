@@ -1,1 +1,0 @@
-php -f C:\xampp\htdocs\Insertar_datos\cargar_db.php >> c:\logs.txt
