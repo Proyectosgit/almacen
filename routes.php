@@ -7,7 +7,7 @@
 		switch($controller){
 			case 'usuario':
 				require_once('Models/usuario.php');
-				$controller= new UsuarioController();
+				$controller = new UsuarioController();
 				break;
 		}
 		//llama a la acción del controlador
@@ -21,7 +21,7 @@
 
 	//array con los controladores y sus respectivas acciones
 	$controllers= array(
-						'usuario'=>['error','formulario',"cerrar","index"]
+						'usuario'=>['error','error_cargo','formulario',"cerrar","index","register"]
 						);
 
 	//verifica que el controlador enviado desde index.php esté dentro del arreglo controllers

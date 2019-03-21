@@ -36,6 +36,10 @@
 			require_once('Views/Usuario/error.php');
 		}
 
+		public function error_cargo(){
+			require_once('Views/Usuario/error_cargo.php');
+		}
+
 		public function cerrar(){
 			require_once('Views/sesion/cerrar_sesion.php');
 		}
@@ -69,7 +73,7 @@
 				$_SESSION["nombre"] = $usuario->nombre;
 				$_SESSION["ruta"] = $usuario->ruta;
 				$_SESSION["visible"] = "true";
-
+				echo $_SESSION['id_sesion'];
 				switch($_SESSION["id_sesion"]){
 						case "almacenista":
 						header("Location: ../".$usuario->ruta."?controller=pedido&action=recibir_pedido");
@@ -85,6 +89,12 @@
 						break;
 						case "barra":
 						header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
+						break;
+						case "root":
+						header("Location: ../?controller=usuario&action=register");
+						break;
+						default:
+						header("Location: ../?controller=usuario&action=error_cargo");
 						break;
 				}
 			}else{
