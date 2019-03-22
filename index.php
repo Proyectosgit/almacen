@@ -34,6 +34,10 @@
 		$controller='usuario';
 		$action='formulario';
 	}
+
+	//carga layout.php
+	require_once("Views/layout.php");
+
 	//carga routes.php
-	require_once('routes.php');
+	//require_once('routes.php');
 ?>

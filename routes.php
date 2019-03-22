@@ -21,7 +21,7 @@
 
 	//array con los controladores y sus respectivas acciones
 	$controllers= array(
-						'usuario'=>['error','error_cargo','formulario',"cerrar","index","register"]
+						'usuario'=>['error','error_cargo','formulario',"cerrar","index","register","update"]
 						);
 
 	//verifica que el controlador enviado desde index.php esté dentro del arreglo controllers

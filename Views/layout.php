@@ -13,25 +13,13 @@
 			<link rel="stylesheet" href="Public/bootstrap/bootstrap_3.3.6/bootstrap.min.css">
 			<link rel="stylesheet" href="Public/css/logos.css"/>
 			<link href="Public/open-iconic-master/font/css/open-iconic.css" rel="stylesheet">
-			</head>
+		</head>
 		<body>
 			<?php
 			switch($_SESSION["id_sesion"]){
-			case "almacenista":
-				 require_once("Views/partials/header_recibe_pedido.php");
-					break;
-			case "cocina":
-				 require_once("Views/partials/header_realiza_pedido.php");
-					break;
-			case "gerente":
-					require_once("Views/partials/header_autoriza_pedido.php");
-					break;
-			case "administrador":
-					require_once("Views/partials/header_admin.php");
-					break;
-			case "barra":
-					require_once("Views/partials/header_realiza_pedido_barra.php");
-					break;
+				case "root":
+						require_once("Views/partials/header_admin.php");
+						break;
 			}
 			?>
 
@@ -43,6 +31,6 @@
 <?php
 	}else{
 		//Inclur una pagina para redireccionar a index
-	header('Location: Views/sesion/formulario.php');
+		require_once('Views/sesion/formulario.php');
 	}
 	?>

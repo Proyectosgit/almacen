@@ -7,6 +7,7 @@
 		public function formulario(){
 			require_once('Views/sesion/formulario.php');
 		}
+
 		public function index(){
 			$usuarios=Usuario::all();
 			require_once('Views/Usuario/index.php');
@@ -29,7 +30,7 @@
 		public function delete($id){
 			require_once('../Models/usuario.php');
 			Usuario::delete($id);
-			header('Location: ../index.php');
+			header('Location: ?controller=usuario&action=index');
 		}
 
 		public function error(){
@@ -56,8 +57,6 @@
 			$usuario= new Usuario(null,$_POST['username'],$_POST['password'],$_POST['cargo'],
 								$_POST['nombre'],$_POST['email'],$_POST['id_almacen'],$_POST['ruta']);
 			$usuarioController->save($usuario);
-			echo $_SESSION['id_sesion'];
-			echo $_SESSION['ruta'];
 
 		}elseif ($_POST['action']=='update') {
 			$usuario= new Usuario($_POST['id_user'],$_POST['username'],$_POST['password'],$_POST['cargo'],
@@ -106,7 +105,7 @@
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
 		if ($_GET['action']!='register' & $_GET['action']!='index' & $_GET['action']!='error') {
-			require_once('Config/connection.php');
+			require_once('../Config/connection.php');
 			$usuarioController=new UsuarioController();
 			if ($_GET['action']=='delete') {
 				$usuarioController->delete($_GET['id']);

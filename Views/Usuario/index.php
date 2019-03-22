@@ -1,6 +1,6 @@
 <?php
 	if(isset($_SESSION["id_sesion"])){
-		if($_SESSION["id_sesion"]=="administrador"){
+		if($_SESSION["id_sesion"]=="root"){
 ?>
 
 		<section>
@@ -15,6 +15,8 @@
 								<th>Cargo</th>
 								<th>Nombre</th>
 								<th>E-mail</th>
+								<th>Id almacen</th>
+								<th>Ruta</th>
 								<!-- <th colspan=2 >Acciones</th> -->
 							</tr>
 						</thead>
@@ -29,8 +31,10 @@
 									<td><?php echo $usuario->cargo;?></td>
 									<td><?php echo $usuario->nombre;?></td>
 									<td><?php echo $usuario->email;?></td>
-									<!-- <td><a href="Controllers/usuario_controller.php?action=update&id=<?php echo $usuario->id_user ?>">Actualizar</a> </td> -->
-									<!-- <td><a href="Controllers/usuario_controller.php?action=delete&id=<?php echo $usuario->id_user ?>">Eliminar</a> </td> -->
+									<td><?php echo $usuario->id_almacen;?></td>
+									<td><?php echo $usuario->ruta;?></td>
+									<td><a href="Controllers/usuario_controller.php?action=update&id=<?php echo $usuario->id_user ?>">Actualizar</a> </td>
+									<td><a href="Controllers/usuario_controller.php?action=delete&id=<?php echo $usuario->id_user ?>">Eliminar</a> </td>
 								</tr>
 						<?php } ?>
 						</tbody>

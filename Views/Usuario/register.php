@@ -1,6 +1,5 @@
 <?php
-session_start();
-// require_once("Config/config.php");
+
 	if(isset($_SESSION["id_sesion"])){
 		if($_SESSION["id_sesion"]=="root"){
 ?>
@@ -37,6 +36,16 @@ session_start();
       				<div class="form-group">
       					<label >E-mail:</label>
       					<input class="form-control" type="email" name="email" maxlength="30" placeholder="E-mail" required>
+      				</div>
+
+					<div class="form-group">
+      					<label >Almacen:</label>
+      					<input class="form-control" type="number" name="id_almacen" maxlength="30" placeholder="almacen" required>
+      				</div>
+
+					<div class="form-group">
+      					<label >Nombre de la carpeta del almacen:</label>
+      					<input class="form-control" type="text" name="ruta" maxlength="30" placeholder="PATH" required>
       				</div>
 
       				<button class="btn btn-primary">Enviar</button>
