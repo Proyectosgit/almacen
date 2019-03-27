@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Pruebas isnumeric</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="Public/jquery/jquery-3.3.1.min.js"/>
+
+    </head>
+    <body>
+        <form action="#" method="get" >
+            <input type="text" name="numero" class="cantidad"/>
+            <input type="submit" value="Enviar" />
+        </form>
+        <script type="text/javascript" src="Public/jquery/jquery-3.3.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                var cantidad;
+                var resultado ="true";
+                $(".cantidad").change(function(){
+                console.log("---------------------------------");
+                    cantidad = $(".cantidad").val();
+                    console.log("tipo de dato antes de comenzar"+typeof(cantidad));
+                    // console.log(cantidad.search(","));
+                    if(cantidad.search(",") != -1){
+                        //Reemplaza coma por punto para validar isNumeric
+                        cantidad=cantidad.replace(",",".");
+                        console.log("Cantidad_reemplazada" + cantidad);
+                        console.log("Tipo de dato"+typeof(cantidad));
+                        console.log("Se remplaza coma");
+                        alert ("Ingresa los numeros con punto.");
+                        $(".cantidad").val(cantidad);
+                    }else{
+                        console.log("No se reemplaza, no hay comas");
+                    }
+
+                    resultado = $.isNumeric(cantidad);
+
+                    if(resultado == false){
+                        alert("Ingresa numeros correctos");
+                        $(".cantidad").val(0);
+                    }
+
+                    console.log("Es numero "+ resultado);
+                    console.log(cantidad);
+                    console.log("---------------------------------");
+
+                });
+            });
+        </script>
+    </body>
+</html>
