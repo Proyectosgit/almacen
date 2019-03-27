@@ -1,5 +1,4 @@
 <?php
-    session_start();
     unset($_SESSION["id_sesion"]);
     unset($_SESSION["nombre"]);
     unset($_SESSION["ruta"]);

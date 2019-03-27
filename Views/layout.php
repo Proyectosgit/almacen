@@ -20,6 +20,30 @@
 				case "root":
 						require_once("Views/partials/header_admin.php");
 						break;
+				case "gerente":
+						header("Location: ".$_SESSION["ruta"]."?controller=pedido&action=ver_pedidos");
+						break;
+				case "almacenista":
+					header("Location: ../".$usuario->ruta."?controller=pedido&action=recibir_pedido");
+						break;
+				case "cocina":
+					header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod");
+						break;
+				case "gerente":
+					header("Location: ../".$usuario->ruta."?controller=pedido&action=ver_pedidos");
+						break;
+				case "administrador":
+					header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
+						break;
+				case "barra":
+					header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
+						break;
+				case "root":
+					header("Location: ../?controller=usuario&action=register");
+						break;
+				default:
+					header("Location: ../?controller=usuario&action=error_cargo");
+						break;
 			}
 			?>
 

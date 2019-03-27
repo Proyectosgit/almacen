@@ -1,3 +1,6 @@
+<?php
+    if(!isset($_SESSION['id_sesion'])){
+ ?>
  <!DOCTYPE html>
  <html lang="en">
 <head>
@@ -27,3 +30,6 @@
    <?php require_once("Views/partials/footer.php");?>
  </body>
  </html>
+<?php
+    }
+?>

@@ -24,7 +24,7 @@
 
 		public function update($usuario){
 			Usuario::update($usuario);
-			header('Location: ../index.php');
+			header('Location: ../?controller=usuario&action=index');
 		}
 
 		public function delete($id){
@@ -104,7 +104,7 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register' & $_GET['action']!='index' & $_GET['action']!='error') {
+		if ($_GET['action']!='register' & $_GET['action']!='index' & $_GET['action']!='error' & $_GET['action']!='cerrar') {
 			require_once('../Config/connection.php');
 			$usuarioController=new UsuarioController();
 			if ($_GET['action']=='delete') {

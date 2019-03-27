@@ -10,7 +10,7 @@
         Ver Usuarios</a></li>
         <!-- <li><a href="?controller=usuario&action=update"><span class="oi" data-glyph="eye"></span>
         Actualizar Usuario</a></li> -->
-        <li><a href="../?controller=usuario&action=cerrar"><span class="oi" data-glyph="account-logout"></span>
+        <li><a href="Views/sesion/cerrar_sesion.php"><span class="oi" data-glyph="account-logout"></span>
         Cerrar sesion</a></li>
       </ul>
     </div>
