@@ -1,5 +1,4 @@
 <?php
-
 if(isset($_SESSION["id_sesion"])){
 		if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="barra")&& $_SESSION["ruta"]==SUCURSAL){
 				// if($visible=="true"){
@@ -35,13 +34,14 @@ if(isset($_SESSION["id_sesion"])){
 												foreach ($productos as $producto) {
 													$pedido=$producto->stockmax - $producto->inventa1;
 													$costo_producto=$producto->ultcosto*$pedido;
+
 													if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 													?>
 														<tr>
 															<td class="small"><?php echo $producto->descrip;?></td>
-															<td bgcolor="#3ADF00"><?php echo $pedido;?></td>
-															<!-- <td><input class="cantidad" type="number" name="<?php //echo $producto->codingre;?>" value="<?php //echo $pedido;?>" required></td> --> <!--Permite modificar la cantidad pedida-->
-															<td><?php echo $costo_producto;?></td>
+															<!-- <td bgcolor="#3ADF00"><?//php echo $pedido;?></td> -->
+															<td><input class="cantidad" type="number" name="<?php echo $producto->codingre;?>" value="<?php echo $pedido;?>" required></td> <!--Permite modificar la cantidad pedida-->
+															<td class="costo_producto"><?php echo $costo_producto;?></td>
 															<?php $costo_total=$costo_total+$costo_producto;
 															$total_prod=$total_prod+1;
 															?>
@@ -60,7 +60,7 @@ if(isset($_SESSION["id_sesion"])){
 															<td><?php echo $producto->equivale;?></td>
 															<td><?php echo $producto->codingre; ?></td>
 														</tr>
-										<?php }//end if
+												<?php }//end if
 												}//end for each
 												//require_once("../librerias/js/verifica_cambio_pedido.js");
 												//Recupera los datos modificados en la vista
@@ -106,8 +106,6 @@ if(isset($_SESSION["id_sesion"])){
 								</form>
 								<br><br><br>
 
-								<!-- <meta http-equiv="Expires" content="0" /> -->
-								<!-- <meta http-equiv="Pragma" content="no-cache" /> -->
 								<script type="text/javascript">
 					  			if(history.forward(1)){
 					    			location.replace( history.forward(1) );
@@ -145,6 +143,7 @@ if(isset($_SESSION["id_sesion"])){
 }//End if verifica que la variable de sesion este definida
 ?>
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
+<script src="Public/librerias/verifica_cambio_pedido.js"></script>
 <script>
 	function cancela_pedido(){
 		alert("Pedido Cancelado");

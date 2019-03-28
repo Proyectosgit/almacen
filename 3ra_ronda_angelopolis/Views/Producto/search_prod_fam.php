@@ -40,9 +40,9 @@
 											?>
 											<tr>
 												<td class="small"><?php echo $producto->descrip;?></td>
-												<td bgcolor="#3ADF00"><?php echo $pedido;?></td>
-												<!-- <td><input class="cantidad" type="number" name="<?php //echo $producto->codingre;?>" value="<?php //echo $pedido;?>" required></td> --> <!--Permite modificar la cantidad pedida-->
-												<td><?php echo $costo_producto;?></td>
+												<!-- <td bgcolor="#3ADF00"><?php //echo $pedido;?></td> -->
+												<td><input class="cantidad" type="number" name="<?php echo $producto->codingre;?>" value="<?php echo $pedido;?>" required></td> <!--Permite modificar la cantidad pedida -->
+												<td class="costo_producto"><?php echo $costo_producto;?></td>
 												<?php $costo_total=$costo_total+$costo_producto;
 															$total_prod=$total_prod+1;
 												?>
@@ -138,13 +138,17 @@
 ?>
 
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
+<script src="Public/librerias/verifica_cambio_pedido.js"></script>
 <script>
+
 	function cancela_pedido(){
 		alert("Pedido Cancelado");
 		return true;
 	}
+
 	function autoriza_pedido(){
 		alert("Pedido Realizado");
 		return true;
 	}
+
 </script>

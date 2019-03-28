@@ -25,7 +25,7 @@ $(document).ready(function(){
     stock_min = $(this).parents("tr").find(".stock_min").html();
     stock_max = $(this).parents("tr").find(".stock_max").html();
     existencia = $(this).parents("tr").find(".existencia").html();
-    cantidad_aux=stock_max-existencia;
+    cantidad_aux = stock_max-existencia;
 
     if(cantidad.match(/^[0-9]+/) && !($(this).parents("tr").find(".cantidad").val().length == 0)){
       //Ajusta tamaño de input
