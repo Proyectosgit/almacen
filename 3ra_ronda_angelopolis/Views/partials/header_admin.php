@@ -4,6 +4,7 @@
           <img  class="navbar-brand" id="logo" src="Public/imagenes/logo.jpg">
       </div>
       <ul class="nav">
+        <!-- <li><a href="?controller=pedido&action=index"><span class="oi" data-glyph="key"></span> --><!--Esta linea dirige a todos los pedidos-->
         <li><a href="?controller=pedido&action=index"><span class="oi" data-glyph="key"></span>
         Pedidos</a></li>
         <!-- <li><a href="?controller=relacion&action=register">Ingresar relacion_pedido_producto</a></li> -->
@@ -24,10 +25,10 @@
         <!-- <li><a href="?controller=producto&action=register">Ingresar Producto</a></li> -->
         <li><a href="?controller=producto&action=index"><span class="oi" data-glyph="eye"></span>
         Ver Producto</a></li>
-        <li><a href="?controller=familia&action=register"><span class="oi" data-glyph="task"></span>
-        Alta Familia</a></li>
-        <li><a href="?controller=familia&action=index"><span class="oi" data-glyph="eye"></span>
-        Ver Familia</a></li>
+        <!-- <li><a href="?controller=familia&action=register"><span class="oi" data-glyph="task"></span> -->
+        <!-- Alta Familia</a></li> -->
+        <!-- <li><a href="?controller=familia&action=index"><span class="oi" data-glyph="eye"></span> -->
+        <!-- Ver Familia</a></li> -->
         <!-- <li><a href="?controller=pedido&action=register">Ingresar pedido</a></li> -->
         <li><a href="../?controller=usuario&action=cerrar"><span class="oi" data-glyph="account-logout"></span>
         Cerrar sesion</a></li>

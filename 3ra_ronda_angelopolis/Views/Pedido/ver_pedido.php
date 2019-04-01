@@ -48,7 +48,7 @@
 				<td><?php echo $pedido->fecha_pedido; ?></td>
 				<td><?php echo $pedido->hora;?></td>
 			</tr>
-  <?php } ?>
+        <?php }//Fin foreach ?>
 		</tbody>
 	</table>
 </div>
