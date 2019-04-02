@@ -12,7 +12,7 @@
 			require_once("config.php");
 			if (!isset(self::$instance)) {
 				$pdo_options[PDO::ATTR_ERRMODE]=PDO::ERRMODE_EXCEPTION;
-				self::$instance= new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS, $pdo_options);
+				self::$instance= new PDO('mysql:host='.DB_HOST_UNIDAD.';dbname='.DB_NAME_UNIDAD, DB_USER_UNIDAD, DB_PASS_UNIDAD, $pdo_options);
 			}
 			return self::$instance;
 		}

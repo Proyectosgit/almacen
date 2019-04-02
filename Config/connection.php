@@ -2,7 +2,7 @@
 	/**
 	* Conexión a la base de datos
 	*/
-	class Db
+	class Db1
 	{
 		private static $instance=NULL;
 

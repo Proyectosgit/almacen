@@ -25,7 +25,7 @@ class Usuario
 
 	public static function all(){
 		$listaUsuarios =[];
-		$db=Db::getConnect();
+		$db=Db1::getConnect();
 		$sql=$db->query('SELECT * FROM usuario');
 		foreach ($sql->fetchAll() as $usuario) {
 			$listaUsuarios[]= new Usuario($usuario['id_user'],$usuario['username'], $usuario['password'],
@@ -50,7 +50,7 @@ class Usuario
 
 	//la función para actualizar
 	public static function update($usuario){
-		$db=Db::getConnect();
+		$db=Db1::getConnect();
 		$update=$db->prepare('UPDATE usuario
 							SET username=:username, password=:password, cargo=:cargo,
 							 	nombre=:nombre, email=:email, id_almacen=:id_almacen, ruta=:ruta
@@ -68,7 +68,7 @@ class Usuario
 
 	// la función para eliminar por el id
 	public static function delete($id){
-		$db=Db::getConnect();
+		$db=Db1::getConnect();
 		$delete=$db->prepare('DELETE FROM usuario WHERE id_user=:id');
 		$delete->bindValue('id',$id);
 		$delete->execute();
@@ -77,7 +77,7 @@ class Usuario
 	//la función para obtener un usuario por el id
 	public static function getById($id){
 		//buscar
-		$db=Db::getConnect();
+		$db=Db1::getConnect();
 		$select=$db->prepare('SELECT * FROM usuario WHERE id_user=:id');
 		$select->bindValue('id',$id);
 		$select->execute();
@@ -89,7 +89,7 @@ class Usuario
 
 	public static function login($usuario){
 
-		$db=Db::getConnect();
+		$db=Db1::getConnect();
 		$validate=$db->prepare('SELECT * FROM usuario WHERE email=:usuario');
 		$validate->bindValue('usuario',$usuario);
 		$validate->execute();

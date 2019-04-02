@@ -68,26 +68,37 @@
 			if($usuario->email==$_POST["usuario"] && $usuario->password==$_POST["password"] && ($_POST["usuario"] != "") && ($_POST["password"]!="") ){
 
 		  	session_start();
+
 				$_SESSION["id_sesion"] = $usuario->cargo;
 				$_SESSION["nombre"] = $usuario->nombre;
 				$_SESSION["ruta"] = $usuario->ruta;
 				$_SESSION["visible"] = "true";
 				echo $_SESSION['id_sesion'];
+				//Actualiza datos ocompra
+				require_once("../".$usuario->ruta."/Config/config.php");
+				require_once("../".$usuario->ruta."/Config/connection.php");
+				require_once("../".$usuario->ruta."/Models/producto.php");
+
 				switch($_SESSION["id_sesion"]){
 						case "almacenista":
 						header("Location: ../".$usuario->ruta."?controller=pedido&action=recibir_pedido");
+							Producto::carga_db();
 						break;
 						case "cocina":
 						header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod");
+							Producto::carga_db();
 						break;
 						case "gerente":
 						header("Location: ../".$usuario->ruta."?controller=pedido&action=ver_pedidos");
+							Producto::carga_db();
 						break;
 						case "administrador":
 						header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
+							Producto::carga_db();
 						break;
 						case "barra":
 						header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
+							Producto::carga_db();
 						break;
 						case "root":
 						header("Location: ../?controller=usuario&action=register");
