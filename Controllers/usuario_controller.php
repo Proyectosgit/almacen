@@ -81,32 +81,37 @@
 
 				switch($_SESSION["id_sesion"]){
 						case "almacenista":
-						header("Location: ../".$usuario->ruta."?controller=pedido&action=recibir_pedido");
+							header("Location: ../".$usuario->ruta."?controller=pedido&action=recibir_pedido");
 							Producto::carga_db();
 						break;
 						case "cocina":
-						header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod");
+							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod");
 							Producto::carga_db();
 						break;
 						case "gerente":
-						header("Location: ../".$usuario->ruta."?controller=pedido&action=ver_pedidos");
+							header("Location: ../".$usuario->ruta."?controller=pedido&action=ver_pedidos");
 							Producto::carga_db();
 						break;
 						case "administrador":
-						header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
-							Producto::carga_db();
+							header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
+							// Producto::carga_db();
+							// exec("C:/xampp/htdocs/almacen/Insertar_datos/cargar_db.bat");
+							echo "Ejecyto";
+							exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
+							// Producto::carga_db();
 						break;
 						case "barra":
-						header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
-							Producto::carga_db();
+							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
 						break;
 						case "root":
-						header("Location: ../?controller=usuario&action=register");
+							header("Location: ../?controller=usuario&action=register");
 						break;
 						default:
-						header("Location: ../?controller=usuario&action=error_cargo");
+							header("Location: ../?controller=usuario&action=error_cargo");
 						break;
 				}
+				// Producto::carga_db();
+
 			}else{
 				header('Location: ../Views/sesion/no_sesion.php');
 			}
