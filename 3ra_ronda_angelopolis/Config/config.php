@@ -10,5 +10,6 @@ define("DB_PASS","");
 
 define("NAME_CSV","OCOMPRA");
 define("SUCURSAL","3ra_ronda_angelopolis");
-define("PATH_CSV","C:\ahora_aqui");
+define("PATH_DESCARGA_CSV_PEDIDO","C:\ahora_aqui");
+define("PATH_CARGA_CSV_OCOMPRA","C:\PUE\\3ajuarez\OCOMPRA.csv")
 ?>

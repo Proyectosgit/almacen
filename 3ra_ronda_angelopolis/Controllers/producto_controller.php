@@ -204,6 +204,12 @@
 			Producto::create_csv($productos,$name_file);
 			//require_once('Views/Producto/download.php');
 		}
+
+		public function carga_db_productos(){
+			require_once('Config/config.php');
+			require_once("Models/producto.php");
+			Producto::carga_db();
+		}
 	}
 
 
@@ -270,7 +276,7 @@
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
 		if ($_GET['action']!='register'&$_GET['action']!='index'&$_GET['action']!='search_prod'&$_GET['action']!='search_prod_fam'
-				&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra'&$_GET['action']!='button_download_db') {
+				&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra'&$_GET['action']!='button_download_db'&$_GET['action']!='carga_db_productos') {
 			require_once('../Config/connection.php');
 			$productoController=new ProductoController();
 

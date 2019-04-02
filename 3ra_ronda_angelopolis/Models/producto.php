@@ -17,10 +17,12 @@ class Producto
 	public $impuesto;
 	public $pedido;
 	public $status;
+	public $inventaFisico;
+	public $diferencia;
 
 
 	function __construct($codingre, $descrip, $familia, $unidad, $empaque, $equivale, $inventa1,
-	 					$stockmax, $stockmin, $ultcosto, $costoprome, $impuesto, $pedido, $status){
+	 					$stockmax, $stockmin, $ultcosto, $costoprome, $impuesto, $pedido, $status,$inventaFisico,$diferencia){
 
 		$this->codingre=$codingre;
 		$this->descrip=$descrip;
@@ -36,6 +38,8 @@ class Producto
 		$this->impuesto=$impuesto;
 		$this->pedido=$pedido;
 		$this->status=$status;
+		$this->inventaFisico=$inventaFisico;
+		$this->pedido=$pedido;
 	}
 
 	public static function all(){
@@ -48,7 +52,7 @@ class Producto
 											$producto['unidad'],$producto['empaque'],$producto['equivale'],
 											$producto['inventa1'],$producto['stockmax'],$producto['stockmin'],
 											$producto['ultcosto'],$producto['costoprome'],$producto['impuesto'],
-											$producto['pedido'],$producto['status']);
+											$producto['pedido'],$producto['status'],$producto['inventaFisico'],$producto['pedido']);
 		}
 		return $listaProductos;
 	}
@@ -62,7 +66,7 @@ class Producto
 			     							:unidad,:empaque,:equivale,
 			     							:inventa1,:stockmax,:stockmin,
 			     							:ultcosto,:costoprome,:impuesto,
-			     							:pedido,:status)');
+			     							:pedido,:status,:inventaFisico,:diferencia)');
 			$insert->bindValue('codingre',$producto->codingre);
 			$insert->bindValue('descrip',$producto->descrip);
 			$insert->bindValue('familia',$producto->familia);
@@ -77,6 +81,8 @@ class Producto
 			$insert->bindValue('impuesto',$producto->impuesto);
 			$insert->bindValue('pedido',$producto->pedido);
 			$insert->bindValue('status',$producto->status);
+			$insert->bindValue('inventaFisico',$producto->inventaFisico);
+			$insert->bindValue('diferencia',$producto->diferencia);
 			$insert->execute();
 		}
 
@@ -89,7 +95,7 @@ class Producto
 										empaque=:empaque, equivale=:equivale, inventa1=:inventa1,
 									stockmax=:stockmax,stockmin=:stockmin,ultcosto=:ultcosto,
 									costoprome=:costoprome,impuesto=:impuesto,pedido=:pedido,
-									status=:status
+									status=:status,inventaFisico=:inventaFisico,diferencia=:diferencia
 							WHERE codingre=:codingre');
 		$update->bindValue('codingre',$producto->codingre);
 		$update->bindValue('descrip',$producto->descrip);
@@ -105,6 +111,8 @@ class Producto
 		$update->bindValue('impuesto',$producto->impuesto);
 		$update->bindValue('pedido',$producto->pedido);
 		$update->bindValue('status',$producto->status);
+		$update->bindValue('inventaFisico',$producto->inventaFisico);
+		$update->bindValue('status',$diferencia->diferencia);
 		$update->execute();
 	}
 
@@ -127,7 +135,7 @@ class Producto
 								$productoDb['unidad'],$productoDb['empaque'],$productoDb['equivale'],
 				  				$productoDb['inventa1'],$productoDb['stockmax'],$productoDb['stockmin'],
 								$productoDb['ultcosto'],$productoDb['costoprome'],$productoDb['impuesto'],
-								$productoDb['pedido'],$productoDb['status']);
+								$productoDb['pedido'],$productoDb['status'],$productoDb['inventaFisico'],$productoDb['diferencia']);
 		return $producto;
 	}
 
@@ -144,7 +152,7 @@ class Producto
 									$productoDb['unidad'],$productoDb['empaque'],$productoDb['equivale'],
 					  				$productoDb['inventa1'],$productoDb['stockmax'],$productoDb['stockmin'],
 									$productoDb['ultcosto'],$productoDb['costoprome'],$productoDb['impuesto'],
-									$productoDb['pedido'],$productoDb['status']);
+									$productoDb['pedido'],$productoDb['status'],$productoDb['inventaFisico'],$productoDb['diferencia']);
 		return $productos;
 	}
 
@@ -222,7 +230,7 @@ class Producto
 		$delimiter = ",";
 		$filename = $name_file . date('Y-m-d') . ".csv";
 		// $f = fopen('C:\OCOMPRA'.'\\'.$filename, 'w');
-		$f = fopen(PATH_CSV.'\\'.$filename, 'w');
+		$f = fopen(PATH_DESCARGA_CSV_PEDIDO.'\\'.$filename, 'w');
 		$fields = array('codingre', 'descrip', 'familia', 'unidad', 'empaque',
 											'equivale', 'inventa1', 'stockmax', 'stockmin', 'ultcosto',
 											'costoprome', 'impuesto', 'pedido', 'status');
@@ -258,6 +266,77 @@ class Producto
 		}
 	}
 
+	public static function verifica_existencia($codingre){
+		$db=Db::getConnect();
+		$select=$db->prepare('SELECT COUNT(*) as cantidad FROM productos WHERE codingre=:codingre');
+		$select->bindValue('codingre',$codingre);
+		$select->execute();
+		$count=$select->fetch();
+		// print_r($count["cantidad"]);
+		return $count["cantidad"];
+	}
 
+	public static function update_existencia($codingre,$inventa1){
+		$db=Db::getConnect();
+		$update=$db->prepare('UPDATE productos SET inventa1=:inventa1 WHERE codingre=:codingre');
+		$update->bindValue('inventa1',$inventa1);
+		$update->bindValue('codingre',$codingre);
+		$update->execute();
+	}
+
+	public static function carga_db(){
+
+		set_time_limit(300);
+		// require_once("connection.php");
+		// require_once("productos.php");
+
+		$linea = 0;
+		$familias=[];
+		//Abrimos nuestro archivo
+		// $archivo = fopen(dirname(__FILE__)."\OCOMPRA.csv", "r");
+		$archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
+		//Lo recorremos
+  		while (($datos = fgetcsv($archivo, ",")) == true)
+  		{
+    		$num = count($datos);
+    		$linea++;
+    		//Recorremos las columnas de esa linea
+    		if($linea==1){
+
+     		echo "salto encabezado";
+      		continue;}
+
+      		for ($columna = 0; $columna < $num; $columna++){
+          		echo ($datos[$columna]);
+          		$datos[$columna];
+        		}
+        		echo $datos[0];
+        		$existencia=Producto::verifica_existencia($datos[0]);
+        		echo "Existencia".$existencia;
+        		if($existencia==0){
+        		echo "Entro al for para guarda";
+          		$producto = new Producto($datos[0],$datos[1],$datos[2],
+                            		$datos[3],$datos[4],$datos[5],
+                            		$datos[6],$datos[7],$datos[8],
+                            		$datos[9],$datos[10],$datos[11],
+                            		$datos[12],$datos[12],NULL,NULL);
+
+                            		Producto::save($producto);
+    		}else{
+      		echo("(" . "ya existe se actualizara" . $datos[0] . ")" . $linea);
+      		Producto::update_existencia($datos[0],$datos[6]);
+       		$linea--;
+    		}
+
+    		if(!in_array($datos[2],$familias)){
+      		$familias[]=$datos[2];
+    		}
+    		echo ("<br>");
+  		}
+		echo "<script>alert(".($linea-1).");</script>";
+		print_r($familias);
+		//Cerramos el archivo
+		fclose($archivo);
+	}
 }//End class
 ?>

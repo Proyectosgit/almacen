@@ -25,6 +25,8 @@
         <!-- <li><a href="?controller=producto&action=register">Ingresar Producto</a></li> -->
         <li><a href="?controller=producto&action=index"><span class="oi" data-glyph="eye"></span>
         Ver Producto</a></li>
+        <li><a href="?controller=producto&action=carga_db_productos"><span class="oi" data-glyph="eye"></span>
+        carga db</a></li>
         <!-- <li><a href="?controller=familia&action=register"><span class="oi" data-glyph="task"></span> -->
         <!-- Alta Familia</a></li> -->
         <!-- <li><a href="?controller=familia&action=index"><span class="oi" data-glyph="eye"></span> -->
