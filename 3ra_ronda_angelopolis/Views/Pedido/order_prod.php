@@ -65,7 +65,7 @@
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php// echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php// echo $pedido->id_pedido ?>">Eliminar</a> </td> -->
 			        <?php }else{?>
-						<td bgcolor=#3ADF00><?php //echo $order["num_prod"];?></td>
+						<td bgcolor=#3ADF00><?php echo $order["num_prod"];?></td>
 				    <?php } ?>
 						<td><?php echo $order['descrip'];?></td>
 						<td class="precio_unitario"><?php echo $order["ultcosto"];?></td>

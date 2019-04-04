@@ -16,16 +16,16 @@
 										<!-- <th>Codigo <br>Familia</th> -->
 										<!-- <th>Empaque</th> -->
 										<th>Total</th>
-										<th>Stock <br>Minimo</th>
+										<!-- <th>Stock <br>Minimo</th> -->
 										<th>Stock <br>Maximo</th>
 										<th>Existencia</th><!--inventaria1-->
 										<!-- <th>Costo <br>promedio</th> -->
 										<!-- <th>Impuesto</th> -->
 										<!-- <td>Estatus</td> -->
 										<th>Precio <br> Unitario</th>
-										<th>Unidad</th>
+										<!-- <th>Unidad</th> -->
 										<th>Equivale</th>
-										<th>Codigo <br>Ingrediente</th>
+										<!-- <th>Codigo <br>Ingrediente</th> -->
 										<!-- <td colspan=2 >Acciones</td> -->
 									</tr>
 								</thead>
@@ -35,20 +35,26 @@
 									$total_prod=0;
 									foreach ($productos as $producto) {
 										$pedido=$producto->stockmax - $producto->inventa1;
-										$costo_producto=$producto->ultcosto*$pedido;
-										if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
+										if($pedido>=0){
+											$costo_producto = $producto->ultcosto*$pedido;
+										}else{
+											$costo_producto = 0;
+										}
+										$pedido=round($pedido,2);
+										$costo_producto=round($costo_producto,2);
+										// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 											?>
 											<tr>
 												<td class="small"><?php echo $producto->descrip;?></td>
 												<!-- <td bgcolor="#3ADF00"><?php //echo $pedido;?></td> -->
-												<td><input class="cantidad" type="number" name="<?php echo $producto->codingre;?>" value="<?php echo $pedido;?>" required></td> <!--Permite modificar la cantidad pedida -->
-												<td class="costo_producto"><?php echo $costo_producto;?></td>
-												<?php $costo_total=$costo_total+$costo_producto;
-															$total_prod=$total_prod+1;
+												<td><input class="cantidad" type="number" name="<?php echo $producto->codingre;?>" value="<?php if($pedido>=0){echo number_format($pedido,2);}else{echo 0;};?>" required></td> <!--Permite modificar la cantidad pedida -->
+												<td class="costo_producto"><?php echo number_format($costo_producto,2);?></td>
+												<?php 	$costo_total=$costo_total+$costo_producto;
+														$total_prod=$total_prod+1;
 												?>
 												<!-- <td><?php //echo $producto->familia;?></td> -->
 												<!-- <td><?php //echo $producto->empaque;?></td> -->
-												<td class="stock_mix"><?php echo $producto->stockmin;?></td>
+												<!-- <td class="stock_mix"><?php //echo $producto->stockmin;?></td> -->
 												<td class="stock_max"><?php echo $producto->stockmax;?></td>
 												<td class="existencia"><?php echo $producto->inventa1;?></td>
 												<td class="precio_unitario"><?php echo $producto->ultcosto;?></td>
@@ -57,11 +63,11 @@
 												<!-- <td><?php //echo $producto->status;?></td> -->
 												<!-- <td><a href="Controllers/producto_controller.php?action=update&codingre=<?php// echo $producto->codingre ?>">Actualizar</a> </td> -->
 												<!-- <td><a href="Controllers/producto_controller.php?action=delete&codingre=<?php// echo $producto->codingre ?>">Eliminar</a> </td> -->
-												<td><?php echo $producto->unidad;?></td>
+												<!-- <td><?php //echo $producto->unidad;?></td> -->
 												<td><?php echo $producto->equivale;?></td>
-												<td><?php echo $producto->codingre; ?></td>
+												<!-- <td><?php// echo $producto->codingre; ?></td> -->
 											</tr>
-									<?php  }//end if
+									<?php  //}//end if
 									}//end foreach
 
 									//require_once("../librerias/js/verifica_cambio_pedido.js");
@@ -69,7 +75,8 @@
 									//$modificados = "<script>datos</script>";
 	 								?>
 	 											<tr>
-													<td colspan="10" id="costo_total">Total de Compra = <?php echo $costo_total?></td>
+													<?php $costo_total=round($costo_total,2)?>
+													<td colspan="10" id="costo_total">Total de Compra = <?php echo number_format($costo_total,2);?></td>
 												</tr>
 								</tbody>
 							</table>

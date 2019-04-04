@@ -144,7 +144,7 @@ class Producto
 
 		$listaProductos =[];
 		$db=Db::getConnect();
-		$select=$db->prepare('SELECT * FROM productos WHERE familia=:familia');
+		$select=$db->prepare('SELECT * FROM productos WHERE familia=:familia ORDER BY descrip ASC');
 		$select->bindValue('familia',$familia);
 		$select->execute();
 		foreach($select->fetchAll() as $productoDb)

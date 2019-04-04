@@ -10,6 +10,7 @@
 		}
 
 		public function realizar_pedido($cod_fam,$modificados,$costo_total,$observacion){
+			set_time_limit(300);
 			session_start();
 			require_once('../Models/pedido.php');
 			require_once('../Models/producto.php');
@@ -53,33 +54,37 @@
 						//Guarda la relacion entre producto y pedido
 					 	foreach ($productos as $producto) {
 							$codingre=$producto->codingre;
-							if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
+							// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 							    if(in_array($codingre,$lista_productos)){
 									$indice=array_search($codingre,$lista_productos);
-									$num_prod=$lista_cantidad[$indice];
- 									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
+									$pedido=$lista_cantidad[$indice];
+ 									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
  									Relacion::save($relacion);
 									Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a bd productos
 								}
 								// continue;
 								else{
-											$num_prod=$producto->stockmax-$producto->inventa1;
-											$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
-											Relacion::save($relacion);
-											Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
+											$pedido=$producto->stockmax-$producto->inventa1;
+											if($pedido>0){
+												$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
+												Relacion::save($relacion);
+												Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
+											}
 
 								  	}
-								}
+								// }//End If filtro
 						}
 				}else{
 					foreach ($productos as $producto) {
-						if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
+						// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 							$codingre=$producto->codingre;
-							$num_prod=$producto->stockmax-$producto->inventa1;
-							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
+							$pedido=$producto->stockmax-$producto->inventa1;
+						if($pedido>0){
+							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
 							Relacion::save($relacion);
 							Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
 						}
+						// }
 					}
 				}
 			}

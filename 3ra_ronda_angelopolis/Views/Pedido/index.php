@@ -41,7 +41,7 @@
 					<td> &nbsp; </td>
    	   	<?php  } ?>
 					<!-- <td><?php// echo $pedido->autoriza;?></td> -->
-					<td><?php echo $pedido->costo_total;?></td>
+					<td><?php echo number_format($pedido->costo_total,2);?></td>
 					<td><?php echo $pedido->solicita;?></td>
 					<td><?php echo $pedido->estado;?></td>
 					<!-- <td><?php// echo $pedido->observaciones;?></td> -->
