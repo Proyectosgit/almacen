@@ -121,13 +121,6 @@ class Productos
 		$update->execute();
 	}
 
-	public static function update_existence($codingre,$inventa1){
-		$db=Db::getConnect();
-		$update=$db->prepare('UPDATE productos SET inventa1=:inventa1 WHERE codingre=:codingre');
-		$update->bindValue('inventa1',$inventa1);
-		$update->bindValue('codingre',$codingre);
-		$update->execute();
-	}
 
 	// la función para eliminar por el id
 	public static function delete($codingre){
@@ -168,6 +161,29 @@ class Productos
 														$productoDB['costoprome'],$productoDB['impuesto'],$productoDB['pedido'],
 														$productoDB['estatus'],$productoDB['inventaFisico'],$productoDB['diferecia']);
 		return $productos;
+	}
+//Anterior
+	// public static function update_existence($codingre,$inventa1){
+	// 	$db=Db::getConnect();
+	// 	$update=$db->prepare('UPDATE productos SET inventa1=:inventa1 WHERE codingre=:codingre');
+	// 	$update->bindValue('inventa1',$inventa1);
+	// 	$update->bindValue('codingre',$codingre);
+	// 	$update->execute();
+	// }
+
+	public static function update_existencia($codingre,$inventa1,$ultcosto,$stockmax,$pedido,$status){
+		$db=Db::getConnect();
+		$update=$db->prepare('UPDATE productos
+							SET inventa1=:inventa1, ultcosto=:ultcosto, stockmax=:stockmax,
+ 								pedido=:pedido, status=:status
+ 							WHERE codingre=:codingre');
+		$update->bindValue('codingre',$codingre);
+		$update->bindValue('inventa1',$inventa1);
+		$update->bindValue('ultcosto',$ultcosto);
+		$update->bindValue('stockmax',$stockmax);
+		$update->bindValue('pedido',$pedido);
+		$update->bindValue('status',$status);
+		$update->execute();
 	}
 
 	public static function verifica_existencia($codingre){

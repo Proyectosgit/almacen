@@ -293,7 +293,7 @@ class Producto
 
 	public static function carga_db(){
 
-		set_time_limit(300);
+		set_time_limit(500);
 		// require_once("connection.php");
 		// require_once("productos.php");
 

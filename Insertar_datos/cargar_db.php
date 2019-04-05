@@ -12,7 +12,8 @@ require_once("productos.php");
 $linea = 0;
 $familias=[];
 //Abrimos nuestro archivo
-$archivo = fopen(dirname(__FILE__)."\OCOMPRA.csv", "r");
+// $archivo = fopen(dirname(__FILE__)."\OCOMPRA.csv", "r");
+$archivo = fopen("C:\PUE\\3ajuarez"."\OCOMPRA.csv", "r");
 //Lo recorremos
   while (($datos = fgetcsv($archivo, ",")) == true)
   {
@@ -42,7 +43,8 @@ $archivo = fopen(dirname(__FILE__)."\OCOMPRA.csv", "r");
                             Productos::save($producto);
     }else{
       echo("(" . "ya existe se actualizara" . $datos[0] . ")" . $linea);
-      Productos::update_existence($datos[0],$datos[6]);
+      // Productos::update_existence($datos[0],$datos[6]);//Solo actualiza inventario
+    Productos::update_existencia($datos[0],$datos[6],$datos[9],$datos[7],$datos[12],$datos[13]);
        $linea--;
     }
 
