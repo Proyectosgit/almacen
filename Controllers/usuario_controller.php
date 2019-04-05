@@ -82,22 +82,23 @@
 				switch($_SESSION["id_sesion"]){
 						case "almacenista":
 							header("Location: ../".$usuario->ruta."?controller=pedido&action=recibir_pedido");
-							Producto::carga_db();
+							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
 						break;
 						case "cocina":
 							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod");
-							Producto::carga_db();
+							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
 						break;
 						case "gerente":
 							header("Location: ../".$usuario->ruta."?controller=pedido&action=ver_pedidos");
-							Producto::carga_db();
+							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
 						break;
 						case "administrador":
 							header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
-							exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
+							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
 						break;
 						case "barra":
 							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
+							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
 						break;
 						case "root":
 							header("Location: ../?controller=usuario&action=register");
