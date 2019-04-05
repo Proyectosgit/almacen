@@ -73,7 +73,7 @@
 				$_SESSION["nombre"] = $usuario->nombre;
 				$_SESSION["ruta"] = $usuario->ruta;
 				$_SESSION["visible"] = "true";
-				echo $_SESSION['id_sesion'];
+				// echo $_SESSION['id_sesion'];
 				//Actualiza datos ocompra
 				require_once("../".$usuario->ruta."/Config/config.php");
 				require_once("../".$usuario->ruta."/Config/connection.php");
@@ -94,11 +94,7 @@
 						break;
 						case "administrador":
 							header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
-							// Producto::carga_db();
-							// exec("C:/xampp/htdocs/almacen/Insertar_datos/cargar_db.bat");
-							echo "Ejecyto";
 							exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
-							// Producto::carga_db();
 						break;
 						case "barra":
 							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
@@ -107,7 +103,8 @@
 							header("Location: ../?controller=usuario&action=register");
 						break;
 						default:
-							header("Location: ../?controller=usuario&action=error_cargo");
+							// header("Location: ?controller=usuario&action=error_cargo");
+							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
 						break;
 				}
 				// Producto::carga_db();

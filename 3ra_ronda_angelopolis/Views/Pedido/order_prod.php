@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	if(isset($_SESSION["id_sesion"])){
-		if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente") && $_SESSION["ruta"]==SUCURSAL){
+	// if(isset($_SESSION["id_sesion"])){
+		// if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente") && $_SESSION["ruta"]==SUCURSAL){
 ?>
 
   	<head>
@@ -38,8 +38,8 @@
 						<th>Productos <br> pedido</th>
 						<th>Descripción</th>
 						<th>Costo <br>unitario</th>
-						<th>Costo <br>productos</th>
-		                <th>Id Producto</th>
+						<th>Total</th><!-- <th>Costo <br>productos</th> -->
+		                <!-- <th>Id Producto</th> -->
 		                <!-- <th>Fecha</th> -->
 		                <th>Existencia</th>
                     	<th>Stock <br> máximo</th>
@@ -53,6 +53,7 @@
                   	$total_prod=0;
 	                foreach ($select->fetchAll() as $order) {
                         $costo_producto=$order['ultcosto']*$order['num_prod'];
+						$costo_producto=round($costo_producto,2);
                     ?>
 			        <tr>
                 	<!-- <td id="id_pedido"><?php //echo $order['id_pedido']; ?></td> -->
@@ -60,7 +61,7 @@
 						<!-- <td bgcolor=#3ADF00><?php //echo $order["num_prod"];?></td> -->
 				        <?php if($_GET["estatus"]=="pedido"){ ?>
 						<!-- <td bgcolor="#3ADF00"><?php //echo $order['num_prod'];?></td> --> <!--Indica la cantidad de productos pedidos-->
-				        <td><input class="cantidad" type="number" name="<?php echo$order['codingre']?>" value="<?php echo $order['num_prod'];?>" required></td> <!--modifica cantidad-->
+				        <td><input class="cantidad" type="number" name="<?php echo $order['codingre']?>" value="<?php echo $order['num_prod'];?>" required></td> <!--modifica cantidad-->
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php// echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php// echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php// echo $pedido->id_pedido ?>">Eliminar</a> </td> -->
@@ -70,11 +71,11 @@
 						<td><?php echo $order['descrip'];?></td>
 						<td class="precio_unitario"><?php echo $order["ultcosto"];?></td>
 						<!-- <td id="costototalmod"><?php //echo $order["costo_total"];?></td> -->
-						<td class="costo_producto"><?php echo $costo_producto;?></td>
+						<td class="costo_producto"><?php echo number_format($costo_producto,2);?></td>
 						<?php $costo_total=$costo_total+$costo_producto;
 						$total_prod=$total_prod+1;
 						?>
-				        <td><?php echo $order['codingre']; ?></td>
+				        <!-- <td><?php //echo $order['codingre']; ?></td> -->
 				        <!-- <td><?php //echo $order['fecha']; ?></td> -->
 				        <td class="existencia"><?php echo $order['inventa1'];?></td>
 				        <td class="stock_max"><?php  echo $order['stockmax'];?></td>
@@ -97,18 +98,18 @@
         <?php   }?>
 
 	</section>
-
+			<?php $costo_total = round($costo_total,2)?>
 			<div align="center">
-				<h2 id="costototalmod">Costo Total: <?php echo $costo_total;?> </h2>
-				<h4>Fecha del pedido: <?php echo $order['fecha_pedido'];?> </h4>
-				 <a href="../?controller=pedido&action=ver_pedidos" class="btn btn-primary">Regresar</a><br>
+				<h2 id="costototalmod">Costo Total: <?php echo number_format($costo_total,2) ;?> </h2>
+				<h4> Fecha del pedido: <?php echo $order['fecha_pedido'];?> </h4>
+				 <a href="../?controller=pedido&action=ver_pedidos" class="btn btn-primary">Regresar</a><br><br><br>
 			<div>
 </body>
 
 <?php
-		}else{
+		// }else{
 			//Inclur una pagina para redireccionar a index
-			header('Location: ../Views/sesion/no_sesion.php');
-		}
-}
+			// header('Location: ../Views/sesion/no_sesion.php');
+		// }
+// }
 ?>

@@ -41,7 +41,7 @@
 						'producto'=>['index','register','search_prod','search_prod_fam','search_prod_bar','search_prod_barra','button_download_db','carga_db_productos'],
 						'familia'=>['index','register'],
 						'pedido'=>['index','register', 'recibir_pedidos','orderDate',"ver_autorizados","ver_pedido_autorizado","ver_pedido_cancelado",
-												'ver_pedidos','ver_pedido_autorizado_todos','ver_pedido_cancelado_todos','error_order_db'],
+												'ver_pedidos','ver_pedido_autorizado_todos','ver_pedido_cancelado_todos','error_order_db','ver_pedidos_rango'],
 						'relacion'=>['index','register']
 						);
 

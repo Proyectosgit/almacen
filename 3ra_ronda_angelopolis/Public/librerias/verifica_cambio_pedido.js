@@ -21,10 +21,9 @@ $(document).ready(function(){
     cantidad = $(this).parents("tr").find(".cantidad").val();;
     id_producto = $(this).parents("tr").find(".cantidad").attr("name");
     stock_min = $(this).parents("tr").find(".cantidad").attr("min");
-    stock_min = $(this).parents("tr").find(".stock_min").html();
+    // stock_min = $(this).parents("tr").find(".stock_min").html();
     stock_max = $(this).parents("tr").find(".stock_max").html();
     existencia = $(this).parents("tr").find(".existencia").html();
-
     cantidad_aux = stock_max-existencia;
 
     if(cantidad.match(/^[0-9]+/) && !($(this).parents("tr").find(".cantidad").val().length == 0)){
@@ -35,7 +34,7 @@ $(document).ready(function(){
       var precio_unitario=$(this).parents("tr").find(".precio_unitario").html();
 
       var costo_producto=precio_unitario*cantidad;
-      console.log(costo_producto);
+      // console.log(costo_producto);
       costo_producto=costo_producto.toFixed(2)
       $(this).parents("tr").find(".costo_producto").html(costo_producto.toLocaleString());
 
@@ -44,25 +43,21 @@ $(document).ready(function(){
       exp = new RegExp(id_producto+":[0-9]+","g");
       // console.log("Expresion"+exp);
       if (datos.match(exp)) {
-        // console.log("Resultado: "+datos.match(exp));
         rem=datos.match(exp)
         datos=datos.replace(rem[0],id_producto+":"+cantidad);
       }
       else {
         datos=datos+id_producto+":"+cantidad+" ";
       }
-      // console.log(datos);
-      // console.log(typeof(datos));
 
       //calcula la suma total de los productos
       var totalDeuda=0;
       $(".costo_producto").each(function(){
         totalDeuda+=parseFloat($(this).html().replace(",","")||0);
       });
+        
 
-        // totalDeuda = totalDeuda.toFixed(2);
       $("#costo_total").html("Total de Compra = " + totalDeuda.toLocaleString());
-
       //Pone los datos modificados en un value de un relacion_pedido_producto
       $("#array_modifica").val(datos);
       $("#costo_total_mod").val(totalDeuda);

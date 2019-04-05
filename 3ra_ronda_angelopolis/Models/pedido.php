@@ -377,5 +377,24 @@ class Pedido
 		public static function get_id($conn){
 		$conn->lastInsertId();
 		}
+
+		public static function show_order_range($fecha_inicio,$fecha_fin,$status){
+			$db=Db::getConnect();
+			$query=$db->prepare('SELECT *  FROM pedidos WHERE estado=:status AND fecha_pedido BETWEEN :fecha_inicio AND :fecha_fin ORDER BY fecha_pedido ASC');
+			$query->bindValue('fecha_inicio',$fecha_inicio);
+			$query->bindValue('fecha_fin',$fecha_fin);
+			$query->bindValue('status',$status);
+			$query->execute();
+			foreach ($query->fetchAll() as $pedido) {
+				$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'], $pedido['hora'], $pedido['hora_autoriza_cancela'],
+											$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
+											$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],
+											$pedido['costo_total']);
+			}
+
+			if(isset($listaPedidos)){
+				return($listaPedidos);
+			}
+		}
 }
 ?>

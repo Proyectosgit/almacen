@@ -276,11 +276,18 @@ class Producto
 		return $count["cantidad"];
 	}
 
-	public static function update_existencia($codingre,$inventa1){
+	public static function update_existencia($codingre,$inventa1,$ultcosto,$stockmax,$pedido,$status){
 		$db=Db::getConnect();
-		$update=$db->prepare('UPDATE productos SET inventa1=:inventa1 WHERE codingre=:codingre');
-		$update->bindValue('inventa1',$inventa1);
+		$update=$db->prepare('UPDATE productos
+							SET inventa1=:inventa1, ultcosto=:ultcosto, stockmax=:stockmax,
+ 								pedido=:pedido, status=:status
+ 							WHERE codingre=:codingre');
 		$update->bindValue('codingre',$codingre);
+		$update->bindValue('inventa1',$inventa1);
+		$update->bindValue('ultcosto',$ultcosto);
+		$update->bindValue('stockmax',$stockmax);
+		$update->bindValue('pedido',$pedido);
+		$update->bindValue('status',$status);
 		$update->execute();
 	}
 
@@ -296,6 +303,7 @@ class Producto
 		// $archivo = fopen(dirname(__FILE__)."\OCOMPRA.csv", "r");
 		$archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
 		//Lo recorremos
+		echo "Se esta cargando o actualizando la base de datos <br> por favor espera un momento...";
   		while (($datos = fgetcsv($archivo, ",")) == true)
   		{
     		$num = count($datos);
@@ -303,18 +311,18 @@ class Producto
     		//Recorremos las columnas de esa linea
     		if($linea==1){
 
-     		echo "salto encabezado";
+     		// echo "salto encabezado";
       		continue;}
 
       		for ($columna = 0; $columna < $num; $columna++){
-          		echo ($datos[$columna]);
+          		// echo ($datos[$columna]);
           		$datos[$columna];
         		}
-        		echo $datos[0];
+        		// echo $datos[0];
         		$existencia=Producto::verifica_existencia($datos[0]);
-        		echo "Existencia".$existencia;
+        		// echo "Existencia".$existencia;
         		if($existencia==0){
-        		echo "Entro al for para guarda";
+        		// echo "Entro al for para guarda";
           		$producto = new Producto($datos[0],$datos[1],$datos[2],
                             		$datos[3],$datos[4],$datos[5],
                             		$datos[6],$datos[7],$datos[8],
@@ -323,18 +331,18 @@ class Producto
 
                             		Producto::save($producto);
     		}else{
-      		echo("(" . "ya existe se actualizara" . $datos[0] . ")" . $linea);
-      		Producto::update_existencia($datos[0],$datos[6]);
+      		// echo("(" . "ya existe se actualizara" . $datos[0] . ")" . $linea);
+      		Producto::update_existencia($datos[0],$datos[6],$datos[9],$datos[7],$datos[12],$datos[13]);
        		$linea--;
     		}
-
-    		if(!in_array($datos[2],$familias)){
-      		$familias[]=$datos[2];
-    		}
-    		echo ("<br>");
+    		// if(!in_array($datos[2],$familias)){
+      		// $familias[]=$datos[2];
+    		// }
+    		// echo ("<br>");
   		}
 		echo "<script>alert(".($linea-1).");</script>";
-		print_r($familias);
+		echo "Exito....";
+		// print_r($familias);
 		//Cerramos el archivo
 		fclose($archivo);
 	}

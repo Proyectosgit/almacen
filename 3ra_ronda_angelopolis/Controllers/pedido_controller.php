@@ -76,6 +76,11 @@
 		public function error_order_db(){
 			require_once('Views/Pedido/error_order.php');
 		}
+
+		public function ver_pedidos_rango(){
+			require_once('Config/config.php');
+			require_once('Views/Pedido/search_prod_range.php');
+		}
 	}
 
 	//obtiene los datos del pedido desde la vista y redirecciona a PedidoController.php
@@ -203,6 +208,11 @@
 				require_once('../Models/pedido.php');
 				$select=Pedido::pedidosProd($_GET['id_pedido']);
 				require_once('../Views/Pedido/order_prod_almacen.php');
+
+			}elseif($_GET['action']=='ver_pedidos_rango_autorizados'){
+				require_once('../Models/pedido.php');
+				$select = Pedido::show_order_range($_GET['fecha_inicio'],$_GET['fecha_fin'],$_GET['status']);
+				require_once('../Views/Pedido/search_order_range_view.php');
 			}
 		}
 	}

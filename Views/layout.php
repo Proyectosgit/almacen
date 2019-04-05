@@ -42,7 +42,7 @@
 					header("Location: ../?controller=usuario&action=register");
 						break;
 				default:
-					header("Location: ../?controller=usuario&action=error_cargo");
+					header("Location: ?controller=usuario&action=error_cargo");
 						break;
 			}
 			?>
