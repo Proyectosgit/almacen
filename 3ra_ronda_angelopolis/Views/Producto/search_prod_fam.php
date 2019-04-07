@@ -13,7 +13,7 @@
 									<tr>
 										<th>Descripción</th>
 										<th>Pedido</th>
-										<!-- <th>Codigo <br>Familia</th> -->
+										<th>Codigo <br>Familia</th>
 										<!-- <th>Empaque</th> -->
 										<th>Total</th>
 										<!-- <th>Stock <br>Minimo</th> -->
@@ -52,7 +52,7 @@
 												<?php 	$costo_total=$costo_total+$costo_producto;
 														$total_prod=$total_prod+1;
 												?>
-												<!-- <td><?php //echo $producto->familia;?></td> -->
+												<td><?php echo $producto->familia;?></td>
 												<!-- <td><?php //echo $producto->empaque;?></td> -->
 												<!-- <td class="stock_mix"><?php //echo $producto->stockmin;?></td> -->
 												<td class="stock_max"><?php echo $producto->stockmax;?></td>

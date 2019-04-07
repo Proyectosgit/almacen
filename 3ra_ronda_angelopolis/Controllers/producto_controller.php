@@ -163,11 +163,15 @@
 
 		public function search_prod(){
 			require_once('Config/config.php');
+			require_once('Models/familia.php');
+			$listaFamilias = Familia::get_fam_tipo("cocina");
 			require_once('Views/Producto/search_prod.php');
 		}
 
 		public function search_prod_bar(){
 			require_once('Config/config.php');
+			require_once('Models/familia.php');
+			$listaFamilias = Familia::get_fam_tipo("barra");
 			require_once('Views/Producto/search_prod_bar.php');
 		}
 

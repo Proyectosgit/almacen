@@ -9,16 +9,20 @@
           Realizar pedido
           </a>
         </li>
-        <li class="active">
+
+        <li><a href="?controller=pedido&action=ver_pedidos_rango"><span class="oi" data-glyph="magnifying-glass"></span>
+        Buscar Pedidos</a></li>
+
+        <!-- <li class="active">
           <a href="?controller=pedido&action=ver_pedido_autorizado"><span class="oi" data-glyph="check"></span>
           Pedidos autorizados
           </a>
-        </li>
-        <li class="active">
+        </li> -->
+        <!-- <li class="active">
           <a href="?controller=pedido&action=ver_pedido_cancelado"><span class="oi" data-glyph="x"></span>
             Pedidos cancelados
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="../?controller=usuario&action=cerrar"><span class="oi" data-glyph="account-logout"></span>
           Cerrar sesion

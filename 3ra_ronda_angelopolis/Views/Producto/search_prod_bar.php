@@ -1,8 +1,8 @@
 <?php
 	if(isset($_SESSION["id_sesion"])){
 		if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="barra")&& $_SESSION["ruta"]==SUCURSAL){
-
 ?>
+
 				<section>
 				<div class="container">
 					<div class="row">
@@ -15,23 +15,11 @@
 									<td><label>Productos por categoria: &nbsp; </label></td>
 									<td>
 										<select name='argumento'>
-											<option value='BEBID'>Bebida</option>
-											<option value='BRAND'>Brandy</option>
-											<option value='CERVE'>Cerveza</option>
-											<option value='CHAMP'>Champagne</option>
-											<option value='CIGAR'>Cigarro</option>
-											<option value='ENERG'>Energéticas</option>
-											<option value='GINEB'>Ginebra</option>
-											<option value='HIELO'>Hielo</option>
-											<option value='COGNA'>Cogna</option>
-											<option value='JEREZ'>Jerez</option>
-											<option value='LICOR'>Licor</option>
-											<option value='MEZCA'>Mezcal</option>
-											<option value='RONN'>Ron</option>
-											<option value='TEQUI'>Tequila</option>
-											<option value='VINOS'>Vino</option>
-											<option value='VODKA'>Vodka</option>
-											<option value='WHISK'>Whisky</option>
+											<?php
+												foreach($listaFamilias as $familia){
+													echo "<option value='" . $familia->cod_familia . "'>" .$familia->descripcion. "</option>";
+												}
+											?>
 										</select>
 									</td>
 								</tr>

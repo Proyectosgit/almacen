@@ -1,6 +1,6 @@
 <?php
      if(isset($_SESSION["id_sesion"])){
-         if(($_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="administrador") && $_SESSION["ruta"]==SUCURSAL){
+         if(($_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="barra" || $_SESSION["id_sesion"]=="cocina") && $_SESSION["ruta"]==SUCURSAL){
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
         <div class="row">
         <div class="mx-auto">
             <form action="Controllers/pedido_controller.php" method="get">
-                <input type="hidden" name="action" value="ver_pedidos_rango_autorizados"/>
+                <input type="hidden" name="action" value="ver_pedidos_rango_estatus"/>
                 <select name="status"/>
                     <option value="autorizado">Autorizado</option>
                     <option value="pedido">Pedido</option>
@@ -42,7 +42,7 @@
 <?php
          }else{
             //Pagina que redirecciona al index
-            // header('Location: ../Views/sesion/no_sesion.php');
+            header('Location: ../Views/sesion/no_sesion.php');
         }
     }
  ?>

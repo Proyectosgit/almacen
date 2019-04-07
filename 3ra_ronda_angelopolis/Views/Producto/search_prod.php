@@ -1,7 +1,6 @@
 <?php
 	if(isset($_SESSION["id_sesion"])){
 		if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina")&& $_SESSION["ruta"]==SUCURSAL){
-
 ?>
 
 <section>
@@ -17,16 +16,11 @@
 					<td><label>Productos por categoria: &nbsp; </label></td>
 					<td>
 						<select name='argumento'>
-							<option value='ABARR'>Abarrote</option>
-							<option value='BEBID'>Bebida</option>
-							<option value='BRAND'>Brandy</option>
-							<option value='CARNE'>Carne</option>
-							<option value='CERVE'>Cerveza</option>
-							<option value='CHAMP'>champagne</option>
-							<option value='CIGAR'>Cigarro</option>
-							<option value='COGNA'>Cogna</option>
-							<option value='CONGE'>Congelado</option>
-							<option value='EMBUT'>Embutido</option>
+							<?php
+							foreach($listaFamilias as $familia){
+								echo "<option value='" . $familia->cod_familia . "'>" . $familia->descripcion . "</option>";
+							}
+							?>
 						</select>
 					</td>
 				</tr>

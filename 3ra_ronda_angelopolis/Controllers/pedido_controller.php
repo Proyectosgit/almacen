@@ -144,8 +144,10 @@
 
 				PedidoProducto::change_order_status_relation($_GET['id_pedido'],$_GET['estado']);
 				//Genera el archivo csv y lo descarga
-				$productos=Producto::all();
-				Producto::create_csv_automatic($productos,NAME_CSV);
+				$productos=Producto::all();//Descomentar para ingresar todos los productos
+				// $productos = Pedido::getOrderByIdToCsv($_GET['id_pedido']);
+				$namecsv_and_pedido = NAME_CSV . "pedido" . $_GET['id_pedido']."_";
+				Producto::create_csv_automatic($productos,$namecsv_and_pedido);
 
 				if($_SESSION['id_sesion']=="administrador"){
 					header("Location: ../?controller=pedido&action=index");
@@ -209,8 +211,10 @@
 				$select=Pedido::pedidosProd($_GET['id_pedido']);
 				require_once('../Views/Pedido/order_prod_almacen.php');
 
-			}elseif($_GET['action']=='ver_pedidos_rango_autorizados'){
+			}elseif($_GET['action']=='ver_pedidos_rango_estatus'){
+				// require_once("../Config/config.php");
 				require_once('../Models/pedido.php');
+				session_start();
 				$select = Pedido::show_order_range($_GET['fecha_inicio'],$_GET['fecha_fin'],$_GET['status']);
 				require_once('../Views/Pedido/search_order_range_view.php');
 			}

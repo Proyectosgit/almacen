@@ -6,7 +6,7 @@
       <ul class="nav">
         <!-- <li><a href="?controller=pedido&action=index"><span class="oi" data-glyph="key"></span> --><!--Esta linea dirige a todos los pedidos-->
         <li><a href="?controller=pedido&action=index"><span class="oi" data-glyph="key"></span>
-        Pedidos</a></li>
+        Autorizar pedidos</a></li>
         <!-- <li><a href="?controller=relacion&action=register">Ingresar relacion_pedido_producto</a></li> -->
         <!-- <li><a href="?controller=relacion&action=index">Productos por pedidos</a></li> -->
         <li><a href="?controller=producto&action=search_prod"><span class="oi" data-glyph="cart"></span>
@@ -14,10 +14,10 @@
         <li><a href="?controller=producto&action=search_prod_bar"><span class="oi" data-glyph="cart"></span>
         Realizar pedido Barra</a></li>
         <!-- <li><a href="?controller=pedido&action=recibir_pedidos">Almacenista</a></li> -->
-        <li><a href="?controller=pedido&action=orderDate"><span class="oi" data-glyph="book"></span>
-        Consultar pedidos</a></li>
+        <!-- <li><a href="?controller=pedido&action=orderDate"><span class="oi" data-glyph="book"></span> -->
+        <!-- Consultar pedidos</a></li> -->
         <li><a href="?controller=producto&action=button_download_db"><span class="oi" data-glyph="cloud-download"></span>
-        Descargar Base de Datos</a></li>
+        Descargar DB</a></li>
         <li class="active"><a href="?controller=usuario&action=register"><span class="oi" data-glyph="person"></span>
         Alta Usuario</a></li>
         <li><a href="?controller=usuario&action=index"><span class="oi" data-glyph="people"></span>
