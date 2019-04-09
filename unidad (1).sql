@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-04-2019 a las 19:01:00
+-- Tiempo de generación: 08-04-2019 a las 00:08:33
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -70,8 +70,10 @@ INSERT INTO `usuario` (`id_user`, `username`, `password`, `cargo`, `nombre`, `em
 (2, 'jesus', '12345', 'cocina', 'jesus paez', 'jesus@gmail.com', 1, '3ra_ronda_angelopolis'),
 (3, 'paola', '12345', 'gerente', 'paola paez', 'paola@gmail.com', 1, '3ra_ronda_angelopolis'),
 (4, 'raul', '12345', 'barra', 'raul sanchez', 'raul@gmail.com', 1, '3ra_ronda_angelopolis'),
-(6, 'ivan_colula', '12345', 'root', 'ivan_colula', 'ivan@gmail.com', 0, ''),
-(8, 'jessica', '12345', 'barra', 'jessica', 'jessica@gmail.com', 1, '3ra_ronda_angelopolis');
+(5, 'ivan colula', '12345', 'root', 'ivan colula', 'ivan@gmail.com', 0, ''),
+(6, 'erik', '12345', 'almacenCocina', 'erik lopez', 'erik@gmail.com', 1, '3ra_ronda_angelopolis'),
+(7, 'gustavo', '12345', 'almacenBarra', 'gustavo', 'gustavo@gmail.com', 1, '3ra_ronda_angelopolis'),
+(8, 'karla', '12345', 'almacenBC', 'karla', 'karla@gmail.com', 1, '3ra_ronda_angelopolis');
 
 --
 -- Índices para tablas volcadas
