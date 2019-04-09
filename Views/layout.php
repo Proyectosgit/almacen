@@ -17,9 +17,9 @@
 		<body>
 			<?php
 			switch($_SESSION["id_sesion"]){
-				case "root":
-						require_once("Views/partials/header_admin.php");
-						break;
+				// case "root":
+				// 		require_once("Views/partials/header_admin.php");
+				// 		break;
 				case "gerente":
 						header("Location: ".$_SESSION["ruta"]."?controller=pedido&action=ver_pedidos");
 						break;
@@ -29,9 +29,9 @@
 				case "cocina":
 					header("Location: ".$_SESSION["ruta"]."?controller=producto&action=search_prod");
 						break;
-				case "gerente":
-					header("Location: ".$_SESSION["ruta"]."?controller=pedido&action=ver_pedidos");
-						break;
+				// case "gerente":
+				// 	header("Location: ".$_SESSION["ruta"]."?controller=pedido&action=ver_pedidos");
+				// 		break;
 				case "administrador":
 					header("Location: ".$_SESSION["ruta"]."?controller=usuario&action=register");
 						break;

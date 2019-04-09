@@ -87,5 +87,13 @@ class Actualiza
 
 	}
 
+	public static function get_info_archivo($ruta,$nombre_archivo){
+
+		if(file_exists($ruta . "\\" . $nombre_archivo)){
+			echo "La actualizacion del archivo es " . date("F d  Y H:i:s.", filectime($ruta."\\".$nombre_archivo));
+		}
+
+	}
+
 }
 ?>
