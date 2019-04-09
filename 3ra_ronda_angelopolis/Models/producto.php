@@ -377,14 +377,14 @@ class Producto
       		Producto::update_existencia($datos[0],$datos[6],$datos[9],$datos[7],$datos[12],$datos[13]);
        		$linea--;
     		}
-    		// if(!in_array($datos[2],$familias)){
-      		// $familias[]=$datos[2];
-    		// }
-    		// echo ("<br>");
+    		 if(!in_array($datos[2],$familias)){
+      		 $familias[]=$datos[2];
+    		 }
+    		 echo ("<br>");
   		}
 		echo "<script>alert(".($linea-1).");</script>";
 		echo "Exito....";
-		// print_r($familias);
+		print_r($familias);
 		//Cerramos el archivo
 		fclose($archivo);
 	}
