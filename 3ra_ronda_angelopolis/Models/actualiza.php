@@ -60,9 +60,9 @@ class Actualiza
 	// }
 
 	//la función para obtener un actualizacion por el id
-	public static function getByUpdate($cod_actualizacion){
+	public static function check_actualizacion($nombre_archivo,$hora,$fecha,$peso){
 		$db=Db::getConnect();
-		$select=$db->prepare('SELECT * FROM actualiza WHERE nombre_archivo =: nombre_archivo AND hora =: hora AND fecha =: fecha and peso =: peso');
+		$select=$db->prepare('SELECT * FROM actualiza WHERE nombre_archivo = :nombre_archivo AND hora = :hora AND fecha = :fecha AND peso = :peso');
         $select->bindValue('nombre_archivo',$nombre_archivo);
         $select->bindValue('hora',$hora);
         $select->bindValue('fecha',$fecha);
@@ -73,24 +73,21 @@ class Actualiza
 		return $actualizacion;
 	}
 
-	public static function get_fam_tipo($area,$ambos=NULL){
-		$listaactualizacions =[];
-		$db=Db::getConnect();
-		$select=$db->prepare('SELECT * FROM actualizacion WHERE area = :area or area = :ambos ORDER BY cod_actualizacion');
-		$select->bindValue("area",$area);
-		$select->bindValue("ambos",$ambos);
-		$select->execute();
-		foreach ($select->fetchAll() as $actualizacion) {
-			$listaactualizacions[]= new actualizacion($actualizacion['cod_actualizacion'],$actualizacion['descripcion'],$actualizacion['area']);
-		}
-		return $listaactualizacions;
-
-	}
 
 	public static function get_info_archivo($ruta,$nombre_archivo){
 
 		if(file_exists($ruta . "\\" . $nombre_archivo)){
-			echo "La actualizacion del archivo es " . date("F d  Y H:i:s.", filectime($ruta."\\".$nombre_archivo));
+			// echo "La actualizacion del archivo es " . date("F d  Y H:i:s.", filectime($ruta."\\".$nombre_archivo));
+			$fecha = date("Y-m-d",filemtime($ruta . "\\" . $nombre_archivo));
+			$hora = date("H:i:s",filemtime($ruta . "\\" . $nombre_archivo));
+			$tam = filesize($ruta. "\\" . $nombre_archivo);
+			// echo ($fecha."<br>");
+			// echo ($hora)."<br>";
+			// echo ($tam)."<br>";
+			$array = array("fecha"=>$fecha, "hora"=>$hora, "tam"=>$tam, "nombre"=>$nombre_archivo);
+			// print_r($array);
+			$ObjActualiza = new Actualiza(NULL, $nombre_archivo,$hora,$fecha,$tam);
+			return $ObjActualiza;
 		}
 
 	}
