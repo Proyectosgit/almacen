@@ -73,7 +73,6 @@
 				$_SESSION["nombre"] = $usuario->nombre;
 				$_SESSION["ruta"] = $usuario->ruta;
 				$_SESSION["visible"] = "true";
-				// echo $_SESSION['id_sesion'];
 				//Actualiza datos ocompra
 				require_once("../".$usuario->ruta."/Config/config.php");
 				require_once("../".$usuario->ruta."/Config/connection.php");
@@ -98,15 +97,11 @@
 							$actualizar = Actualiza::insert_actualizacion_metodo(PATH_CARGA_CSV_OCOMPRA);
 							$_SESSION["fecha"] = $actualizar["fecha"];
 							$_SESSION["hora"] = $actualizar["hora"];
-							$_SESSION["actualiza"] = "Listo.";
-							// echo $actualizar;
 							if($actualizar['actualiza']=='true'){
-								$_SESSION["actualiza"] = "Actualizando...";
 								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
-								// $_SESSION["actualiza"] = "Listo.";
-							}else{
-								$_SESSION["actualiza"] = "Listo";
 							}
+							$estado="Actualizando";
+							Actualiza::actualiza_estado($estado);
 							header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
 						break;
 						case "barra":
