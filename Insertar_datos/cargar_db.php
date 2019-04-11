@@ -8,6 +8,10 @@
 set_time_limit(300);
 require_once("connection.php");
 require_once("productos.php");
+require_once("../3ra_ronda_angelopolis/Models/actualiza.php");
+
+$estado="Actualizando";
+Actualiza::actualiza_estado($estado);
 
 $linea = 0;
 $familias=[];
@@ -47,15 +51,19 @@ $archivo = fopen("C:\PUE\\3ajuarez"."\OCOMPRA.csv", "r");
     Productos::update_existencia($datos[0],$datos[6],$datos[9],$datos[7],$datos[12],$datos[13]);
        $linea--;
     }
-
     if(!in_array($datos[2],$familias)){
       $familias[]=$datos[2];
     }
     echo ("<br>");
   }
 echo "<script>alert(".($linea-1).");</script>";
+
 print_r($familias);
 //Cerramos el archivo
 fclose($archivo);
+
+$estado = "Listo";
+Actualiza::actualiza_estado($estado)
+
 ?>
 </html>

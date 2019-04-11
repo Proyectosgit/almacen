@@ -78,11 +78,13 @@
 				require_once("../".$usuario->ruta."/Config/config.php");
 				require_once("../".$usuario->ruta."/Config/connection.php");
 				require_once("../".$usuario->ruta."/Models/producto.php");
+				require_once("../".$usuario->ruta."/Models/actualiza.php");
 
 				switch($_SESSION["id_sesion"]){
 						case "almacenista":
-							header("Location: ../".$usuario->ruta."?controller=pedido&action=recibir_pedido");
+							$actualizar = Actualiza::insert_actualizacion_metodo(PATH_CARGA_CSV_OCOMPRA);
 							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
+							header("Location: ../".$usuario->ruta."?controller=pedido&action=recibir_pedido");
 						break;
 						case "cocina":
 							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod");
@@ -93,8 +95,19 @@
 							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
 						break;
 						case "administrador":
+							$actualizar = Actualiza::insert_actualizacion_metodo(PATH_CARGA_CSV_OCOMPRA);
+							$_SESSION["fecha"] = $actualizar["fecha"];
+							$_SESSION["hora"] = $actualizar["hora"];
+							$_SESSION["actualiza"] = "Listo.";
+							// echo $actualizar;
+							if($actualizar['actualiza']=='true'){
+								$_SESSION["actualiza"] = "Actualizando...";
+								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
+								// $_SESSION["actualiza"] = "Listo.";
+							}else{
+								$_SESSION["actualiza"] = "Listo";
+							}
 							header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
-							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
 						break;
 						case "barra":
 							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");

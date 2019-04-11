@@ -10,7 +10,7 @@
 		}
 
 		public function realizar_pedido($cod_fam,$modificados,$costo_total,$observacion){
-			set_time_limit(300);
+			set_time_limit(600);
 			session_start();
 			require_once('../Models/pedido.php');
 			require_once('../Models/producto.php');

@@ -1,7 +1,11 @@
 <?php
 	session_start();
+	require_once("Models/actualiza.php");
+	$estado = Actualiza::get_estado();
+	$_SESSION['actualiza']=$estado;
+	// echo $estado;
 	if(isset($_SESSION["id_sesion"])){
-		echo ('Sesion iniciada: '.$_SESSION["id_sesion"]);
+		echo ('Sesion: '. $_SESSION["id_sesion"] . " --- Info. actualizada: " . $_SESSION["fecha"] . "  a  las: " . $_SESSION["hora"] . " ---- Estado: " . $_SESSION["actualiza"]);
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +28,13 @@
 				 require_once("Views/partials/header_realiza_pedido.php");
 					break;
 			case "gerente":
-					require_once("Views/partials/header_autoriza_pedido.php");
+				require_once("Views/partials/header_autoriza_pedido.php");
 					break;
 			case "administrador":
-					require_once("Views/partials/header_admin.php");
+				require_once("Views/partials/header_admin.php");
 					break;
 			case "barra":
-					require_once("Views/partials/header_realiza_pedido_barra.php");
+				require_once("Views/partials/header_realiza_pedido_barra.php");
 					break;
 			}
 			?>
