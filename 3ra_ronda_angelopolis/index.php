@@ -7,10 +7,6 @@
 	header ("Pragma: no-cache");
 	header("Expires: 0", false);
 
-	// require_once("Config/connection.php");
-	// require_once("Models/actualiza.php");
-	// $estado = Actualiza::get_estado();
-	// $_SESSION["actualiza"] = $estado;
 
 // if(isset($_SESSION["id_sesion"])){
 	 require_once('Config/connection.php');

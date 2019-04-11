@@ -17,19 +17,27 @@
 					<td>
 						<select name='argumento'>
 							<?php
-							foreach($listaFamilias as $familia){
-								echo "<option value='" . $familia->cod_familia . "'>" . $familia->descripcion . "</option>";
+							if(!empty($listaFamilias)){
+								foreach($listaFamilias as $familia){
+									echo "<option value='" . $familia->cod_familia . "'>" . $familia->descripcion . "</option>";
+								}
+							}else{
+								echo "<h2 align='center'>No existen familias registradas</h2>";
 							}
 							?>
 						</select>
 					</td>
 				</tr>
 				<tr>
+					<?php if($_SESSION['actualiza'] == "Listo"){?>
 					<td align="center"><br>
 						<button type='submit' class="btn btn-info">
 							Buscar <span class="oi" data-glyph="magnifying-glass"></span>
 						</button>
 					</td>
+					<?php }else{
+						echo "<h2 align='center'>Se está actualizando la información,<br> espera un momento...</h2>";
+					}?>
 				</tr>
 			</table>
 		</form>

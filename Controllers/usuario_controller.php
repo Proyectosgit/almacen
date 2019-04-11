@@ -100,8 +100,6 @@
 							if($actualizar['actualiza']=='true'){
 								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
 							}
-							$estado="Actualizando";
-							Actualiza::actualiza_estado($estado);
 							header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
 						break;
 						case "barra":

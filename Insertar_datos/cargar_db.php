@@ -5,7 +5,7 @@
 </head>
 <?php
 
-set_time_limit(300);
+set_time_limit(500);
 require_once("connection.php");
 require_once("productos.php");
 require_once("../3ra_ronda_angelopolis/Models/actualiza.php");
