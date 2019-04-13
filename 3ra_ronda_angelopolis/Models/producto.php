@@ -318,8 +318,9 @@ class Producto
 		return $count["cantidad"];
 	}
 
-	public static function update_existencia($codingre,$inventa1,$ultcosto,$stockmax,$pedido,$status){
-		$db=Db::getConnect();
+	public static function update_existencia($conexion,$codingre,$inventa1,$ultcosto,$stockmax,$pedido,$status){
+		// $db=Db::getConnect();
+		$db=$conexion;
 		$update=$db->prepare('UPDATE productos
 							SET inventa1=:inventa1, ultcosto=:ultcosto, stockmax=:stockmax,
  								pedido=:pedido, status=:status
