@@ -90,7 +90,7 @@
 							$_SESSION["fecha"] = $actualizar["fecha"];
 							$_SESSION["hora"] = $actualizar["hora"];
 							if($actualizar['actualiza']=='true'){
-								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
+								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\\' . $usuario->ruta . '\Insertar_datos\cargar_db.php');
 							}
 							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod");
 							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
@@ -120,7 +120,7 @@
 							$_SESSION["fecha"] = $actualizar["fecha"];
 							$_SESSION["hora"] = $actualizar["hora"];
 							if($actualizar['actualiza']=='true'){
-								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
+								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\\' . $usuario->ruta . '\Insertar_datos\cargar_db.php');
 							}
 							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bar");
 							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
