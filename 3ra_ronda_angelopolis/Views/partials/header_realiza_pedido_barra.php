@@ -23,6 +23,10 @@
             Pedidos cancelados
           </a>
         </li> -->
+
+        <!-- <li><a href="?controller=pedido&action=ver_pedidos_rango"><span class="oi" data-glyph="magnifying-glass"></span>
+        Buscar Pedidos</a></li> -->
+
         <li>
           <a href="../?controller=usuario&action=cerrar"><span class="oi" data-glyph="account-logout"></span>
           Cerrar sesion

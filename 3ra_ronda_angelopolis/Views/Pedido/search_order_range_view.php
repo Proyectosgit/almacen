@@ -15,7 +15,11 @@
 	<body>
 		<header>
 			<div align="center"><h1>Pedidos por Estatus</h1></div>
-    <?php echo "<h2 align='center'> Lista de pedidos con el estatus:  " . $select[0]->estado . "</h2><br>";?>
+    <?php
+      if(!empty($select[0]->estado)){
+        echo "<h2 align='center'> Lista de pedidos con el estatus:  " . $select[0]->estado . "</h2><br>";
+      }
+    ?>
 		</header>
         <section>
 						<div class="container small">

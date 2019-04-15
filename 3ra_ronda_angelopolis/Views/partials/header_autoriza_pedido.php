@@ -14,12 +14,16 @@
               <a href="?controller=producto&action=search_prod_bar"><span class="oi" data-glyph="cart"></span>
             Realizar pedido de bebidas
               </a></li>
-          <li class="active"><a href="?controller=pedido&action=ver_pedido_autorizado_todos"><span class="oi" data-glyph="check"></span>
+          <!-- <li class="active"><a href="?controller=pedido&action=ver_pedido_autorizado_todos"><span class="oi" data-glyph="check"></span>
               Pedidos autorizados
           </a></li>
           <li class="active"><a href="?controller=pedido&action=ver_pedido_cancelado_todos"><span class="oi" data-glyph="x"></span>
             Pedidos cancelados
-          </a></li>
+          </a></li> -->
+
+          <li><a href="?controller=pedido&action=ver_pedidos_rango"><span class="oi" data-glyph="magnifying-glass"></span>
+          Buscar Pedidos</a></li>
+
           <li><a href="../?controller=usuario&action=cerrar"><span class="oi" data-glyph="account-logout"></span>
             Cerrar sesion
           </a></li>
