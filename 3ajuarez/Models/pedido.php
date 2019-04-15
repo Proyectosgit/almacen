@@ -401,9 +401,11 @@ class Pedido
 
 		public static function show_order_range($fecha_inicio,$fecha_fin,$status){
 			$db=Db::getConnect();
-			$query=$db->prepare('SELECT *  FROM pedidos WHERE estado=:status AND fecha_pedido BETWEEN :fecha_inicio AND :fecha_fin');
+			$nombre = $_SESSION['nombre'];
+			$query=$db->prepare('SELECT *  FROM pedidos WHERE estado=:status AND solicita=:nombre AND fecha_pedido BETWEEN :fecha_inicio AND :fecha_fin');
 			$query->bindValue('fecha_inicio',$fecha_inicio);
 			$query->bindValue('fecha_fin',$fecha_fin);
+			$query->bindValue('nombre',$nombre);
 			$query->bindValue('status',$status);
 			$query->execute();
 			foreach ($query->fetchAll() as $pedido) {

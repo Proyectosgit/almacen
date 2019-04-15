@@ -100,7 +100,7 @@
 							$_SESSION["fecha"] = $actualizar["fecha"];
 							$_SESSION["hora"] = $actualizar["hora"];
 							if($actualizar['actualiza']=='true'){
-								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
+								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\\' . $usuario->ruta . '\Insertar_datos\cargar_db.php');
 							}
 							header("Location: ../".$usuario->ruta."?controller=pedido&action=ver_pedidos");
 							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
@@ -110,7 +110,8 @@
 							$_SESSION["fecha"] = $actualizar["fecha"];
 							$_SESSION["hora"] = $actualizar["hora"];
 							if($actualizar['actualiza']=='true'){
-								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
+								// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\3ra_ronda_angelopolis\Insertar_datos\cargar_db.php');
+								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\\' . $usuario->ruta . '\Insertar_datos\cargar_db.php');
 							}
 							header("Location: ../".$usuario->ruta."?controller=usuario&action=register");
 						break;
