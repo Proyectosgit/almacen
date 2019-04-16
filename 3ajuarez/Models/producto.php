@@ -274,8 +274,9 @@ class Producto
 		// $f = fopen('C:\OCOMPRA'.'\\'.$filename, 'w');
 		$f = fopen(PATH_DESCARGA_CSV_PEDIDO.'\\'.$filename, 'w');
 		$fields = array('codingre', 'descrip', 'familia', 'unidad', 'empaque',
-											'equivale', 'inventa1', 'stockmax', 'stockmin', 'ultcosto',
-											'costoprome', 'impuesto', 'pedido', 'status');
+						'equivale', 'inventa1', 'stockmax', 'stockmin', 'ultcosto',
+						'costoprome', 'impuesto', 'pedido', 'status');
+						
 		fputcsv($f, $fields, $delimiter);
 		//Escribe cada uno de los registros de la tabla usuarios en líneas separadas de nuestro csv
 		foreach($data as $row){
@@ -298,7 +299,7 @@ class Producto
 			fputcsv($f, $lineData, $delimiter);
 			}
 		//move back to beginning of file
-		//fseek($f, 0);
+		// fseek($f, 0);
 		//set headers to download file rather than displayed
 		//header('Content-Type: text/csv');
 		//header('Content-Disposition: attachment; filename="' . $filename . '";');

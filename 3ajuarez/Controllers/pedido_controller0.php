@@ -140,17 +140,14 @@
 				Pedido::change_order_status($_GET['estado'],$_GET['id_pedido']);
 
 				$productos=Pedido::pedidosProd($_GET["id_pedido"]);
-				print_r($productos);
 				Producto::ingresa_pedido_autorizado_cancelado($productos,$_GET['estado']);
 
 				PedidoProducto::change_order_status_relation($_GET['id_pedido'],$_GET['estado']);
 				//Genera el archivo csv y lo descarga
-				//$productos=Producto::all();//Descomentar para ingresar todos los productos
-				$productosPedidos = Pedido::getOrderByIdToCsv($_GET['id_pedido']);
-				// $namecsv_and_pedido = NAME_CSV . "pedido" . $_GET['id_pedido']."_";
-				$namecsv_and_pedido = "pedido" . $_GET['id_pedido']."_";
-				print_r($productosPedidos);
-				Producto::create_csv_automatic($productosPedidos,$namecsv_and_pedido);
+				$productos=Producto::all();//Descomentar para ingresar todos los productos
+				// $productos = Pedido::getOrderByIdToCsv($_GET['id_pedido']);
+				$namecsv_and_pedido = NAME_CSV . "pedido" . $_GET['id_pedido']."_";
+				Producto::create_csv_automatic($productos,$namecsv_and_pedido);
 
 				if($_SESSION['id_sesion']=="administrador"){
 					header("Location: ../?controller=pedido&action=index");

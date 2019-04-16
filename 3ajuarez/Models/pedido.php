@@ -191,7 +191,7 @@ class Pedido
 
 	  //Metodo que busca todos los productos correspodientes a un pedido
   	public static function getOrderByIdToCsv($id){
-
+		require_once("producto.php");
   		$db=Db::getConnect();
   		$select=$db->prepare('SELECT productos.*
   							FROM pedidos
@@ -200,13 +200,14 @@ class Pedido
   							WHERE pedidos.id_pedido = :id');
   		$select->bindValue('id',$id);
   		$select->execute();
-		foreach ($select->fetchAll() as $pedido) {
-			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
-										$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],
-										$pedido['estado'],$pedido['observaciones'],$pedido['unidad_medida'],
-										$pedido['total_prod'],$pedido['costo_total']);
+		foreach ($select->fetchAll() as $producto) {
+			$listaProductosPedidos[]= new Producto($producto['codingre'],$producto['descrip'],$producto['familia'],
+													$producto['unidad'],$producto['empaque'],$producto['equivale'],
+													$producto['inventa1'],$producto['stockmax'],$producto['stockmin'],
+													$producto['ultcosto'],$producto['costoprome'],$producto['impuesto'],
+													$producto['pedido'],$producto['status'],NULL,NULL);
 		}
-		return $listaPedidos;
+		return $listaProductosPedidos;
   		// return $select;
   	  }
 
