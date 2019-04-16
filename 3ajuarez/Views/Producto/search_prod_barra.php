@@ -32,7 +32,13 @@ if(isset($_SESSION["id_sesion"])){
 												$costo_total=0;
 												$total_prod=0;
 												foreach ($productos as $producto) {
-													$pedido = $producto->stockmax - $producto->inventa1;
+													//Se agrega para evitar pedir con negativos
+													if($producto->inventa1>=0){
+														$pedido = $producto->stockmax - $producto->inventa1;
+													}elseif($producto->inventa1 < 0){
+														$pedido=$producto->stockmax - 0;
+													}//fin negativos
+
 													if($pedido>=0){
 														$costo_producto = $producto->ultcosto*$pedido;
 													}else{

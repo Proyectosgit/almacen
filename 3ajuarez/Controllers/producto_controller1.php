@@ -65,16 +65,11 @@
 								// continue;
 								else{
 											$pedido=$producto->stockmax-$producto->inventa1;
-											if($pedido>0 && $producto->inventa1>=0){
+											if($pedido>0){
 												$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
 												Relacion::save($relacion);
 												Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
-											}elseif ($producto->inventa1 < 0) {
-												$pedido=$producto->stockmax - 0;
-												$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
-												Relacion::save($relacion);
-												Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
-											}//Se agrega para validar existencias negativas
+											}
 
 								  	}
 								// }//End If filtro
@@ -84,16 +79,11 @@
 						// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 							$codingre=$producto->codingre;
 							$pedido=$producto->stockmax-$producto->inventa1;
-						if($pedido>0 && $producto->inventa1>=0){
+						if($pedido>0){
 							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
 							Relacion::save($relacion);
 							Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
-						}elseif ($producto->inventa1 < 0){
-							$pedido=$producto->stockmax - 0;
-							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
-							Relacion::save($relacion);
-							Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
-						}//Se agrega para validar existencias negativas
+						}
 						// }
 					}
 				}
