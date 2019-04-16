@@ -31,6 +31,7 @@ if(isset($_SESSION["id_sesion"])){
 												<?php
 												$costo_total=0;
 												$total_prod=0;
+												if(!empty($productos)){
 												foreach ($productos as $producto) {
 													//Se agrega para evitar pedir con negativos
 													if($producto->inventa1>=0){
@@ -81,6 +82,9 @@ if(isset($_SESSION["id_sesion"])){
 																<?php $costo_total=round($costo_total,2)?>
 																<td colspan="10" id="costo_total">Total de Compra = <?php echo number_format($costo_total,2);?></td>
 														</tr>
+											<?php
+												}//End empty productos
+											?>
 										</tbody>
 										</table>
 								</div>
@@ -158,11 +162,11 @@ if(isset($_SESSION["id_sesion"])){
 <script src="Public/librerias/verifica_cambio_pedido.js"></script>
 <script>
 	function cancela_pedido(){
-		alert("Pedido Cancelado");
+		alert("Pedido Canceladose...");
 		return true;
 	 }
 	function autoriza_pedido(){
-		alert("Pedido Realizado");
+		alert("Pedido Realizandose...");
 		return true;
 	}
 </script>

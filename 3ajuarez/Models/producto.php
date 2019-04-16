@@ -19,10 +19,11 @@ class Producto
 	public $status;
 	public $inventaFisico;
 	public $diferencia;
+	public $redondeo;
 
 
 	function __construct($codingre, $descrip, $familia, $unidad, $empaque, $equivale, $inventa1,
-	 					$stockmax, $stockmin, $ultcosto, $costoprome, $impuesto, $pedido, $status,$inventaFisico,$diferencia){
+	 					$stockmax, $stockmin, $ultcosto, $costoprome, $impuesto, $pedido, $status,$inventaFisico,$diferencia,$redondeo){
 
 		$this->codingre=$codingre;
 		$this->descrip=$descrip;
@@ -40,6 +41,7 @@ class Producto
 		$this->status=$status;
 		$this->inventaFisico=$inventaFisico;
 		$this->pedido=$pedido;
+		$this->redondeo=$redondeo;
 	}
 
 	public static function all(){
@@ -52,7 +54,8 @@ class Producto
 											$producto['unidad'],$producto['empaque'],$producto['equivale'],
 											$producto['inventa1'],$producto['stockmax'],$producto['stockmin'],
 											$producto['ultcosto'],$producto['costoprome'],$producto['impuesto'],
-											$producto['pedido'],$producto['status'],$producto['inventaFisico'],$producto['pedido']);
+											$producto['pedido'],$producto['status'],$producto['inventaFisico'],
+											$producto['diferencia'],$producto['redondeo']);
 		}
 		return $listaProductos;
 	}
@@ -66,7 +69,7 @@ class Producto
 			     							:unidad,:empaque,:equivale,
 			     							:inventa1,:stockmax,:stockmin,
 			     							:ultcosto,:costoprome,:impuesto,
-			     							:pedido,:status,:inventaFisico,:diferencia)');
+			     							:pedido,:status,:inventaFisico,:diferencia,:redondeo)');
 			$insert->bindValue('codingre',$producto->codingre);
 			$insert->bindValue('descrip',$producto->descrip);
 			$insert->bindValue('familia',$producto->familia);
@@ -83,6 +86,7 @@ class Producto
 			$insert->bindValue('status',$producto->status);
 			$insert->bindValue('inventaFisico',$producto->inventaFisico);
 			$insert->bindValue('diferencia',$producto->diferencia);
+			$insert->bindValue('redondeo',$producto->redondeo);
 			$insert->execute();
 		}
 
@@ -95,7 +99,8 @@ class Producto
 										empaque=:empaque, equivale=:equivale, inventa1=:inventa1,
 									stockmax=:stockmax,stockmin=:stockmin,ultcosto=:ultcosto,
 									costoprome=:costoprome,impuesto=:impuesto,pedido=:pedido,
-									status=:status,inventaFisico=:inventaFisico,diferencia=:diferencia
+									status=:status,inventaFisico=:inventaFisico,diferencia=:diferencia,
+									redondeo=:redondeo
 							WHERE codingre=:codingre');
 		$update->bindValue('codingre',$producto->codingre);
 		$update->bindValue('descrip',$producto->descrip);
@@ -113,6 +118,7 @@ class Producto
 		$update->bindValue('status',$producto->status);
 		$update->bindValue('inventaFisico',$producto->inventaFisico);
 		$update->bindValue('status',$diferencia->diferencia);
+		$update->bindValue('status',$redondeo->redondeo);
 		$update->execute();
 	}
 
@@ -135,7 +141,8 @@ class Producto
 								$productoDb['unidad'],$productoDb['empaque'],$productoDb['equivale'],
 				  				$productoDb['inventa1'],$productoDb['stockmax'],$productoDb['stockmin'],
 								$productoDb['ultcosto'],$productoDb['costoprome'],$productoDb['impuesto'],
-								$productoDb['pedido'],$productoDb['status'],$productoDb['inventaFisico'],$productoDb['diferencia']);
+								$productoDb['pedido'],$productoDb['status'],$productoDb['inventaFisico'],
+								$productoDb['diferencia'],$productoDb['redondeo']);
 		return $producto;
 	}
 
@@ -152,8 +159,11 @@ class Producto
 									$productoDb['unidad'],$productoDb['empaque'],$productoDb['equivale'],
 					  				$productoDb['inventa1'],$productoDb['stockmax'],$productoDb['stockmin'],
 									$productoDb['ultcosto'],$productoDb['costoprome'],$productoDb['impuesto'],
-									$productoDb['pedido'],$productoDb['status'],$productoDb['inventaFisico'],$productoDb['diferencia']);
-		return $productos;
+									$productoDb['pedido'],$productoDb['status'],$productoDb['inventaFisico'],
+									$productoDb['diferencia'],$productoDb['redondeo']);
+		if(!empty($productos)){
+			return $productos;
+		}
 	}
 
 	public static function ingresa_pedido_autorizado_cancelado($productos,$status){
@@ -232,7 +242,7 @@ class Producto
 		$f = fopen('php://memory', 'w');
 		$fields = array('codingre', 'descrip', 'familia', 'unidad', 'empaque',
 											'equivale', 'inventa1', 'stockmax', 'stockmin', 'ultcosto',
-											'costoprome', 'impuesto', 'pedido', 'status');
+											'costoprome', 'impuesto', 'pedido', 'status', 'redondeo');
 		fputcsv($f, $fields, $delimiter);
 		//Escribe cada uno de los registros de la tabla usuarios en líneas separadas de nuestro csv
 		foreach($data as $row){
@@ -251,7 +261,8 @@ class Producto
 					$row->costoprome,
 					$row->impuesto,
 					$row->pedido,
-					$row->status);
+					$row->status,
+					$row->redondeo);
 			fputcsv($f, $lineData, $delimiter);
 			}
 		//move back to beginning of file
@@ -275,8 +286,8 @@ class Producto
 		$f = fopen(PATH_DESCARGA_CSV_PEDIDO.'\\'.$filename, 'w');
 		$fields = array('codingre', 'descrip', 'familia', 'unidad', 'empaque',
 						'equivale', 'inventa1', 'stockmax', 'stockmin', 'ultcosto',
-						'costoprome', 'impuesto', 'pedido', 'status');
-						
+						'costoprome', 'impuesto', 'pedido', 'status', 'redondeo');
+
 		fputcsv($f, $fields, $delimiter);
 		//Escribe cada uno de los registros de la tabla usuarios en líneas separadas de nuestro csv
 		foreach($data as $row){
@@ -295,7 +306,8 @@ class Producto
 					$row->costoprome,
 					$row->impuesto,
 					$row->pedido,
-					$row->status);
+					$row->status,
+					$row->redondeo);
 			fputcsv($f, $lineData, $delimiter);
 			}
 		//move back to beginning of file
@@ -381,7 +393,8 @@ class Producto
                             		$datos[3],$datos[4],$datos[5],
                             		$datos[6],$datos[7],$datos[8],
                             		$datos[9],$datos[10],$datos[11],
-                            		$datos[12],$datos[13],NULL,NULL);
+                            		$datos[12],$datos[13],NULL,NULL,
+									$datos[16]);
 
                             		Producto::save($producto);
     		}else{

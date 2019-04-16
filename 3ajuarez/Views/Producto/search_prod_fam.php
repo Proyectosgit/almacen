@@ -33,7 +33,8 @@
 									<?php
 									$costo_total=0;
 									$total_prod=0;
-									foreach ($productos as $producto) {
+									if(!empty($productos)){
+										foreach ($productos as $producto) {
 										//Se agrega para evitar pedir con negativos
 										if($producto->inventa1>=0){
 											$pedido = $producto->stockmax - $producto->inventa1;
@@ -84,6 +85,7 @@
 													<?php $costo_total=round($costo_total,2)?>
 													<td colspan="10" id="costo_total">Total de Compra = <?php echo number_format($costo_total,2);?></td>
 												</tr>
+									<?php }//End empty productos?> 
 								</tbody>
 							</table>
 						</div>

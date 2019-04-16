@@ -205,7 +205,7 @@ class Pedido
 													$producto['unidad'],$producto['empaque'],$producto['equivale'],
 													$producto['inventa1'],$producto['stockmax'],$producto['stockmin'],
 													$producto['ultcosto'],$producto['costoprome'],$producto['impuesto'],
-													$producto['pedido'],$producto['status'],NULL,NULL);
+													$producto['pedido'],$producto['status'],NULL,NULL,NULL);
 		}
 		return $listaProductosPedidos;
   		// return $select;
