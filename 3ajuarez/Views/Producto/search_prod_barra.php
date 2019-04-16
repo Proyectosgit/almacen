@@ -45,7 +45,16 @@ if(isset($_SESSION["id_sesion"])){
 													}else{
 														$costo_producto = 0;
 													}
-													$pedido = round($pedido,2);
+
+													if($producto->redondeo == 1){
+														// $pedido=round($pedido,2);
+														$pedido=ceil($pedido);
+														// $pedido=round($pedido,2)
+													}elseif($producto->redondeo == 0){
+														$pedido=$pedido;
+													}
+
+													// $pedido = round($pedido,2);
 													$costo_producto = round($costo_producto,2);
 													// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 													?>

@@ -47,7 +47,15 @@
 										}else{
 											$costo_producto = 0;
 										}
-										$pedido=round($pedido,2);
+
+										if($producto->redondeo == 1){
+											// $pedido=round($pedido,2);
+											$pedido=ceil($pedido);
+											// $pedido=round($pedido,2)
+										}elseif($producto->redondeo == 0){
+											$pedido=$pedido;
+										}
+
 										$costo_producto=round($costo_producto,2);
 										// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 											?>
@@ -85,7 +93,7 @@
 													<?php $costo_total=round($costo_total,2)?>
 													<td colspan="10" id="costo_total">Total de Compra = <?php echo number_format($costo_total,2);?></td>
 												</tr>
-									<?php }//End empty productos?> 
+									<?php }//End empty productos?>
 								</tbody>
 							</table>
 						</div>
