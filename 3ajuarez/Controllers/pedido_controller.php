@@ -149,7 +149,7 @@
 				$productosPedidos = Pedido::getOrderByIdToCsv($_GET['id_pedido']);
 				// $namecsv_and_pedido = NAME_CSV . "pedido" . $_GET['id_pedido']."_";
 				$namecsv_and_pedido = "pedido" . $_GET['id_pedido']."_";
-				print_r($productosPedidos);
+				// print_r($productosPedidos);
 				Producto::create_csv_automatic($productosPedidos,$namecsv_and_pedido);
 
 				if($_SESSION['id_sesion']=="administrador"){
