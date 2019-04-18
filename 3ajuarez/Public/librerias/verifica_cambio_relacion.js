@@ -30,6 +30,25 @@ $(document).ready(function(){
     // stock_min = $(this).parents("tr").find(".stock_min").html();
     stock_max = $(this).parents("tr").find(".stock_max").html();
     existencia = $(this).parents("tr").find(".existencia").html();
+
+    redondeo    =   $(this).parents("tr").find(".redondeo").val();
+    console.log(cantidad);
+
+
+    if(redondeo == "" || redondeo == 0){
+        console.log(typeof("cantidad" + cantidad));
+        cantidad = parseFloat(cantidad);
+        console.log(typeof("cantidad" + cantidad));
+        cantidad = cantidad.toFixed(2);
+        cantidad = cantidad.toLocaleString();
+    }else if(redondeo == 1){
+        cantidad = Math.ceil(cantidad);
+        cantidad = cantidad.toFixed(2);
+        cantidad = cantidad.toLocaleString();
+    }
+    $(this).parents("tr").find(".cantidad").val(cantidad);
+    console.log(cantidad);
+
     cantidad_aux=stock_max-existencia;
 
     if(cantidad.match(/^[0-9]+/) && !($(this).parents("tr").find(".cantidad").val().length == 0)){
@@ -58,7 +77,7 @@ $(document).ready(function(){
       $(".costo_producto").each(function(){
          totalDeuda+=parseFloat($(this).html().replace(",","")||0);
        });
-        
+
       // $("#costo_total").html("Total de Compra = " + totalDeuda);
 
       //Pone los datos modificados en un value de un relacion_pedido_producto
