@@ -1,5 +1,7 @@
 <?php
 
+$tiempo_inicial = microtime(true);
+
 echo "*******Importante no cierres la ventana esta se cerrara de forma automatica*******";
 
 $unidad_ruta = "3ajuarez";
@@ -12,6 +14,7 @@ require_once("../" . $unidad_ruta . "/Models/producto.php");
 echo "Espera un momento por favor... se estan ingresado los datos";
 
 $estado="Actualizando";
+
 Actualiza::actualiza_estado($estado);
 
 $linea = 0;
@@ -19,12 +22,20 @@ $familias=[];
 //Abrimos nuestro archivo
 // $archivo = fopen(dirname(__FILE__)."\OCOMPRA.csv", "r");
 // $archivo = fopen("C:\PUE\\3ajuarez"."\OCOMPRA.csv", "r");
+
+$tiempo_final = microtime(true);
+echo ("Tiempo final antes del while" . ($tiempo_final-$tiempo_inicial));
+
 $archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
 //Lo recorremos
   while (($datos = fgetcsv($archivo, ",")) == true)
   {
+
+      $tiempo_final = microtime(true);
+      echo ("Tiempo final en el while" . ($tiempo_final-$tiempo_inicial));
+
     $num = count($datos);
-    $linea++;
+    echo "Linea" . $linea++;
     //Recorremos las columnas de esa linea
     if($linea==1){
 
@@ -44,8 +55,7 @@ $archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
                             $datos[3],$datos[4],$datos[5],
                             $datos[6],$datos[7],$datos[8],
                             $datos[9],$datos[10],$datos[11],
-                            $datos[12],$datos[13],NULL,NULL,$datos[16]);
-
+                            $datos[12],$datos[13],$datos[14],NULL,NULL);
                             Producto::save($producto);
     }else{
       // echo("(" . "ya existe se actualizara" . $datos[0] . ")" . $linea);
@@ -54,7 +64,7 @@ $archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
                       $datos[3],$datos[4],$datos[5],
                       $datos[6],$datos[7],$datos[8],
                       $datos[9],$datos[10],$datos[11],
-                      $datos[12],$datos[13],$datos[16]);
+                      $datos[12],$datos[13],$datos[14]);
        $linea--;
     }
     // if(!in_array($datos[2],$familias)){

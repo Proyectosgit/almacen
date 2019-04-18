@@ -34,11 +34,11 @@
 				<table class="table">
   			 	<thead class="thead-dark">
 	                <tr>
-		                <th>Id Pedido</th>
+		                <th>Id <br> pedido</th>
 						<th>Productos <br> pedido</th>
 						<th>Descripción</th>
 						<th>Costo <br>unitario</th>
-						<th>Total</th><!-- <th>Costo <br>productos</th> -->
+						<th>Subtotal</th><!-- <th>Costo <br>productos</th> -->
 		                <!-- <th>Id Producto</th> -->
 		                <!-- <th>Fecha</th> -->
 		                <th>Existencia</th>
@@ -79,6 +79,7 @@
 				        <!-- <td><?php //echo $order['fecha']; ?></td> -->
 				        <td class="existencia"><?php echo $order['inventa1'];?></td>
 				        <td class="stock_max"><?php  echo $order['stockmax'];?></td>
+						<td> <input class="redondeo" type="hidden" name="redondeo" value="<?php echo $order['redondeo'];?>"></td>
 			        </tr>
 	          <?php }//End foreach ?>
                 </tbody>

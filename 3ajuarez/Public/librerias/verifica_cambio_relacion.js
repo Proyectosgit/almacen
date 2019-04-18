@@ -20,18 +20,15 @@ $(document).ready(function(){
 
   $(".cantidad").change(function(){
 
-    cantidad = $(this).parents("tr").find(".cantidad").val();
-    // console.log(cantidad);
-    id_producto = $(this).parents("tr").find(".cantidad").attr("name");
-    // console.log(id_producto);
-    id_pedido=$(this).parents("tr").find("#id_pedido").html();
-    // console.log(id_pedido);
+    cantidad    =   $(this).parents("tr").find(".cantidad").val();
+    id_producto =   $(this).parents("tr").find(".cantidad").attr("name");
+    id_pedido   =   $(this).parents("tr").find("#id_pedido").html();
     // stock_min = $(this).parents("tr").find(".cantidad").attr("min");
     // stock_min = $(this).parents("tr").find(".stock_min").html();
-    stock_max = $(this).parents("tr").find(".stock_max").html();
-    existencia = $(this).parents("tr").find(".existencia").html();
-
+    stock_max   =   $(this).parents("tr").find(".stock_max").html();
+    existencia  =   $(this).parents("tr").find(".existencia").html();
     redondeo    =   $(this).parents("tr").find(".redondeo").val();
+
     console.log(cantidad);
 
 

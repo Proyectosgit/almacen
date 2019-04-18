@@ -80,7 +80,7 @@ if(isset($_SESSION["id_sesion"])){
 															<!-- <td><?php //echo $producto->unidad;?></td> -->
 															<!-- <td><?php //echo $producto->equivale;?></td> -->
 															<!-- <td><?php //echo $producto->codingre; ?></td> -->
-															<td> <input class="redondeo" type="text" name="redondeo" value="<?php echo $producto->redondeo; ?>"> </td>
+															<td> <input class="redondeo" type="hidden" name="redondeo" value="<?php echo $producto->redondeo; ?>"> </td>
 														</tr>
 												<?php //}//end if
 												}//end for each
