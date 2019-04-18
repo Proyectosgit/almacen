@@ -7,9 +7,12 @@ echo "*******Importante no cierres la ventana esta se cerrara de forma automatic
 $unidad_ruta = "3ajuarez";
 
 set_time_limit(500);
-require_once("../" . $unidad_ruta . "/Config/connection.php");
-require_once("../" . $unidad_ruta . "/Models/actualiza.php");
-require_once("../" . $unidad_ruta . "/Models/producto.php");
+// require_once("../" . $unidad_ruta . "/Config/connection.php");
+require_once("../Config/connection.php");
+// require_once("../" . $unidad_ruta . "/Models/actualiza.php");
+require_once("../Models/actualiza.php");
+// require_once("../" . $unidad_ruta . "/Models/producto.php");
+require_once("../Models/producto.php");
 
 echo "Espera un momento por favor... se estan ingresado los datos";
 
@@ -24,7 +27,7 @@ $familias=[];
 // $archivo = fopen("C:\PUE\\3ajuarez"."\OCOMPRA.csv", "r");
 
 $tiempo_final = microtime(true);
-echo ("Tiempo final antes del while" . ($tiempo_final-$tiempo_inicial));
+echo ("Tiempo final antes del while " . ($tiempo_final-$tiempo_inicial) . "<br>");
 
 $archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
 //Lo recorremos
@@ -32,7 +35,7 @@ $archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
   {
 
       $tiempo_final = microtime(true);
-      echo ("Tiempo final en el while" . ($tiempo_final-$tiempo_inicial));
+      echo ("Tiempo final en el while " . ($tiempo_final-$tiempo_inicial) . "<br>");
 
     $num = count($datos);
     echo "Linea" . $linea++;
@@ -65,7 +68,7 @@ $archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
                       $datos[6],$datos[7],$datos[8],
                       $datos[9],$datos[10],$datos[11],
                       $datos[12],$datos[13],$datos[14]);
-       $linea--;
+       //$linea--;
     }
     // if(!in_array($datos[2],$familias)){
       // $familias[]=$datos[2];
