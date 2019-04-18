@@ -22,26 +22,27 @@ class Producto
 	public $redondeo;
 
 
-	function __construct($codingre, $descrip, $familia, $unidad, $empaque, $equivale, $inventa1,
-	 					$stockmax, $stockmin, $ultcosto, $costoprome, $impuesto, $pedido, $status,$inventaFisico,$diferencia,$redondeo){
+	function __construct($codingre,	$descrip, 	$familia, 	$unidad, 	$empaque, 	$equivale, 	$inventa1,
+	 					$stockmax, 	$stockmin, 	$ultcosto, 	$costoprome, $impuesto, $pedido, 	$status,
+						$inventaFisico, $diferencia, $redondeo){
 
-		$this->codingre=$codingre;
-		$this->descrip=$descrip;
-		$this->familia=$familia;
-		$this->unidad=$unidad;
-		$this->empaque=$empaque;
-		$this->equivale=$equivale;
-		$this->inventa1=$inventa1;
-		$this->stockmax=$stockmax;
-		$this->stockmin=$stockmin;
-		$this->ultcosto=$ultcosto;
-		$this->costoprome=$costoprome;
-		$this->impuesto=$impuesto;
-		$this->pedido=$pedido;
-		$this->status=$status;
-		$this->inventaFisico=$inventaFisico;
-		$this->pedido=$pedido;
-		$this->redondeo=$redondeo;
+		$this->codingre = $codingre;
+		$this->descrip  = $descrip;
+		$this->familia  = $familia;
+		$this->unidad   = $unidad;
+		$this->empaque  = $empaque;
+		$this->equivale = $equivale;
+		$this->inventa1 = $inventa1;
+		$this->stockmax = $stockmax;
+		$this->stockmin = $stockmin;
+		$this->ultcosto = $ultcosto;
+		$this->costoprome = $costoprome;
+		$this->impuesto = $impuesto;
+		$this->pedido   = $pedido;
+		$this->status   = $status;
+		$this->inventaFisico = $inventaFisico;
+		$this->diferencia = $diferencia;
+		$this->redondeo = $redondeo;
 	}
 
 	public static function all(){
@@ -50,11 +51,11 @@ class Producto
 		$db=Db::getConnect();
 		$sql=$db->query('SELECT * FROM productos');
 		foreach ($sql->fetchAll() as $producto) {
-			$listaProductos[]= new Producto($producto['codingre'],$producto['descrip'], $producto['familia'],
-											$producto['unidad'],$producto['empaque'],$producto['equivale'],
-											$producto['inventa1'],$producto['stockmax'],$producto['stockmin'],
-											$producto['ultcosto'],$producto['costoprome'],$producto['impuesto'],
-											$producto['pedido'],$producto['status'],$producto['inventaFisico'],
+			$listaProductos[]= new Producto($producto['codingre'],	$producto['descrip'], 	$producto['familia'],
+											$producto['unidad'],	$producto['empaque'],	$producto['equivale'],
+											$producto['inventa1'],	$producto['stockmax'],	$producto['stockmin'],
+											$producto['ultcosto'],	$producto['costoprome'],$producto['impuesto'],
+											$producto['pedido'],	$producto['status'],	$producto['inventaFisico'],
 											$producto['diferencia'],$producto['redondeo']);
 		}
 		return $listaProductos;
@@ -65,28 +66,29 @@ class Producto
 
 			$db=Db::getConnect();
 			$insert=$db->prepare('INSERT INTO productos
-			     				VALUES(:codingre,:descrip,:familia,
-			     							:unidad,:empaque,:equivale,
-			     							:inventa1,:stockmax,:stockmin,
-			     							:ultcosto,:costoprome,:impuesto,
-			     							:pedido,:status,:inventaFisico,:diferencia,:redondeo)');
-			$insert->bindValue('codingre',$producto->codingre);
-			$insert->bindValue('descrip',$producto->descrip);
-			$insert->bindValue('familia',$producto->familia);
-			$insert->bindValue('unidad',$producto->unidad);
-			$insert->bindValue('empaque',$producto->empaque);
-			$insert->bindValue('equivale',$producto->equivale);
-			$insert->bindValue('inventa1',$producto->inventa1);
-			$insert->bindValue('stockmax',$producto->stockmax);
-			$insert->bindValue('stockmin',$producto->stockmin);
-			$insert->bindValue('ultcosto',$producto->ultcosto);
+			     				VALUES(	:codingre, 	:descrip, 	:familia,
+			     						:unidad, 	:empaque, 	:equivale,
+			     						:inventa1,	:stockmax,	:stockmin,
+			     						:ultcosto,	:costoprome,:impuesto,
+			     						:pedido,	:status,	:inventaFisico,
+										:diferencia,:redondeo)');
+			$insert->bindValue('codingre',	$producto->codingre);
+			$insert->bindValue('descrip',	$producto->descrip);
+			$insert->bindValue('familia',	$producto->familia);
+			$insert->bindValue('unidad',	$producto->unidad);
+			$insert->bindValue('empaque',	$producto->empaque);
+			$insert->bindValue('equivale',	$producto->equivale);
+			$insert->bindValue('inventa1',	$producto->inventa1);
+			$insert->bindValue('stockmax',	$producto->stockmax);
+			$insert->bindValue('stockmin',	$producto->stockmin);
+			$insert->bindValue('ultcosto',	$producto->ultcosto);
 			$insert->bindValue('costoprome',$producto->costoprome);
-			$insert->bindValue('impuesto',$producto->impuesto);
-			$insert->bindValue('pedido',$producto->pedido);
-			$insert->bindValue('status',$producto->status);
+			$insert->bindValue('impuesto',	$producto->impuesto);
+			$insert->bindValue('pedido',	$producto->pedido);
+			$insert->bindValue('status',	$producto->status);
 			$insert->bindValue('inventaFisico',$producto->inventaFisico);
 			$insert->bindValue('diferencia',$producto->diferencia);
-			$insert->bindValue('redondeo',$producto->redondeo);
+			$insert->bindValue('redondeo',	$producto->redondeo);
 			$insert->execute();
 		}
 
@@ -95,30 +97,30 @@ class Producto
 
 		$db=Db::getConnect();
 		$update=$db->prepare('UPDATE productos
-							SET descrip=:descrip, familia=:familia, unidad=:unidad,
-										empaque=:empaque, equivale=:equivale, inventa1=:inventa1,
-									stockmax=:stockmax,stockmin=:stockmin,ultcosto=:ultcosto,
-									costoprome=:costoprome,impuesto=:impuesto,pedido=:pedido,
-									status=:status,inventaFisico=:inventaFisico,diferencia=:diferencia,
-									redondeo=:redondeo
+							SET descrip=:descrip,	familia=:familia,	unidad=:unidad,
+								empaque=:empaque,	equivale=:equivale, inventa1=:inventa1,
+								stockmax=:stockmax,	stockmin=:stockmin,	ultcosto=:ultcosto,
+								costoprome=:costoprome, impuesto=:impuesto, pedido=:pedido,
+								status=:status,	inventaFisico=:inventaFisico, diferencia=:diferencia,
+								redondeo=:redondeo
 							WHERE codingre=:codingre');
-		$update->bindValue('codingre',$producto->codingre);
-		$update->bindValue('descrip',$producto->descrip);
-		$update->bindValue('familia',$producto->familia);
-		$update->bindValue('unidad',$producto->unidad);
-		$update->bindValue('empaque',$producto->empaque);
-		$update->bindValue('equivale',$producto->equivale);
-		$update->bindValue('inventa1',$producto->inventa1);
-		$update->bindValue('stockmax',$producto->stockmax);
-		$update->bindValue('stockmin',$producto->stockmin);
-		$update->bindValue('ultcosto',$producto->ultcosto);
+		$update->bindValue('codingre',	$producto->codingre);
+		$update->bindValue('descrip',	$producto->descrip);
+		$update->bindValue('familia',	$producto->familia);
+		$update->bindValue('unidad',	$producto->unidad);
+		$update->bindValue('empaque',	$producto->empaque);
+		$update->bindValue('equivale',	$producto->equivale);
+		$update->bindValue('inventa1',	$producto->inventa1);
+		$update->bindValue('stockmax',	$producto->stockmax);
+		$update->bindValue('stockmin',	$producto->stockmin);
+		$update->bindValue('ultcosto',	$producto->ultcosto);
 		$update->bindValue('costoprome',$producto->costoprome);
-		$update->bindValue('impuesto',$producto->impuesto);
-		$update->bindValue('pedido',$producto->pedido);
-		$update->bindValue('status',$producto->status);
+		$update->bindValue('impuesto',	$producto->impuesto);
+		$update->bindValue('pedido',	$producto->pedido);
+		$update->bindValue('status',	$producto->status);
 		$update->bindValue('inventaFisico',$producto->inventaFisico);
-		$update->bindValue('status',$diferencia->diferencia);
-		$update->bindValue('status',$redondeo->redondeo);
+		$update->bindValue('status',	$diferencia->diferencia);
+		$update->bindValue('status',	$redondeo->redondeo);
 		$update->execute();
 	}
 
@@ -137,12 +139,12 @@ class Producto
 		$select->bindValue('codingre',$codingre);
 		$select->execute();
 		$productoDb=$select->fetch();
-		$producto= new Producto($productoDb['codingre'],$productoDb['descrip'], $productoDb['familia'],
-								$productoDb['unidad'],$productoDb['empaque'],$productoDb['equivale'],
-				  				$productoDb['inventa1'],$productoDb['stockmax'],$productoDb['stockmin'],
-								$productoDb['ultcosto'],$productoDb['costoprome'],$productoDb['impuesto'],
-								$productoDb['pedido'],$productoDb['status'],$productoDb['inventaFisico'],
-								$productoDb['diferencia'],$productoDb['redondeo']);
+		$producto= new Producto($productoDb['codingre'],	$productoDb['descrip'], 	$productoDb['familia'],
+								$productoDb['unidad'],		$productoDb['empaque'],		$productoDb['equivale'],
+				  				$productoDb['inventa1'],	$productoDb['stockmax'],	$productoDb['stockmin'],
+								$productoDb['ultcosto'],	$productoDb['costoprome'],	$productoDb['impuesto'],
+								$productoDb['pedido'],		$productoDb['status'],		$productoDb['inventaFisico'],
+								$productoDb['diferencia'],	$productoDb['redondeo']);
 		return $producto;
 	}
 
@@ -155,12 +157,12 @@ class Producto
 		$select->bindValue('familia',$familia);
 		$select->execute();
 		foreach($select->fetchAll() as $productoDb)
-		$productos[]= new Producto($productoDb['codingre'],$productoDb['descrip'], $productoDb['familia'],
-									$productoDb['unidad'],$productoDb['empaque'],$productoDb['equivale'],
-					  				$productoDb['inventa1'],$productoDb['stockmax'],$productoDb['stockmin'],
-									$productoDb['ultcosto'],$productoDb['costoprome'],$productoDb['impuesto'],
-									$productoDb['pedido'],$productoDb['status'],$productoDb['inventaFisico'],
-									$productoDb['diferencia'],$productoDb['redondeo']);
+		$productos[]= new Producto( $productoDb['codingre'],	$productoDb['descrip'],		$productoDb['familia'],
+									$productoDb['unidad'],  	$productoDb['empaque'],		$productoDb['equivale'],
+					  				$productoDb['inventa1'],	$productoDb['stockmax'],	$productoDb['stockmin'],
+									$productoDb['ultcosto'],	$productoDb['costoprome'],	$productoDb['impuesto'],
+									$productoDb['pedido'],  	$productoDb['status'],		$productoDb['inventaFisico'],
+									$productoDb['diferencia'],	$productoDb['redondeo']);
 		if(!empty($productos)){
 			return $productos;
 		}
@@ -333,12 +335,12 @@ class Producto
 
 	public static function update_existencia($codingre,$descrip,$familia,$unidad,$empaque,$equivale,
 											$inventa1,$stockmax,$stockmin,$ultcosto,$costoprome,$impuesto,
-											$pedido,$status){
+											$pedido,$status,$redondeo){
 		$db=Db::getConnect();
 		$update=$db->prepare('UPDATE productos
 							SET descrip=:descrip,familia=:familia,unidad=:unidad,empaque=:empaque,equivale=:equivale,
 								inventa1=:inventa1,stockmax=:stockmax,stockmin=:stockmin,ultcosto=:ultcosto,costoprome=:costoprome,
-								impuesto=:impuesto,pedido=:pedido,status=:status
+								impuesto=:impuesto,pedido=:pedido,status=:status,redondeo=:redondeo
  							WHERE codingre=:codingre');
 		$update->bindValue('codingre',$codingre);
 		$update->bindValue('descrip',$descrip);
@@ -354,12 +356,13 @@ class Producto
 		$update->bindValue('impuesto',$impuesto);
 		$update->bindValue('pedido',$pedido);
 		$update->bindValue('status',$status);
+		$update->bindValue('redondeo',$redondeo);
 		$update->execute();
 	}
 
 	public static function carga_db(){
 
-		set_time_limit(500);
+		set_time_limit(600);
 		// require_once("connection.php");
 		// require_once("productos.php");
 
@@ -389,18 +392,18 @@ class Producto
         		// echo "Existencia".$existencia;
         		if($existencia==0){
         		// echo "Entro al for para guarda";
-          		$producto = new Producto($datos[0],$datos[1],$datos[2],
-                            		$datos[3],$datos[4],$datos[5],
-                            		$datos[6],$datos[7],$datos[8],
-                            		$datos[9],$datos[10],$datos[11],
-                            		$datos[12],$datos[13],NULL,NULL,
-									$datos[16]);
+          		$producto = new Producto(	$datos[0],	$datos[1],	$datos[2],
+                            				$datos[3],	$datos[4],	$datos[5],
+                            				$datos[6],	$datos[7],	$datos[8],
+                            				$datos[9],	$datos[10],	$datos[11],
+                            				$datos[12],	$datos[13],	NULL,NULL,
+											$datos[16]);
 
                             		Producto::save($producto);
     		}else{
       		// echo("(" . "ya existe se actualizara" . $datos[0] . ")" . $linea);
       		Producto::update_existencia($datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5],$datos[6],
-										$datos[7],$datos[8],$datos[9],$datos[10],$datos[11],$datos[12],$datos[13]);
+										$datos[7],$datos[8],$datos[9],$datos[10],$datos[11],$datos[12],$datos[13],$datos[16]);
        		$linea--;
     		}
     		 if(!in_array($datos[2],$familias)){
