@@ -112,7 +112,8 @@
 								<input type="hidden" name="modificados" value="" id="array_modifica">
 								<input type="hidden" name="observacion" value="">
 								<center>
-									<button type="submit" class="btn btn-success" onclick="return autoriza_pedido();">
+									<!-- <button type="submit" class="btn btn-success" onclick="return autoriza_pedido();"> --><!--Se utilizaba-->
+									<button type="submit" class="btn btn-success">
 										Pedido <span class="oi" data-glyph="cart"></span>
 									</button>
 								</center>
@@ -123,7 +124,8 @@
 								<input type="hidden" name="action" value="cancelado">
 								<input type="hidden" name="perfil" value="cocina">
 								<center>
-									<button type="submit" class="btn btn-danger"  onclick="return cancela_pedido();">
+									<!-- <button type="submit" class="btn btn-danger"  onclick="return cancela_pedido();"> -->
+									<button type="submit" class="btn btn-danger">
 										Cancelar &nbsp; <span class="oi" data-glyph="x"></span>
 									</button>
 								</center>

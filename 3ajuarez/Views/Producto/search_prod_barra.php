@@ -114,7 +114,8 @@ if(isset($_SESSION["id_sesion"])){
 									<input type="hidden" name="visible" value="false">
 									<center>
 											<!-- <input type="submit" value="Pedido" class="btn btn-success" onclick="return foor();"> -->
-											<button type="submit" class="btn btn-success" onclick="return autoriza_pedido();">
+											<!-- <button type="submit" class="btn btn-success" onclick="return autoriza_pedido();"> --> <!--Muestra mensaje, se usaba-->
+											<button type="submit" class="btn btn-success">
 												Pedido &nbsp; <span class="oi" data-glyph="cart"></span>
 											</button>
 									</center>
@@ -125,7 +126,8 @@ if(isset($_SESSION["id_sesion"])){
 									<input type="hidden" name="action" value="cancelado">
 									<input type="hidden" name="perfil" value="barra">
 									<center>
-										<button type="submit" class="btn btn-danger"  onclick="return cancela_pedido();">
+										<!-- <button type="submit" class="btn btn-danger"  onclick="return cancela_pedido();"> -->
+										<button type="submit" class="btn btn-danger">
 											Cancelar &nbsp; <span class="oi" data-glyph="x"></span>
 										</button>
 									</center>
