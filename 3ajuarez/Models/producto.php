@@ -62,9 +62,9 @@ class Producto
 	}
 
 
-	public static function save($producto){
+	public static function save($db,$producto){
 
-			$db=Db::getConnect();
+			// $db=Db::getConnect();
 			$insert=$db->prepare('INSERT INTO productos
 			     				VALUES(	:codingre, 		:descrip, 		:familia,
 			     						:unidad, 		:empaque, 		:equivale,
@@ -320,8 +320,9 @@ class Producto
 		}
 	}
 
-	public static function verifica_existencia($codingre){
-		$db=Db::getConnect();
+	public static function verifica_existencia($db,$codingre){
+		// $db=Db::getConnect();
+		// $db=Db::getConnect();
 		// $select=$db->prepare('SELECT COUNT(*) as cantidad FROM productos WHERE codingre=:codingre');
 		$select=$db->prepare('SELECT COUNT(codingre) as cantidad FROM productos WHERE codingre=:codingre');
 		$select->bindValue('codingre',$codingre);
@@ -331,10 +332,10 @@ class Producto
 		return $count["cantidad"];
 	}
 
-	public static function update_existencia($codingre,$descrip,$familia,$unidad,$empaque,$equivale,
+	public static function update_existencia($db,$codingre,$descrip,$familia,$unidad,$empaque,$equivale,
 											$inventa1,$stockmax,$stockmin,$ultcosto,$costoprome,$impuesto,
 											$pedido,$status,$redondeo){
-		$db=Db::getConnect();
+		// $db=Db::getConnect();
 		$update=$db->prepare('UPDATE productos
 							SET descrip=:descrip,familia=:familia,unidad=:unidad,empaque=:empaque,equivale=:equivale,
 								inventa1=:inventa1,stockmax=:stockmax,stockmin=:stockmin,ultcosto=:ultcosto,costoprome=:costoprome,

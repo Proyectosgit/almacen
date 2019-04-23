@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-04-2019 a las 08:57:41
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.1
+-- Tiempo de generación: 22-04-2019 a las 10:45:34
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -66,14 +66,14 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_user`, `username`, `password`, `cargo`, `nombre`, `email`, `id_almacen`, `ruta`) VALUES
-(1, 'pedro', '12345', 'administrador', 'administrador1', 'administrador3ajuarez@abmexico.com', 1, '3ajuarez'),
-(2, 'jesus', '12345', 'cocina', 'cocina1', 'cocina@abmexico.com', 1, '3ajuarez'),
-(3, 'paola', '12345', 'gerente', 'gerente1', 'gerente@abmexico.com', 1, '3ajuarez'),
-(4, 'raul', '12345', 'barra', 'barra1', 'barra@abmexico.com', 1, '3ajuarez'),
+(1, 'pedro1', '12345', 'administrador', 'administrador', 'administrador3ajuarez@abmexico.com', 1, '3ajuarez'),
+(2, 'jesus', '12345', 'cocina', 'cocina', 'cocina3ajuarez@abmexico.com', 1, '3ajuarez'),
+(3, 'paola', '12345', 'gerente', 'gerente', 'gerente3ajuarez@abmexico.com', 1, '3ajuarez'),
+(4, 'raul', '12345', 'barra', 'barra', 'barra3ajuarez@abmexico.com', 1, '3ajuarez'),
 (5, 'ivan colula', '12345', 'root', 'root', 'root@abmexico.com', 0, ''),
-(6, 'erik', '12345', 'almacenCocina', 'erik lopez', 'erik@gmail.com', 1, '3ajuarez'),
-(7, 'gustavo', '12345', 'almacenBarra', 'gustavo', 'gustavo@gmail.com', 1, '3ajuarez'),
-(8, 'karla', '12345', 'almacenBC', 'karla', 'karla@gmail.com', 1, '3ajuarez');
+(6, 'erik', '12345', 'almacenCocina', 'almacen Cocina', 'cocina3rajuarez@abmexico.com', 1, '3ajuarez'),
+(7, 'gustavo', '12345', 'almacenBarra', 'almacen Barra', 'barra3rajuarez@abmexico.com', 1, '3ajuarez'),
+(8, 'karla', '12345', 'almacenBC', 'almacen Bodega', 'bodega3rajuarez@abmexico.com', 1, '3ajuarez');
 
 --
 -- Índices para tablas volcadas
