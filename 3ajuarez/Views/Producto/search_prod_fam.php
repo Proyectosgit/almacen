@@ -13,17 +13,17 @@
 									<tr>
 										<th>Descripción</th>
 										<th>Pedido</th>
-										<th>Codigo <br>Familia</th>
+										<!-- <th>Codigo <br>Familia</th> -->
 										<!-- <th>Empaque</th> -->
-										<th>Total</th>
+										<th>Subtotal</th>
 										<!-- <th>Stock <br>Minimo</th> -->
 										<th>Stock <br>Maximo</th>
 										<th>Existencia</th><!--inventaria1-->
 										<!-- <th>Costo <br>promedio</th> -->
 										<!-- <th>Impuesto</th> -->
 										<!-- <td>Estatus</td> -->
-										<th>Precio <br> Unitario</th>
-										<!-- <th>Unidad</th> -->
+										<th>Precio<br>Unitario</th>
+										<th>Unidad<br>de Medida</th>
 										<th>Equivale</th>
 										<!-- <th>Codigo <br>Ingrediente</th> -->
 										<!-- <td colspan=2 >Acciones</td> -->
@@ -67,7 +67,7 @@
 												<?php 	$costo_total=$costo_total+$costo_producto;
 														$total_prod=$total_prod+1;
 												?>
-												<td><?php echo $producto->familia;?></td>
+												<!-- <td><?php //echo $producto->familia;?></td> -->
 												<!-- <td><?php //echo $producto->empaque;?></td> -->
 												<!-- <td class="stock_mix"><?php //echo $producto->stockmin;?></td> -->
 												<td class="stock_max"><?php echo $producto->stockmax;?></td>
@@ -78,7 +78,7 @@
 												<!-- <td><?php //echo $producto->status;?></td> -->
 												<!-- <td><a href="Controllers/producto_controller.php?action=update&codingre=<?php// echo $producto->codingre ?>">Actualizar</a> </td> -->
 												<!-- <td><a href="Controllers/producto_controller.php?action=delete&codingre=<?php// echo $producto->codingre ?>">Eliminar</a> </td> -->
-												<!-- <td><?php //echo $producto->unidad;?></td> -->
+												<td><?php echo $producto->unidad;?></td>
 												<td><?php echo $producto->equivale;?></td>
 												<!-- <td><?php// echo $producto->codingre; ?></td> -->
 												<td> <input class="redondeo" type="hidden" name="redondeo" value="<?php echo $producto->redondeo; ?>"> </td>

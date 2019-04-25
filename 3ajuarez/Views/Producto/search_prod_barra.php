@@ -11,9 +11,9 @@ if(isset($_SESSION["id_sesion"])){
 											<tr>
 												<th>Descripción</th>
 												<th>Pedido</th>
-												<th>Codigo <br>Familia</th>
+												<th>Subtotal</th>
 												<!-- <th>Empaque</th> -->
-												<th>Total</th>
+												<!-- <th>Codigo <br>Familia</th> -->
 												<!-- <th>Stock <br>Minimo</th> -->
 												<th>Stock <br>Maximo</th>
 												<th>Existencia</th><!--inventaria1-->
@@ -66,7 +66,7 @@ if(isset($_SESSION["id_sesion"])){
 															<?php 	$costo_total=$costo_total+$costo_producto;
 																   	$total_prod=$total_prod+1;
 															?>
-															<td><?php echo $producto->familia;?></td>
+															<!-- <td><?php //echo $producto->familia;?></td> -->
 															<!-- <td><?php //echo $producto->empaque;?></td> -->
 															<!-- <td class="stock_mix"><?php //echo $producto->stockmin;?></td> -->
 															<td class="stock_max"><?php echo $producto->stockmax;?></td>

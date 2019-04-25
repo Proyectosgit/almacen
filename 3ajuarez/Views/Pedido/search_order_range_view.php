@@ -1,11 +1,12 @@
 <?php
     if(isset($_SESSION["id_sesion"])){
-        if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina" || $_SESSION["id_sesion"]=="barra") && $_SESSION["ruta"]==SUCURSAL){
+        if((    $_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente"    ||
+                $_SESSION["id_sesion"]=="cocina"        || $_SESSION["id_sesion"]=="barra")     &&  $_SESSION["ruta"]==SUCURSAL){
 ?>
 
 <html>
 	<head>
-		<title>Show_order_prod </title>
+		<title> Pedidos </title>
 		<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'/>
 			<link rel="stylesheet" href="../Public/bootstrap/css/bootstrap.min.css"/>
 			<link rel="stylesheet" href="../Public/bootstrap/bootstrap_3.3.6/bootstrap.min.css">

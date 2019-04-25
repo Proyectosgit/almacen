@@ -24,7 +24,7 @@ class Producto
 
 	function __construct($codingre,	$descrip, 	$familia, 	$unidad, 	$empaque, 	$equivale, 	$inventa1,
 	 					$stockmax, 	$stockmin, 	$ultcosto, 	$costoprome, $impuesto, $pedido, 	$status,
-						$redondeo, $inventaFisico, $diferencia){
+						$redondeo, 	$inventaFisico, $diferencia){
 
 		$this->codingre = $codingre;
 		$this->descrip  = $descrip;
@@ -45,13 +45,14 @@ class Producto
 		$this->diferencia = $diferencia;
 	}
 
+
 	public static function all(){
 
 		$listaProductos = [];
 		$db	 =	Db::getConnect();
 		$sql =	$db->query('SELECT * FROM productos');
 		foreach ($sql->fetchAll() as $producto) {
-			$listaProductos[]= new Producto(	$producto['codingre'],	$producto['descrip'], 	$producto['familia'],
+			$listaProductos[] = new Producto(	$producto['codingre'],	$producto['descrip'], 	$producto['familia'],
 												$producto['unidad'],	$producto['empaque'],	$producto['equivale'],
 												$producto['inventa1'],	$producto['stockmax'],	$producto['stockmin'],
 												$producto['ultcosto'],	$producto['costoprome'],$producto['impuesto'],
@@ -62,47 +63,48 @@ class Producto
 	}
 
 
-	public static function save($db,$producto){
+	public static function save($producto){
 
-			// $db=Db::getConnect();
-			$insert=$db->prepare('INSERT INTO productos
-			     				VALUES(	:codingre, 		:descrip, 		:familia,
-			     						:unidad, 		:empaque, 		:equivale,
-			     						:inventa1,		:stockmax,		:stockmin,
-			     						:ultcosto,		:costoprome,	:impuesto,
-			     						:pedido,		:status,		:redondeo,
-										:inventaFisico,	:diferencia )');
-			$insert->bindValue('codingre',	$producto->codingre);
-			$insert->bindValue('descrip',	$producto->descrip);
-			$insert->bindValue('familia',	$producto->familia);
-			$insert->bindValue('unidad',	$producto->unidad);
-			$insert->bindValue('empaque',	$producto->empaque);
-			$insert->bindValue('equivale',	$producto->equivale);
-			$insert->bindValue('inventa1',	$producto->inventa1);
-			$insert->bindValue('stockmax',	$producto->stockmax);
-			$insert->bindValue('stockmin',	$producto->stockmin);
-			$insert->bindValue('ultcosto',	$producto->ultcosto);
-			$insert->bindValue('costoprome',$producto->costoprome);
-			$insert->bindValue('impuesto',	$producto->impuesto);
-			$insert->bindValue('pedido',	$producto->pedido);
-			$insert->bindValue('status',	$producto->status);
-			$insert->bindValue('redondeo',	$producto->redondeo);
-			$insert->bindValue('inventaFisico',$producto->inventaFisico);
-			$insert->bindValue('diferencia',$producto->diferencia);
+			$db = Db::getConnect();
+			$insert = $db->prepare('INSERT INTO productos
+			     					VALUES(	:codingre, 		:descrip, 		:familia,
+			     							:unidad, 		:empaque, 		:equivale,
+			     							:inventa1,		:stockmax,		:stockmin,
+			     							:ultcosto,		:costoprome,	:impuesto,
+			     							:pedido,		:status,		:redondeo,
+											:inventaFisico,	:diferencia )');
+			$insert->bindValue('codingre',		$producto->codingre);
+			$insert->bindValue('descrip',		$producto->descrip);
+			$insert->bindValue('familia',		$producto->familia);
+			$insert->bindValue('unidad',		$producto->unidad);
+			$insert->bindValue('empaque',		$producto->empaque);
+			$insert->bindValue('equivale',		$producto->equivale);
+			$insert->bindValue('inventa1',		$producto->inventa1);
+			$insert->bindValue('stockmax',		$producto->stockmax);
+			$insert->bindValue('stockmin',		$producto->stockmin);
+			$insert->bindValue('ultcosto',		$producto->ultcosto);
+			$insert->bindValue('costoprome',	$producto->costoprome);
+			$insert->bindValue('impuesto',		$producto->impuesto);
+			$insert->bindValue('pedido',		$producto->pedido);
+			$insert->bindValue('status',		$producto->status);
+			$insert->bindValue('redondeo',		$producto->redondeo);
+			$insert->bindValue('inventaFisico',	$producto->inventaFisico);
+			$insert->bindValue('diferencia',	$producto->diferencia);
 			$insert->execute();
 		}
+
 
 	//la función para actualizar
 	public static function update($producto){
 
 		$db=Db::getConnect();
-		$update=$db->prepare('UPDATE productos
-							SET descrip=:descrip,		familia=:familia,		unidad=:unidad,
-								empaque=:empaque,		equivale=:equivale, 	inventa1=:inventa1,
-								stockmax=:stockmax,		stockmin=:stockmin,		ultcosto=:ultcosto,
-								costoprome=:costoprome, impuesto=:impuesto, 	pedido=:pedido,
-								status=:status,			redondeo=:redondeo
-							WHERE codingre=:codingre');
+		$update=$db->prepare('	UPDATE productos
+								SET 	descrip=:descrip,		familia=:familia,		unidad=:unidad,
+										empaque=:empaque,		equivale=:equivale, 	inventa1=:inventa1,
+										stockmax=:stockmax,		stockmin=:stockmin,		ultcosto=:ultcosto,
+										costoprome=:costoprome, impuesto=:impuesto, 	pedido=:pedido,
+										status=:status,			redondeo=:redondeo
+								WHERE 	codingre=:codingre');
 		$update->bindValue('codingre',	$producto->codingre);
 		$update->bindValue('descrip',	$producto->descrip);
 		$update->bindValue('familia',	$producto->familia);
@@ -121,55 +123,59 @@ class Producto
 		$update->execute();
 	}
 
+
 	// la función para eliminar por el id
 	public static function delete($codingre){
-		$db=Db::getConnect();
-		$delete=$db->prepare('DELETE FROM productos WHERE codingre=:codingre');
+		$db = Db::getConnect();
+		$delete = $db->prepare('DELETE FROM productos WHERE codingre = :codingre');
 		$delete->bindValue('codingre',$codingre);
 		$delete->execute();
 	}
 
+
 	//la función para obtener un producto por el id
 	public static function getById($codingre){
-		$db=Db::getConnect();
-		$select=$db->prepare('SELECT * FROM productos WHERE codingre=:codingre');
+		$db = Db::getConnect();
+		$select = $db->prepare('SELECT * FROM productos WHERE codingre = :codingre');
 		$select->bindValue('codingre',$codingre);
 		$select->execute();
-		$productoDb=$select->fetch();
-		$producto= new Producto($productoDb['codingre'],	$productoDb['descrip'], 	$productoDb['familia'],
-								$productoDb['unidad'],		$productoDb['empaque'],		$productoDb['equivale'],
-				  				$productoDb['inventa1'],	$productoDb['stockmax'],	$productoDb['stockmin'],
-								$productoDb['ultcosto'],	$productoDb['costoprome'],	$productoDb['impuesto'],
-								$productoDb['pedido'],		$productoDb['status'],		$productoDb['redondeo'],
-								$productoDb['inventaFisico'],$productoDb['diferencia']	);
+		$productoDb = $select->fetch();
+		$producto = new Producto($productoDb['codingre'],		$productoDb['descrip'], 	$productoDb['familia'],
+								$productoDb['unidad'],			$productoDb['empaque'],		$productoDb['equivale'],
+				  				$productoDb['inventa1'],		$productoDb['stockmax'],	$productoDb['stockmin'],
+								$productoDb['ultcosto'],		$productoDb['costoprome'],	$productoDb['impuesto'],
+								$productoDb['pedido'],			$productoDb['status'],		$productoDb['redondeo'],
+								$productoDb['inventaFisico'],	$productoDb['diferencia']	);
 		return $producto;
 	}
+
 
 	//la función para obtener un producto por el id
 	public static function getByFam($familia){
 
-		$listaProductos =[];
-		$db=Db::getConnect();
-		$select=$db->prepare('SELECT * FROM productos WHERE familia=:familia ORDER BY descrip ASC');
+		$listaProductos = [];
+		$db = Db::getConnect();
+		$select = $db->prepare('SELECT * FROM productos WHERE familia = :familia ORDER BY descrip ASC');
 		$select->bindValue('familia',$familia);
 		$select->execute();
 		foreach($select->fetchAll() as $productoDb)
-		$productos[]= new Producto( $productoDb['codingre'],	$productoDb['descrip'],		$productoDb['familia'],
-									$productoDb['unidad'],  	$productoDb['empaque'],		$productoDb['equivale'],
-					  				$productoDb['inventa1'],	$productoDb['stockmax'],	$productoDb['stockmin'],
-									$productoDb['ultcosto'],	$productoDb['costoprome'],	$productoDb['impuesto'],
-									$productoDb['pedido'],  	$productoDb['status'],		$productoDb['redondeo'],
-									$productoDb['inventaFisico'],$productoDb['diferencia'],	);
+		$productos[] = new Producto( $productoDb['codingre'],		$productoDb['descrip'],		$productoDb['familia'],
+									$productoDb['unidad'],  		$productoDb['empaque'],		$productoDb['equivale'],
+					  				$productoDb['inventa1'],		$productoDb['stockmax'],	$productoDb['stockmin'],
+									$productoDb['ultcosto'],		$productoDb['costoprome'],	$productoDb['impuesto'],
+									$productoDb['pedido'],  		$productoDb['status'],		$productoDb['redondeo'],
+									$productoDb['inventaFisico'],	$productoDb['diferencia'],	);
 		if(!empty($productos)){
 			return $productos;
 		}
 	}
 
+
 	public static function ingresa_pedido_autorizado_cancelado($productos,$status){
 		//$status="autorizado";
-		$db=Db::getconnect();
+		$db = Db::getconnect();
 		foreach($productos->fetchAll() as $producto){
-			$insert=$db->prepare('UPDATE productos SET pedido=:pedido, status=:status WHERE codingre=:codingre');
+			$insert = $db->prepare('UPDATE productos SET pedido = :pedido, status = :status WHERE codingre = :codingre');
 			$insert->bindValue("pedido",$producto['num_prod']);
 			$insert->bindValue("codingre",$producto['codingre']);
 			$insert->bindValue("status",$status);
@@ -179,10 +185,10 @@ class Producto
 	}
 
 	public static function change_order_status_db($status,$codingre){
-		$db=Db::getConnect();
-		$update=$db->prepare('UPDATE productos
-							SET status=:status
-							WHERE codingre=:codingre');
+		$db = Db::getConnect();
+		$update = $db->prepare('UPDATE productos
+							SET status = :status
+							WHERE codingre = :codingre');
 		$update->bindValue('status',$status);
 		$update->bindvalue('codingre',$codingre);
 		// $update->bindValue('autoriza',$_SESSION['nombre']);
@@ -232,37 +238,39 @@ class Producto
 	// 	exit;
 	// }
 
+
 	public static function create_csv($data,$name_file){
-		// $db=Db::getConnect();
-		// $query = $db->query("SELECT * FROM productos ORDER BY codingre ASC");
+
 		if(!empty($data)){
-		$delimiter = ",";
-		$filename = $name_file . date('Y-m-d') . ".csv";
-		$f = fopen('php://memory', 'w');
-		$fields = array('codingre', 'descrip', 'familia', 'unidad', 'empaque',
-						'equivale', 'inventa1', 'stockmax', 'stockmin', 'ultcosto',
-						'costoprome', 'impuesto', 'pedido', 'status', 'redondeo');
-		fputcsv($f, $fields, $delimiter);
-		//Escribe cada uno de los registros de la tabla usuarios en líneas separadas de nuestro csv
-		foreach($data as $row){
-			//$status = ($row['status'] == '1')?'Active':'Inactive';
-			$lineData = array(
-					$row->codingre,
-					$row->descrip,
-					$row->familia,
-					$row->unidad,
-					$row->empaque,
-					$row->equivale,
-					$row->inventa1,
-					$row->stockmax,
-					$row->stockmin,
-					$row->ultcosto,
-					$row->costoprome,
-					$row->impuesto,
-					$row->pedido,
-					$row->status,
-					$row->redondeo);
-			fputcsv($f, $lineData, $delimiter);
+
+			$delimiter = ",";
+			$filename = $name_file . date('Y-m-d') . ".csv";
+			$f = fopen('php://memory', 'w');
+			$fields = array(	'codingre',		'descrip', 	'familia', 	'unidad', 	'empaque',
+								'equivale', 	'inventa1', 'stockmax', 'stockmin', 'ultcosto',
+								'costoprome', 	'impuesto', 'pedido', 	'status', 	'redondeo');
+			fputcsv($f, $fields, $delimiter);
+			//Escribe cada uno de los registros de la tabla usuarios en líneas separadas de nuestro csv
+			foreach($data as $row){
+
+				//$status = ($row['status'] == '1')?'Active':'Inactive';
+				$lineData = array(
+						$row->codingre,
+						$row->descrip,
+						$row->familia,
+						$row->unidad,
+						$row->empaque,
+						$row->equivale,
+						$row->inventa1,
+						$row->stockmax,
+						$row->stockmin,
+						$row->ultcosto,
+						$row->costoprome,
+						$row->impuesto,
+						$row->pedido,
+						$row->status,
+						$row->redondeo);
+				fputcsv($f, $lineData, $delimiter);
 			}
 		//move back to beginning of file
 		fseek($f, 0);
@@ -271,24 +279,26 @@ class Producto
 		header('Content-Disposition: attachment; filename="' . $filename . '";');
 		//output all remaining data on a file pointer
 		fpassthru($f);
-	fclose($f);
+
+		fclose($f);
 		}
 		exit;
 	}
 
+
 	public static function create_csv_automatic($data,$name_file){
+
 		require_once("../Config/config.php");
 		if(!empty($data)){
-		$delimiter = ",";
-		$filename = $name_file . date('Y-m-d') . ".csv";
-		// $f = fopen('C:\OCOMPRA'.'\\'.$filename, 'w');
-		$f = fopen(PATH_DESCARGA_CSV_PEDIDO.'\\'.$filename, 'w');
-		$fields = array('codingre', 'descrip', 'familia', 'unidad', 'empaque',
-						'equivale', 'inventa1', 'stockmax', 'stockmin', 'ultcosto',
-						'costoprome', 'impuesto', 'pedido', 'status', 'redondeo');
+			$delimiter = ",";
+			$filename = $name_file . date('Y-m-d') . ".csv";
+			$f = fopen(PATH_DESCARGA_CSV_PEDIDO . '\\' . $filename, 'w');
+			$fields = array('codingre', 	'descrip', 	'familia', 	'unidad', 	'empaque',
+							'equivale', 	'inventa1', 'stockmax', 'stockmin', 'ultcosto',
+							'costoprome', 	'impuesto', 'pedido', 	'status', 	'redondeo');
 
-		fputcsv($f, $fields, $delimiter);
-		//Escribe cada uno de los registros de la tabla usuarios en líneas separadas de nuestro csv
+			fputcsv($f, $fields, $delimiter);
+			//Escribe cada uno de los registros de la tabla usuarios en líneas separadas de nuestro csv
 		foreach($data as $row){
 			//$status = ($row['status'] == '1')?'Active':'Inactive';
 			$lineData = array(
@@ -320,67 +330,70 @@ class Producto
 		}
 	}
 
-	public static function verifica_existencia($db,$codingre){
-		// $db=Db::getConnect();
-		// $db=Db::getConnect();
-		// $select=$db->prepare('SELECT COUNT(*) as cantidad FROM productos WHERE codingre=:codingre');
-		$select=$db->prepare('SELECT COUNT(codingre) as cantidad FROM productos WHERE codingre=:codingre');
-		$select->bindValue('codingre',$codingre);
+
+	public static function verifica_existencia($codingre){
+		$db = Db::getConnect();
+		$select = $db->prepare('SELECT COUNT(codingre) as cantidad FROM productos WHERE codingre=:codingre');
+		$select->bindValue('codingre', $codingre);
 		$select->execute();
-		$count=$select->fetch();
-		// print_r($count["cantidad"]);
+		$count = $select->fetch();
 		return $count["cantidad"];
 	}
 
-	public static function update_existencia($db,$codingre,$descrip,$familia,$unidad,$empaque,$equivale,
-											$inventa1,$stockmax,$stockmin,$ultcosto,$costoprome,$impuesto,
-											$pedido,$status,$redondeo){
-		// $db=Db::getConnect();
-		$update=$db->prepare('UPDATE productos
-							SET descrip=:descrip,familia=:familia,unidad=:unidad,empaque=:empaque,equivale=:equivale,
-								inventa1=:inventa1,stockmax=:stockmax,stockmin=:stockmin,ultcosto=:ultcosto,costoprome=:costoprome,
-								impuesto=:impuesto,pedido=:pedido,status=:status,redondeo=:redondeo
- 							WHERE codingre=:codingre');
-		$update->bindValue('codingre',$codingre);
-		$update->bindValue('descrip',$descrip);
-		$update->bindValue('familia',$familia);
-		$update->bindValue('unidad',$unidad);
-		$update->bindValue('empaque',$empaque);
-		$update->bindValue('equivale',$equivale);
-		$update->bindValue('inventa1',$inventa1);
-		$update->bindValue('stockmax',$stockmax);
-		$update->bindValue('stockmin',$stockmin);
-		$update->bindValue('ultcosto',$ultcosto);
+
+	public static function update_existencia($codingre,	$descrip,	$familia,	$unidad,	$empaque,		$equivale,
+											$inventa1,	$stockmax,	$stockmin,	$ultcosto,	$costoprome,	$impuesto,
+											$pedido,	$status,	$redondeo){
+		$db = Db::getConnect();
+		$update = $db->prepare('UPDATE productos
+								SET descrip = :descrip, familia = :familia, unidad = :unidad, empaque = :empaque,
+									equivale = :equivale,	inventa1 = :inventa1, stockmax = :stockmax, stockmin = :stockmin,
+									ultcosto = :ultcosto, costoprome = :costoprome, impuesto = :impuesto, pedido = :pedido,
+									redondeo = :redondeo
+ 								WHERE codingre = :codingre LIMIT 1;');
+		$update->bindValue('codingre',	$codingre);
+		$update->bindValue('descrip',	$descrip);
+		$update->bindValue('familia',	$familia);
+		$update->bindValue('unidad',	$unidad);
+		$update->bindValue('empaque',	$empaque);
+		$update->bindValue('equivale',	$equivale);
+		$update->bindValue('inventa1',	$inventa1);
+		$update->bindValue('stockmax',	$stockmax);
+		$update->bindValue('stockmin',	$stockmin);
+		$update->bindValue('ultcosto',	$ultcosto);
 		$update->bindValue('costoprome',$costoprome);
-		$update->bindValue('impuesto',$impuesto);
-		$update->bindValue('pedido',$pedido);
-		$update->bindValue('status',$status);
-		$update->bindValue('redondeo',$redondeo);
+		$update->bindValue('impuesto',	$impuesto);
+		$update->bindValue('pedido',	$pedido);
+		// $update->bindValue('status',	$status);
+		$update->bindValue('redondeo',	$redondeo);
 		$update->execute();
+		// $update->closeCursor();
 	}
 
+
+
 	public static function carga_db(){
-		$tiempo_inicio = microtime(true);
-		set_time_limit(600);
+
+		// $tiempo_inicio = microtime(true);
+		// set_time_limit(600);
 		// require_once("connection.php");
 		// require_once("productos.php");
 
 		$linea = 0;
-		$familias=[];
+		$familias = [];
 		//Abrimos nuestro archivo
 		// $archivo = fopen(dirname(__FILE__)."\OCOMPRA.csv", "r");
 		$archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
 		//Lo recorremos
-		echo "Se esta cargando o actualizando la base de datos, por favor espera un momento...";
+		echo "Se esta cargando o actualizando la base de datos, por favor espera un momento... <br>";
   		while (($datos = fgetcsv($archivo, ",")) == true)
   		{
     		$num = count($datos);
     		$linea++;
     		//Recorremos las columnas de esa linea
-    		if($linea==1){
-
-     		// echo "salto encabezado";
-      		continue;}
+    		if($linea == 1){
+     			// echo "salto encabezado";
+      			continue;}
 
       		// for ($columna = 0; $columna < $num; $columna++){
 
@@ -388,23 +401,26 @@ class Producto
           		// $datos[$columna];
         		// }
         		// echo $datos[0];
-        		$existencia=Producto::verifica_existencia($datos[0]);
+        		$existencia = Producto::verifica_existencia($datos[0]);
         		// echo "Existencia".$existencia;
-        		if($existencia==0){
+        		if($existencia == 0){
         		// echo "Entro al for para guarda";
           		$producto = new Producto(	$datos[0],	$datos[1],	$datos[2],
                             				$datos[3],	$datos[4],	$datos[5],
                             				$datos[6],	$datos[7],	$datos[8],
                             				$datos[9],	$datos[10],	$datos[11],
                             				$datos[12],	$datos[13],	$datos[14],
-											NULL,NULL );
+											NULL,		NULL );
 
-                            		Producto::save($producto);
+            	Producto::save($producto);
     		}else{
       		// echo("(" . "ya existe se actualizara" . $datos[0] . ")" . $linea);
-      		Producto::update_existencia($datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5],$datos[6],
-										$datos[7],$datos[8],$datos[9],$datos[10],$datos[11],$datos[12],$datos[13],$datos[14]);
-       		$linea--;
+      		Producto::update_existencia( 	$datos[0],	$datos[1],	$datos[2],
+											$datos[3],	$datos[4],	$datos[5],
+											$datos[6],	$datos[7],	$datos[8],
+											$datos[9],	$datos[10],	$datos[11],
+											$datos[12],	NULL,		$datos[14]);
+       		// $linea--;
     		}
     		 // if(!in_array($datos[2],$familias)){
       		 // $familias[]=$datos[2];
@@ -413,12 +429,11 @@ class Producto
   		}
 		// echo "<script>alert(".($linea-1).");</script>";
 		// print_r($familias);
-		echo "Exito....";
+		echo "Exito.... Actualizacion lista.";
 		//Cerramos el archivo
 		fclose($archivo);
-		$tiempo_final = microtime(true);
-
-		echo "Tiempo de ejecucion: " . ($tiempo_final - $tiempo_inicio) ;
+		// $tiempo_final = microtime(true);
+		// echo "Tiempo de ejecucion: " . ($tiempo_final - $tiempo_inicio) ;
 	}
 }//End class
 ?>

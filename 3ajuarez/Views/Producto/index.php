@@ -23,7 +23,7 @@
 					<th>Impuesto</th>
 					<th>Pedido</th>
 					<th>Estatus</th>
-					<th colspan=2 >Acciones</th>
+					<!-- <th colspan=2 >Acciones</th> -->
 				</tr>
 			</thead>
 			<tbody>
@@ -44,8 +44,8 @@
 							<td><?php echo $producto->impuesto;?></td>
 							<td><?php echo $producto->pedido;?></td>
 							<td><?php echo $producto->status;?></td>
-							<td><a href="Controllers/producto_controller.php?action=update&codingre=<?php echo $producto->codingre ?>">Actualizar</a> </td>
-							<td><a href="Controllers/producto_controller.php?action=delete&codingre=<?php echo $producto->codingre ?>">Eliminar</a> </td>
+							<!-- <td><a href="Controllers/producto_controller.php?action=update&codingre=<?php //echo $producto->codingre ?>">Actualizar</a> </td> -->
+							<!-- <td><a href="Controllers/producto_controller.php?action=delete&codingre=<?php //echo $producto->codingre ?>">Eliminar</a> </td> -->
 						</tr>
 					<?php } ?>
 				</tbody>

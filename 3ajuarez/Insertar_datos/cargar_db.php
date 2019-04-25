@@ -2,7 +2,7 @@
 
 $tiempo_inicial = microtime(true);
 
-echo "*******Importante no cierres la ventana esta se cerrara de forma automatica*******";
+echo "******Importante no cierres la ventana esta se cerrara de forma automatica******";
 
 $unidad_ruta = "3ajuarez";
 
