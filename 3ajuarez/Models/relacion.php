@@ -1,7 +1,5 @@
 <?php
-/**
-* Modelo para el acceso a la base de datos y funciones CRUD
-*/
+
 class Relacion
 {
 	//atributos
@@ -43,9 +41,9 @@ class Relacion
 	public static function save($relacion){
 			$db=Db::getConnect();
 			$insert=$db->prepare('INSERT INTO pedido_producto
-													  VALUES(:id_pedido,:codingre,:fecha_pedido,
-																	 :hora_pedido,:num_prod,:estado_prod,
-																 	 :observacion)');
+								  VALUES(:id_pedido,:codingre,:fecha_pedido,
+										 :hora_pedido,:num_prod,:estado_prod,
+									 	 :observacion)');
 			$insert->bindValue('id_pedido',$relacion->id_pedido);
 			$insert->bindValue('codingre',$relacion->codingre);
 			$insert->bindValue('fecha_pedido',$relacion->fecha_pedido);
@@ -59,10 +57,10 @@ class Relacion
 	//la función para actualizar
 	public static function update($relacion){
 		$db=Db::getConnect();
-		$update=$db->prepare('UPDATE pedido_producto
-													SET codingre=:codingre, fecha_pedido=:fecha_pedido,	hora_pedido=:hora_pedido,
-													    num_prod=:num_prod,estado_prod=:estado_prod, observacion=:observacion
-													WHERE id_pedido=:id_pedido');
+		$update=$db->prepare('	UPDATE pedido_producto
+								SET codingre=:codingre, fecha_pedido=:fecha_pedido,	hora_pedido=:hora_pedido,
+								    num_prod=:num_prod,estado_prod=:estado_prod, observacion=:observacion
+								WHERE id_pedido=:id_pedido');
 		$update->bindValue('id_pedido',$relacion->id_pedido);
 		$update->bindValue('codingre',$relacion->codingre);
 		$update->bindValue('fecha_pedido',$relacion->fecha_pedido);

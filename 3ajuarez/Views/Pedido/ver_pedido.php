@@ -20,7 +20,8 @@
 			<!-- <th>Unidad de medida</th> -->
 			<!-- <th>Total de productos por familia</th> -->
 			<th scope="col">Fecha Pedido</th>
-			<th scope="col">Hora</th>
+            <th scope="col">Hora</th>
+			<th scope="col">Familia</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -40,13 +41,14 @@
                 <td><?php echo number_format($pedido->costo_total,2);?></td>
 				<td><?php echo $pedido->solicita;?></td>
 				<td><?php echo $pedido->estado;?></td>
-				<!-- <td><?php// echo $pedido->observaciones;?></td> -->
+				<!-- <td><?php // echo $pedido->observaciones;?></td> -->
 				<!-- <td><?php //echo $pedido->unidad_medida;?></td> -->
 				<!-- <td><?php //echo $pedido->total_prod;?></td> -->
 				<!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php //echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
 				<!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php //echo $pedido->id_pedido ?>">Eliminar</a> </td> -->
 				<td><?php echo $pedido->fecha_pedido; ?></td>
-				<td><?php echo $pedido->hora;?></td>
+                <td><?php echo $pedido->hora;?></td>
+				<td><?php echo $pedido->familia;?></td>
 			</tr>
         <?php }//Fin foreach ?>
 		</tbody>

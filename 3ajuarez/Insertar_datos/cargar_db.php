@@ -58,7 +58,7 @@ $archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
                             $datos[3],$datos[4],$datos[5],
                             $datos[6],$datos[7],$datos[8],
                             $datos[9],$datos[10],$datos[11],
-                            $datos[12],$datos[13],$datos[14],NULL,NULL);
+                            $datos[12],$datos[13],$datos[14],NULL,NULL,NULL);
                             Producto::save($producto);
     }else{
       // echo("(" . "ya existe se actualizara" . $datos[0] . ")" . $linea);

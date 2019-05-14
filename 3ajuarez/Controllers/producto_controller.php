@@ -2,6 +2,7 @@
 	class ProductoController
 	{
 		public $codingre_class;
+
 		public function __construct(){}
 
 		public function index(){
@@ -20,30 +21,32 @@
 			$fecha_pedido = date("Y-m-d");
 			$fecha_autoriza = NULL;
 			$hora = date("h:i:s");
-			$hora_autoriza_cancela=NULL;
-			$autoriza=NULL;
-			$solicita=$_SESSION["nombre"];
-			$estado='pedido';
-			$observaciones=NULL;
-			$unidad_medida='';//Cambiar por costo_total
-			$total_prod=$_POST['total_prod'];
-			$costo_total=$_POST['costo_total'];
+			$hora_autoriza_cancela = NULL;
+			$autoriza = NULL;
+			$solicita = $_SESSION["nombre"];
+			$estado = 'pedido';
+			$observaciones = NULL;
+			$unidad_medida = '';//Cambiar por costo_total
+			$total_prod = $_POST['total_prod'];
+			$costo_total = $_POST['costo_total'];
+			$familia = $cod_fam;
 			//Crea Objeto pedido y lo pasa a el metodo save
 			$pedido= new Pedido(NULL,$fecha_pedido,$fecha_autoriza,$hora,$hora_autoriza_cancela,
-								$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,$costo_total);
+								$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,
+								$costo_total,$familia);
 
 			//Variables para la relacion entre producto y pedido
-			$id_pedido=Pedido::save($pedido);
-			$fecha_pedido_relacion=$pedido->fecha_pedido;
-			$hora_pedido=$pedido->hora;
-			$estado_prod='pedido';
+			$id_pedido = Pedido::save($pedido);
+			$fecha_pedido_relacion = $pedido->fecha_pedido;
+			$hora_pedido = $pedido->hora;
+			$estado_prod = 'pedido';
 			//Objeto con los productos por familia
-			$productos=Producto::getByFam($cod_fam);
+			$productos = Producto::getByFam($cod_fam);
 
 			if(isset($_POST['modificados'])){
 			    if(!empty($_POST['modificados'])){
-			      $lista_productos=[];
-			      $lista_cantidad=[];
+			      $lista_productos = [];
+			      $lista_cantidad  = [];
 			      $datos_modificados = explode(" ",$_POST['modificados']);
 			          for($i=0; $i< count($datos_modificados)-1; $i++){
 			            $id_and_cantidad=explode(':',$datos_modificados[$i]);
