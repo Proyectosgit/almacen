@@ -15,9 +15,9 @@
                 <label>Buscar por:</label><br>
                 <label>Dia:</label> <input type="radio" name="tipo" value="dia" checked><br>
                 <label>Mes:</label> <input type="radio" name="tipo" value="mes"><br><br>
-                <button type="submit" class="btn btn-success">
-								 Buscar Autorizados  <span class="oi" data-glyph="check"></span>
-							 	</button>
+                	<button type="submit" class="btn btn-success">
+					 	Buscar Autorizados  <span class="oi" data-glyph="check"></span>
+					</button>
                 </center>
             </form>
         </div>

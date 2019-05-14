@@ -36,24 +36,24 @@
 									if(!empty($productos)){
 										foreach ($productos as $producto) {
 										//Se agrega para evitar pedir con negativos
-										if($producto->inventa1>=0){
-											$pedido = $producto->stockmax - $producto->inventa1;
+										if($producto->inventa1 >= 0){
+											$pedido1 = $producto->stockmax1 - $producto->inventa1;
 										}elseif($producto->inventa1 < 0){
-											$pedido=$producto->stockmax - 0;
+											$pedido1 = $producto->stockmax1 - 0;
 										}//fin negativos
 
-										if($pedido>=0){
-											$costo_producto = $producto->ultcosto*$pedido;
+										if($pedido1>=0){
+											$costo_producto = $producto->ultcosto*$pedido1;
 										}else{
 											$costo_producto = 0;
 										}
 
 										if($producto->redondeo == 1){
 											// $pedido=round($pedido,2);
-											$pedido=ceil($pedido);
+											$pedido1=ceil($pedido1);
 											// $pedido=round($pedido,2)
 										}elseif($producto->redondeo == 0){
-											$pedido=$pedido;
+											$pedido1=$pedido1;
 										}
 
 										$costo_producto=round($costo_producto,2);
@@ -62,7 +62,7 @@
 											<tr>
 												<td class="small"><?php echo $producto->descrip;?></td>
 												<!-- <td bgcolor="#3ADF00"><?php //echo $pedido;?></td> -->
-												<td><input class="cantidad" type="number" name="<?php echo $producto->codingre;?>" value="<?php if($pedido>=0){echo number_format($pedido,2);}else{echo 0;};?>" required></td> <!--Permite modificar la cantidad pedida -->
+												<td><input class="cantidad" type="number" name="<?php echo $producto->codingre;?>" value="<?php if($pedido1>=0){echo number_format($pedido1,2);}else{echo 0;};?>" required></td> <!--Permite modificar la cantidad pedida -->
 												<td class="costo_producto"><?php echo number_format($costo_producto,2); ?></td>
 												<?php 	$costo_total=$costo_total+$costo_producto;
 														$total_prod=$total_prod+1;
@@ -70,7 +70,7 @@
 												<!-- <td><?php //echo $producto->familia;?></td> -->
 												<!-- <td><?php //echo $producto->empaque;?></td> -->
 												<!-- <td class="stock_mix"><?php //echo $producto->stockmin;?></td> -->
-												<td class="stock_max"><?php echo $producto->stockmax;?></td>
+												<td class="stock_max"><?php echo $producto->stockmax1;?></td>
 												<td class="existencia"><?php echo $producto->inventa1;?></td>
 												<td class="precio_unitario"><?php echo $producto->ultcosto;?></td>
 												<!-- <td><?php //echo $producto->costoprome;?></td> -->

@@ -93,45 +93,54 @@
 		require_once('../Config/connection.php');
 
 		if ($_POST['action']=='register') {
-			$pedido= new Pedido(NULL,$_POST['fecha'],$_POST['hora'],$_POST['autoriza'],
-								 $_POST['solicita'],$_POST['estado'],$_POST['observaciones'],
-								 $_POST['unidad_medida'],$_POST['total_prod'],$_POST['costo_total']);
+
+			$pedido= new Pedido(NULL,$_POST['fecha_pedido'],$_POST['fecha_autoriza_cancela'],$_POST['hora'],$_POST['hora_autoriza_cancela'],$_POST['autoriza'],
+								$_POST['solicita'],$_POST['estado'],$_POST['observaciones'],$_POST['unidad_medida'],$_POST['total_prod'],$_POST['costo_total'],
+								$_POST('familia'));
 			$pedidoController->save($pedido);
+
 		}elseif ($_POST['action']=='update') {
-			$pedido= new Pedido($_POST['id_pedido'],$_POST['fecha'],$_POST['hora'],
-								$_POST['autoriza'],$_POST['solicita'],$_POST['estado'],
-								$_POST['observaciones'],$_POST['unidad_medida'],$_POST['total_prod'],
-								$_POST['costo_total']);
+
+			$pedido= new Pedido($_POST['id_pedido'],$_POST['fecha_pedido'],$_POST['fecha_autoriza_cancela'],$_POST['hora'],$_POST['hora_autoriza_cancela'],$_POST['autoriza'],
+								$_POST['solicita'],$_POST['estado'],$_POST['observaciones'],$_POST['unidad_medida'],$_POST['total_prod'],$_POST['costo_total'],
+								$_POST('familia'));
 			$pedidoController->update($pedido);
 		}
 	}
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action'] != 'register'&$_GET['action'] != 'index'&$_GET['action'] != 'recibir_pedidos'&$_GET['action'] != 'orderDate'
-				&$_GET['action'] != 'ver_pedido'&$_GET['action'] != 'ver_pedido_autorizado'&$_GET['action'] != 'ver_pedido_cancelado' &$_GET['action'] != 'ver_pedidos'
-				&$_GET['action'] != 'ver_pedido_autorizado_todos'&$_GET['action'] != 'ver_pedido_cancelado_todos'&$_GET['action'] != 'error_order_db'){
+		if ($_GET['action'] != 'register'  	&& 	$_GET['action'] != 'index' && $_GET['action'] != 'recibir_pedidos' && $_GET['action'] != 'orderDate' &&
+			$_GET['action'] != 'ver_pedido'	&&	$_GET['action'] != 'ver_pedido_autorizado' && $_GET['action'] != 'ver_pedido_cancelado' &&
+			$_GET['action'] != 'ver_pedidos'&&	$_GET['action'] != 'ver_pedido_autorizado_todos' && $_GET['action'] != 'ver_pedido_cancelado_todos' &&
+			$_GET['action'] != 'error_order_db'){
 
 				require_once('../Config/connection.php');
 				$pedidoController=new PedidoController();
 
 			if ($_GET['action']=='delete') {
+
 				$pedidoController->delete($_GET['id_pedido']);
 				//mostrar la vista update con los datos del registro actualizar
+
 			}elseif($_GET['action']=='update') {
+
 				require_once('../Models/pedido.php');
 				$pedido=Pedido::getById($_GET['id_pedido']);
 				require_once('../Views/Pedido/update.php');
 		//Obtiene los detalles del pedido
 			}elseif($_GET['action']=='order'){
+
 				require_once('../Models/pedido.php');
 				$select=Pedido::getOrderById($_GET['id_pedido']);
 				require_once('../Views/Pedido/order_prod.php');
+
 			}elseif($_GET['action']=='register_order'){
 
 				require_once('../Models/pedido.php');
 				$select=Pedido::registerOrderById($_GET['fecha']);
 				require_once('../Views/Pedido/register_prod.php');
+
 			}elseif($_GET['action']=="change"){
 
 				require_once("../Models/pedido.php");
@@ -197,7 +206,8 @@
 				require_once('../Views/pedido/show_order_date.php');
 
 			}elseif($_GET['action']=="search_order_date_kitchen_authorized_all"){
-					require_once("../Models/pedido.php");
+
+				require_once("../Models/pedido.php");
 					if($_GET["tipo"]=="dia"){
 						$select=Pedido::getOrderByDayStatus_all($_GET['date'],"autorizado");
 					}elseif($_GET["tipo"]=="mes"){
@@ -207,7 +217,7 @@
 					require_once('../Views/Pedido/show_order_date.php');
 
 			}elseif($_GET['action']=="search_order_date_kitchen_cancel_all"){
-					require_once("../Models/pedido.php");
+				require_once("../Models/pedido.php");
 					if($_GET["tipo"]=="dia"){
 						$select=Pedido::getOrderByDayStatus_all($_GET['date'],"cancelado");
 					}elseif($_GET["tipo"]=="mes"){
@@ -217,6 +227,7 @@
 				require_once('../Views/Pedido/show_order_date.php');
 		//Obtiene los detalles del pedido del almacen
 			}elseif($_GET['action']=='order_almacen'){
+
 				require_once('../Models/pedido.php');
 				$select=Pedido::pedidosProd($_GET['id_pedido']);
 				require_once('../Views/Pedido/order_prod_almacen.php');

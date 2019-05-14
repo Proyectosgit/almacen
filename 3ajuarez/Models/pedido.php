@@ -216,12 +216,12 @@ class Pedido
 		foreach ($select->fetchAll() as $producto) {
 			$listaProductosPedidos[]= new Producto(	$producto['codingre'],		$producto['descrip'],		$producto['familia'],
 													$producto['unidad'],		$producto['empaque'],		$producto['equivale'],
-													$producto['inventa0'],		$producto['inventa1']		$producto['stockmax0'],
-													$producto['stockmax1']		$producto['stockmin0'],		$producto['stockmin1'],
+													$producto['inventa0'],		$producto['inventa1'],		$producto['stockmax0'],
+													$producto['stockmax1'],		$producto['stockmin0'],		$producto['stockmin1'],
 													$producto['ultcosto'],		$producto['costoprome'],	$producto['impuesto'],
-													$producto['pedido0'],		$producto['pedido1']		$producto['status0'],
+													$producto['pedido0'],		$producto['pedido1'],		$producto['status0'],
 													$producto['status1'],		$producto['redondeo'],		$producto['inventafisico0'],
-													$producto['inventafisico1']	$producto['diferencia0'],	$producto['diferencia1']);
+													$producto['inventafisico1'],$producto['diferencia0'],	$producto['diferencia1']);
 		}
 		return $listaProductosPedidos;
   		// return $select;
@@ -241,12 +241,12 @@ class Pedido
 		foreach ($select->fetchAll() as $producto) {
 			$listaProductosPedidos[]= new Producto(	$producto['codingre'],		$producto['descrip'],		$producto['familia'],
 													$producto['unidad'],		$producto['empaque'],		$producto['equivale'],
-													$producto['inventa0'],		$producto['inventa1']		$producto['stockmax0'],
-													$producto['stockmax1']		$producto['stockmin0'],		$producto['stockmin1'],
+													$producto['inventa0'],		$producto['inventa1'],		$producto['stockmax0'],
+													$producto['stockmax1'],		$producto['stockmin0'],		$producto['stockmin1'],
 													$producto['ultcosto'],		$producto['costoprome'],	$producto['impuesto'],
-													$producto['pedido0'],		$producto['pedido1']		$producto['status0'],
+													$producto['pedido0'],		$producto['pedido1'],		$producto['status0'],
 													$producto['status1'],		$producto['redondeo'],		$producto['inventafisico0'],
-													$producto['inventafisico1']	$producto['diferencia0'],	$producto['diferencia1']);
+													$producto['inventafisico1'],$producto['diferencia0'],	$producto['diferencia1']);
 		}
 		return $listaProductosPedidos;
   		// return $select;

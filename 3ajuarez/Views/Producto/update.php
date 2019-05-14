@@ -29,10 +29,10 @@
 			<td><label>Existencia:</label></td><td><input type='text' name='inventa1' maxlength='20' value='<?php echo $producto->inventa1; ?>'></td>
 		</tr>
 		<tr>
-			<td><label>Stock Maximo:</label></td><td><input type='text' name='stockmax' maxlength='20' value='<?php echo $producto->stockmax; ?>'></td>
+			<td><label>Stock Maximo:</label></td><td><input type='text' name='stockmax' maxlength='20' value='<?php echo $producto->stockmax1; ?>'></td>
 		</tr>
 		<tr>
-			<td><label>Stock Minimo:</label></td><td><input type='text' name='stockmin' maxlength='20' value='<?php echo $producto->stockmin; ?>'></td>
+			<td><label>Stock Minimo:</label></td><td><input type='text' name='stockmin' maxlength='20' value='<?php echo $producto->stockmin1; ?>'></td>
 		</tr>
 		<tr>
 			<td><label>Costo Final:</label></td><td><input type='text' name='ultcosto' maxlength='20' value='<?php echo $producto->ultcosto; ?>'></td>
@@ -44,10 +44,10 @@
 			<td><label>Impuesto:</label></td><td><input type='text' name='impuesto' maxlength='20' value='<?php echo $producto->impuesto; ?>'></td>
 		</tr>
 		<tr>
-			<td><label>Pedido:</label></td><td><input type='text' name='pedido' maxlength='20' value='<?php echo $producto->pedido; ?>'></td>
+			<td><label>Pedido:</label></td><td><input type='text' name='pedido' maxlength='20' value='<?php echo $producto->pedido1; ?>'></td>
 		</tr>
 		<tr>
-			<td><label>Estatus:</label></td><td><input type='text' name='estatus' maxlength='20' value='<?php echo $producto->status; ?>'></td>
+			<td><label>Estatus:</label></td><td><input type='text' name='estatus' maxlength='20' value='<?php echo $producto->status1; ?>'></td>
 		</tr>
 	</table>
 

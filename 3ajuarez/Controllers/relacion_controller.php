@@ -40,12 +40,14 @@
 		require_once('../Models/relacion.php');
 		require_once('../Config/connection.php');
 
-		if ($_POST['action']=='register') {
-			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod'],$_POST['Observacion']);
+		if ($_POST['action']=='register'){
+			$relacion= new Relacion($_POST['id_pedido'],	$_POST['codingre'],		$_POST['fecha_pedido'],		$_POST['hora_pedido'],
+									$_POST['num_prod'],		$_POST['estado_prod'],	$_POST['Observacion']);
 			$relacionController->save($relacion);
 
-		}elseif ($_POST['action']=='update') {
-			$relacion= new Relacion($_POST['id_pedido'],$_POST['codingre'],$_POST['fecha_pedido'],$_POST['hora_pedido'],$_POST['num_prod'],$_POST['estado_prod']);
+		}elseif ($_POST['action']=='update'){
+			$relacion= new Relacion($_POST['id_pedido'],	$_POST['codingre'],		$_POST['fecha_pedido'],		$_POST['hora_pedido'],
+									$_POST['num_prod'],		$_POST['estado_prod']);
 			$relacionController->update($relacion);
 
 		}elseif($_POST['action']=='updateRelation'){
@@ -59,7 +61,7 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register'&$_GET['action']!='index') {
+		if ($_GET['action']!='register' && $_GET['action']!='index') {
 			require_once('../Config/connection.php');
 			$relacionController=new RelacionController();
 

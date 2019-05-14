@@ -30,7 +30,7 @@ class Producto
 
 
 	function __construct($codingre,	$descrip, 	$familia, 	$unidad, 	$empaque, 		 $equivale, 		$inventa0, 		$inventa1,
-	 					$stockmax0,	$stockmax1, $stockmin0, $stockmin, 	$ultcosto, 		 $costoprome, 		$impuesto, 		$pedido0,
+	 					$stockmax0,	$stockmax1, $stockmin0, $stockmin1, 	$ultcosto, 		 $costoprome, 		$impuesto, 		$pedido0,
 						$pedido1,	$status0, 	$status1,	$redondeo, 	$inventafisico0, $inventafisico1,	$diferencia0, 	$diferencia1){
 
 		$this->codingre = $codingre;
@@ -172,7 +172,7 @@ class Producto
 		$productoDb = $select->fetch();
 		$producto = new Producto(	$productoDb['codingre'],		$productoDb['descrip'], 		$productoDb['familia'],
 									$productoDb['unidad'],			$productoDb['empaque'],			$productoDb['equivale'],
-				  					$productoDb['inventa0'],		$productoDb['inventa1']			$productoDb['stockmax0'],
+				  					$productoDb['inventa0'],		$productoDb['inventa1'],			$productoDb['stockmax0'],
 									$productoDb['stockmax1'],		$productoDb['stockmin0'],		$productoDb['stockmin1'],
 									$productoDb['ultcosto'],		$productoDb['costoprome'],		$productoDb['impuesto'],
 									$productoDb['pedido0'],			$productoDb['pedido1'],			$productoDb['status0'],
@@ -196,8 +196,8 @@ class Producto
 										$productoDb['stockmax1'],		$productoDb['stockmin0'],		$productoDb['stockmin1'],
 										$productoDb['ultcosto'],		$productoDb['costoprome'],		$productoDb['impuesto'],
 										$productoDb['pedido0'],			$productoDb['pedido1'],  		$productoDb['status0'],
-										$productoDb['status1'],			$productoDb['redondeo'],		$productoDb['inventaFisico0'],
-										$productoDb['inventaFisico1'],	$productoDb['diferencia0'],		$productoDb['diferencia1']	);
+										$productoDb['status1'],			$productoDb['redondeo'],		$productoDb['inventafisico0'],
+										$productoDb['inventafisico1'],	$productoDb['diferencia0'],		$productoDb['diferencia1']	);
 		if(!empty($productos)){
 			return $productos;
 		}

@@ -67,7 +67,7 @@
 								}
 								// continue;
 								else{
-										$pedido=$producto->stockmax-$producto->inventa1;
+										$pedido=$producto->stockmax1-$producto->inventa1;
 											if($producto->redondeo == 1){
 												$pedido=ceil($pedido);
 											}elseif($producto->redondeo == 0){
@@ -79,7 +79,7 @@
 												Relacion::save($relacion);
 												Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
 											}elseif ($producto->inventa1 < 0) {
-												$pedido=$producto->stockmax - 0;
+												$pedido=$producto->stockmax1 - 0;
 
 												if($producto->redondeo == 1){
 													$pedido=ceil($pedido);
@@ -99,7 +99,7 @@
 					foreach ($productos as $producto) {
 						// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 							$codingre=$producto->codingre;
-							$pedido=$producto->stockmax-$producto->inventa1;
+							$pedido=$producto->stockmax1-$producto->inventa1;
 
 							if($producto->redondeo == 1){
 								$pedido=ceil($pedido);
@@ -113,7 +113,7 @@
 							Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
 						}elseif ($producto->inventa1 < 0){
 
-							$pedido=$producto->stockmax - 0;
+							$pedido=$producto->stockmax1 - 0;
 
 							if($producto->redondeo == 1){
 								$pedido=ceil($pedido);
@@ -167,7 +167,7 @@
 									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 									 Relacion::save($relacion);
 								 }else{
-									 $num_prod=$producto->stockmax-$producto->inventa1;
+									 $num_prod=$producto->stockmax1-$producto->inventa1;
 									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 									 Relacion::save($relacion);
 								}
@@ -177,7 +177,7 @@
 								echo "alert('post modificados esta vacia')";
 								foreach ($productos as $producto) {
 									$codingre=$producto->codingre;
-									$num_prod=$producto->stockmax-$producto->inventa1;
+									$num_prod=$producto->stockmax1-$producto->inventa1;
 									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 									Relacion::save($relacion);
 								}
@@ -271,20 +271,26 @@
 		require_once('../Config/connection.php');
 
 		if ($_POST['action']=='register') {
-			$producto= new Producto($_POST['codingre'],$_POST['descrip'],$_POST['familia'],
-														$_POST['unidad'],$_POST['empaque'],$_POST['equivale'],
-														$_POST['inventa1'],$_POST['stockmax'],$_POST['stockmin'],
-														$_POST['ultcosto'],$_POST['costoprome'],$_POST['impuesto'],
-														$_POST['pedido'],$_POST['status']);
+			$producto = new Producto(	$_POST['codingre'],		$_POST['descrip'],		$_POST['familia'],
+										$_POST['unidad'],		$_POST['empaque'],		$_POST['equivale'],
+										$_POST['inventa0'],		$_POST['inventa1'],		$_POST['stockmax0'],
+										$_POST['stockmax1'],	$_POST['stockmin0'],	$_POST['stockmin1'],
+										$_POST['ultcosto'],		$_POST['costoprome'],	$_POST['impuesto'],
+										$_POST['pedido0'],		$_POST['pedido1'],		$_POST['status0'],
+										$_POST['status1'],		$_POST['redondeo'],		$_POST['inventafisico0'],
+										$_POST['inventafisico1'],$_POST['diferencia0'],	$_POST['diferencia1']);
 			$productoController->save($producto);
 			header('Location: ../index.php?controller=producto&action=index');
 
 		}elseif ($_POST['action']=='update') {
-			$producto= new Producto($_POST['codingre'],$_POST['descrip'],$_POST['familia'],
-															 $_POST['unidad'],$_POST['empaque'],$_POST['equivale'],
-															 $_POST['inventa1'],$_POST['stockmax'],$_POST['stockmin'],
-															 $_POST['ultcosto'],$_POST['costoprome'],$_POST['impuesto'],
-															 $_POST['pedido'],$_POST['status']);
+			$producto= new Producto($_POST['codingre'],		$_POST['descrip'],		$_POST['familia'],
+									$_POST['unidad'],		$_POST['empaque'],		$_POST['equivale'],
+									$_POST['inventa0'],		$_POST['inventa1'],		$_POST['stockmax0'],
+									$_POST['stockmax1'],	$_POST['stockmin0'],	$_POST['stockmin1'],
+									$_POST['ultcosto'],		$_POST['costoprome'],	$_POST['impuesto'],
+									$_POST['pedido0'],		$_POST['pedido1'],		$_POST['status0'],
+									$_POST['status1'],		$_POST['redondeo'],		$_POST['inventafisico0'],
+									$_POST['inventafisico1'],$_POST['diferencia0'],	$_POST['diferencia1']);
 			$productoController->update($producto);
 
 		}elseif ($_POST['action']=='search_prod'){
@@ -326,24 +332,26 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register'&$_GET['action']!='index'&$_GET['action']!='search_prod'&$_GET['action']!='search_prod_fam'
-				&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra'&$_GET['action']!='button_download_db'&$_GET['action']!='carga_db_productos') {
+		if (	$_GET['action']!='register' && $_GET['action']!='index' && $_GET['action']!='search_prod' && $_GET['action']!='search_prod_fam' &&
+				$_GET['action']!='search_prod_bar' && $_GET['action']!='search_prod_barra' && $_GET['action']!='button_download_db' &&
+				$_GET['action']!='carga_db_productos'){
+
 			require_once('../Config/connection.php');
 			$productoController=new ProductoController();
 
-			if ($_GET['action']=='delete') {
+			if($_GET['action']=='delete'){
 				$productoController->delete($_GET['codingre']);
 				header('Location: ../index.php?controller=producto&action=index');
 
-			}elseif ($_GET['action']=='update') {//mostrar la vista update con los datos del registro actualizar
+			}elseif($_GET['action']=='update'){//mostrar la vista update con los datos del registro actualizar
 				require_once('../Models/producto.php');
 				$producto=Producto::getById($_GET['codingre']);
 				require_once('../Views/Producto/update.php');
-			}elseif ($_GET['action']=='download') {//mostrar la vista update con los datos del registro actualizar
+			}elseif($_GET['action']=='download'){//mostrar la vista update con los datos del registro actualizar
 				require_once('../Models/producto.php');
 				$productoController->download_db($_GET["name_file"]);
 				header('Location: index.php/?controller=producto&action=button_download_db');
 			}
-		}
+		}//End if verifica si existe la accion
 	}
 ?>
