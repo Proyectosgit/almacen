@@ -37,13 +37,13 @@
 							<td><?php echo $producto->empaque;?></td>
 							<td><?php echo $producto->equivale;?></td>
 							<td><?php echo $producto->inventa1;?></td>
-							<td><?php echo $producto->stockmax;?></td>
-							<td><?php echo $producto->stockmin;?></td>
+							<td><?php echo $producto->stockma1;?></td>
+							<td><?php echo $producto->stockmi1;?></td>
 							<td><?php echo $producto->ultcosto;?></td>
-							<td><?php echo $producto->costoprome;?></td>
+							<td><?php echo $producto->costprom;?></td>
 							<td><?php echo $producto->impuesto;?></td>
-							<td><?php echo $producto->pedido;?></td>
-							<td><?php echo $producto->status;?></td>
+							<td><?php echo $producto->pedido1;?></td>
+							<td><?php echo $producto->status1;?></td>
 							<!-- <td><a href="Controllers/producto_controller.php?action=update&codingre=<?php //echo $producto->codingre ?>">Actualizar</a> </td> -->
 							<!-- <td><a href="Controllers/producto_controller.php?action=delete&codingre=<?php //echo $producto->codingre ?>">Eliminar</a> </td> -->
 						</tr>

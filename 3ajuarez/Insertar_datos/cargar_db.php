@@ -54,20 +54,29 @@ $archivo = fopen(PATH_CARGA_CSV_OCOMPRA, "r");
         // echo "Existencia".$existencia;
         if($existencia==0){
         // echo "Entro al for para guarda";
-          $producto = new Producto($datos[0],$datos[1],$datos[2],
-                            $datos[3],$datos[4],$datos[5],
-                            $datos[6],$datos[7],$datos[8],
-                            $datos[9],$datos[10],$datos[11],
-                            $datos[12],$datos[13],$datos[14],NULL,NULL);
-                            Producto::save($producto);
+          $producto = new Producto(     $datos[0],	$datos[1],	$datos[2],
+                                        $datos[3],	$datos[4],	$datos[5],
+                                        $datos[6],	$datos[7],	$datos[8],
+                                        $datos[9],	$datos[10],	$datos[11],
+                                        $datos[12],	$datos[13],	$datos[14],
+                                        $datos[15],	$datos[16],	$datos[17],
+                                        $datos[18],	$datos[19],	$datos[20],
+                                        $datos[21],	$datos[22],	$datos[23]
+                                    );
+
+            Producto::save($producto);
     }else{
       // echo("(" . "ya existe se actualizara" . $datos[0] . ")" . $linea);
       // Productos::update_existence($datos[0],$datos[6]);//Solo actualiza inventario
-    Producto::update_existencia($datos[0],$datos[1],$datos[2],
-                      $datos[3],$datos[4],$datos[5],
-                      $datos[6],$datos[7],$datos[8],
-                      $datos[9],$datos[10],$datos[11],
-                      $datos[12],$datos[13],$datos[14]);
+    Producto::update_existencia(    $datos[0],	$datos[1],	$datos[2],
+                                    $datos[3],	$datos[4],	$datos[5],
+                                    $datos[6],	$datos[7],	$datos[8],
+                                    $datos[9],	$datos[10],	$datos[11],
+                                    $datos[12],	$datos[13],	$datos[14],
+                                    $datos[15],	$datos[16],	$datos[17],
+                                    $datos[18],	$datos[19],	$datos[20],
+                                    $datos[21],	$datos[22],	$datos[23]
+                              );
        //$linea--;
     }
     // if(!in_array($datos[2],$familias)){

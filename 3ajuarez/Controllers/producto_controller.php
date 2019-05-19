@@ -2,6 +2,7 @@
 	class ProductoController
 	{
 		public $codingre_class;
+
 		public function __construct(){}
 
 		public function index(){
@@ -10,6 +11,7 @@
 		}
 
 		public function realizar_pedido($cod_fam,$modificados,$costo_total,$observacion){
+
 			set_time_limit(600);
 			session_start();
 			require_once('../Models/pedido.php');
@@ -20,30 +22,32 @@
 			$fecha_pedido = date("Y-m-d");
 			$fecha_autoriza = NULL;
 			$hora = date("h:i:s");
-			$hora_autoriza_cancela=NULL;
-			$autoriza=NULL;
-			$solicita=$_SESSION["nombre"];
-			$estado='pedido';
-			$observaciones=NULL;
-			$unidad_medida='';//Cambiar por costo_total
-			$total_prod=$_POST['total_prod'];
-			$costo_total=$_POST['costo_total'];
+			$hora_autoriza_cancela = NULL;
+			$autoriza = NULL;
+			$solicita = $_SESSION["nombre"];
+			$estado = 'pedido';
+			$observaciones = NULL;
+			$unidad_medida = '';//Cambiar por costo_total
+			$total_prod = $_POST['total_prod'];
+			$costo_total = $_POST['costo_total'];
+			$familia = $cod_fam;
 			//Crea Objeto pedido y lo pasa a el metodo save
 			$pedido= new Pedido(NULL,$fecha_pedido,$fecha_autoriza,$hora,$hora_autoriza_cancela,
-								$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,$costo_total);
+								$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,
+								$costo_total,$familia);
 
 			//Variables para la relacion entre producto y pedido
-			$id_pedido=Pedido::save($pedido);
-			$fecha_pedido_relacion=$pedido->fecha_pedido;
-			$hora_pedido=$pedido->hora;
-			$estado_prod='pedido';
+			$id_pedido = Pedido::save($pedido);
+			$fecha_pedido_relacion = $pedido->fecha_pedido;
+			$hora_pedido = $pedido->hora;
+			$estado_prod = 'pedido';
 			//Objeto con los productos por familia
-			$productos=Producto::getByFam($cod_fam);
+			$productos = Producto::getByFam($cod_fam);
 
 			if(isset($_POST['modificados'])){
 			    if(!empty($_POST['modificados'])){
-			      $lista_productos=[];
-			      $lista_cantidad=[];
+			      $lista_productos = [];
+			      $lista_cantidad  = [];
 			      $datos_modificados = explode(" ",$_POST['modificados']);
 			          for($i=0; $i< count($datos_modificados)-1; $i++){
 			            $id_and_cantidad=explode(':',$datos_modificados[$i]);
@@ -51,37 +55,37 @@
 			            $lista_cantidad[]=$id_and_cantidad[1];
 			          }
 
-						//Guarda la relacion entre producto y pedido
+						//Guarda la relacion entre producto y pedido1
 					 	foreach ($productos as $producto) {
 							$codingre=$producto->codingre;
 							// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 							    if(in_array($codingre,$lista_productos)){
 									$indice=array_search($codingre,$lista_productos);
-									$pedido=$lista_cantidad[$indice];
+									$pedido1=$lista_cantidad[$indice];
  									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
  									Relacion::save($relacion);
 									Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a bd productos
 								}
 								// continue;
 								else{
-										$pedido=$producto->stockmax-$producto->inventa1;
+										$pedido1=$producto->stockma1-$producto->inventa1;
 											if($producto->redondeo == 1){
-												$pedido=ceil($pedido);
+												$pedido1=ceil($pedido1);
 											}elseif($producto->redondeo == 0){
-												$pedido=$pedido;
+												$pedido1=$pedido1;
 											}
 
-											if($pedido>0 && $producto->inventa1>=0){
+											if($pedido1>0 && $producto->inventa1>=0){
 												$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
 												Relacion::save($relacion);
 												Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
 											}elseif ($producto->inventa1 < 0) {
-												$pedido=$producto->stockmax - 0;
+												$pedido1=$producto->stockma1 - 0;
 
 												if($producto->redondeo == 1){
-													$pedido=ceil($pedido);
+													$pedido1=ceil($pedido1);
 												}elseif($producto->redondeo == 0){
-													$pedido=$pedido;
+													$pedido1=$pedido1;
 												}
 
 												$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
@@ -96,26 +100,26 @@
 					foreach ($productos as $producto) {
 						// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 							$codingre=$producto->codingre;
-							$pedido=$producto->stockmax-$producto->inventa1;
+							$pedido1=$producto->stockma1-$producto->inventa1;
 
 							if($producto->redondeo == 1){
-								$pedido=ceil($pedido);
+								$pedido1=ceil($pedido1);
 							}elseif($producto->redondeo == 0){
-								$pedido=$pedido;
+								$pedido1=$pedido1;
 							}
 
-						if($pedido>0 && $producto->inventa1>=0){
+						if($pedido1>0 && $producto->inventa1>=0){
 							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
 							Relacion::save($relacion);
 							Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
-						}elseif ($producto->inventa1 < 0){
+						}elseif($producto->inventa1 < 0){
 
-							$pedido=$producto->stockmax - 0;
+							$pedido1=$producto->stockma1 - 0;
 
 							if($producto->redondeo == 1){
-								$pedido=ceil($pedido);
+								$pedido1=ceil($pedido1);
 							}elseif($producto->redondeo == 0){
-								$pedido=$pedido;
+								$pedido1=$pedido1;
 							}
 
 							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
@@ -164,7 +168,7 @@
 									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 									 Relacion::save($relacion);
 								 }else{
-									 $num_prod=$producto->stockmax-$producto->inventa1;
+									 $num_prod=$producto->stockma1-$producto->inventa1;
 									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 									 Relacion::save($relacion);
 								}
@@ -174,7 +178,7 @@
 								echo "alert('post modificados esta vacia')";
 								foreach ($productos as $producto) {
 									$codingre=$producto->codingre;
-									$num_prod=$producto->stockmax-$producto->inventa1;
+									$num_prod=$producto->stockma1-$producto->inventa1;
 									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
 									Relacion::save($relacion);
 								}
@@ -268,11 +272,11 @@
 		require_once('../Config/connection.php');
 
 		if ($_POST['action']=='register') {
-			$producto= new Producto($_POST['codingre'],$_POST['descrip'],$_POST['familia'],
-														$_POST['unidad'],$_POST['empaque'],$_POST['equivale'],
-														$_POST['inventa1'],$_POST['stockmax'],$_POST['stockmin'],
-														$_POST['ultcosto'],$_POST['costoprome'],$_POST['impuesto'],
-														$_POST['pedido'],$_POST['status']);
+			$producto= new Producto(		$_POST['codingre'],$_POST['descrip'],$_POST['familia'],
+											$_POST['unidad'],$_POST['empaque'],$_POST['equivale'],
+											$_POST['inventa1'],$_POST['stockmax'],$_POST['stockmin'],
+											$_POST['ultcosto'],$_POST['costoprome'],$_POST['impuesto'],
+											$_POST['pedido'],$_POST['status']);
 			$productoController->save($producto);
 			header('Location: ../index.php?controller=producto&action=index');
 
@@ -284,7 +288,7 @@
 															 $_POST['pedido'],$_POST['status']);
 			$productoController->update($producto);
 
-		}elseif ($_POST['action']=='search_prod'){
+		}elseif($_POST['action']=='search_prod'){
 			header('Location: ../index.php?controller=producto&action=search_prod_fam');
 
 		}elseif($_POST['action']=='pedido'){
@@ -323,8 +327,8 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register'&$_GET['action']!='index'&$_GET['action']!='search_prod'&$_GET['action']!='search_prod_fam'
-				&$_GET['action']!='search_prod_bar'&$_GET['action']!='search_prod_barra'&$_GET['action']!='button_download_db'&$_GET['action']!='carga_db_productos') {
+		if (	$_GET['action']!='register' && $_GET['action']!='index' && $_GET['action']!='search_prod' && $_GET['action']!='search_prod_fam'
+				&$_GET['action']!='search_prod_bar' && $_GET['action']!='search_prod_barra' && $_GET['action']!='button_download_db' && $_GET['action']!='carga_db_productos') {
 			require_once('../Config/connection.php');
 			$productoController=new ProductoController();
 
