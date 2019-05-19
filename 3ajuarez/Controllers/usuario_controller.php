@@ -1,4 +1,4 @@
-		<?php
+<?php
 
 	class UsuarioController
 	{
@@ -45,7 +45,7 @@
 
 
 	if (isset($_POST['action'])) {
-		$usuarioController= new UsuarioController();
+		$usuarioController = new UsuarioController();
 		require_once('../Models/usuario.php');
 		require_once('../Config/connection.php');
 
@@ -90,7 +90,7 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register' & $_GET['action']!='index' & $_GET['action']!='error') {
+		if ($_GET['action']!='register' && $_GET['action']!='index' && $_GET['action']!='error') {
 			require_once('../Config/connection.php');
 			$usuarioController=new UsuarioController();
 			if ($_GET['action']=='delete') {
