@@ -206,6 +206,11 @@
 			header('Location: ../index.php?controller=producto&action=search_prod_bar');
 		}
 
+		public function redireccionar_bodega(){
+			session_start();
+			header('Location: ../index.php?controller=producto&action=search_prod_bodega_menu');
+		}
+
 		//public function search_prod_fam($cod_fam){
 		public function search_prod_fam($familia){
 			$productos=Producto::getByFam($familia);
@@ -340,6 +345,8 @@
 				$productoController->redireccionar_cocina();
 			}else if($_POST["perfil"]=="barra"){
 				$productoController->redireccionar_barra();
+			}else if($_POST["perfil"]=="bodega"){
+				$productoController->redireccionar_bodega();
 			}
 		}elseif($_POST['action']=='registra_pedido'){
 				$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total']);

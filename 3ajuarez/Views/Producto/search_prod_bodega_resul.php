@@ -105,7 +105,7 @@ if(isset($_SESSION["id_sesion"])){
 
 		<?php if($total_prod>0){
 								?>
-								<form action="Controllers/producto_controller.php" method="post" id="pedido_form">
+								<form action="Controllers/producto_controller.php" method="post">
 									<input type="hidden" name="action" value="pedido">
 									<input type="hidden" name="familia" value="<?php echo $producto->familia;?>" >
 									<input type="hidden" name="costo_total" value="<?php echo $costo_total;?>" id="costo_total_mod">
