@@ -45,6 +45,9 @@
 				case "barra":
 					require_once("Views/partials/header_realiza_pedido_barra.php");
 						break;
+				case "bodega":
+					require_once("Views/partials/header_realiza_pedido_bodega.php");
+						break;
 				}
 				?>
 

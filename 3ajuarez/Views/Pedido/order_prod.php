@@ -78,7 +78,7 @@
 				        <!-- <td><?php //echo $order['codingre']; ?></td> -->
 				        <!-- <td><?php //echo $order['fecha']; ?></td> -->
 				        <td class="existencia"><?php echo $order['inventa1'];?></td>
-				        <td class="stock_max"><?php  echo $order['stockmax1'];?></td>
+				        <td class="stock_max"><?php  echo $order['stockma1'];?></td>
 						<td> <input class="redondeo" type="hidden" name="redondeo" value="<?php echo $order['redondeo'];?>"></td>
 			        </tr>
 	          <?php }//End foreach ?>

@@ -32,20 +32,22 @@
 			$costo_total = $_POST['costo_total'];
 			$familia = $cod_fam;
 			//Crea Objeto pedido y lo pasa a el metodo save
-			$pedido= new Pedido(NULL,$fecha_pedido,$fecha_autoriza,$hora,$hora_autoriza_cancela,
+			$pedidoObj= new Pedido(NULL,$fecha_pedido,$fecha_autoriza,$hora,$hora_autoriza_cancela,
 								$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,
 								$costo_total,$familia);
-
+			print_r($pedidoObj);
 			//Variables para la relacion entre producto y pedido
-			$id_pedido = Pedido::save($pedido);
-			$fecha_pedido_relacion = $pedido->fecha_pedido;
-			$hora_pedido = $pedido->hora;
+			$id_pedido = Pedido::save($pedidoObj);
+			$fecha_pedido_relacion = $pedidoObj->fecha_pedido;
+			$hora_pedido = $pedidoObj->hora;
 			$estado_prod = 'pedido';
 			//Objeto con los productos por familia
 			$productos = Producto::getByFam($cod_fam);
+			// print_r($productos);
 
 			if(isset($_POST['modificados'])){
 			    if(!empty($_POST['modificados'])){
+					echo "entro0";
 			      $lista_productos = [];
 			      $lista_cantidad  = [];
 			      $datos_modificados = explode(" ",$_POST['modificados']);
@@ -54,7 +56,7 @@
 			            $lista_productos[]=$id_and_cantidad[0];
 			            $lista_cantidad[]=$id_and_cantidad[1];
 			          }
-
+					  echo "paso a lista";
 						//Guarda la relacion entre producto y pedido1
 					 	foreach ($productos as $producto) {
 							$codingre=$producto->codingre;
@@ -62,12 +64,11 @@
 							    if(in_array($codingre,$lista_productos)){
 									$indice=array_search($codingre,$lista_productos);
 									$pedido1=$lista_cantidad[$indice];
- 									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
+ 									$relacion = new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido1,$estado_prod,$observacion);
  									Relacion::save($relacion);
 									Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a bd productos
-								}
-								// continue;
-								else{
+									echo "entro para guardar modificados";
+								}else{
 										$pedido1=$producto->stockma1-$producto->inventa1;
 											if($producto->redondeo == 1){
 												$pedido1=ceil($pedido1);
@@ -76,10 +77,11 @@
 											}
 
 											if($pedido1>0 && $producto->inventa1>=0){
-												$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
+												$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido1,$estado_prod,$observacion);
 												Relacion::save($relacion);
 												Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
-											}elseif ($producto->inventa1 < 0) {
+												echo "Entro1";
+											}elseif ($producto->inventa1 < 0){
 												$pedido1=$producto->stockma1 - 0;
 
 												if($producto->redondeo == 1){
@@ -87,16 +89,18 @@
 												}elseif($producto->redondeo == 0){
 													$pedido1=$pedido1;
 												}
-
-												$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
-												Relacion::save($relacion);
-												Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
+												if($pedido1>0){//Si el pedido es mayor a 0 lo guarda
+													$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido1,$estado_prod,$observacion);
+													Relacion::save($relacion);
+													Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
+													echo "Entro2";
+												}
 											}//Se agrega para validar existencias negativas
 
 								  	}
 								// }//End If filtro
-						}
-				}else{
+						}//End for each
+				}else{//Else si no esta vacia la variable modificados
 					foreach ($productos as $producto) {
 						// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
 							$codingre=$producto->codingre;
@@ -109,9 +113,11 @@
 							}
 
 						if($pedido1>0 && $producto->inventa1>=0){
-							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
+							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido1,$estado_prod,$observacion);
 							Relacion::save($relacion);
 							Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
+							echo "Entro3";
+
 						}elseif($producto->inventa1 < 0){
 
 							$pedido1=$producto->stockma1 - 0;
@@ -121,10 +127,12 @@
 							}elseif($producto->redondeo == 0){
 								$pedido1=$pedido1;
 							}
-
-							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido,$estado_prod,$observacion);
-							Relacion::save($relacion);
-							Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
+							if($pedido1>0){//Si el pedido es mayor a 0 lo guarda
+								$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido1,$estado_prod,$observacion);
+								Relacion::save($relacion);
+								Producto::change_order_status_db($estado_prod,$codingre);//Agrega estado a db productos
+								echo "Entro4";
+							}
 						}//Se agrega para validar existencias negativas
 						// }
 					}
@@ -204,6 +212,16 @@
 			require_once('Views/Producto/search_prod_fam.php');
 		}
 
+		public function search_prod_barra($familia){
+			$productos=Producto::getByFam($familia);
+			require_once('Views/Producto/search_prod_barra.php');
+		}
+
+		public function search_prod_bodega_resul($familia){
+			$productos=Producto::getByFam($familia);
+			require_once('Views/Producto/search_prod_bodega_resul.php');
+		}
+
 		public function search_prod(){
 			require_once('Config/config.php');
 			require_once('Models/familia.php');
@@ -218,10 +236,13 @@
 			require_once('Views/Producto/search_prod_bar.php');
 		}
 
-		public function search_prod_barra($familia){
-			$productos=Producto::getByFam($familia);
-			require_once('Views/Producto/search_prod_barra.php');
+		public function search_prod_bodega_menu(){
+			require_once('Config/config.php');
+			require_once('Models/familia.php');
+			$listaFamilias = Familia::all();
+			require_once('Views/Producto/search_prod_bodega_menu.php');
 		}
+
 
 		public function register(){
 			require_once('Views/Producto/register.php');
@@ -321,14 +342,15 @@
 				$productoController->redireccionar_barra();
 			}
 		}elseif($_POST['action']=='registra_pedido'){
-				// $productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total']);
+				$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total']);
 		}
 	}
 
+
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if (	$_GET['action']!='register' && $_GET['action']!='index' && $_GET['action']!='search_prod' && $_GET['action']!='search_prod_fam'
-				&$_GET['action']!='search_prod_bar' && $_GET['action']!='search_prod_barra' && $_GET['action']!='button_download_db' && $_GET['action']!='carga_db_productos') {
+		if (	$_GET['action']!='register' && $_GET['action']!='index' && $_GET['action']!='search_prod' && $_GET['action']!='search_prod_fam' &&
+				$_GET['action']!='search_prod_bar' && $_GET['action']!='search_prod_barra' && $_GET['action']!='button_download_db' && $_GET['action']!='carga_db_productos') {
 			require_once('../Config/connection.php');
 			$productoController=new ProductoController();
 

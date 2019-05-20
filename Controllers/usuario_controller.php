@@ -96,6 +96,16 @@
 							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod");
 							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
 						break;
+						case "bodega":
+							$actualizar = Actualiza::insert_actualizacion_metodo(PATH_CARGA_CSV_OCOMPRA);
+							$_SESSION["fecha"] = $actualizar["fecha"];
+							$_SESSION["hora"] = $actualizar["hora"];
+							if($actualizar['actualiza']=='true'){
+								exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\\' . $usuario->ruta . '\Insertar_datos\cargar_db.php');
+							}
+							header("Location: ../".$usuario->ruta."?controller=producto&action=search_prod_bodega_menu");
+							// exec('C:\psexec\PsExec.exe -d C:\xampp\php\php.exe -f C:\xampp\htdocs\almacen\Insertar_datos\cargar_db.php');
+						break;
 						case "gerente":
 							$actualizar = Actualiza::insert_actualizacion_metodo(PATH_CARGA_CSV_OCOMPRA);
 							$_SESSION["fecha"] = $actualizar["fecha"];

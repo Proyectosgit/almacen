@@ -30,8 +30,8 @@ class Producto
 
 
 	function __construct(	$codingre, 	$descrip, 	$familia, 	$unidad, 	$empaque, 	$equivale, 	$inventa0, 	$inventa1,	$stockma0,
-								$stockma1,	$stockmi0, $stockmi1, $ultcosto, 	$costprom, 	$impuesto, 	$pedido0, 	$pedido1, 	$status0,
-								$status1,	$redondeo,	$fisico0, 	$fisico1, 	$dife0, 	$dife1){
+							$stockma1,	$stockmi0, $stockmi1, $ultcosto, 	$costprom, 	$impuesto, 	$pedido0, 	$pedido1, 	$status0,
+							$status1,	$redondeo,	$fisico0, 	$fisico1, 	$dife0, 	$dife1){
 
 			$this->codingre=$codingre;
 			$this->descrip=$descrip;
@@ -296,7 +296,7 @@ class Producto
 						$row->stockmi0,
 						$row->stockmi1,
 						$row->ultcosto,
-						$row->costoprome,
+						$row->costprom,
 						$row->impuesto,
 						$row->pedido0,
 						$row->pedido1,
@@ -415,7 +415,7 @@ class Producto
 		$update->bindValue('stockmi0',	$stockmi0);
 		$update->bindValue('stockmi1',	$stockmi1);
 		$update->bindValue('ultcosto',	$ultcosto);
-		$update->bindValue('costoprome',$costoprome);
+		$update->bindValue('costprom',	$costprom);
 		$update->bindValue('impuesto',	$impuesto);
 		// $update->bindValue('pedido',	$pedido);
 		// $update->bindValue('status',	$status);

@@ -186,7 +186,7 @@ class Pedido
 
 		$db=Db::getConnect();
 		$select=$db->prepare('SELECT pedidos.id_pedido, productos.codingre, pedidos.fecha_pedido, productos.descrip,
-									 productos.inventa1,productos.stockmax,pedido_producto.num_prod, pedidos.costo_total,
+									 productos.inventa1,productos.stockma1,pedido_producto.num_prod, pedidos.costo_total,
 									 productos.ultcosto,productos.redondeo
 							FROM pedidos
 							RIGHT OUTER JOIN pedido_producto ON pedidos.id_pedido = pedido_producto.id_pedido

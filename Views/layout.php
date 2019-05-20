@@ -23,8 +23,8 @@
 				case "gerente":
 						header("Location: ".$_SESSION["ruta"]."?controller=pedido&action=ver_pedidos");
 						break;
-				case "almacenista":
-					header("Location: ".$_SESSION["ruta"]."?controller=pedido&action=recibir_pedido");
+				case "bodega":
+					header("Location: ".$_SESSION["ruta"]."?controller=producto&action=search_prod_bodega_menu");
 						break;
 				case "cocina":
 					header("Location: ".$_SESSION["ruta"]."?controller=producto&action=search_prod");
