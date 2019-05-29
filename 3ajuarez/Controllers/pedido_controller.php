@@ -9,7 +9,6 @@
 		}
 
 		public function ver_pedidos(){
-			//require_once('Config/config.php');
 			$pedidos=Pedido::ver_pedidos();
 			require_once('Views/Pedido/ver_pedido.php');
 		}
@@ -135,6 +134,12 @@
 				$select=Pedido::getOrderById($_GET['id_pedido']);
 				require_once('../Views/Pedido/order_prod.php');
 
+			}elseif($_GET['action']=='orderbodega'){
+
+				require_once('../Models/pedido.php');
+				$select=Pedido::getOrderByIdBodega($_GET['id_pedido']);
+				require_once('../Views/Pedido/order_prod_bodega.php');
+
 			}elseif($_GET['action']=='register_order'){
 
 				require_once('../Models/pedido.php');
@@ -148,31 +153,19 @@
 				require_once("../Models/pedido_prod.php");
 
 				Pedido::change_order_status($_GET['estado'],$_GET['id_pedido']);
-
 				$productos=Pedido::pedidosProd($_GET["id_pedido"]);
-				// print_r($productos);
-				Producto::ingresa_pedido_autorizado_cancelado($productos,$_GET['estado']);
-
+				echo $_GET['perfil'];
+				Producto::ingresa_pedido_autorizado_cancelado($productos,$_GET['estado'],$_GET['perfil']);
 				PedidoProducto::change_order_status_relation($_GET['id_pedido'],$_GET['estado']);
-				//Genera el archivo csv y lo descarga
-				//$productos=Producto::all();//Descomentar para ingresar todos los productos
-				// $productosPedidos = Pedido::getOrderByIdToCsv($_GET['id_pedido']);://Descomentar para ingresar solo los productos de un pedido
 				$area = Pedido::getAreaOFPedido($_GET['id_pedido']);
-
 				$productosPedidos = Pedido::getOrderByAreaToCsv($area);
-				// $namecsv_and_pedido = NAME_CSV . "pedido" . $_GET['id_pedido']."_";
-
-				// $namecsv_and_pedido = "P" . strtoupper($area) . $_GET['id_pedido'];
-
 				$namecsv_and_pedido = "P" . strtoupper($area);
-				// print_r($productosPedidos);
 				Producto::create_csv_automatic($productosPedidos,$namecsv_and_pedido);
-
-				if($_SESSION['id_sesion']=="administrador"){
-					header("Location: ../?controller=pedido&action=index");
-				}elseif($_SESSION['id_sesion']=="gerente"){
-					header("Location: ../?controller=pedido&action=ver_pedidos");
-				}
+				// if($_SESSION['id_sesion']=="administrador"){
+				// 	header("Location: ../?controller=pedido&action=index");
+				// }elseif($_SESSION['id_sesion']=="gerente"){
+				// 	header("Location: ../?controller=pedido&action=ver_pedidos");
+				// }
 
 			}elseif($_GET['action']=="search_order_date"){
 				require_once("../Models/pedido.php");

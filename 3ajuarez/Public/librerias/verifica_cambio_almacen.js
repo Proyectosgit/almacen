@@ -3,7 +3,6 @@ $(document).ready(function(){
   var cantidad=0;
   var id_producto="";
   var datos="";
-  
   var pedidos=0;
   var exp;
 

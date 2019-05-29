@@ -1,31 +1,40 @@
 $(document).ready(function(){
 
-  var id_producto=0;  var datos="";     var stock_max;
-  var stock_min;      var existencia;   var cantidad_aux;
-  var exp;            var redondeo="";  var cantidad;
+  //var cantidad=0;
+  var id_producto=0;
+  var datos="";
+  var stock_max;
+  var stock_min;
+  var existencia;
+  var cantidad_aux;
+  var exp;
+  var redondeo="";
+  //console.log(datos);
 
+  //Coloca en verde todos los input
   $(".cantidad").each(function(){
-      $(this).parents("tr").find(".cantidad").css("background-color","#b8ff54");
-      // $(this).parents("tr").find(".cantidad").css("width",($(this).parents("tr").find(".cantidad").val().length+1)+"em");
-      $(this).parents("tr").find(".cantidad").css("width","70px");
-      cantidad = $(this).parents("tr").find(".cantidad").val();
-    })
+    $(this).parents("tr").find(".cantidad").css("background-color","#b8ff54");
+    //Ajusta tamaño de input
+    $(this).parents("tr").find(".cantidad").css("width",($(this).parents("tr").find(".cantidad").val().length+1)+"em");
+  })
 
   $(".cantidad").change(function(){
-
     cantidad    =   $(this).parents("tr").find(".cantidad").val();
     id_producto =   $(this).parents("tr").find(".cantidad").attr("name");
     stock_min   =   $(this).parents("tr").find(".cantidad").attr("min");
+    // stock_min = $(this).parents("tr").find(".stock_min").html();
     stock_max   =   $(this).parents("tr").find(".stock_max").html();
     existencia  =   $(this).parents("tr").find(".existencia").html();
     redondeo    =   $(this).parents("tr").find(".redondeo").val();
 
-    console.log(typeof(cantidad));
+    // cantidad = cantidad.toFixed(2);
     console.log(cantidad);
-    cantidad = cantidad.replace(',','.');
+
 
     if(redondeo == "" || redondeo == 0){
+        console.log(typeof("cantidad" + cantidad));
         cantidad = parseFloat(cantidad);
+        console.log(typeof("cantidad" + cantidad));
         cantidad = cantidad.toFixed(2);
         cantidad = cantidad.toLocaleString();
     }else if(redondeo == 1){
@@ -34,17 +43,17 @@ $(document).ready(function(){
         cantidad = cantidad.toLocaleString();
     }
 
-    $(this).parents("tr").find(".cantidad").val(cantidad);
-    // console.log(cantidad);
-    existencia = Math.abs(existencia);
-    cantidad_aux = stock_max-existencia;
-    console.log("---cantidad_aux-----");
-    console.log(cantidad_aux);
-    console.log("---fin cantidad_aux-----");
 
-    if(cantidad.match(/^[0-9]+.?[0-9]*/) && !($(this).parents("tr").find(".cantidad").val().length == 0)){
-      // $(this).parents("tr").find(".cantidad").css("width",($(this).parents("tr").find(".cantidad").val().length+1)+"em");
-      $(this).parents("tr").find(".cantidad").css("width","70px");
+
+    $(this).parents("tr").find(".cantidad").val(cantidad);
+    console.log(cantidad);
+
+    cantidad_aux = stock_max-existencia;
+
+
+    if(cantidad.match(/^[0-9]+/) && !($(this).parents("tr").find(".cantidad").val().length == 0)){
+      //Ajusta tamaño de input
+      $(this).parents("tr").find(".cantidad").css("width",($(this).parents("tr").find(".cantidad").val().length+1)+"em");
 
       //Calcula el precio por producto, dependiendo la cantidad
       var precio_unitario=$(this).parents("tr").find(".precio_unitario").html();
@@ -56,7 +65,7 @@ $(document).ready(function(){
 
       //Ingresa el id y cantidas de productos a un string y si esta reempraza la cantidad
       // console.log(id_producto);
-      exp = new RegExp(id_producto+":[0-9]+.?[0-9]*(?= )","g");
+      exp = new RegExp(id_producto+":[0-9]+","g");
       // console.log("Expresion"+exp);
       if (datos.match(exp)) {
         rem=datos.match(exp)
@@ -83,35 +92,14 @@ $(document).ready(function(){
       }else if(cantidad < cantidad_aux){
         alert("Estas solicitando menos de lo sugerido = " + cantidad_aux);
       }
-      console.log("----Lista de datos si es numero---------");
-      console.log(datos);
-      console.log("----End de datos si es numero---------");
+
 
     }else{
+      $(this).parents("tr").find(".cantidad").css("background-color", "#fdaf9c" );
+      alert("Ingresa una cantidad valida");
 
-        if( cantidad_aux < 0 ){
-            cantidad_aux = 0;
-        }
-
-        $(this).parents("tr").find(".cantidad").css("background-color", "#fdaf9c" );
-        alert("Ingresa una cantidad valida");
-
-        $(this).parents("tr").find(".cantidad").val(cantidad_aux);
-        $(this).parents("tr").find(".cantidad").css("background-color","#b8ff54");
-
-
-        // start guarda datos
-        exp = new RegExp(id_producto+":[0-9]+.?[0-9]*(?= )","g");
-        if (datos.match(exp)) {
-            rem=datos.match(exp)
-            datos=datos.replace(rem[0],id_producto+":"+cantidad_aux);
-        }else {
-            datos=datos+id_producto+":"+cantidad_aux+" ";
-        }
-        console.log("----Lista de datos si no es numero---------");
-        console.log(datos);
-        console.log("----End de datos si no es numero---------");
-        //End guarda datos.
+      $(this).parents("tr").find(".cantidad").val(cantidad_aux);
+      $(this).parents("tr").find(".cantidad").css("background-color","#b8ff54");
     }
   });
 });

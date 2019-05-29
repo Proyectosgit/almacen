@@ -10,6 +10,8 @@
 			require_once('Views/Producto/index.php');
 		}
 
+//-----------------------------------Inicio realizar pedido--------------------------------------------------------
+
 		public function realizar_pedido($cod_fam,$modificados,$costo_total,$observacion){
 
 			set_time_limit(600);
@@ -31,10 +33,11 @@
 			$total_prod = $_POST['total_prod'];
 			$costo_total = $_POST['costo_total'];
 			$familia = $cod_fam;
+			$perfil = $_SESSION['id_sesion'];
 			//Crea Objeto pedido y lo pasa a el metodo save
 			$pedidoObj= new Pedido(NULL,$fecha_pedido,$fecha_autoriza,$hora,$hora_autoriza_cancela,
 								$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,
-								$costo_total,$familia);
+								$costo_total,$familia,$perfil);
 			print_r($pedidoObj);
 			//Variables para la relacion entre producto y pedido
 			$id_pedido = Pedido::save($pedidoObj);
@@ -140,61 +143,139 @@
 
 			return 0;
 			}
-			// if($_SESSION['id_sesion']=="barra"){
-			// 	header('Location: ../index.php?controller=producto&action=search_prod_bar');
-			// }else if($_SESSION['id_sesion']=="cocina"){
-			// 	header('Location: ../index.php?controller=producto&action=search_prod');
-			// }else if($_SESSION['id_sesion']=='gerente'){
-			// 	header('Location: ../index.php?controller=pedido&action=ver_pedidos');
-			// }
-		}
+		}//End funcion realizar_pedido
 
-		public function registra_pedido($modificados){
+//-----------------------------------End realizar pedido------------------------------------------------------------
+
+
+//-----------------------------------Inicio realizar pedido bodega--------------------------------------------------
+		public function realizar_pedido_bodega($cod_fam,$modificados,$costo_total,$observacion){
+
+			set_time_limit(600);
 			session_start();
 			require_once('../Models/pedido.php');
+			require_once('../Models/producto.php');
 			require_once('../Models/relacion.php');
 			require_once('../Config/fecha.php');
 
+			$fecha_pedido = date("Y-m-d");
+			$fecha_autoriza = NULL;
+			$hora = date("h:i:s");
+			$hora_autoriza_cancela = NULL;
+			$autoriza = NULL;
+			$solicita = $_SESSION["nombre"];
+			$estado = 'pedido';
+			$observaciones = NULL;
+			$unidad_medida = '';//Cambiar por costo_total
+			$total_prod = $_POST['total_prod'];
+			$costo_total = $_POST['costo_total'];
+			$familia = $cod_fam;
+			$perfil=$_SESSION['id_sesion'];
+			//Crea Objeto pedido y lo pasa a el metodo save
+			$pedidoObj= new Pedido(NULL,$fecha_pedido,$fecha_autoriza,$hora,$hora_autoriza_cancela,
+								$autoriza,$solicita,$estado,$observaciones,$unidad_medida,$total_prod,
+								$costo_total,$familia,$perfil);
+			//Variables para la relacion entre producto y pedido
+			$id_pedido = Pedido::save($pedidoObj);
+			$fecha_pedido_relacion = $pedidoObj->fecha_pedido;
+			$hora_pedido = $pedidoObj->hora;
+			$estado_prod = 'pedido';
+			//Objeto con los productos por familia
+			$productos = Producto::getByFam($cod_fam);
+			// print_r($productos);
+			$lista_productos = [];
+			$lista_cantidad  = [];
+
 			if(isset($_POST['modificados'])){
-					if(!empty($_POST['modificados'])){
-						$lista_productos=[];
-						$lista_cantidad=[];
-						$datos_modificados = explode(" ",$_POST['modificados']);
-							for($i=0; $i< count($datos_modificados)-1; $i++){
-								$id_and_cantidad=explode(':',$datos_modificados[$i]);
-								$lista_productos[]=$id_and_cantidad[0];
-								$lista_cantidad[]=$id_and_cantidad[1];
-							}
-
-							//Guarda la relacion entre producto y pedido
-							 foreach ($productos as $producto) {
-								 $codingre=$producto->codingre;
-								 if(in_array($codingre,$lista_productos)){
-									 $indice=array_search($codingre,$lista_productos);
-									 //$num_prod=$producto->stock_max-$producto->existencia;
-									 $num_prod=$lista_cantidad[$indice];
-									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
-									 Relacion::save($relacion);
-								 }else{
-									 $num_prod=$producto->stockma1-$producto->inventa1;
-									 $relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
-									 Relacion::save($relacion);
-								}
-							}
-					}else{
-								//Si la variable $_POST['modificados'] esta vacia se ejecuta esto
-								echo "alert('post modificados esta vacia')";
-								foreach ($productos as $producto) {
-									$codingre=$producto->codingre;
-									$num_prod=$producto->stockma1-$producto->inventa1;
-									$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$num_prod,$estado_prod,$observacion);
+				if(!empty($_POST['modificados'])){
+				  $lista_productos = [];
+				  $lista_cantidad  = [];
+				  $datos_modificados = explode(" ",$_POST['modificados']);
+					  for($i=0; $i< count($datos_modificados)-1; $i++){
+						$id_and_cantidad=explode(':',$datos_modificados[$i]);
+						$lista_productos[]=$id_and_cantidad[0];
+						$lista_cantidad[]=$id_and_cantidad[1];
+					  }
+						//Guarda la relacion entre producto y pedido1
+						foreach ($productos as $producto) {
+							$codingre=$producto->codingre;
+							// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
+								if(in_array($codingre,$lista_productos)){
+									$indice=array_search($codingre,$lista_productos);
+									$pedido0=$lista_cantidad[$indice];
+									$relacion = new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido0,$estado_prod,$observacion);
 									Relacion::save($relacion);
-								}
-					}
-			}
+									Producto::change_order_status_db_bodega($estado_prod,$codingre);//Agrega estado a bd productos
+								}else{
+										$pedido0=$producto->stockma0-$producto->inventa0;
+											if($producto->redondeo == 1){
+												$pedido0=ceil($pedido0);
+											}elseif($producto->redondeo == 0){
+												$pedido0=$pedido0;
+											}
 
-				header('Location: ../index.php?controller=pedido&action=index');
-		}
+											if($pedido0>0 && $producto->inventa0>=0){
+												$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido0,$estado_prod,$observacion);
+												Relacion::save($relacion);
+												Producto::change_order_status_db_bodega($estado_prod,$codingre);//Agrega estado a db productos
+											}elseif ($producto->inventa0 < 0){
+												$pedido0=$producto->stockma0 - 0;
+
+												if($producto->redondeo == 1){
+													$pedido0=ceil($pedido0);
+												}elseif($producto->redondeo == 0){
+													$pedido0=$pedido0;
+												}
+												if($pedido0>0){//Si el pedido es mayor a 0 lo guarda
+													$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido0,$estado_prod,$observacion);
+													Relacion::save($relacion);
+													Producto::change_order_status_db_bodega($estado_prod,$codingre);//Agrega estado a db productos
+												}
+											}//Se agrega para validar existencias negativas
+
+									}
+								// }//End If filtro
+						}//End for each
+				}else{//Else si no esta vacia la variable modificados
+					foreach ($productos as $producto) {
+						// if($producto->inventa1 >=0 && $producto->inventa1 < $producto->stockmax){
+							$codingre=$producto->codingre;
+							$pedido0=$producto->stockma0-$producto->inventa0;
+
+							if($producto->redondeo == 1){
+								$pedido0=ceil($pedido0);
+							}elseif($producto->redondeo == 0){
+								$pedido0=$pedido0;
+							}
+
+						if($pedido0>0 && $producto->inventa0>=0){
+							$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido0,$estado_prod,$observacion);
+							Relacion::save($relacion);
+							Producto::change_order_status_db_bodega($estado_prod,$codingre);//Agrega estado a db productos
+
+						}elseif($producto->inventa0 < 0){
+
+							$pedido0=$producto->stockma0 - 0;
+
+							if($producto->redondeo == 1){
+								$pedido0=ceil($pedido0);
+							}elseif($producto->redondeo == 0){
+								$pedido0=$pedido0;
+							}
+							if($pedido0>0){//Si el pedido es mayor a 0 lo guarda
+								$relacion=new Relacion($id_pedido,$codingre,$fecha_pedido_relacion,$hora_pedido,$pedido0,$estado_prod,$observacion);
+								Relacion::save($relacion);
+								Producto::change_order_status_db_bodega($estado_prod,$codingre);//Agrega estado a db productos
+							}
+						}//Se agrega para validar existencias negativas
+						// }
+					}
+				}
+
+			return 0;
+			}
+		}//End funcion realizar_pedido
+//-----------------------------------End realizar pedido bodega-----------------------------------------------------
 
 		public function redireccionar_cocina(){
 			session_start();
@@ -318,8 +399,15 @@
 			header('Location: ../index.php?controller=producto&action=search_prod_fam');
 
 		}elseif($_POST['action']=='pedido'){
+			session_start();
 			// echo "<center><h1>Se esta realizando tu pedido</h1></center>";
-			$resultado=$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
+			if($_SESSION['id_sesion']=='bodega'){
+				$resultado=$productoController->realizar_pedido_bodega($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
+				echo "se realiza pedido de bodega";
+			}else{
+				$resultado=$productoController->realizar_pedido($_POST['familia'],$_POST['modificados'],$_POST['costo_total'],$_POST['observacion']);
+				echo "Se realiza pedido normal";
+			}
 			if($resultado==0){
 				// echo "<script>alert('Se realizo el pedido de forma exitosa!!!');</script>";
 				if($_SESSION['id_sesion']=="barra"){
@@ -334,7 +422,10 @@
 				}else if($_SESSION['id_sesion']=='administrador'){
 					header('Location: ../index.php?controller=pedido&action=ver_pedidos');
 
-				}
+				}else if($_SESSION['id_sesion']=='bodega'){
+					header('Location: ../index.php?controller=producto&action=search_prod_bodega_menu');
+
+			 	}
 			}else{
 				// echo "<script>alert('Error: No se realizo el pedido, intenta nuevamente o ponte en contacto con el administrador');</script>";
 				header('Location: ../index.php?controller=pedido&action=error_order_db');

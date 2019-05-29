@@ -29,10 +29,17 @@
 		foreach ($pedidos as $pedido) { ?>
 			<tr>
 				<td><?php echo $pedido->id_pedido; ?></td>
-				<td><a href="Controllers/pedido_controller.php?action=order&id_pedido=<?php echo $pedido->id_pedido ?>&estatus=<?php echo $pedido->estado?>">Detalles</a> </td>
+        <?php if($pedido->perfil=="bodega"){
+                echo $pedido->perfil;
+				echo "<td><a href='Controllers/pedido_controller.php?action=orderbodega&id_pedido=" . $pedido->id_pedido . "&status=" . $pedido->estado . "'>Detalles</a> </td>";
+            }else{
+                echo $pedido->perfil;
+                echo "<td><a href='Controllers/pedido_controller.php?action=order&id_pedido=" . $pedido->id_pedido . "&status=" . $pedido->estado . "'>Detalles</a> </td>";
+            }
+                ?>
 		<?php if( $pedido->estado=="pedido"){?>
-				<td><a href="Controllers/pedido_controller.php?action=change&estado=autorizado&id_pedido=<?php echo $pedido->id_pedido; ?>" class="btn btn-success">Autorizar</a></td>
-				<td><a href="Controllers/pedido_controller.php?action=change&estado=cancelado&id_pedido=<?php echo $pedido->id_pedido; ?>" class="btn btn-danger">Cancelar</a></td>
+				<td><a href="Controllers/pedido_controller.php?action=change&estado=autorizado&id_pedido=<?php echo $pedido->id_pedido; ?> &perfil=<?php echo $pedido->perfil;?>" class="btn btn-success">Autorizar</a></td>
+				<td><a href="Controllers/pedido_controller.php?action=change&estado=cancelado&id_pedido=<?php echo $pedido->id_pedido; ?> &perfil=<?php echo $pedido->perfil;?>" class="btn btn-danger">Cancelar</a></td>
   		<?php }else{?>
 				<td> &nbsp; </td>
 				<td> &nbsp; </td>
@@ -48,7 +55,8 @@
 				<!-- <td><a href="Controllers/pedido_controller.php?action=delete&id_pedido=<?php //echo $pedido->id_pedido ?>">Eliminar</a> </td> -->
 				<td><?php echo $pedido->fecha_pedido; ?></td>
                 <td><?php echo $pedido->hora;?></td>
-				<td><?php echo $pedido->familia;?></td>
+                <td><?php echo $pedido->familia;?></td>
+				<td><?php echo $pedido->perfil;?></td>
 			</tr>
         <?php }//Fin foreach ?>
 		</tbody>

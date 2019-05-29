@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2019 a las 10:45:34
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.2
+-- Tiempo de generación: 20-05-2019 a las 19:59:56
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `almacen` (
   `id_almacen` int(3) NOT NULL,
-  `nom_almacen` varchar(60) NOT NULL,
-  `estado` varchar(25) NOT NULL,
-  `gerente` varchar(30) NOT NULL,
-  `direccion` varchar(300) NOT NULL,
+  `nom_almacen` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `estado` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `gerente` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `direccion` varchar(300) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `tel` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -66,14 +66,17 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_user`, `username`, `password`, `cargo`, `nombre`, `email`, `id_almacen`, `ruta`) VALUES
-(1, 'pedro1', '12345', 'administrador', 'administrador', 'administrador3ajuarez@abmexico.com', 1, '3ajuarez'),
+(1, 'pedro1', '12345', 'administrador', 'administrador', 'admin3ajuarez@abmexico.com', 1, '3ajuarez'),
 (2, 'jesus', '12345', 'cocina', 'cocina', 'cocina3ajuarez@abmexico.com', 1, '3ajuarez'),
 (3, 'paola', '12345', 'gerente', 'gerente', 'gerente3ajuarez@abmexico.com', 1, '3ajuarez'),
 (4, 'raul', '12345', 'barra', 'barra', 'barra3ajuarez@abmexico.com', 1, '3ajuarez'),
 (5, 'ivan colula', '12345', 'root', 'root', 'root@abmexico.com', 0, ''),
 (6, 'erik', '12345', 'almacenCocina', 'almacen Cocina', 'cocina3rajuarez@abmexico.com', 1, '3ajuarez'),
 (7, 'gustavo', '12345', 'almacenBarra', 'almacen Barra', 'barra3rajuarez@abmexico.com', 1, '3ajuarez'),
-(8, 'karla', '12345', 'almacenBC', 'almacen Bodega', 'bodega3rajuarez@abmexico.com', 1, '3ajuarez');
+(8, 'karla', '12345', 'almacenBC', 'almacen Bodega', 'bodega3rajuarez@abmexico.com', 1, '3ajuarez'),
+(9, 'comisariato', '12345', 'almacenBC', 'comisariato', 'comisariato@abmexico.com', 1, 'comisariato'),
+(10, 'adminInventario', '12345', 'almacenAdmin', 'AdminInventario', 'inventarioadmin@abmexico.com', 1, '3ajuarez'),
+(11, 'bodega', '12345', 'bodega', 'bodeganame', 'bodega3ajuarez@abmexico.com', 1, '3ajuarez');
 
 --
 -- Índices para tablas volcadas
@@ -106,7 +109,7 @@ ALTER TABLE `almacen`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

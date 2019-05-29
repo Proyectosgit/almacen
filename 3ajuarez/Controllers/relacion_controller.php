@@ -52,8 +52,8 @@
 
 		}elseif($_POST['action']=='updateRelation'){
 			require_once('../Models/relacion.php');
-			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);
 			require_once('../Models/pedido.php');
+			Relacion::updateProductsOrder($_POST['id_pedido'],$_POST['modificados']);
 			Pedido::change_order_cost($_POST['id_pedido'],$_POST['costo_total']);
 			header('Location: ../index.php?controller=pedido&action=ver_pedidos');
 		}

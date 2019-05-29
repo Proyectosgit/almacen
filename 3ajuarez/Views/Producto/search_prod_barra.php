@@ -61,7 +61,7 @@ if(isset($_SESSION["id_sesion"])){
 														<tr>
 															<td class="small"><?php echo $producto->descrip;?></td>
 															<!-- <td bgcolor="#3ADF00"><?//php echo $pedido;?></td> -->
-															<td><input class="cantidad" type="number" name="<?php echo $producto->codingre;?>" value="<?php if($pedido1>=0){echo number_format($pedido1,2);}else{echo 0;};?>" required></td> <!--Permite modificar la cantidad pedida-->
+															<td><input class="cantidad" type="text" name="<?php echo $producto->codingre;?>" value="<?php if($pedido1>=0){echo number_format($pedido1,2);}else{echo 0;};?>" required></td> <!--Permite modificar la cantidad pedida-->
 															<td class="costo_producto"><?php echo number_format($costo_producto,2); ?></td>
 															<?php 	$costo_total=$costo_total+$costo_producto;
 																   	$total_prod=$total_prod+1;

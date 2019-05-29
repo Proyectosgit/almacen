@@ -16,11 +16,12 @@ class Pedido
 	public $total_prod;
 	public $costo_total;
 	public $familia;
+	public $perfil;
 
 
 	function __construct(	$id_pedido, $fecha_pedido, $fecha_autoriza_cancela, $hora, $hora_autoriza_cancela,
  							$autoriza, $solicita, $estado, $observaciones, $unidad_medida, $total_prod, $costo_total,
-							$familia){
+							$familia,$perfil){
 
 		$this->id_pedido=$id_pedido;
 		$this->fecha_pedido=$fecha_pedido;
@@ -35,6 +36,7 @@ class Pedido
 		$this->total_prod=$total_prod;
 		$this->costo_total=$costo_total;
 		$this->familia=$familia;
+		$this->perfil=$perfil;
 	}
 
 	//función para obtener todos los usuarios
@@ -47,7 +49,7 @@ class Pedido
 			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
 										$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],
 										$pedido['estado'],$pedido['observaciones'],$pedido['unidad_medida'],
-										$pedido['total_prod'],$pedido['costo_total'],$pedido['familia']);
+										$pedido['total_prod'],$pedido['costo_total'],$pedido['familia'],$pedido['perfil']);
 		}
 		return $listaPedidos;
 	}
@@ -66,7 +68,7 @@ class Pedido
 			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
 										$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],
 										$pedido['estado'],$pedido['observaciones'],$pedido['unidad_medida'],
-										$pedido['total_prod'],$pedido['costo_total'],$pedido['familia']);
+										$pedido['total_prod'],$pedido['costo_total'],$pedido['familia'],$pedido['perfil']);
 		}
 		return $listaPedidos;
 	}
@@ -83,7 +85,7 @@ class Pedido
 			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
 			 							$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],
 										$pedido['estado'],$pedido['observaciones'],$pedido['unidad_medida'],
-										$pedido['total_prod'],$pedido['costo_total'],$pedido['familia']);
+										$pedido['total_prod'],$pedido['costo_total'],$pedido['familia'],$pedido['perfil']);
 		}
 		return $listaPedidos;
 	}
@@ -98,7 +100,7 @@ class Pedido
 			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
 		 								$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],
 										$pedido['estado'],$pedido['observaciones'],$pedido['unidad_medida'],
-										$pedido['total_prod'],$pedido['costo_total'],$pedido['familia']);
+										$pedido['total_prod'],$pedido['costo_total'],$pedido['familia'],$pedido['perfil']);
 		}
 		return $listaPedidos;
 	}
@@ -111,7 +113,7 @@ class Pedido
 		$insert=$db->prepare('INSERT INTO pedidos
 							  VALUES(NULL,:fecha_pedido,:fecha_autoriza_cancela,:hora,:hora_autoriza_cancela,:autoriza,
 										  :solicita,:estado,:observaciones,:unidad_medida,
-										  :total_prod,:costo_total,:familia)');
+										  :total_prod,:costo_total,:familia,:perfil)');
 		$insert->bindValue('fecha_pedido',$pedido->fecha_pedido);
 		$insert->bindValue('fecha_autoriza_cancela',$pedido->fecha_autoriza_cancela);
 		$insert->bindValue('hora',$pedido->hora);
@@ -124,6 +126,7 @@ class Pedido
 		$insert->bindValue('total_prod',$pedido->total_prod);
 		$insert->bindValue('costo_total',$pedido->costo_total);
 		$insert->bindValue('familia',$pedido->familia);
+		$insert->bindValue('perfil',$pedido->perfil);
 		$insert->execute();
 		$last_id=$db->lastInsertId();
 
@@ -138,7 +141,7 @@ class Pedido
 							  SET 	fecha_pedido=:fecha_pedido, fecha_autoriza_cancela=:fecha_autoriza_cancela, hora=:hora,
 									hora_autoriza_cancela=:hora_autoriza_cancela, autoriza=:autoriza, solicita=:solicita,
 									estado=:estado, observaciones=:observaciones, unidad_medida=:unidad_medida, total_prod=:total_prod,
- 									costo_total=:costo_total,familia=:familia
+ 									costo_total=:costo_total,familia=:familia,perfil=:perfil
 					 	      WHERE id_pedido=:id_pedido');
 		$update->bindValue('id_pedido',$pedido->id_pedido);
 		$update->bindValue('fecha_pedido',$pedido->fecha_pedido);
@@ -153,6 +156,7 @@ class Pedido
 		$update->bindValue('total_prod',$pedido->total_prod);
 		$update->bindValue('costo_total',$pedido->costo_total);
 		$update->bindValue('familia',$pedido->familia);
+		$update->bindValue('perfil',$pedido->perfil);
 		$update->execute();
 	}
 
@@ -176,7 +180,7 @@ class Pedido
 		$pedido= new Pedido(	$pedidoDb['id_pedido'],$pedidoDb['fecha_pedido'],$pedidoDb['fecha_autoriza_cancela'],$pedidoDb['hora'],
 								$pedidoDb['hora_autoriza_cancela'], $pedidoDb['autoriza'],$pedidoDb['solicita'],$pedidoDb['estado'],
 								$pedidoDb['observaciones'], $pedidoDb['unidad_medida'],$pedidoDb['total_prod'],$pedidoDb['costo_total'],
-								$pedidoDb['familia']);
+								$pedidoDb['familia'],$pedidoDb['perfil']);
 
 		return $pedido;
 	}
@@ -196,6 +200,22 @@ class Pedido
 		$select->execute();
 		return $select;
 	 }
+
+	 //Metodo que busca todos los productos correspodientes a un pedido de bodega
+ 	public static function getOrderByIdBodega($id){
+
+ 		$db=Db::getConnect();
+ 		$select=$db->prepare('SELECT pedidos.id_pedido, productos.codingre, pedidos.fecha_pedido, productos.descrip,
+ 									 productos.inventa0,productos.stockma0,pedido_producto.num_prod, pedidos.costo_total,
+ 									 productos.ultcosto,productos.redondeo
+ 							FROM pedidos
+ 							RIGHT OUTER JOIN pedido_producto ON pedidos.id_pedido = pedido_producto.id_pedido
+ 							RIGHT OUTER JOIN productos ON pedido_producto.codingre = productos.codingre
+ 							WHERE pedidos.id_pedido = :id');
+ 		$select->bindValue('id',$id);
+ 		$select->execute();
+ 		return $select;
+ 	 }
 
 	  //Metodo que busca todos los productos correspodientes a un pedido
   	public static function getOrderByIdToCsv($id){
@@ -231,11 +251,13 @@ class Pedido
   		$select->bindValue('area', $area);
   		$select->execute();
 		foreach ($select->fetchAll() as $producto) {
-			$listaProductosPedidos[]= new Producto($producto['codingre'],$producto['descrip'],$producto['familia'],
+			$listaProductosPedidos[]= new Producto(	$producto['codingre'],$producto['descrip'], $producto['familia'],
 													$producto['unidad'],$producto['empaque'],$producto['equivale'],
-													$producto['inventa1'],$producto['stockmax'],$producto['stockmin'],
-													$producto['ultcosto'],$producto['costoprome'],$producto['impuesto'],
-													$producto['pedido'],$producto['status'],$producto['redondeo'],NULL,NULL,NULL);
+													$producto['inventa0'], $producto['inventa1'], $producto['stockma0'], $producto['stockma1'],
+													$producto['stockmi0'], $producto['stockmi1'], $producto['ultcosto'],$producto['costprom'],
+													$producto['impuesto'], $producto['pedido0'], $producto['pedido1'], $producto['status0'],
+													$producto['status1'], $producto['redondeo'], $producto['fisico0'], $producto['fisico1'],
+													$producto['dife0'],$producto['dife1']);
 		}
 		return $listaProductosPedidos;
   		// return $select;
@@ -272,7 +294,7 @@ class Pedido
 				$listaPedidos[]= new Pedido($pedido['id_pedido'], $pedido['fecha_pedido'], $pedido['fecha_autoriza_cancela'],$pedido['hora'],
 											$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 											$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],$pedido['costo_total'],
-											$pedido['area']);
+											$pedido['area'],$pedido['perfil']);
 			}
 			return $listaPedidos;
 	}
@@ -293,7 +315,8 @@ class Pedido
 				$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],
  											$pedido['hora'],$pedido['hora_autoriza_cancela'],$pedido['autoriza'],
 											$pedido['solicita'],$pedido['estado'],$pedido['observaciones'],
-											$pedido['unidad_medida'],$pedido['total_prod'],$pedido['costo_total'],$pedido['familia']);
+											$pedido['unidad_medida'],$pedido['total_prod'],$pedido['costo_total'],$pedido['familia'],
+											$pedido['perfil']);
 			}
 
 		return $listaPedidos;
@@ -317,7 +340,7 @@ class Pedido
 			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'], $pedido['hora'],
 										$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 										$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],$pedido['costo_total'],
-										$pedido['familia']);
+										$pedido['familia'],$pedido['perfil']);
 		}
 	return $listaPedidos;
 	}
@@ -340,7 +363,7 @@ class Pedido
 			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'], $pedido['hora'],
 										$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 										$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],$pedido['costo_total'],
-										$pedido['familia']);
+										$pedido['familia'],$pedido['perfil']);
 		}
 		return $listaPedidos;
 	}
@@ -363,7 +386,7 @@ class Pedido
 				$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'], $pedido['hora'],
 											$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 											$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],$pedido['costo_total'],
-											$pedido['familia']);
+											$pedido['familia'],$pedido['perfil']);
 		}
 			return $listaPedidos;
 	}
@@ -387,7 +410,7 @@ class Pedido
 					$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'],$pedido['hora'],
 												$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 												$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],$pedido['costo_total'],
-												$pedido['familia']);
+												$pedido['familia'],$pedido['perfil']);
 				}
 
 		return $listaPedidos;
@@ -423,9 +446,6 @@ class Pedido
 		$update->execute();
 	}
 
-	public static function get_id($conn){
-		$conn->lastInsertId();
-	}
 
 	public static function show_order_range($fecha_inicio,$fecha_fin,$status){
 		$db=Db::getConnect();
@@ -440,7 +460,7 @@ class Pedido
 			$listaPedidos[]= new Pedido($pedido['id_pedido'],$pedido['fecha_pedido'],$pedido['fecha_autoriza_cancela'], $pedido['hora'],
  										$pedido['hora_autoriza_cancela'],$pedido['autoriza'],$pedido['solicita'],$pedido['estado'],
 										$pedido['observaciones'],$pedido['unidad_medida'],$pedido['total_prod'],$pedido['costo_total'],
-										$pedido['familia']);
+										$pedido['familia'],$pedido['perfil']);
 		}
 		if(isset($listaPedidos)){
 			return($listaPedidos);

@@ -196,17 +196,30 @@ class Producto
 
 
 
-	public static function ingresa_pedido_autorizado_cancelado($productos,$status){
-		//$status="autorizado";
-		$db = Db::getconnect();
-		foreach($productos->fetchAll() as $producto){
-			$insert = $db->prepare('UPDATE productos SET pedido1 = :pedido1, status1 = :status1 WHERE codingre = :codingre');
-			$insert->bindValue("pedido1",$producto['num_prod']);
-			$insert->bindValue("codingre",$producto['codingre']);
-			$insert->bindValue("status1",$status1);
-			$insert->execute();
+	public static function ingresa_pedido_autorizado_cancelado($productos,$status,$perfil){
 
-	  }
+		$db = Db::getconnect();
+		echo "soy perfil= ".$perfil;
+		if($perfil!="bodega"){
+			echo "entro en bodega productos estatus";
+			foreach($productos->fetchAll() as $producto){
+				$insert = $db->prepare('UPDATE productos SET pedido0 = :pedido0, status0 = :status0 WHERE codingre = :codingre');
+				$insert->bindValue("pedido0",$producto['num_prod']);
+				$insert->bindValue("codingre",$producto['codingre']);
+				$insert->bindValue("status0",$status);
+				$insert->execute();
+
+	  		}
+  		}else{
+			foreach($productos->fetchAll() as $producto){
+				$insert = $db->prepare('UPDATE productos SET pedido1 = :pedido1, status1 = :status1 WHERE codingre = :codingre');
+				$insert->bindValue("pedido1",$producto['num_prod']);
+				$insert->bindValue("codingre",$producto['codingre']);
+				$insert->bindValue("status1",$status);
+				$insert->execute();
+
+	  		}
+		}
 	}
 
 	public static function change_order_status_db($status1,$codingre){
@@ -220,6 +233,16 @@ class Producto
 		$update->execute();
 	}
 
+	public static function change_order_status_db_bodega($status0,$codingre){
+		$db = Db::getConnect();
+		$update = $db->prepare('UPDATE productos
+							SET status0 = :status0
+							WHERE codingre = :codingre');
+		$update->bindValue('status0',$status0);
+		$update->bindvalue('codingre',$codingre);
+		// $update->bindValue('autoriza',$_SESSION['nombre']);
+		$update->execute();
+	}
 //Descomentar este es el que funciona y descarga toda la DB
 	// public static function create_csv($data,$name_file){
 	// 	// $db=Db::getConnect();
@@ -334,7 +357,7 @@ class Producto
 			$f = fopen(PATH_DESCARGA_CSV_PEDIDO . '\\' . $filename, 'w');
 			$fields = array(	'codingre',	'descrip', 	'familia', 	'unidad', 		'empaque',
 								'equivale', 'inventa0', 'inventa1', 'stockma0',		'stockma1',
-								'stockmi0',	'stockmi1', 'ultcosto',	'costoprome',	'impuesto',
+								'stockmi0',	'stockmi1', 'ultcosto',	'costprom',	'impuesto',
 								'pedido0', 	'pedido1', 	'status0',	'status1', 		'redondeo',
 								'fisico0', 	'fisico1', 	'dife0', 	'dife1'	);
 
@@ -356,7 +379,7 @@ class Producto
 				$row->stockmi0,
 				$row->stockmi1,
 				$row->ultcosto,
-				$row->costoprome,
+				$row->costprom,
 				$row->impuesto,
 				$row->pedido0,
 				$row->pedido1,

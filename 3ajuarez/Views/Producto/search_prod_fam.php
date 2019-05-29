@@ -2,7 +2,7 @@
 
 	if(isset($_SESSION["id_sesion"])){
 		if(($_SESSION["id_sesion"]=="administrador" || $_SESSION["id_sesion"]=="gerente" || $_SESSION["id_sesion"]=="cocina") && $_SESSION["ruta"]==SUCURSAL){
-			if($_SESSION["visible"]=="true"){
+			// if($_SESSION["visible"]=="true"){
 	?>
 
 				<section>
@@ -62,7 +62,7 @@
 											<tr>
 												<td class="small"><?php echo $producto->descrip;?></td>
 												<!-- <td bgcolor="#3ADF00"><?php //echo $pedido;?></td> -->
-												<td><input class="cantidad" type="number" name="<?php echo $producto->codingre;?>" value="<?php if($pedido1>=0){echo number_format($pedido1,2);}else{echo 0;};?>" required></td> <!--Permite modificar la cantidad pedida -->
+												<td><input class="cantidad" type="text" name="<?php echo $producto->codingre;?>" value="<?php if($pedido1>=0){echo number_format($pedido1,2);}else{echo number_format(0,2);}?>" required/></td> <!--Permite modificar la cantidad pedida -->
 												<td class="costo_producto"><?php echo number_format($costo_producto,2); ?></td>
 												<?php 	$costo_total=$costo_total+$costo_producto;
 														$total_prod=$total_prod+1;
@@ -146,13 +146,13 @@
 								</div>";
 							}
 
-			}else{//end if visible
-					// echo "<h1 align='center'>Pagina expirada, has cancelado tu pedido o ya se realizo<h1>
-					// <div align='center'>
-					// <a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
-					// </div>";
-					header("Location: index.php?controller=producto&action=search_prod");
-			}
+			// }else{//end if visible
+			// 		// echo "<h1 align='center'>Pagina expirada, has cancelado tu pedido o ya se realizo<h1>
+			// 		// <div align='center'>
+			// 		// <a href='javascript:window.history.back();' class='btn btn-primary'>&laquo; Volver atrás</a>
+			// 		// </div>";
+			// 		header("Location: index.php?controller=producto&action=search_prod");
+			// }
 				?>
 				<!-- <script src="Public/librerias/verifica_cambio_pedido.js"></script> --> <!--Sirve para validar las entradas -->
 				<?php
@@ -165,16 +165,3 @@
 
 <script src="Public/jquery/jquery-3.3.1.min.js"></script>
 <script src="Public/librerias/verifica_cambio_pedido.js"></script>
-<script>
-
-	function cancela_pedido(){
-		alert("Pedido Cancelado");
-		return true;
-	}
-
-	function autoriza_pedido(){
-		alert("Pedido Realizado");
-		return true;
-	}
-
-</script>
