@@ -59,7 +59,7 @@
                 	<!-- <td id="id_pedido"><?php //echo $order['id_pedido']; ?></td> -->
 				    	<td><?php echo $order['id_pedido']; ?></td>
 						<!-- <td bgcolor=#3ADF00><?php //echo $order["num_prod"];?></td> -->
-				        <?php if($_GET["estatus"]=="pedido"){ ?>
+				        <?php if($_GET["status"]=="pedido"){ ?>
 						<!-- <td bgcolor="#3ADF00"><?php //echo $order['num_prod'];?></td> --> <!--Indica la cantidad de productos pedidos-->
 				        <td><input class="cantidad" type="number" name="<?php echo $order['codingre']?>" value="<?php echo $order['num_prod'];?>" required></td> <!--modifica cantidad-->
 				        <!-- <td><a href="Controllers/pedido_controller.php?action=update&id_pedido=<?php// echo $pedido->id_pedido ?>">Actualizar</a> </td> -->
@@ -87,7 +87,7 @@
 	     </div>
      </div>
 
-	     <?php   if($_GET["estatus"]=="pedido"){ ?>
+	     <?php   if($_GET["status"]=="pedido"){ ?>
         			<form action="../Controllers/relacion_controller.php" method="post" id="pedido_form">
         				<input type="hidden" name="action" value="updateRelation">
         				<input type="hidden" name="id_pedido" value="<?php echo $order['id_pedido'];?>" >

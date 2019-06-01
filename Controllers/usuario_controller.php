@@ -154,7 +154,7 @@
 
 	//se verifica que action esté definida
 	if (isset($_GET['action'])) {
-		if ($_GET['action']!='register' & $_GET['action']!='index' & $_GET['action']!='error' & $_GET['action']!='cerrar') {
+		if ($_GET['action']!='register' && $_GET['action']!='index' && $_GET['action']!='error' && $_GET['action']!='cerrar') {
 			require_once('../Config/connection.php');
 			$usuarioController=new UsuarioController();
 			if ($_GET['action']=='delete') {

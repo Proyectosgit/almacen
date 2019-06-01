@@ -30,10 +30,8 @@
 			<tr>
 				<td><?php echo $pedido->id_pedido; ?></td>
         <?php if($pedido->perfil=="bodega"){
-                echo $pedido->perfil;
 				echo "<td><a href='Controllers/pedido_controller.php?action=orderbodega&id_pedido=" . $pedido->id_pedido . "&status=" . $pedido->estado . "'>Detalles</a> </td>";
             }else{
-                echo $pedido->perfil;
                 echo "<td><a href='Controllers/pedido_controller.php?action=order&id_pedido=" . $pedido->id_pedido . "&status=" . $pedido->estado . "'>Detalles</a> </td>";
             }
                 ?>

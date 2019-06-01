@@ -197,11 +197,11 @@ class Producto
 
 
 	public static function ingresa_pedido_autorizado_cancelado($productos,$status,$perfil){
-
+		session_start();
 		$db = Db::getconnect();
-		echo "soy perfil= ".$perfil;
-		if($perfil!="bodega"){
-			echo "entro en bodega productos estatus";
+		// echo "soy perfil= ".$perfil;
+		if($perfil=="bodega"){
+			// echo "entro en bodega productos estatus";
 			foreach($productos->fetchAll() as $producto){
 				$insert = $db->prepare('UPDATE productos SET pedido0 = :pedido0, status0 = :status0 WHERE codingre = :codingre');
 				$insert->bindValue("pedido0",$producto['num_prod']);

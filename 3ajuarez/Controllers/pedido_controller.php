@@ -154,18 +154,18 @@
 
 				Pedido::change_order_status($_GET['estado'],$_GET['id_pedido']);
 				$productos=Pedido::pedidosProd($_GET["id_pedido"]);
-				echo $_GET['perfil'];
+				echo $_GET['perfil'] . "<br>";
 				Producto::ingresa_pedido_autorizado_cancelado($productos,$_GET['estado'],$_GET['perfil']);
 				PedidoProducto::change_order_status_relation($_GET['id_pedido'],$_GET['estado']);
 				$area = Pedido::getAreaOFPedido($_GET['id_pedido']);
 				$productosPedidos = Pedido::getOrderByAreaToCsv($area);
 				$namecsv_and_pedido = "P" . strtoupper($area);
 				Producto::create_csv_automatic($productosPedidos,$namecsv_and_pedido);
-				// if($_SESSION['id_sesion']=="administrador"){
-				// 	header("Location: ../?controller=pedido&action=index");
-				// }elseif($_SESSION['id_sesion']=="gerente"){
-				// 	header("Location: ../?controller=pedido&action=ver_pedidos");
-				// }
+				if($_SESSION['id_sesion']=="administrador"){
+					header("Location: ../?controller=pedido&action=index");
+				}elseif($_SESSION['id_sesion']=="gerente"){
+					header("Location: ../?controller=pedido&action=ver_pedidos");
+				}
 
 			}elseif($_GET['action']=="search_order_date"){
 				require_once("../Models/pedido.php");
